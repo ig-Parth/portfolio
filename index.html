@@ -72,9 +72,9 @@ body{background:var(--paper);color:var(--ink);overflow-x:clip;position:relative}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
 
-.heading1{font-family:var(--sf);font-size:clamp(62px,11vw,180px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.05}
-.heading2{font-family:var(--sf);font-size:clamp(54px,8.6vw,160px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.04}
-.heading3{font-family:var(--sf);font-size:clamp(38px,5.4vw,82px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.06}
+.heading1{font-family:var(--sf);font-size:clamp(38px,10.8vw,180px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.05}
+.heading2{font-family:var(--sf);font-size:clamp(34px,8.5vw,160px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.04}
+.heading3{font-family:var(--sf);font-size:clamp(28px,5.4vw,82px);letter-spacing:.005em;text-transform:uppercase;font-weight:400;line-height:1.06}
 .body-bold{font-family:var(--ub);font-size:clamp(11px,1vw,15px);letter-spacing:.02em;text-transform:uppercase;font-weight:800;line-height:1.2}
 .body-regular{font-family:var(--sn);font-size:15px;letter-spacing:.005em;font-weight:300;line-height:1.5}
 
@@ -325,19 +325,19 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 @keyframes driftDown{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(6px);opacity:.95}}
 .hero-cue i{font-style:normal;animation:driftDown 2s infinite}
 
-/* ==================== SHARED MANHWA DIALOGUE PLATES & SLANTED INSET PANELS ==================== */
+/* Layered 3D Kirigami / Paper-Cutout Dialogue Plates & Slanted Inset Panels */
 .cap-box{
-  position:relative;z-index:10;background:rgba(255,255,255,.96);
+  position:relative;z-index:10;background:#FBF9F3;
   border:1.5px solid var(--ink);padding:12px 17px;
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
   font:600 10px/1.55 var(--mn);letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink);box-shadow:0 14px 36px rgba(0,0,0,.16);
+  color:var(--ink);box-shadow:4px 5px 0 rgba(18,16,20,.26),0 14px 36px rgba(0,0,0,.16);
   max-width:410px;pointer-events:auto;cursor:pointer;min-height:38px;
   transition:opacity .3s var(--e),transform .36s var(--e),box-shadow .3s var(--e);
 }
 #scene-reach .cap-box,#scene-sanctuary-story .cap-box,#scene-pour .cap-box,#scene-vortex .cap-box{
-  background:rgba(10,12,18,.88);color:#F4F2EC;border-color:rgba(255,255,255,.28);
-  backdrop-filter:blur(10px);box-shadow:0 18px 46px rgba(0,0,0,.46);
+  background:rgba(12,13,18,.92);color:#F5F2EA;border-color:#F5F2EA;
+  backdrop-filter:blur(10px);box-shadow:4px 5px 0 rgba(245,242,234,.22),0 18px 46px rgba(0,0,0,.48);
 }
 .type-cur{
   display:inline-block;width:2px;height:1em;background:var(--crimson-hi);
@@ -345,7 +345,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 }
 @keyframes curBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes wordPop{0%{transform:scale(1.20);opacity:.4}100%{transform:scale(1);opacity:1}}
-.cap-box:hover{box-shadow:0 20px 50px rgba(0,0,0,.28)}
+.cap-box:hover{box-shadow:6px 7px 0 rgba(18,16,20,.32),0 20px 50px rgba(0,0,0,.28)}
 .cap-box .red{
   display:inline-block;color:var(--crimson-hi);font:700 1.06em var(--sf);letter-spacing:.04em;
   animation:wordPop .22s var(--e) both;
@@ -363,10 +363,10 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   font:700 8px var(--mn);letter-spacing:.15em;text-transform:uppercase;
 }
 .cap-box[data-type-n="0"]{opacity:0 !important;pointer-events:none !important}
-.cap-box.speaker-god::before{background:var(--crimson-wall);border-color:rgba(255,255,255,.32)}
+.cap-box.speaker-god::before{background:var(--crimson-wall);border-color:rgba(245,242,234,.45)}
 .inset-frame{
-  position:relative;border:1.5px solid var(--ink);background:var(--white);
-  overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.26);
+  position:relative;border:2px solid #F5F2EA;outline:1.5px solid var(--ink);background:#1A1B20;
+  overflow:hidden;box-shadow:5px 6px 0 rgba(18,16,20,.38),0 18px 44px rgba(0,0,0,.28);
   clip-path:polygon(0 0,100% 0,94% 100%,0 100%);
   transition:opacity .38s var(--e),transform .42s var(--e);
 }
@@ -923,13 +923,15 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 @media(max-width:960px){
   #jp-sub-bar{top:64px;max-width:92vw}
   #jp-sub-bar .jp-txt{white-space:normal;font-size:11.5px}
-  #sanc-dossier-card{width:92vw;left:4vw !important;right:auto !important;top:auto;bottom:60px;max-height:26vh;padding:12px 14px}
-  #sanc-dossier-card.expanded{max-height:48vh}
-  #sanc-cap-1,#sanc-cap-2{bottom:68px;top:auto;max-width:92vw;font-size:10px}
-  #sanc-hud.has-dossier #sanc-cap-1,#sanc-hud.has-dossier #sanc-cap-2{bottom:calc(26vh + 72px)}
-  #sanc-rail{left:12px;transform:none;bottom:12px;max-width:calc(100vw - 184px)}
-  #sanc-speaker-inset{width:118px;height:104px;top:72px;left:12px}
-  #sanc-dual-eyes{top:72px;left:12px;width:calc(100vw - 24px)}
+  #sanc-dossier-card{width:calc(100vw - 24px);left:12px !important;right:12px !important;top:auto;bottom:60px;max-height:24vh;padding:11px 13px}
+  #sanc-dossier-card.expanded{width:calc(100vw - 24px);max-height:52vh;z-index:15}
+  #sanc-cap-1,#sanc-cap-2{left:12px !important;right:12px !important;bottom:62px;top:auto;max-width:none;width:auto;font-size:9.5px}
+  #sanc-hud.has-dossier #sanc-cap-1,#sanc-hud.has-dossier #sanc-cap-2{bottom:calc(24vh + 68px)}
+  #sanc-hud.dossier-expanded #sanc-cap-1,#sanc-hud.dossier-expanded #sanc-cap-2{opacity:.14;pointer-events:none}
+  #sanc-rail{left:12px;transform:none;bottom:12px;max-width:calc(100vw - 184px);padding:4px 8px;gap:2px}
+  .rail-pip{padding:7px 8px;min-height:36px;font-size:9px}
+  #sanc-speaker-inset{width:108px;height:96px;top:102px;left:12px}
+  #sanc-dual-eyes{top:102px;left:12px;width:calc(100vw - 24px)}
 }
 @media(max-width:880px){
   .about-grid,.ev-grid,.skill-grid,.contact-grid,.ev-meta,.facts-grid,.taste-triptych{grid-template-columns:1fr}
@@ -940,26 +942,57 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   .medallion-grid{grid-template-columns:1fr;max-width:260px}
 }
 @media(max-width:720px){
+  #welcome-gate{padding:16px}
+  .wg-title{font-size:clamp(24px,7.2vw,64px)}
+  .wg-notice{margin:18px auto;padding:14px 16px}
+  .wg-btn{width:min(100%,300px);min-height:48px}
+  .gate-mid{gap:clamp(16px,6vw,48px)}
+  .gate-btn{width:88px;height:48px}
+  .gate-movie{min-height:44px;padding:10px 18px;max-width:92vw}
+  #brand-mark{top:12px;left:12px}
+  .crest-svg{width:34px;height:34px}
   #brand-mark .brand-words{display:none}
-  #top-nav{top:14px;right:14px;height:36px}
+  #top-nav{top:10px;right:12px;height:40px}
   #top-nav .header__content{padding:0 12px;gap:10px}
   #top-nav .header__link span{font-size:10px}
   #top-nav .nav-dos span{font-size:14px}
   #top-nav .nav-dos .header__ornament{display:none}
-  #inset-face-1,#inset-phone-joy,#inset-face-shock{width:136px;height:112px;top:78px}
-  #ladder-leg-inset,#temple-leg-inset{width:190px;height:116px;left:12px;right:auto;bottom:14px}
-  #cap-mist-1,#cap-mist-2,#cap-mist-3{bottom:48px;max-width:90vw;left:5vw !important;right:auto !important}
-  #eq-btn{right:14px;bottom:14px}
-  #voice-btn{right:54px;bottom:14px;height:28px;padding:0 8px;font-size:8.5px}
-  #movie-btn{right:14px;top:58px;bottom:auto;height:28px;padding:0 9px;font-size:8.5px}
+  #movie-btn{right:12px;top:54px;bottom:auto;height:32px;min-height:32px;padding:0 10px;font-size:8.5px}
+  #jp-sub-bar{top:94px;max-width:calc(100vw - 24px);padding:6px 12px}
+  #eq-btn{right:12px;bottom:12px;min-width:40px;height:40px;padding:8px 10px}
+  #voice-btn{right:60px;bottom:12px;height:40px;min-height:40px;padding:0 10px;font-size:9px}
+  #inset-face-1,#inset-face-shock{width:132px;height:104px;top:64px;left:12px}
+  #inset-phone-joy{width:136px;height:112px;top:94px;right:12px}
+  #ladder-leg-inset,#temple-leg-inset{width:176px;height:108px;left:12px;right:auto;bottom:62px}
+  #cap-mist-1,#cap-mist-2,#cap-mist-3{bottom:64px;max-width:none;width:auto;left:12px !important;right:12px !important;font-size:9.5px}
+  .scroll-step-hint{bottom:14px;left:12px;transform:none;max-width:calc(100vw - 172px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8.5px;letter-spacing:.12em}
   #sanc-voice-pill{display:none}
+  .portrait-panel{width:min(340px,88vw);height:min(58vh,460px)}
+  #impact-eye-cut{position:relative;right:auto;top:auto;margin:12px auto 0;width:min(260px,84vw);height:74px}
+  .mono-wide,.portal-frame,.step-top,.shatter-panel{height:min(60vh,500px)}
   .retail-item{flex-direction:column;gap:6px}
   .retail-item-meta{text-align:left}
-  #cap-imp-1,#cap-imp-2,#cap-mono-1,#cap-port-1,#cap-port-2,#cap-pour,#cap-vortex{
-    position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:14px auto 0;max-width:92vw;
+  .col-sec{padding:48px 0}
+  #collection .col-sec:first-of-type{padding-top:86px}
+  .col-title{font-size:clamp(30px,9vw,74px);word-break:break-word}
+  .ev-tab{min-height:48px;padding:12px 14px}
+  .ev-dossier{padding:18px 16px}
+  .sd-toggle-btn,.sd-build-pill,.btn-sharp{min-height:36px}
+  .x-close{width:40px;height:40px}
+  .c-row{flex-direction:column;align-items:flex-start}
+  .footer-links{gap:24px}
+  .footer-social{min-width:0;width:100%}
+  #cap-imp-1,#cap-imp-2,#cap-mono-1,#cap-port-1,#cap-port-2,#cap-pour,#cap-vortex,#cap-reach{
+    position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:12px auto 0;max-width:92vw;
   }
+  #scene-reach #cap-reach,#scene-pour #cap-pour,#scene-vortex #cap-vortex{
+    position:absolute;left:12px;right:12px;top:98px;bottom:auto;margin:0 auto;max-width:none;width:auto;
+  }
+  #eye-strip{top:98px;height:90px;width:92vw}
+  #cap-curtain{top:200px;width:92vw}
   #cap-shatter{width:92%;top:auto;bottom:14px}
-  #hold-move-btn,#hold-pour-btn,#hold-vortex-btn{left:50%;top:62%}
+  .orb-btn{width:106px;height:106px;font-size:10.5px}
+  #hold-move-btn,#hold-pour-btn,#hold-vortex-btn{left:50%;top:66%}
 }
 </style>
 </head>
@@ -1043,6 +1076,17 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   <button type="button" class="gate-movie" id="gate-movie">▶ WATCH AS 8K ANIME FILM</button>
   <div class="gate-half-bot"><div class="heading2">AUDIO</div></div>
 </div>
+<script>(function(){
+  function hide(id){var e=document.getElementById(id);if(e){e.classList.add('gone');e.setAttribute('aria-hidden','true');}}
+  window.__NEXUS_GATE_CHOICE=null;
+  document.addEventListener('click',function(ev){
+    var b=ev.target&&ev.target.closest?ev.target.closest('#welcome-enter,#gate-yes,#gate-no,#gate-movie'):null;
+    if(!b||window.__NEXUS_READY)return;
+    if(b.id==='welcome-enter'){hide('welcome-gate');return;}
+    hide('welcome-gate');hide('sound-gate');
+    window.__NEXUS_GATE_CHOICE=b.id==='gate-yes'?'yes':b.id==='gate-movie'?'movie':'no';
+  },true);
+})();</script>
 
 <!-- STAGE 1: HERO & RISING CLOUD DISSOLVE (00:01 - 00:09) -->
 <section id="hero">
@@ -2110,6 +2154,10 @@ $('#gate-movie').onclick=()=>{
   setMovieMode(true);
 };
 $('#gate-no').onclick=()=>{Sound.enable(false);Sound.setVoice(false);dismissGates()};
+if(window.__NEXUS_GATE_CHOICE==='yes')$('#gate-yes').click();
+else if(window.__NEXUS_GATE_CHOICE==='movie')$('#gate-movie').click();
+else if(window.__NEXUS_GATE_CHOICE==='no')$('#gate-no').click();
+window.__NEXUS_READY=true;
 $('#eq-btn').onclick=()=>Sound.toggle();
 $('#voice-btn').onclick=()=>Sound.toggleVoice();
 $('#movie-btn').onclick=()=>{
@@ -2229,7 +2277,8 @@ function getHDAnimeSprite(key){
   if(!im||!im.complete||!im.naturalWidth)return null;
   const nw=im.naturalWidth,nh=im.naturalHeight;
   const isSanctuaryHero=/^(p_idle|p_recoil|p_speak|p_listen|g_front|g_listen|g_profile|g_bestow)$/.test(key);
-  const mul=Math.min(isSanctuaryHero?4.2:3.5,2800/Math.max(nw,nh,1));
+  const maxDim=typeof window!=='undefined'&&window.innerWidth<760?1650:(isSanctuaryHero?2600:2200);
+  const mul=Math.min(isSanctuaryHero?4.0:3.2,maxDim/Math.max(nw,nh,1));
   const w=Math.round(nw*Math.max(1,mul)),h=Math.round(nh*Math.max(1,mul));
   const cv=document.createElement('canvas');cv.width=w;cv.height=h;
   const cx=cv.getContext('2d',{willReadFrequently:true});
@@ -2238,6 +2287,169 @@ function getHDAnimeSprite(key){
   defringeAndSharpen(cx,w,h,0.48);
   HD_CACHE[key]=cv;
   return cv;
+}
+let PAPER_GRAIN_TILE=null;
+function getPaperGrainTile(){
+  if(PAPER_GRAIN_TILE)return PAPER_GRAIN_TILE;
+  const t=document.createElement('canvas');t.width=96;t.height=96;
+  const c=t.getContext('2d');
+  c.fillStyle='rgba(255,252,244,0.03)';c.fillRect(0,0,96,96);
+  for(let y=0;y<96;y+=2){
+    c.fillStyle=y%4===0?'rgba(255,250,240,0.22)':'rgba(24,20,18,0.16)';
+    c.fillRect(0,y,96,1);
+  }
+  for(let i=0;i<360;i++){
+    const x=((i*53)%96),y=((i*79)%96);
+    c.fillStyle=i%2?'rgba(255,250,238,0.34)':'rgba(32,26,22,0.28)';
+    c.fillRect(x,y,1+(i%2),1);
+  }
+  PAPER_GRAIN_TILE=t;
+  return t;
+}
+function quantizePaperSurface(cx,w,h,opts={}){
+  const step=opts.step||22,blend=opts.blend??0.44,grain=opts.grain??7;
+  try{
+    const id=cx.getImageData(0,0,w,h),d=id.data;
+    const copy=new Uint8ClampedArray(d),stride=w*4;
+    for(let y=1;y<h-1;y++){
+      const rowOff=y*stride;
+      for(let x=1;x<w-1;x++){
+        const idx=rowOff+x*4,a=copy[idx+3];
+        if(a<20)continue;
+        let r=copy[idx],g=copy[idx+1],b=copy[idx+2];
+        /* Step tonal bands into matte cardstock layers while preserving crisp anime detail */
+        const qr=Math.round(r/step)*step,qg=Math.round(g/step)*step,qb=Math.round(b/step)*step;
+        r=lerp(r,qr,blend);g=lerp(g,qg,blend);b=lerp(b,qb,blend);
+        /* Kirigami internal layer crease highlight/shadow between contrasting paper planes */
+        const lum=r*0.299+g*0.587+b*0.114;
+        const nTop=(idx-stride-4);
+        if(copy[nTop+3]>160){
+          const nLum=copy[nTop]*0.299+copy[nTop+1]*0.587+copy[nTop+2]*0.114;
+          const diff=lum-nLum;
+          if(diff>36){r+=11;g+=10;b+=7}
+          else if(diff<-36){r-=12;g-=12;b-=10}
+        }
+        /* Cotton rag fiber modulation + matte white paper floor/ceiling */
+        const hsh=(((x*19+y*37)^((x*7)*(y*11)))&15)-7.5;
+        const gr=(hsh/7.5)*grain;
+        d[idx]=clamp(Math.round(r*0.97+5+gr),12,248);
+        d[idx+1]=clamp(Math.round(g*0.96+4+gr),11,244);
+        d[idx+2]=clamp(Math.round(b*0.93+3+gr*0.85),15,236);
+      }
+    }
+    cx.putImageData(id,0,0);
+  }catch{}
+}
+function makeTintSilhouette(src,w,h,fillStyle){
+  const t=document.createElement('canvas');t.width=w;t.height=h;
+  const cx=t.getContext('2d');
+  cx.drawImage(src,0,0,w,h);
+  cx.globalCompositeOperation='source-in';
+  cx.fillStyle=fillStyle;
+  cx.fillRect(0,0,w,h);
+  return t;
+}
+function stampRing(cx,img,ox,oy,rad,steps=12){
+  for(let i=0;i<steps;i++){
+    const a=(i/steps)*Math.PI*2;
+    cx.drawImage(img,ox+Math.cos(a)*rad,oy+Math.sin(a)*rad);
+  }
+}
+function makePaperCutSprite(src,opts={}){
+  if(!src)return null;
+  const sw=src.width||src.naturalWidth,sh=src.height||src.naturalHeight;
+  if(!sw||!sh)return null;
+  const pad=opts.pad??Math.max(12,Math.round(Math.max(sw,sh)*0.022));
+  const rim=opts.rim??Math.max(5,Math.round(pad*0.52));
+  const shOff=opts.shadow??Math.max(5,Math.round(pad*0.36));
+  const inner=document.createElement('canvas');inner.width=sw;inner.height=sh;
+  const ic=inner.getContext('2d',{willReadFrequently:true});
+  ic.imageSmoothingEnabled=true;ic.imageSmoothingQuality='high';
+  ic.drawImage(src,0,0,sw,sh);
+  quantizePaperSurface(ic,sw,sh,{step:opts.step||22,blend:opts.blend??0.44,grain:opts.grain??7});
+
+  const out=document.createElement('canvas');out.width=sw+pad*2;out.height=sh+pad*2;
+  const oc=out.getContext('2d');
+  oc.imageSmoothingEnabled=true;oc.imageSmoothingQuality='high';
+  const shadSil=makeTintSilhouette(inner,sw,sh,'rgba(14,10,12,0.34)');
+  const edgeSil=makeTintSilhouette(inner,sw,sh,'#18151A');
+  const creamSil=makeTintSilhouette(inner,sw,sh,'#F5F0E4');
+  const bevelSil=makeTintSilhouette(inner,sw,sh,'#DDD4C4');
+
+  /* 1. Soft 3D diorama shadow cast behind cardstock cutout */
+  oc.save();
+  try{oc.filter='blur('+Math.max(2,Math.round(shOff*0.42))+'px)'}catch{}
+  oc.drawImage(shadSil,pad+shOff,pad+shOff*1.12);
+  oc.restore();
+
+  /* 2. Dark outer scissor-cut outline + warm ivory die-cut cardstock rim + inner crease */
+  stampRing(oc,edgeSil,pad,pad,rim+1.8,12);
+  stampRing(oc,creamSil,pad,pad,rim,12);
+  oc.drawImage(creamSil,pad,pad);
+  stampRing(oc,bevelSil,pad,pad,Math.max(1.5,rim*0.35),8);
+
+  /* 3. Layered cardstock character piece + unified paper fiber overlay */
+  oc.drawImage(inner,pad,pad);
+  oc.save();
+  oc.globalCompositeOperation='source-atop';
+  oc.globalAlpha=0.075;
+  const pat=oc.createPattern(getPaperGrainTile(),'repeat');
+  if(pat){oc.fillStyle=pat;oc.fillRect(0,0,out.width,out.height)}
+  oc.restore();
+
+  out._pad=pad;out._origW=sw;out._origH=sh;
+  return out;
+}
+function drawPaperSprite(c,spr,dx,dy,dw,dh){
+  if(!spr)return;
+  if(spr._pad&&spr._origW&&spr._origH){
+    const sx=dw/spr._origW,sy=dh/spr._origH;
+    c.drawImage(spr,dx-spr._pad*sx,dy-spr._pad*sy,dw+2*spr._pad*sx,dh+2*spr._pad*sy);
+  }else{
+    c.drawImage(spr,dx,dy,dw,dh);
+  }
+}
+const PAPER_CACHE={},PAPER_ENTITY_CACHE={},WALK_PAPER_FRAMES=[],STAGE_PAPER_URL={};
+function getPaperCutSprite(key,entityMode=false){
+  const cache=entityMode?PAPER_ENTITY_CACHE:PAPER_CACHE;
+  if(cache[key])return cache[key];
+  const base=entityMode?getEntityParthSprite(key):getHDAnimeSprite(key);
+  if(!base)return null;
+  const sw=base.width||base.naturalWidth,sh=base.height||base.naturalHeight;
+  const pad=Math.max(12,Math.round(Math.max(sw,sh)*0.022));
+  const res=makePaperCutSprite(base,{pad,rim:Math.max(5,Math.round(pad*0.52))});
+  if(res)cache[key]=res;
+  return res;
+}
+function getWalkPaperFrame(f){
+  const idx=((Math.floor(f)%36)+36)%36;
+  if(WALK_PAPER_FRAMES[idx])return WALK_PAPER_FRAMES[idx];
+  const raw=getWalkFrame(idx);
+  if(!raw)return null;
+  const sw=raw.width,sh=raw.height;
+  const pad=Math.max(12,Math.round(Math.max(sw,sh)*0.022));
+  const res=makePaperCutSprite(raw,{pad,rim:Math.max(5,Math.round(pad*0.52))});
+  if(res)WALK_PAPER_FRAMES[idx]=res;
+  return res;
+}
+function makePaperBackdropUrl(srcImg,opts={}){
+  if(!srcImg)return '';
+  const nw=srcImg.naturalWidth||srcImg.width,nh=srcImg.naturalHeight||srcImg.height;
+  if(!nw||!nh)return '';
+  const maxD=typeof window!=='undefined'&&window.innerWidth<760?1150:1680;
+  const scale=Math.min(1,maxD/Math.max(nw,nh));
+  const w=Math.round(nw*scale),h=Math.round(nh*scale);
+  const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+  const cx=cv.getContext('2d',{willReadFrequently:true});
+  cx.imageSmoothingEnabled=true;cx.imageSmoothingQuality='high';
+  cx.drawImage(srcImg,0,0,w,h);
+  quantizePaperSurface(cx,w,h,{step:opts.step||24,blend:opts.blend??0.40,grain:opts.grain??7});
+  cx.save();
+  cx.globalAlpha=0.07;
+  const pat=cx.createPattern(getPaperGrainTile(),'repeat');
+  if(pat){cx.fillStyle=pat;cx.fillRect(0,0,w,h)}
+  cx.restore();
+  try{return cv.toDataURL('image/webp',0.91)}catch{return ''}
 }
 const ENTITY_CACHE={},REF_PORTRAITS={},HD_FACE_URL={},WALK_FRAMES=[];
 function getEntityParthSprite(key){
@@ -2422,18 +2634,59 @@ function extractSheetPortrait(key,entityStyle){
     cx.putImageData(id,0,0);
     defringeAndSharpen(cx,outW,outH,0.34);
   }catch{}
+  if(entityStyle){
+    cx.strokeStyle='rgba(206,214,228,0.65)';cx.lineWidth=2.4;
+    cx.beginPath();cx.moveTo(outW*0.28,outH*0.68);cx.lineTo(outW*0.48,outH*0.96);cx.stroke();
+    cx.beginPath();cx.moveTo(outW*0.72,outH*0.68);cx.lineTo(outW*0.52,outH*0.96);cx.stroke();
+  }
+  const pad=Math.max(12,Math.round(outW*0.04));
+  const paperStand=makePaperCutSprite(cv,{pad,rim:Math.max(7,Math.round(outW*0.020)),shadow:Math.max(8,Math.round(outW*0.026))});
   const fin=document.createElement('canvas');fin.width=outW;fin.height=outH;
   const fc=fin.getContext('2d');
+  /* Layered crimson/obsidian kirigami card mat with angled paper fold shadow */
   const bg=fc.createLinearGradient(0,0,0,outH);
-  bg.addColorStop(0,'#16171D');bg.addColorStop(1,'#090A0D');
+  bg.addColorStop(0,'#1D1B22');bg.addColorStop(1,'#0D0C10');
   fc.fillStyle=bg;fc.fillRect(0,0,outW,outH);
-  fc.drawImage(cv,0,0);
-  if(entityStyle){
-    fc.strokeStyle='rgba(206,214,228,0.65)';fc.lineWidth=2.4;
-    fc.beginPath();fc.moveTo(outW*0.28,outH*0.68);fc.lineTo(outW*0.48,outH*0.96);fc.stroke();
-    fc.beginPath();fc.moveTo(outW*0.72,outH*0.68);fc.lineTo(outW*0.52,outH*0.96);fc.stroke();
+  fc.save();
+  fc.fillStyle=key==='ref_g'?'rgba(150,25,29,0.44)':'rgba(40,42,54,0.46)';
+  fc.beginPath();fc.moveTo(0,outH*0.56);fc.lineTo(outW,outH*0.38);fc.lineTo(outW,outH);fc.lineTo(0,outH);fc.closePath();fc.fill();
+  fc.strokeStyle='rgba(245,240,228,0.16)';fc.lineWidth=1.5;
+  fc.beginPath();fc.moveTo(0,outH*0.56);fc.lineTo(outW,outH*0.38);fc.stroke();
+  fc.globalAlpha=0.06;
+  const gPat=fc.createPattern(getPaperGrainTile(),'repeat');
+  if(gPat){fc.fillStyle=gPat;fc.fillRect(0,0,outW,outH)}
+  fc.restore();
+  if(paperStand){
+    fc.drawImage(paperStand,-pad*0.55,-pad*0.25,outW+pad*1.1,outH+pad*1.1);
+  }else{
+    fc.drawImage(cv,0,0);
   }
   return fin.toDataURL('image/webp',0.95);
+}
+function getPaperCutUrl(key,entityMode=false){
+  const sp=getPaperCutSprite(key,entityMode);
+  if(!sp)return '';
+  try{return sp.toDataURL('image/webp',0.93)}catch{return ''}
+}
+let staticPaperDone=false;
+function hydrateDomPaperCutouts(){
+  if(staticPaperDone)return;
+  if(!IMG.p_idle||!IMG.p_idle.complete||!IMG.p_idle.naturalWidth)return;
+  staticPaperDone=true;
+  const cp=$('#contact-parth');
+  if(cp){const u=getPaperCutUrl('p_idle',false);if(u)cp.src=u}
+  [
+    ['pe_relieved','#img-mist-phone'],['pe_shocked','#img-mist-shock'],
+    ['pey_shock','#img-impact-eyes'],['p_mem','#img-last-mem'],
+    ['hd_eye_parth','#img-eye-parth'],['hd_eye_god','#img-eye-god'],
+    ['hd_eye_god','#img-dual-god'],['hd_eye_parth','#img-dual-parth'],
+    ['hd_reach','#reach-hd-img'],['celestial','#shatter-cel-bg']
+  ].forEach(([k,sel])=>{
+    if(!STAGE_PAPER_URL[k]&&IMG[k]&&IMG[k].complete&&IMG[k].naturalWidth){
+      STAGE_PAPER_URL[k]=makePaperBackdropUrl(IMG[k]);
+    }
+    if(STAGE_PAPER_URL[k]){const el=$(sel);if(el)el.src=STAGE_PAPER_URL[k]}
+  });
 }
 function initRefPortraits(){
   if(!REF_PORTRAITS.parth&&IMG.ref_p&&IMG.ref_p.complete&&IMG.ref_p.naturalWidth){
@@ -2460,9 +2713,14 @@ function getFaceCloseUrl(faceKey,isEntityVerdict=false){
   if((faceKey==='pe_profile'||faceKey==='pe_confident')&&REF_PORTRAITS.parth)return REF_PORTRAITS.parth;
   if(HD_FACE_URL[faceKey])return HD_FACE_URL[faceKey];
   const hd=getHDAnimeSprite(faceKey);
-  if(hd){try{HD_FACE_URL[faceKey]=hd.toDataURL('image/webp',0.95);return HD_FACE_URL[faceKey]}catch{}}
+  if(hd){
+    const u=makePaperBackdropUrl(hd,{step:22,blend:0.44,grain:7});
+    if(u){HD_FACE_URL[faceKey]=u;return u}
+  }
   return IM[faceKey]||'';
 }
+if(typeof requestIdleCallback==='function')requestIdleCallback(hydrateDomPaperCutouts,{timeout:1400});
+else setTimeout(hydrateDomPaperCutouts,500);
 
 function getWalkFrame(f){
   const idx=((Math.floor(f)%36)+36)%36;
@@ -2569,7 +2827,7 @@ function bindSilverPortal(imgKey,selectors){
       const w=im.naturalWidth,h=im.naturalHeight;
       if(!w||!h)return;
       const cv=document.createElement('canvas');cv.width=w;cv.height=h;
-      const cx=cv.getContext('2d');cx.drawImage(im,0,0);
+      const cx=cv.getContext('2d',{willReadFrequently:true});cx.drawImage(im,0,0);
       const id=cx.getImageData(0,0,w,h),d=id.data;
       for(let i=0;i<d.length;i+=4){
         const r=d[i],g=d[i+1],b=d[i+2];
@@ -2584,6 +2842,9 @@ function bindSilverPortal(imgKey,selectors){
         }
       }
       cx.putImageData(id,0,0);
+      quantizePaperSurface(cx,w,h,{step:24,blend:0.38,grain:7});
+      const pat=cx.createPattern(getPaperGrainTile(),'repeat');
+      if(pat){cx.save();cx.globalAlpha=0.065;cx.fillStyle=pat;cx.fillRect(0,0,w,h);cx.restore()}
       const url=cv.toDataURL('image/webp',0.90);
       selectors.forEach(s=>{const el=$(s);if(el)el.src=url});
     }catch{}
@@ -2611,19 +2872,37 @@ function drawHero(t,pHero){
 
   const baseRise=0.07+smoothstep(0.06,0.94,pHero)*1.04;
   const topY=h*(1-baseRise);
-  c.save();c.fillStyle='#F2F1EC';c.strokeStyle='#141414';c.lineWidth=2;
-  c.beginPath();c.moveTo(-20,h+40);c.lineTo(-20,topY+40);
-  const segs=13;
-  for(let i=0;i<=segs;i++){
-    const cx=(i/segs)*w;
-    const puff=Math.sin(i*1.7+t*1.1)*18+Math.cos(i*2.3-t*.8)*14;
-    const rad=42+((i*19)%38)+Math.sin(t*1.2+i)*6;
-    c.arc(cx,topY+puff,rad,Math.PI,0,false);
-  }
-  c.lineTo(w+20,h+40);c.closePath();c.fill();c.stroke();
+  /* Three Stacked 3D Kirigami Cardstock Cloud Decks with Physical Drop Shadows */
+  const decks=[
+    {dy:-28,fill:'#DAD6CC',stroke:'#161418',phase:0.9,shad:'rgba(0,0,0,0.45)',amp:14,bump:44},
+    {dy:-12,fill:'#EAE6DC',stroke:'#161418',phase:1.4,shad:'rgba(0,0,0,0.36)',amp:16,bump:50},
+    {dy:0,fill:'#F5F1E6',stroke:'#141414',phase:1.7,shad:'rgba(0,0,0,0.32)',amp:18,bump:56}
+  ];
+  const segs=11;
+  decks.forEach((dk,li)=>{
+    c.save();
+    c.shadowColor=dk.shad;c.shadowBlur=18;c.shadowOffsetY=-6;
+    c.fillStyle=dk.fill;c.strokeStyle=dk.stroke;c.lineWidth=2;
+    const xStart=-40,step=(w+80)/segs;
+    const y0=topY+dk.dy+Math.sin(t*(1.05-li*0.1))*dk.amp;
+    c.beginPath();c.moveTo(xStart,h+40);c.lineTo(xStart,y0);
+    for(let i=0;i<segs;i++){
+      const x1=xStart+i*step,x2=x1+step;
+      const midX=(x1+x2)*0.5;
+      const puff=Math.sin((i+1)*dk.phase+t*(1.05-li*0.1))*dk.amp+Math.cos(i*2.1-t*.8+li)*10;
+      const dome=(dk.bump+((i*17+li*11)%28)+Math.sin(t*1.2+i+li)*8)*1.35;
+      c.quadraticCurveTo(midX,topY+dk.dy+puff-dome,x2,topY+dk.dy+puff);
+    }
+    c.lineTo(w+40,h+40);c.closePath();c.fill();
+    c.shadowColor='transparent';c.stroke();
+    c.restore();
+  });
+  c.save();
+  c.shadowColor='rgba(14,12,16,0.34)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=5;
+  c.fillStyle='#F5F1E6';c.strokeStyle='#141414';c.lineWidth=2;
   for(let k=0;k<6;k++){
     const px=w*(0.16+k*0.135)+Math.sin(t*.7+k)*14;
-    const py=topY-28-(k%3)*26+Math.cos(t*.9+k)*8;
+    const py=topY-42-(k%3)*26+Math.cos(t*.9+k)*8;
     const pr=14+(k%3)*9;
     c.beginPath();c.arc(px,py,pr,0,Math.PI*2);c.fill();c.stroke();
   }
@@ -2646,23 +2925,26 @@ function drawMistBg(t,pMist){
   c.fillStyle=bgG;c.fillRect(0,0,w,h);
 
   const hor=h*0.48;
-  /* Mumbai dusk skyline & elevated metro viaduct parallax */
+  /* Layered Kirigami Cardstock Skyline & Elevated Metro Viaduct with 3D Paper Shadows */
   const pan=pMist*260;
-  c.save();c.fillStyle='rgba(24,25,30,0.12)';c.strokeStyle='rgba(20,20,20,0.32)';c.lineWidth=1.1;
+  c.save();
+  c.shadowColor='rgba(18,16,20,0.22)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=4;
+  c.fillStyle='#DDD9CF';c.strokeStyle='#1E1D22';c.lineWidth=1.4;
   for(let i=-2;i<16;i++){
     const bx=((i*110-(pan*0.45)%110)+w+220)%(w+220)-110;
     const bh=50+((i*37)%115);
     c.fillRect(bx,hor-bh,82,bh);
     c.strokeRect(bx,hor-bh,82,bh);
+    c.fillStyle='#F5F1E6';c.fillRect(bx,hor-bh,82,4);c.fillStyle='#DDD9CF';
   }
-  /* Elevated viaduct ribbon & gliding Mumbai Metro train */
-  c.fillStyle='rgba(20,20,20,0.18)';c.fillRect(0,hor-28,w,7);
+  /* Elevated paper-cut viaduct & gliding Mumbai Metro train */
+  c.fillStyle='#C7C2B6';c.fillRect(0,hor-28,w,7);
   const trainX=((w+260)-((pMist*920+t*42)%(w+520)));
-  c.fillStyle='rgba(32,34,42,0.45)';c.strokeStyle='rgba(20,20,20,0.55)';
+  c.fillStyle='#353742';c.strokeStyle='#F5F1E6';c.lineWidth=1.6;
   c.fillRect(trainX,hor-40,180,12);c.strokeRect(trainX,hor-40,180,12);
-  c.fillStyle='rgba(255,244,210,0.55)';
+  c.fillStyle='rgba(255,244,210,0.82)';
   for(let m=0;m<8;m++)c.fillRect(trainX+10+m*21,hor-37,13,5);
-  c.fillStyle='rgba(20,20,20,0.18)';
+  c.fillStyle='#ABA69B';
   for(let p=-1;p<10;p++){
     const px=((p*180-(pan*0.7)%180)+w+180)%(w+180)-90;
     c.fillRect(px,hor-21,10,21);
@@ -2882,8 +3164,6 @@ function drawParthWalkActor(t,pMist,cam){
   c.clearRect(0,0,w,h);
   initRefPortraits();
   const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
-  const phoneIm=getHDAnimeSprite('p_phone')||IMG.p_phone;
-  const recoilIm=getHDAnimeSprite('p_recoil')||IMG.p_recoil;
   if(!w1)return;
 
   const isPhone=pMist>=0.34&&pMist<=0.64;
@@ -2892,11 +3172,13 @@ function drawParthWalkActor(t,pMist,cam){
   const recoilBlend=isRecoil?smoothstep(0.82,0.90,pMist):0;
   const walkAmt=1-Math.max(phoneBlend,recoilBlend);
 
-  /* Scroll-locked 36-Frame Biomechanical Human Gait Cycle (ZERO idle jitter/vibration!) */
+  /* Scroll-locked 36-Frame Layered 3D Paper-Cutout Gait Cycle */
   const strideFrames=36;
   const walkFloat=pMist*2.4*strideFrames;
   const frameIdx=((Math.floor(walkFloat)%strideFrames)+strideFrames)%strideFrames;
-  const walkFrame=getWalkFrame(frameIdx)||w1;
+  const walkFrame=getWalkPaperFrame(frameIdx)||getPaperCutSprite('p_walk1')||w1;
+  const phoneIm=phoneBlend>0.02?(getPaperCutSprite('p_phone')||IMG.p_phone):null;
+  const recoilIm=recoilBlend>0.02?(getPaperCutSprite('p_recoil')||IMG.p_recoil):null;
   const phi=frameIdx/strideFrames;
 
   if(walkAmt>0.6&&pMist>0.03&&pMist<0.95){
@@ -2912,7 +3194,7 @@ function drawParthWalkActor(t,pMist,cam){
   const baseX=w*(0.46+pMist*0.04);
   const baseY=h*0.90;
 
-  /* Apply camera matrix natively inside 4K canvas BEFORE sampling 4K sprites (ZERO CSS zoom blur!) */
+  /* Apply camera matrix natively inside 4K canvas BEFORE sampling 8K Paper-Cutout sprites */
   c.save();
   if(cam){
     c.translate(w*0.5+w*(cam.tx/100),h*0.52+h*(cam.ty/100));
@@ -2922,28 +3204,31 @@ function drawParthWalkActor(t,pMist,cam){
   }
 
   const bob=-Math.abs(Math.sin(phi*Math.PI*2))*5.5*walkAmt;
-  c.fillStyle='rgba(18,18,22,0.28)';
+  c.fillStyle='rgba(18,18,22,0.34)';
   c.beginPath();c.ellipse(baseX,baseY-2,drawW*(0.24-bob*0.002),8,0,0,Math.PI*2);c.fill();
 
   const lean=(walkAmt*0.018*Math.cos(phi*Math.PI*2))-(recoilBlend*0.04);
   c.translate(baseX,baseY+bob);
   c.rotate(lean);
 
-  if(recoilBlend<0.02&&phoneBlend<0.02){
-    c.drawImage(walkFrame,-drawW/2,-drawH,drawW,drawH);
-  }else{
-    if(tmpCv.width!==sw||tmpCv.height!==sh){tmpCv.width=sw;tmpCv.height=sh}
-    tmpCtx.clearRect(0,0,sw,sh);
-    if(recoilBlend>0.02&&recoilIm){
-      tmpCtx.save();tmpCtx.globalAlpha=recoilBlend;tmpCtx.drawImage(recoilIm,0,0,sw,sh);tmpCtx.restore();
-    }
-    if(phoneBlend>0.02&&phoneIm){
-      tmpCtx.save();tmpCtx.globalAlpha=phoneBlend;tmpCtx.drawImage(phoneIm,0,0,sw,sh);tmpCtx.restore();
-    }
-    if(walkAmt>0.02){
-      tmpCtx.save();tmpCtx.globalAlpha=walkAmt;tmpCtx.drawImage(walkFrame,0,0,sw,sh);tmpCtx.restore();
-    }
-    c.drawImage(tmpCv,-drawW/2,-drawH,drawW,drawH);
+  if(walkAmt>0.02&&walkFrame){
+    c.save();c.globalAlpha=walkAmt;
+    drawPaperSprite(c,walkFrame,-drawW/2,-drawH,drawW,drawH);
+    c.restore();
+  }
+  if(phoneBlend>0.02&&phoneIm){
+    const phW=phoneIm._origW||phoneIm.width||sw,phH=phoneIm._origH||phoneIm.height||sh;
+    const psc=targetH/phH,pdw=phW*psc,pdh=targetH;
+    c.save();c.globalAlpha=phoneBlend;
+    drawPaperSprite(c,phoneIm,-pdw/2,-pdh,pdw,pdh);
+    c.restore();
+  }
+  if(recoilBlend>0.02&&recoilIm){
+    const rcW=recoilIm._origW||recoilIm.width||sw,rcH=recoilIm._origH||recoilIm.height||sh;
+    const rsc=targetH/rcH,rdw=rcW*rsc,rdh=targetH;
+    c.save();c.globalAlpha=recoilBlend;
+    drawPaperSprite(c,recoilIm,-rdw/2,-rdh,rdw,rdh);
+    c.restore();
   }
   c.restore();
 }
@@ -3037,7 +3322,7 @@ function drawLadderLegFocus(cv,t,prog,crimsonFloor=false){
   const strideFrames=36;
   const stepFloat=prog*2.1*strideFrames;
   const frameIdx=((Math.floor(stepFloat)%strideFrames)+strideFrames)%strideFrames;
-  const walkFrame=getWalkFrame(frameIdx)||w1;
+  const walkFrame=getWalkPaperFrame(frameIdx)||getWalkFrame(frameIdx)||w1;
   const phi=frameIdx/strideFrames;
   const shiftCycle=(phi*2)%1;
 
@@ -3089,10 +3374,12 @@ function drawLadderLegFocus(cv,t,prog,crimsonFloor=false){
   }
   c.restore();
 
-  /* 2. Composite Solid Crisp Frame From 36-Frame Biomechanical Walk Cycle (lower thigh to sole) */
-  const sw=walkFrame.width||walkFrame.naturalWidth,sh=walkFrame.height||walkFrame.naturalHeight;
+  /* 2. Composite Solid Crisp Paper-Cut Frame From 36-Frame Gait Cycle (lower thigh to sole) */
+  const pad=walkFrame._pad||0;
+  const sw=walkFrame._origW||(walkFrame.width-pad*2)||walkFrame.naturalWidth;
+  const sh=walkFrame._origH||(walkFrame.height-pad*2)||walkFrame.naturalHeight;
   if(sw&&sh){
-    const sx=sw*0.16,sW=sw*0.68,sy=sh*0.56,sH=sh*0.43;
+    const sx=pad+sw*0.14,sW=sw*0.72,sy=pad+sh*0.56,sH=Math.min(sh*0.43+pad,walkFrame.height-sy);
     const drawH=h*0.98,drawW=drawH*(sW/sH);
     const dx=w*0.5-drawW*0.5;
     const dy=h*0.02-Math.abs(Math.sin(phi*Math.PI*2))*4.5;
@@ -3181,11 +3468,15 @@ function drawCurtain(t,pCur){
   pillars.forEach((px,idx)=>{
     const pw=w*(idx===0||idx===5?.082:idx===1||idx===4?.062:.044);
     const x=w*px-pw/2+(px-0.5)*pCur*44+Math.sin(t*1.1+idx)*2.2;
+    c.save();
+    c.shadowColor='rgba(6,2,4,0.52)';c.shadowBlur=16;c.shadowOffsetX=idx<3?7:-7;c.shadowOffsetY=4;
     const g=c.createLinearGradient(x,0,x+pw,0);
     g.addColorStop(0,'#1B0708');g.addColorStop(.45,'#82181C');g.addColorStop(.8,'#4A0C0E');g.addColorStop(1,'#120506');
     c.fillStyle=g;c.fillRect(x,0,pw,h);
+    c.shadowColor='transparent';
     c.strokeStyle='#0B0B0D';c.lineWidth=1.4;c.strokeRect(x,0,pw,h);
     for(let k=1;k<6;k++){c.beginPath();c.moveTo(x+k*(pw/6),0);c.lineTo(x+k*(pw/6),h);c.stroke()}
+    c.restore();
   });
   for(let e=0;e<18;e++){
     const ex=(w*(0.08+((e*43)%84)/100))+Math.sin(t*1.6+e)*14;
@@ -3194,20 +3485,23 @@ function drawCurtain(t,pCur){
     c.beginPath();c.arc(ex,ey,1.1+(e%3)*0.7,0,Math.PI*2);c.fill();
   }
 
-  /* 72-Strip Etched Ink Bristle Curtain peeling like the reference video */
+  /* 72-Strip Etched Ink & Cardstock Curtain peeling with physical 3D paper drop shadows */
   if(pCur<0.76){
     const bars=72,bw=w/bars;
     const sweepIn=smoothstep(0.01,0.34,pCur);
     const sweepOut=smoothstep(0.30,0.76,pCur);
+    c.save();
+    c.shadowColor='rgba(0,0,0,0.48)';c.shadowBlur=8;c.shadowOffsetX=5;c.shadowOffsetY=3;
     for(let i=0;i<bars;i++){
       const stagger=((i*31)%17)*0.022;
       const top=clamp((sweepOut*1.38-stagger)*h,0,h);
       const bot=clamp((sweepIn*1.38-stagger)*h,0,h);
       if(bot>top){
-        c.fillStyle=i%3===0?'#F2F1EC':'#0D0D0F';
+        c.fillStyle=i%3===0?'#F5F1E6':'#141317';
         c.fillRect(i*bw,top,bw*0.76,bot-top);
       }
     }
+    c.restore();
   }
   const showEye=pCur>0.55&&pCur<0.97;
   $('#eye-strip').classList.toggle('on',showEye);
@@ -3432,14 +3726,14 @@ function renderSanctuaryDossier(beat){
   if(!beat.dossier){
     card.classList.add('hidden');
     card.classList.remove('expanded');
-    if(hud)hud.classList.remove('has-dossier','dossier-left');
+    if(hud)hud.classList.remove('has-dossier','dossier-left','dossier-expanded');
     return;
   }
   const isLeft=beat.dossierSide==='left';
   card.classList.remove('hidden');
   card.classList.toggle('left-mode',isLeft);
   card.classList.toggle('expanded',sancDossierOpen);
-  if(hud){hud.classList.add('has-dossier');hud.classList.toggle('dossier-left',isLeft)}
+  if(hud){hud.classList.add('has-dossier');hud.classList.toggle('dossier-left',isLeft);hud.classList.toggle('dossier-expanded',sancDossierOpen)}
   const togLabel=sancDossierOpen?'[ COLLAPSE - ]':'[ + EXPAND RECORD ]';
   if(beat.dossier.builds){
     const b=SANCTUARY_BUILDS[activeSancBuild]||SANCTUARY_BUILDS[0];
@@ -3493,21 +3787,32 @@ function drawHallBg(t,wind,pSanc=0,vpX=0.5,horRatio=0.75,verdictTr=0){
     c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();
   }
 
-  /* Multi-Plane 3D Parallax Cathedral Columns (near, mid, far orbit opposite vanishing point!) */
+  /* Multi-Plane Layered Paper-Theatre Cathedral Wings with 3D Diorama Cast Shadows */
   const stoneCourseShift=(pSanc*240)%68;
   [[0.04,0.095,1.85],[0.16,0.068,1.15],[0.30,0.045,0.55],[0.70,0.045,0.55],[0.84,0.068,1.15],[0.96,0.095,1.85]].forEach(([px,pw,depth])=>{
     const cw=w*pw,cx=w*px-cw/2-panShift*depth*0.65;
     if(cx+cw<-20||cx>w+20)return;
+    c.save();
+    c.shadowColor='rgba(10,2,4,0.52)';c.shadowBlur=18;c.shadowOffsetX=px<0.5?8:-8;c.shadowOffsetY=4;
     const g=c.createLinearGradient(cx,0,cx+cw,0);
     g.addColorStop(0,'#3D0A0C');g.addColorStop(.42,'#B82529');g.addColorStop(.75,'#641013');g.addColorStop(1,'#240607');
     c.fillStyle=g;c.fillRect(cx,0,cw,hor);
+    c.shadowColor='transparent';
     c.strokeStyle='#141414';c.lineWidth=1.5;c.strokeRect(cx,0,cw,hor);
+    c.strokeStyle='rgba(245,240,228,0.22)';c.lineWidth=1;
+    c.beginPath();c.moveTo(cx+2,0);c.lineTo(cx+2,hor);c.stroke();
+    c.strokeStyle='#141414';c.lineWidth=1.2;
     for(let k=1;k<5;k++){c.beginPath();c.moveTo(cx+k*(cw/5),0);c.lineTo(cx+k*(cw/5),hor);c.stroke()}
     c.strokeStyle='rgba(20,10,12,0.28)';c.lineWidth=1;
     for(let sy=stoneCourseShift*depth*0.45;sy<hor;sy+=68){
       const yy=sy%hor;c.beginPath();c.moveTo(cx,yy);c.lineTo(cx+cw,yy);c.stroke();
     }
+    c.restore();
   });
+  c.save();c.globalAlpha=0.045;
+  const hPat=c.createPattern(getPaperGrainTile(),'repeat');
+  if(hPat){c.fillStyle=hPat;c.fillRect(0,0,w,h)}
+  c.restore();
 
   if(verdictTr<0.95){
     const sanctuaryDim=1-verdictTr;
@@ -3539,15 +3844,15 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
   const{w,h,c}=fitCanvas(sancActorsCv,true);
   c.clearRect(0,0,w,h);
   initRefPortraits();
-  const gIm=getHDAnimeSprite(beat.godPose||'g_front')||IMG[beat.godPose]||IMG.g_front;
+  const gIm=getPaperCutSprite(beat.godPose||'g_front',false)||getHDAnimeSprite(beat.godPose||'g_front')||IMG[beat.godPose]||IMG.g_front;
   const pRaw=IMG[beat.parthPose||'p_listen']||IMG.p_listen;
-  const pIm=getHDAnimeSprite(beat.parthPose||'p_listen')||pRaw;
+  const pIm=getPaperCutSprite(beat.parthPose||'p_listen',false)||getHDAnimeSprite(beat.parthPose||'p_listen')||pRaw;
 
   const orbitOff=(vpX-0.5)*w*0.18;
   const floorY=h*clamp(horRatio,0.54,0.92);
   const isVerdict=beat.id==='verdict';
 
-  /* Apply Camera Transform in Native 4K Canvas Coordinates BEFORE rasterizing 4K character ink (ZERO CSS scale blur!) */
+  /* Apply Camera Transform in Native 4K Canvas Coordinates BEFORE rasterizing 8K Paper-Cutout ink */
   c.save();
   if(cam){
     c.translate(w*0.5+w*(cam.tx/100),h*0.5+h*(cam.ty/100));
@@ -3556,7 +3861,7 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
     c.translate(-w*0.5,-h*0.5);
   }
 
-  /* Soft Feathered Heavenly White Awakening Light Veil behind Entity Parth on #000000 Void (ZERO hard grey triangle!) */
+  /* Soft Feathered Heavenly White Awakening Light Veil behind Entity Parth on #000000 Void */
   if(isVerdict&&verdictTr>0.01){
     const beamAmt=smoothstep(0.05,0.30,verdictTr);
     if(beamAmt>0.01){
@@ -3581,7 +3886,6 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
       c.fillStyle=hg;
       c.fillRect(bx-colW,0,colW*2,beamFloor);
 
-      /* Subtle Vertical Manhwa Brush Stencil SFX in Void Darkness */
       if(subBeat>0.26){
         c.save();
         c.fillStyle='rgba(255,255,255,'+(0.11*beamAmt).toFixed(2)+')';
@@ -3595,8 +3899,8 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
     }
   }
 
-  /* 1. Draw The Divine (4x Anime4K Crystal-Crisp Sovereign) */
-  const gw=gIm&&(gIm.width||gIm.naturalWidth),gh=gIm&&(gIm.height||gIm.naturalHeight);
+  /* 1. Draw The Divine (8K Layered 3D Paper-Cutout Sovereign) */
+  const gw=gIm&&(gIm._origW||gIm.width||gIm.naturalWidth),gh=gIm&&(gIm._origH||gIm.height||gIm.naturalHeight);
   const godAlpha=isVerdict?1-smoothstep(0.06,0.28,subBeat):1;
   if(gw&&gh&&godAlpha>0.01){
     const targetH=Math.min(h*0.65,550);
@@ -3607,14 +3911,14 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
     const gy=Math.min(h*0.78,floorY-h*0.02)+(isVerdict?0:Math.sin(t*2.2)*4.5);
     c.save();
     c.globalAlpha=godAlpha;
-    c.drawImage(gIm,gx-dw/2,gy-dh,dw,dh);
+    drawPaperSprite(c,gIm,gx-dw/2,gy-dh,dw,dh);
     c.restore();
   }
 
-  /* 2. Draw Parth (4x Anime4K Razor Ink + Verdict Sovereign Entity Coat) */
-  const pw=pIm&&(pIm.width||pIm.naturalWidth),ph=pIm&&(pIm.height||pIm.naturalHeight);
+  /* 2. Draw Parth (8K Layered 3D Paper-Cutout + Verdict Sovereign Entity Coat) */
+  const pw=pIm&&(pIm._origW||pIm.width||pIm.naturalWidth),ph=pIm&&(pIm._origH||pIm.height||pIm.naturalHeight);
   if(pw&&ph){
-    const entIm=isVerdict?(getEntityParthSprite(beat.parthPose||'p_idle')||pIm):pIm;
+    const entIm=isVerdict?(getPaperCutSprite(beat.parthPose||'p_idle',true)||getEntityParthSprite(beat.parthPose||'p_idle')||pIm):pIm;
     const targetH=Math.min(h*0.58,495);
     const scale=targetH/ph;
     const dw=pw*scale,dh=ph*scale;
@@ -3622,7 +3926,7 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
     const px=basePx-orbitOff*1.05;
     const py=Math.min(h*0.93,floorY+h*0.16);
 
-    c.fillStyle=isVerdict?'rgba(255,255,255,0.10)':'rgba(15,6,6,0.48)';
+    c.fillStyle=isVerdict?'rgba(255,255,255,0.14)':'rgba(15,6,6,0.52)';
     c.beginPath();c.ellipse(px,py-4,dw*0.26,9,0,0,Math.PI*2);c.fill();
 
     const breath=1+Math.sin(t*2.4)*0.008;
@@ -3632,20 +3936,25 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
     c.scale(1,breath);
     if(isVerdict){
       const morph=smoothstep(0.08,0.34,subBeat);
-      const sw=entIm.width||pw,sh=entIm.height||ph;
-      const cutSrcY=Math.round(sh*morph),cutDstY=dh*morph;
+      const padP=pIm._pad||0,origWP=pIm._origW||pw,origHP=pIm._origH||ph;
+      const sxP=dw/origWP,syP=dh/origHP;
+      const dTopY=-padP*syP,dTotH=dh+2*padP*syP;
+      const cutSrcY=Math.round(padP+origHP*morph);
+      const cutDstY=dh*morph;
+      const ePad=entIm._pad||0,eOW=entIm._origW||pw,eOH=entIm._origH||ph;
+      const cutEntY=Math.round(ePad+eOH*morph);
       if(morph<0.995){
-        c.drawImage(pIm,0,cutSrcY,sw,sh-cutSrcY,0,cutDstY,dw,dh-cutDstY);
+        c.drawImage(pIm,0,cutSrcY,pIm.width||origWP,(pIm.height||origHP)-cutSrcY,-padP*sxP,cutDstY,dw+2*padP*sxP,(dTopY+dTotH)-cutDstY);
       }
       if(morph>0.005){
-        c.drawImage(entIm,0,0,sw,cutSrcY,0,0,dw,cutDstY);
+        c.drawImage(entIm,0,0,entIm.width||eOW,cutEntY,-ePad*(dw/eOW),-ePad*(dh/eOH),dw+2*ePad*(dw/eOW),cutDstY+ePad*(dh/eOH));
       }
       if(morph>0.02&&morph<0.98){
         c.fillStyle='#FFFFFF';
         c.fillRect(dw*0.04,cutDstY-1.5,dw*0.92,3);
       }
     }else{
-      c.drawImage(pIm,0,0,dw,dh);
+      drawPaperSprite(c,pIm,0,0,dw,dh);
     }
     c.restore();
   }
@@ -3705,17 +4014,23 @@ function drawPour(t,pPour=0.5){
   c.bezierCurveTo(cx+streamW*0.52,stBot*0.75,cx+streamW*0.65,stBot*0.4,cx+streamW*1.35,stTop);
   c.closePath();c.fill();
 
-  /* Three Essence Orbs (Defender · Builder · Creator) Orbiting Calmly Into the Mercury Stream */
+  /* Three Kirigami Cardstock Essence Orbs (Defender · Builder · Creator) with Ivory Rim */
   const orbColors=['#2BB6D8','#4BC988','#E4B648'];
   orbColors.forEach((col,i)=>{
     const ang=pPour*3.2+t*(0.55+inf*1.2)+(i*Math.PI*2/3);
     const orbitR=(95-inf*58);
     const ox=cx+Math.cos(ang)*orbitR*1.35,oy=h*0.46+Math.sin(ang)*orbitR*0.42;
     const rad=Math.max(8,18-inf*6);
-    c.fillStyle=col;c.strokeStyle='#141414';c.lineWidth=1.8;
+    c.save();
+    c.shadowColor='rgba(12,4,6,0.48)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=5;
+    c.fillStyle='#F5F1E6';c.strokeStyle='#141414';c.lineWidth=1.4;
+    c.beginPath();c.arc(ox,oy,rad+3.2,0,Math.PI*2);c.fill();c.stroke();
+    c.shadowColor='transparent';
+    c.fillStyle=col;c.strokeStyle='#141414';c.lineWidth=1.6;
     c.beginPath();c.arc(ox,oy,rad,0,Math.PI*2);c.fill();c.stroke();
-    c.fillStyle='rgba(255,255,255,0.68)';
+    c.fillStyle='rgba(255,252,244,0.68)';
     c.beginPath();c.arc(ox-rad*0.28,oy-rad*0.28,rad*0.28,0,Math.PI*2);c.fill();
+    c.restore();
   });
 }
 
@@ -3727,7 +4042,7 @@ function drawVortex(t,pVor=0.5){
   const lift=clamp(Math.max(pull*0.68,vortexProgress),0,1);
   const cx=w/2,cy=h*(0.52-lift*0.04);
 
-  /* Smooth Feathered Heavenly White Awakening Aura Illuminating Entity Parth in the Darkness (ZERO ugly ellipse wireframe lines!) */
+  /* Smooth Feathered Heavenly White Awakening Aura + Layered Paper Halo Behind Entity Parth */
   const auraR=Math.min(w,h)*(0.42+lift*0.26);
   const aura=c.createRadialGradient(cx,cy,8,cx,cy,auraR);
   aura.addColorStop(0,'rgba(255,255,255,'+(0.62+lift*0.36).toFixed(2)+')');
@@ -3737,7 +4052,6 @@ function drawVortex(t,pVor=0.5){
   c.fillStyle=aura;
   c.beginPath();c.arc(cx,cy,auraR,0,Math.PI*2);c.fill();
 
-  /* Soft Silky Overhead Illumination Pillar (NO sharp flat polygon edge!) */
   const colW=w*(0.16+lift*0.09);
   const colG=c.createLinearGradient(cx-colW,0,cx+colW,0);
   colG.addColorStop(0,'rgba(255,255,255,0)');
@@ -3746,7 +4060,6 @@ function drawVortex(t,pVor=0.5){
   c.fillStyle=colG;
   c.fillRect(cx-colW,0,colW*2,h*0.94);
 
-  /* Calm Rising White Light Motes + Subtle Stencil Manhwa Awakening Calligraphy */
   c.save();
   c.fillStyle='rgba(255,255,255,'+(0.09+lift*0.08).toFixed(2)+')';
   c.font='700 '+Math.round(h*0.12)+'px var(--jp)';
@@ -3761,24 +4074,25 @@ function drawVortex(t,pVor=0.5){
     c.beginPath();c.arc(px,py,1.1+(i%2)*0.9,0,Math.PI*2);c.fill();
   }
 
-  /* Awakened 4K Sovereign Entity Parth rising in light */
+  /* Awakened 8K Paper-Cutout Sovereign Entity Parth rising in light */
   const{w:aw,h:ah,c:ac}=fitCanvas(vortexActorCv,true);
   ac.clearRect(0,0,aw,ah);
-  const srcV=getEntityParthSprite('p_idle')||IMG.p_idle;
-  const sw=srcV&&(srcV.width||srcV.naturalWidth),sh=srcV&&(srcV.height||srcV.naturalHeight);
-  if(sw&&sh){
+  const srcV=getPaperCutSprite('p_idle',true)||getEntityParthSprite('p_idle')||IMG.p_idle;
+  const ow=srcV&&(srcV._origW||srcV.width||srcV.naturalWidth),oh=srcV&&(srcV._origH||srcV.height||srcV.naturalHeight);
+  const cw=srcV&&(srcV.width||ow),ch=srcV&&(srcV.height||oh),vPad=srcV&&(srcV._pad||0);
+  if(ow&&oh){
     const targetH=Math.min(ah*0.64,520)*(0.95+pull*0.08+vortexProgress*0.14);
-    const sc=targetH/sh,dw=sw*sc,dh=targetH;
+    const sc=targetH/oh,dw=ow*sc,dh=targetH,dPadX=vPad*(dw/ow),dPadY=vPad*sc;
     const fy=ah*(0.54-lift*0.06);
     ac.save();
     ac.translate(aw/2-dw/2,fy-dh/2);
-    const hemY=Math.round(sh*0.44);
-    ac.drawImage(srcV,0,0,sw,hemY,0,0,dw,hemY*sc);
-    for(let y=hemY;y<sh;y+=6){
-      const bh=Math.min(6,sh-y);
-      const frac=(y-hemY)/(sh-hemY);
+    const hemY=Math.round(vPad+oh*0.44);
+    ac.drawImage(srcV,0,0,cw,hemY,-dPadX,-dPadY,dw+2*dPadX,hemY*sc);
+    for(let y=hemY;y<ch;y+=6){
+      const bh=Math.min(6,ch-y);
+      const frac=(y-hemY)/Math.max(1,ch-hemY);
       const wx=Math.sin(pVor*6-frac*4+t*1.1)*frac*(1.8+vortexProgress*3.6);
-      ac.drawImage(srcV,0,y,sw,bh,wx,y*sc,dw,bh*sc+1.0);
+      ac.drawImage(srcV,0,y,cw,bh,wx-dPadX,-dPadY+y*sc,dw+2*dPadX,bh*sc+1.0);
     }
     ac.restore();
   }
@@ -3806,9 +4120,10 @@ function drawShatter(t,pSh){
     const cw=Math.min(118,w*0.11);
     const drawHalf=(topHalf)=>{
       c.save();
+      c.shadowColor='rgba(10,4,6,0.45)';c.shadowBlur=14;c.shadowOffsetX=5;c.shadowOffsetY=7;
       c.translate(cx+(ci?1:-1)*(topHalf?crack*34:crack*10),h*0.5+(topHalf?-crack*40:crack*22));
       c.rotate((ci?1:-1)*crack*(topHalf?0.16:0.08));
-      c.fillStyle='#F2F1EC';c.strokeStyle='#141414';c.lineWidth=2;
+      c.fillStyle='#F5F1E6';c.strokeStyle='#141414';c.lineWidth=2.2;
       c.beginPath();
       if(topHalf){
         c.moveTo(-cw/2,-h*0.6);c.lineTo(cw/2,-h*0.6);c.lineTo(cw/2,-16);
@@ -3817,7 +4132,7 @@ function drawShatter(t,pSh){
         c.moveTo(-cw/2,28);c.lineTo(-cw*.18,4);c.lineTo(cw*.16,30);c.lineTo(cw/2,-4);
         c.lineTo(cw/2,h*0.6);c.lineTo(-cw/2,h*0.6);c.closePath();
       }
-      c.fill();c.stroke();
+      c.fill();c.shadowColor='transparent';c.stroke();
       c.save();c.clip();
       for(let k=-2;k<=2;k++){c.beginPath();c.moveTo(k*(cw/6),-h*0.6);c.lineTo(k*(cw/6),h*0.6);c.stroke()}
       c.restore();c.restore();
@@ -3825,24 +4140,28 @@ function drawShatter(t,pSh){
     drawHalf(true);drawHalf(false);
   });
 
+  c.save();c.shadowColor='rgba(10,4,6,0.42)';c.shadowBlur=8;c.shadowOffsetX=4;c.shadowOffsetY=5;
   SHARDS.forEach((s,idx)=>{
     const x=(s.x+s.vx*crack+Math.sin(t*1.5+idx)*0.014)*w;
     const y=((s.y0+s.vy*crack+t*0.035)%1.08)*h;
     c.save();c.translate(x,y);c.rotate(s.rot+crack*2.8+t*(0.5+(idx%3)*0.25));
-    c.fillStyle='#ECEAE2';c.strokeStyle='#141414';c.lineWidth=1.6;
+    c.fillStyle='#F4F0E5';c.strokeStyle='#141414';c.lineWidth=1.8;
     c.fillRect(-s.w/2,-s.h/2,s.w,s.h);c.strokeRect(-s.w/2,-s.h/2,s.w,s.h);
     c.restore();
   });
+  c.restore();
 
   const{w:fw,h:fh,c:fc}=fitCanvas(shatterFallCv);
   fc.fillStyle='#96191D';fc.fillRect(0,0,fw,fh);
+  fc.save();fc.shadowColor='rgba(10,4,6,0.44)';fc.shadowBlur=8;fc.shadowOffsetX=4;fc.shadowOffsetY=5;
   SHARDS.slice(0,18).forEach((s,i)=>{
     const x=fw*((0.1+i*0.048)%0.9)+Math.sin(t*1.8+i)*8,y=fh*((0.15+s.vy*0.8+crack*0.45+t*0.05)%0.95);
     fc.save();fc.translate(x,y);fc.rotate(s.rot+crack*3+t*0.9);
-    fc.fillStyle='#EAE8E0';fc.strokeStyle='#141414';fc.lineWidth=1.6;
+    fc.fillStyle='#F4F0E5';fc.strokeStyle='#141414';fc.lineWidth=1.8;
     fc.fillRect(-s.w/2,-s.h/2,s.w,s.h);fc.strokeRect(-s.w/2,-s.h/2,s.w,s.h);
     fc.restore();
   });
+  fc.restore();
 }
 
 function drawCollectionFx(t){
@@ -3886,7 +4205,8 @@ function bindHold(btnId,ringId,onProg,moveMode=false){
   function move(e){
     if(!active||!moveMode)return;
     const x=e.clientX||(e.touches&&e.touches[0].clientX)||startX;
-    onProg(clamp((startX-x)/130,0,1),ring);
+    const span=Math.max(54,Math.min(130,window.innerWidth*0.24));
+    onProg(clamp((startX-x)/span,0,1),ring);
   }
   function up(){active=false}
   btn.addEventListener('pointerdown',down);
@@ -4132,7 +4452,7 @@ function tick(ts){
     $('#mist-cam').style.transform='translate('+mTx.toFixed(2)+'%,'+mTy.toFixed(2)+'%) scale('+mScale.toFixed(3)+') rotate('+mRot.toFixed(2)+'deg)';
     drawParthWalkActor(tTime,pMistS,{tx:mTx,ty:mTy,s:mScale,r:mRot});
     const hint=$('.scroll-step-hint');
-    if(hint)hint.style.opacity=pMistS>0.03?'0':'1';
+    if(hint){hint.style.opacity=pMistS>0.025?'0':'1';hint.style.visibility=pMistS>0.03?'hidden':'visible'}
 
     const showM1=pMistS<0.36,showM2=pMistS>=0.32&&pMistS<0.68,showM3=pMistS>=0.64;
     $('#cap-mist-1').style.opacity=showM1?1:0;
