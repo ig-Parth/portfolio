@@ -1,4 +1,4 @@
-﻿# NEXUS 01 — Parth Vijay Gidde Portfolio
+# NEXUS 01 — Parth Vijay Gidde Portfolio
 
 **Live Site:** https://portfolio-devharbour.vercel.app
 
