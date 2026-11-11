@@ -1,0 +1,21 @@
+{
+  "specVersion": "0.91",
+  "host": {
+    "displayName": "NEXUS 01 — Parth Vijay Gidde Portfolio",
+    "identifier": "portfolio-devharbour.vercel.app"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:portfolio-devharbour.vercel.app:doc:portfolio-llms",
+      "displayName": "NEXUS 01 Portfolio Context (LLMs.txt)",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://portfolio-devharbour.vercel.app/llms.txt",
+      "description": "Verified portfolio, projects (Garaa, DevHarbour, Zyr Resume Studio, Laser Distance System, IoT Weather Detection), cybersecurity internship, and certifications of Parth Vijay Gidde.",
+      "representativeQueries": [
+        "Who is Parth Vijay Gidde and what did he build?",
+        "Details about DevHarbour 4000+ developer platform and Garaa Hackathon project",
+        "Parth Vijay Gidde cybersecurity experience and skills"
+      ]
+    }
+  ]
+}

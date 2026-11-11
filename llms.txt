@@ -1,0 +1,25 @@
+# NEXUS 01 — Parth Vijay Gidde Portfolio
+
+> Interactive 8K Manhwa & graphic-novel engineering portfolio of Parth Vijay Gidde (B.E. Cybersecurity student at Mumbai University, Co-Founder of DevHarbour).
+
+## Profile
+- Name: Parth Vijay Gidde
+- Live URL: https://portfolio-devharbour.vercel.app/
+- Location: Navi Mumbai, Maharashtra, India
+- Education: B.E. Cybersecurity (IoT incl. Blockchain Technology), Mumbai University (2025-2029) · SSC Foundation (2023)
+- Contact: parthvgidde@gmail.com
+- LinkedIn: https://linkedin.com/in/parth-g-0a8335412
+- GitHub: https://github.com/ig-Parth · https://github.com/Gaara-1
+
+## Verified Projects
+- [Garaa](https://gaara-1.github.io/ZyID/): 1st Runner-up at Baloon National Hackathon 2026 — identity & document verification pipeline (React, Tesseract.js, jsQR, face-api.js).
+- [DevHarbour](https://devharbour.in): Developer learning & hackathon community platform serving 4,000+ developers (Co-Founder since October 2025).
+- Zyr Resume Studio: AI-assisted resume builder with live formatting preview (React, Vite, AI assistance).
+- Laser Distance System: Optical ranging perimeter security prototype.
+- IoT Weather Detection: Arduino real-time ambient temperature and humidity telemetry monitor.
+
+## Experience & Certifications
+- Cybersecurity Intern, Tripple One Solutions (Sept-Nov 2026): Network security monitoring, threat research, incident response planning, Python security analysis.
+- Campus Campaign Marketing Intern, Goibibo (Aug-Sept 2026).
+- College Ambassador, Techfest IIT Bombay (Rank 88).
+- Certifications: NPTEL Cyber Security and Privacy (Elite, 75%), VaultofCodes Ethical Hacking Assessment, Mastercard Cybersecurity Job Simulation (Forage), Microsoft & LinkedIn Generative AI Essentials, 30 Days of Python Using AI, Infosys Springboard Unix/Linux OS Fundamentals.
