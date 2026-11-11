@@ -4,7 +4,7 @@
 
 ## Profile
 - Name: Parth Vijay Gidde
-- Live URL: https://portfolio-devharbour.vercel.app/
+- Live URL: https://portfolio-flax-three-1uk6t48jdt.vercel.app/
 - Location: Navi Mumbai, Maharashtra, India
 - Education: B.E. Cybersecurity (IoT incl. Blockchain Technology), Mumbai University (2025-2029) · SSC Foundation (2023)
 - Contact: parthvgidde@gmail.com
