@@ -1,0 +1,31 @@
+# NEXUS 01 — Parth Vijay Gidde Portfolio & Verified Engineering Resume
+
+> Verified portfolio, interactive 8K Layered 3D Kirigami Web Experience, and machine-readable engineering credentials of Parth Vijay Gidde.
+
+## Executive Highlights (All Verified)
+- **Role & Education**: B.E. Cybersecurity (IoT incl. Blockchain Technology), Mumbai University (2025–2029) · Navi Mumbai, India
+- **Founder Impact**: Co-Founder of [DevHarbour](https://devharbour.in) — scaled community & hackathon ecosystem to **4,000+ developers** since October 2025
+- **National Hackathon Win**: **1st Runner-up at Baloon National Hackathon 2026** with [Garaa](https://gaara-1.github.io/ZyID/) (OCR + QR + face verification)
+- **Cybersecurity Experience**: Cybersecurity Intern at **Tripple One Solutions** (Sept–Nov 2026) — network security monitoring, threat research, incident response planning, Python security analysis
+- **Certifications**: **NPTEL Elite (75%)** Cyber Security and Privacy, Mastercard Cybersecurity Job Simulation (Forage), VaultofCodes Ethical Hacking Assessment, Microsoft & LinkedIn Generative AI Essentials, 30 Days of Python Using AI, Infosys Springboard Unix/Linux OS Fundamentals
+- **Campus Leadership**: College Ambassador at **Techfest, IIT Bombay** (Leaderboard Rank 88) · Campus Campaign Marketing Intern at **Goibibo**
+
+## Live Links & Machine-Readable Endpoints
+- Portfolio URL: https://portfolio-flax-three-1uk6t48jdt.vercel.app/
+- Public Source Code Repository: https://github.com/ig-Parth/portfolio
+- JSON Resume v1.0: https://portfolio-flax-three-1uk6t48jdt.vercel.app/resume.json
+- Full Technical & Project Context: https://portfolio-flax-three-1uk6t48jdt.vercel.app/llms-full.txt
+- Contact: parthvgidde@gmail.com | [LinkedIn](https://linkedin.com/in/parth-g-0a8335412) | [GitHub](https://github.com/ig-Parth)
+
+## Verified Projects
+- **Garaa** (Identity & document verification) — https://gaara-1.github.io/ZyID/: Built and shipped with Team Garaa — 1st Runner-up at Baloon National Hackathon 2026. Tech: React, Tesseract.js, jsQR, face-api.js.
+- **DevHarbour** (Developer learning & building platform) — https://devharbour.in: Co-Founder since October 2025 — product development, platform strategy, community growth, and hackathon organization. Tech: Product, Strategy, Community, 4,000+ Users.
+- **Zyr Resume Studio** (AI-assisted resume builder): Designed and engineered the studio interface and interactive generation workflow. Tech: React, Vite, AI assistance.
+- **Laser Distance System** (Optical ranging for security): Built the measurement workflow and explored practical security monitoring triggers. Tech: Laser ranging, Hardware sensing, Security.
+- **IoT Weather Detection** (Arduino environmental monitor): Built hardware connections and live monitoring firmware. Tech: Arduino, Temp/humidity sensors, IoT.
+
+## Technical Architecture of NEXUS 01
+- Custom 8K Canvas2D & Kirigami Pipeline: client-side edge-directed sharpening, alpha defringing, stepped cotton-rag paper surface quantization, cream die-cut contour silhouettes, and physical 3D shadow casting.
+- 36-frame scroll-locked gait kinematics & 8-beat camera choreography without external 3D/WebGL dependencies.
+- Procedural WebAudio synthesizer (footsteps, truck approach/horn/impact FX, cathedral harmonic chords, mercury pour & awakening swell) synchronized with Japanese SpeechSynthesis turn-locked dialogues.
+- Full SSR semantic HTML parity for all 5 case files and 8 skill nodes, JSON-LD @graph, JSON Resume v1.0, ATS print mode (@media print), and Lighthouse 100/100/100/100 across Accessibility, Best Practices, SEO, and Agentic Browsing (Desktop & Mobile).

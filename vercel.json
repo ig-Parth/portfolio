@@ -1,6 +1,16 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/favicon.ico",
+      "destination": "/favicon.svg"
+    },
+    {
+      "source": "/((?!robots\\.txt|sitemap\\.xml|resume\\.json|llms\\.txt|llms-full\\.txt|og-preview\\.png|favicon\\.ico|favicon\\.svg|\\.well-known/).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -10,42 +20,23 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         }
       ]
     },
     {
-      "source": "/.well-known/ard.json",
+      "source": "/(resume\\.json|llms\\.txt|llms-full\\.txt|sitemap\\.xml|\\.well-known/ard\\.json)",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json; charset=utf-8"
-        },
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/llms.txt",
-      "headers": [
+        },
         {
-          "key": "Content-Type",
-          "value": "text/markdown; charset=utf-8"
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/favicon.ico",
-      "destination": "/favicon.svg"
     }
   ]
 }

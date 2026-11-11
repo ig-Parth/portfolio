@@ -10,11 +10,34 @@
       "displayName": "NEXUS 01 Portfolio Context (LLMs.txt)",
       "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/llms.txt",
-      "description": "Verified portfolio, projects (Garaa, DevHarbour, Zyr Resume Studio, Laser Distance System, IoT Weather Detection), cybersecurity internship, and certifications of Parth Vijay Gidde.",
+      "description": "Executive summary, verified metrics (4,000+ users, National Hackathon 1st Runner-up, NPTEL Elite 75%), projects, and experience of Parth Vijay Gidde.",
       "representativeQueries": [
         "Who is Parth Vijay Gidde and what did he build?",
         "Details about DevHarbour 4000+ developer platform and Garaa Hackathon project",
-        "Parth Vijay Gidde cybersecurity experience and skills"
+        "Parth Vijay Gidde cybersecurity experience, certifications, and skills"
+      ]
+    },
+    {
+      "identifier": "urn:air:portfolio-flax-three-1uk6t48jdt.vercel.app:doc:resume-json",
+      "displayName": "JSON Resume v1.0 — Parth Vijay Gidde",
+      "type": "application/json",
+      "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/resume.json",
+      "description": "Structured JSON Resume schema containing verified work history, education, awards, certifications, projects, and technical skills.",
+      "representativeQueries": [
+        "Parse Parth Vijay Gidde structured resume JSON",
+        "Compare candidate credentials, cybersecurity internships, and projects"
+      ]
+    },
+    {
+      "identifier": "urn:air:portfolio-flax-three-1uk6t48jdt.vercel.app:doc:portfolio-llms-full",
+      "displayName": "NEXUS 01 Full Technical & Case Study Dossier",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/llms-full.txt",
+      "description": "Complete technical architecture of the NEXUS 01 8K Layered Paper-Cut Engine plus full project case studies.",
+      "representativeQueries": [
+        "How is the NEXUS 01 8K paper-cut portfolio engineered?",
+        "Detailed architecture of Garaa, DevHarbour, and Parth Vijay Gidde engineering projects",
+        "Verify WebAudio, Canvas2D gait kinematics, and accessibility compliance"
       ]
     }
   ]

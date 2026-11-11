@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://portfolio-flax-three-1uk6t48jdt.vercel.app/sitemap.xml

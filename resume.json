@@ -1,0 +1,268 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Parth Vijay Gidde",
+    "label": "Cybersecurity Engineering Student · Co-Founder, DevHarbour · National Hackathon Runner-Up",
+    "image": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/og-preview.png",
+    "email": "parthvgidde@gmail.com",
+    "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/",
+    "summary": "B.E. Cybersecurity (IoT incl. Blockchain Technology) student at Mumbai University (2025–2029), Co-Founder of DevHarbour (4,000+ developers since Oct 2025), and 1st Runner-up at Baloon National Hackathon 2026 (Team Garaa). Combines network security monitoring, Python security workflows, browser-native OCR/biometrics, and full-stack product delivery.",
+    "location": {
+      "city": "Navi Mumbai",
+      "region": "Maharashtra",
+      "countryCode": "IN"
+    },
+    "profiles": [
+      {
+        "network": "GitHub (Portfolio Source)",
+        "username": "ig-Parth",
+        "url": "https://github.com/ig-Parth/portfolio"
+      },
+      {
+        "network": "GitHub (Projects)",
+        "username": "Gaara-1",
+        "url": "https://github.com/Gaara-1"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "parth-g-0a8335412",
+        "url": "https://linkedin.com/in/parth-g-0a8335412"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "DevHarbour",
+      "position": "Co-Founder",
+      "url": "https://devharbour.in",
+      "startDate": "2025-10",
+      "summary": "Co-founded developer learning, community platform, and hackathon ecosystem serving 4,000+ developers.",
+      "highlights": [
+        "Scaled community platform and hackathon programming to 4,000+ developers since Oct 2025.",
+        "Led product development, platform strategy, and community execution."
+      ]
+    },
+    {
+      "name": "Tripple One Solutions",
+      "position": "Cybersecurity Intern",
+      "startDate": "2026-09",
+      "endDate": "2026-11",
+      "summary": "Network security monitoring, threat research, incident response planning, and Python-based security analysis.",
+      "highlights": [
+        "Executed network security monitoring and threat research workflows.",
+        "Contributed to incident response planning and Python security analysis scripts."
+      ]
+    },
+    {
+      "name": "Goibibo",
+      "position": "Campus Campaign Marketing Intern",
+      "startDate": "2026-08",
+      "endDate": "2026-09",
+      "summary": "Executed campus brand campaigns, student outreach initiatives, and engagement workflows."
+    },
+    {
+      "name": "Techfest, IIT Bombay",
+      "position": "College Ambassador",
+      "summary": "Represented Techfest campus outreach, achieving Leaderboard Rank 88."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Mumbai University",
+      "area": "Cybersecurity (IoT including Blockchain Technology)",
+      "studyType": "B.E.",
+      "startDate": "2025",
+      "endDate": "2029",
+      "summary": "Prior foundation: SSC (2023)."
+    }
+  ],
+  "awards": [
+    {
+      "title": "1st Runner-up — Baloon National Hackathon 2026",
+      "date": "2026",
+      "awarder": "Baloon National Hackathon (Team Garaa)",
+      "summary": "Built Garaa: browser-native OCR, QR decoding, face landmark check, and image-quality document verification pipeline."
+    },
+    {
+      "title": "Leaderboard Rank 88 — College Ambassador",
+      "awarder": "Techfest, IIT Bombay",
+      "summary": "Recognized among top national campus ambassadors."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Cyber Security and Privacy (Elite · 75%)",
+      "issuer": "NPTEL"
+    },
+    {
+      "name": "Cybersecurity Job Simulation",
+      "issuer": "Mastercard (Forage)"
+    },
+    {
+      "name": "Ethical Hacking & Cybersecurity Assessment",
+      "issuer": "VaultofCodes"
+    },
+    {
+      "name": "Career Essentials in Generative AI",
+      "issuer": "Microsoft & LinkedIn"
+    },
+    {
+      "name": "30 Days of Python Using AI",
+      "issuer": "House of Edtech"
+    },
+    {
+      "name": "Unix / Linux OS Fundamentals",
+      "issuer": "Infosys Springboard"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Network Security",
+      "level": "CYBER",
+      "keywords": [
+        "Tripple One Solutions Internship (Sept–Nov 2026)",
+        "NPTEL Cyber Security and Privacy (Elite, 75%)",
+        "Mastercard Cybersecurity Job Simulation (Forage)"
+      ]
+    },
+    {
+      "name": "Linux & Ethical Hacking",
+      "level": "CYBER",
+      "keywords": [
+        "Infosys Springboard Unix / Linux OS Fundamentals",
+        "VaultofCodes Ethical Hacking & Cybersecurity Assessment"
+      ]
+    },
+    {
+      "name": "Python Security",
+      "level": "PROG",
+      "keywords": [
+        "Tripple One Solutions Python security analysis",
+        "House of Edtech 30 Days of Python Using AI"
+      ]
+    },
+    {
+      "name": "React / Vite / Web",
+      "level": "PROG",
+      "keywords": [
+        "Garaa identity prototype (React)",
+        "Zyr Resume Studio (React + Vite)",
+        "DevHarbour platform engineering"
+      ]
+    },
+    {
+      "name": "Arduino & IoT",
+      "level": "PROG",
+      "keywords": [
+        "IoT Weather Detection System (Arduino)",
+        "Laser Distance Measurement System"
+      ]
+    },
+    {
+      "name": "Generative AI & OCR",
+      "level": "AI",
+      "keywords": [
+        "Garaa (Tesseract.js, jsQR, face-api.js)",
+        "Zyr Resume Studio",
+        "Microsoft & LinkedIn Generative AI Essentials"
+      ]
+    },
+    {
+      "name": "Product Strategy",
+      "level": "PROD",
+      "keywords": [
+        "Co-Founder, DevHarbour (4,000+ users)",
+        "1st Runner-up, Baloon National Hackathon 2026"
+      ]
+    },
+    {
+      "name": "Community & Events",
+      "level": "LEAD",
+      "keywords": [
+        "DevHarbour hackathon organization",
+        "Techfest IIT Bombay College Ambassador (Rank 88)",
+        "Goibibo Campus Marketing Intern"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Garaa",
+      "description": "Identity & document verification — Manual KYC and identity checks break down when documents suffer blur, glare, tampered text, or mismatched faces. Browser-native verification pipeline combining OCR, QR parsing, face landmark checks, and document quality scoring.",
+      "highlights": [
+        "Built and shipped with Team Garaa — 1st Runner-up at Baloon National Hackathon 2026."
+      ],
+      "keywords": [
+        "React",
+        "Tesseract.js",
+        "jsQR",
+        "face-api.js"
+      ],
+      "url": "https://gaara-1.github.io/ZyID/"
+    },
+    {
+      "name": "DevHarbour",
+      "description": "Developer learning & building platform — Student developers often lack structured builder ecosystems that bridge early learning into shipped hackathon projects. End-to-end platform strategy and community programming serving 4,000+ users.",
+      "highlights": [
+        "Co-Founder since October 2025 — product development, platform strategy, community growth, and hackathon organization."
+      ],
+      "keywords": [
+        "Product",
+        "Strategy",
+        "Community",
+        "4,000+ Users"
+      ],
+      "url": "https://devharbour.in"
+    },
+    {
+      "name": "Zyr Resume Studio",
+      "description": "AI-assisted resume builder — Resumes often suffer from clunky formatting workflows and inconsistent bullet refinement. Fast frontend workspace combining live preview formatting with guided AI editing.",
+      "highlights": [
+        "Designed and engineered the studio interface and interactive generation workflow."
+      ],
+      "keywords": [
+        "React",
+        "Vite",
+        "AI assistance"
+      ],
+      "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/#ev-panel-zyr"
+    },
+    {
+      "name": "Laser Distance System",
+      "description": "Optical ranging for security — Perimeter security prototypes require low-latency distance thresholding without bulky sensor arrays. Optical distance calculation loop coupled with threshold trigger verification.",
+      "highlights": [
+        "Built the measurement workflow and explored practical security monitoring triggers."
+      ],
+      "keywords": [
+        "Laser ranging",
+        "Hardware sensing",
+        "Security"
+      ],
+      "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/#ev-panel-laser"
+    },
+    {
+      "name": "IoT Weather Detection",
+      "description": "Arduino environmental monitor — Localized environmental monitoring needs low-cost telemetry directly from physical sensor modules. Arduino sensor wiring and real-time telemetry readout code.",
+      "highlights": [
+        "Built hardware connections and live monitoring firmware."
+      ],
+      "keywords": [
+        "Arduino",
+        "Temp/humidity sensors",
+        "IoT"
+      ],
+      "url": "https://portfolio-flax-three-1uk6t48jdt.vercel.app/#ev-panel-weather"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Domains",
+      "keywords": [
+        "Cybersecurity",
+        "AI & Generative AI",
+        "Software & Web Development",
+        "Creative Technology"
+      ]
+    }
+  ]
+}

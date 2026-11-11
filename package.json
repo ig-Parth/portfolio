@@ -1,0 +1,10 @@
+{
+  "name": "nexus-01-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NEXUS 01 — 8K Layered Paper-Cut Interactive Portfolio & Engineering Resume of Parth Vijay Gidde",
+  "scripts": {
+    "test": "node tests/verify_site.mjs"
+  }
+}
