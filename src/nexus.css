@@ -360,12 +360,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT I: MUMBAI 6:42 PM STICKY CAMERA WALK (330VH) ==================== */
 #scene-mist{position:relative;height:330vh;background:var(--paper)}
 #mist-sticky{
-  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--paper);
+  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--paper);perspective:1100px;transform-style:preserve-3d;
 }
 #mist-cam{
-  position:absolute;inset:0;transform-origin:50% 52%;will-change:transform;
+  position:absolute;inset:0;transform-origin:50% 52%;will-change:transform;transform-style:preserve-3d;
 }
-#mist-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(1.8px);transform:scale(1.02)}
+#mist-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(0.7px);transform:scale(1.03)}
 #parth-walk-cv{
   position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none;
 }
@@ -399,12 +399,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 #scene-impact{
   position:relative;background:var(--paper);padding:8vh clamp(16px,4vw,48px) 8vh;overflow:hidden;
 }
-.impact-wrap{position:relative;max-width:1120px;min-height:84vh;margin:0 auto;display:grid;place-items:center}
+.impact-wrap{position:relative;max-width:1120px;min-height:84vh;margin:0 auto;display:grid;place-items:center;perspective:1100px;transform-style:preserve-3d}
 #impact-rays{position:absolute;inset:-80px 0;width:100%;height:calc(100% + 160px);pointer-events:none;z-index:1}
 .portrait-panel{
   position:relative;z-index:2;width:min(380px,80vw);height:min(74vh,590px);
   border:1.5px solid var(--ink);background:#17181E;overflow:hidden;
-  box-shadow:0 24px 64px rgba(0,0,0,.15);
+  box-shadow:0 24px 64px rgba(0,0,0,.15);transform-style:preserve-3d;
 }
 .portrait-panel img{
   width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block;
@@ -412,7 +412,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 }
 .portrait-headlight{
   position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:radial-gradient(circle at 86% 42%,rgba(255,252,235,.98),rgba(255,244,210,.55) 35%,transparent 70%);
+  background:radial-gradient(circle at 86% 42%,rgba(255,255,255,.98),rgba(229,57,53,.42) 38%,rgba(175,235,255,.22) 64%,transparent 78%);
   mix-blend-mode:screen;
 }
 .portrait-flash{
@@ -552,12 +552,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT VI: CRIMSON SANCTUARY & COMPLETE 6-CHAPTER SCROLL STORY (700VH) ==================== */
 #scene-sanctuary-story{position:relative;height:700vh;background:var(--crimson-wall);border-top:1.5px solid var(--ink)}
 #sanc-sticky{
-  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall);
+  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall);perspective:1150px;transform-style:preserve-3d;
 }
 #sanc-cam{
-  position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;
+  position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;transform-style:preserve-3d;
 }
-#hall-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(2.4px) saturate(1.06);transform:scale(1.02)}
+#hall-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(1.0px) saturate(1.08);transform:scale(1.03)}
 #sanc-actors-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none}
 
 /* HUD layer stays razor-sharp outside camera transform */

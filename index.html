@@ -599,12 +599,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT I: MUMBAI 6:42 PM STICKY CAMERA WALK (330VH) ==================== */
 #scene-mist{position:relative;height:330vh;background:var(--paper)}
 #mist-sticky{
-  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--paper);
+  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--paper);perspective:1100px;transform-style:preserve-3d;
 }
 #mist-cam{
-  position:absolute;inset:0;transform-origin:50% 52%;will-change:transform;
+  position:absolute;inset:0;transform-origin:50% 52%;will-change:transform;transform-style:preserve-3d;
 }
-#mist-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(1.8px);transform:scale(1.02)}
+#mist-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(0.7px);transform:scale(1.03)}
 #parth-walk-cv{
   position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none;
 }
@@ -638,12 +638,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 #scene-impact{
   position:relative;background:var(--paper);padding:8vh clamp(16px,4vw,48px) 8vh;overflow:hidden;
 }
-.impact-wrap{position:relative;max-width:1120px;min-height:84vh;margin:0 auto;display:grid;place-items:center}
+.impact-wrap{position:relative;max-width:1120px;min-height:84vh;margin:0 auto;display:grid;place-items:center;perspective:1100px;transform-style:preserve-3d}
 #impact-rays{position:absolute;inset:-80px 0;width:100%;height:calc(100% + 160px);pointer-events:none;z-index:1}
 .portrait-panel{
   position:relative;z-index:2;width:min(380px,80vw);height:min(74vh,590px);
   border:1.5px solid var(--ink);background:#17181E;overflow:hidden;
-  box-shadow:0 24px 64px rgba(0,0,0,.15);
+  box-shadow:0 24px 64px rgba(0,0,0,.15);transform-style:preserve-3d;
 }
 .portrait-panel img{
   width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block;
@@ -651,7 +651,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 }
 .portrait-headlight{
   position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:radial-gradient(circle at 86% 42%,rgba(255,252,235,.98),rgba(255,244,210,.55) 35%,transparent 70%);
+  background:radial-gradient(circle at 86% 42%,rgba(255,255,255,.98),rgba(229,57,53,.42) 38%,rgba(175,235,255,.22) 64%,transparent 78%);
   mix-blend-mode:screen;
 }
 .portrait-flash{
@@ -791,12 +791,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT VI: CRIMSON SANCTUARY & COMPLETE 6-CHAPTER SCROLL STORY (700VH) ==================== */
 #scene-sanctuary-story{position:relative;height:700vh;background:var(--crimson-wall);border-top:1.5px solid var(--ink)}
 #sanc-sticky{
-  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall);
+  position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall);perspective:1150px;transform-style:preserve-3d;
 }
 #sanc-cam{
-  position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;
+  position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;transform-style:preserve-3d;
 }
-#hall-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(2.4px) saturate(1.06);transform:scale(1.02)}
+#hall-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;filter:blur(1.0px) saturate(1.08);transform:scale(1.03)}
 #sanc-actors-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none}
 
 /* HUD layer stays razor-sharp outside camera transform */
@@ -1377,36 +1377,36 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
         </div>
 
         <div class="cap-box speaker-badge" data-speaker="NARRATOR" id="cap-mist-1">
-          MUMBAI. 6:42 PM. TRAFFIC ROARS, THE SKY BURNS AMBER—AND <span class="red">PARTH IS STILL SHIPPING CODE</span>.
+          MUMBAI. 6:42 PM. THE CITY HUMS, RAIN COOLS THE GRID—AND <span class="red">PARTH JUST PUSHED A LIVE RELEASE</span>.
         </div>
         <div class="cap-box speaker-badge" data-speaker="PARTH" id="cap-mist-2">
-          "NO WAY… BALOON NATIONAL RESULTS ARE LIVE. <span class="red">GARAA TOOK 1ST RUNNER-UP?!</span> WE ACTUALLY BUILT THAT!"
+          "WAIT… BALOON NATIONAL RESULTS DROPPED. <span class="red">GARAA TOOK 1ST RUNNER-UP?!</span> DEVHARBOUR'S GOING WILD!"
         </div>
         <div class="cap-box speaker-badge" data-speaker="PARTH" id="cap-mist-3">
-          "4,000+ BUILDERS AT DEVHARBOUR WON'T BELIEVE THIS—<span class="red">WAIT… WHY IS THE STREET SHAKING?</span>"
+          "LET ME PUSH THE LIVE LOGS FIRST—<span class="red">WAIT… WHY ARE THE CITY POLYGONS TEARING APART?!</span>"
         </div>
       </div>
       <div class="scroll-step-hint">SCROLL TO WALK THROUGH THE STORY ▾</div>
     </div>
   </section>
 
-  <!-- ACT II: TALL PORTRAIT FREEZE, WHITE IMPACT & LAST MEMORY -->
+  <!-- ACT II: 3D PAPER FRACTURE FREEZE, WHITE SANDBOX & SNAPSHOT MEMORY -->
   <section id="scene-impact">
     <div class="impact-wrap">
       <canvas id="impact-rays"></canvas>
       <div class="portrait-panel" id="portrait-panel">
-        <img id="img-impact-portrait" alt="Parth startled by headlights" />
+        <img id="img-impact-portrait" alt="Parth startled by firewall breach" />
         <div class="portrait-headlight" id="portrait-headlight"></div>
         <div class="portrait-flash" id="portrait-flash"></div>
       </div>
       <div class="inset-frame" id="impact-eye-cut">
-        <img id="img-impact-eyes" alt="Parth wide eyes in headlights" />
+        <img id="img-impact-eyes" alt="Parth wide eyes during breach scan" />
       </div>
-      <div class="cap-box speaker-badge" data-speaker="IMPACT" id="cap-imp-1">
-        A BLARING HORN TEARS THROUGH THE DUSK. <span class="red">BLINDING HEADLIGHTS SWALLOW THE STREET</span>—AND PARTH FREEZES.
+      <div class="cap-box speaker-badge" data-speaker="BREACH" id="cap-imp-1">
+        AN UNKNOWN FIREWALL RIPS OPEN THE HORIZON. <span class="red">CRIMSON SCANLINES SWALLOW THE STREET</span>—CONNECTION SEVERED.
       </div>
-      <div class="cap-box speaker-badge" data-speaker="SILENCE" id="cap-imp-2">
-        NOISE SHATTERS INTO STILLNESS. <span class="red">NO PAIN. NO STATIC. ONLY WHITE.</span>
+      <div class="cap-box speaker-badge" data-speaker="ISOLATION" id="cap-imp-2">
+        TRAFFIC SILENCES IN ONE MILLISECOND. <span class="red">NO NOISE. NO LATENCY. ONLY WHITE SANDBOX.</span>
       </div>
     </div>
 
@@ -1418,12 +1418,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
           <path d="M24 95 Q110 135 196 95 M20 120 Q110 158 200 120 M34 148 Q110 176 186 148" stroke="#141414" stroke-width=".85" opacity=".38" />
         </svg>
         <div class="mem-polaroid">
-          <img id="img-last-mem" alt="Last memory of Parth holding phone" />
-          <span>LAST MEMORY · 6:42 PM</span>
+          <img id="img-last-mem" alt="Cached snapshot of Parth holding phone" />
+          <span>SNAPSHOT CACHED · 6:42 PM</span>
         </div>
       </div>
       <div class="cap-box void-orb-cap" id="cap-void-orb">
-        HIS LAST MEMORY: <span class="red">DEPLOYED CODE ON HIS SCREEN, A NATIONAL PODIUM, AND AN UNFINISHED MISSION</span>.
+        CACHED IN LOCAL MEMORY: <span class="red">ONE DEPLOYED PROTOTYPE, A NATIONAL PODIUM, AND UNFINISHED CODE</span>.
       </div>
     </div>
   </section>
@@ -1437,33 +1437,33 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
       </div>
       <div class="inset-frame" id="ladder-leg-inset">
         <canvas id="ladder-leg-cv"></canvas>
-        <span class="inset-tag">LADDER ASCENT · FOOTSTEPS</span>
+        <span class="inset-tag">KIRIGAMI ASCENT · FOOTSTEPS</span>
       </div>
       <div class="cap-box speaker-badge" data-speaker="AWAKENING" id="cap-mono-1">
-        IN AN ENDLESS VOID, A STONE <span class="red">KIRIGAMI STAIRCASE RISES TOWARD A SILVERY BREACH</span>—AND HIS WILL REFUSES TO HALT.
+        BEYOND THE SANDBOX, A <span class="red">KIRIGAMI STAIRCASE RISES TOWARD AN OPEN KERNEL PORT</span>—AND HIS LEGS REFUSE TO HALT.
       </div>
     </div>
 
     <div class="portal-panel-wrap">
       <div class="portal-frame">
-        <img id="portal-hd-img" alt="Approaching the crimson portal threshold" />
+        <img id="portal-hd-img" alt="Approaching the silver root firewall threshold" />
         <canvas id="portal-fx-cv"></canvas>
       </div>
       <div class="cap-box" id="cap-port-1">
-        WITH EVERY STEP, THE <span class="red">LIQUID-SILVER PORTAL</span> HUMS LOUDER—LIKE A CORE ON REDLINE.
+        THE <span class="red">SILVER GATE HUMS AT HIGH FREQUENCY</span>—PULLING EVERY UNVERIFIED PROCESS INWARD.
       </div>
       <div class="cap-box" id="cap-port-2">
-        A COLD WIND TEARS PAST HIS COAT. AT THE <span class="red">THRESHOLD OF PROOF</span>, HE RAISES ONE HAND.
+        PACKETS WHIP PAST HIS COAT LIKE WIND. FACING THE <span class="red">ROOT FIREWALL</span>, HE RAISES A HAND.
       </div>
     </div>
   </section>
 
-  <!-- ACT IV: INTERACTIVE HOLD & MOVE (HD ANIME REACHING HAND) -->
+  <!-- ACT IV: INTERACTIVE CIPHER BREACH HOLD -->
   <section id="scene-reach">
-    <img id="reach-hd-img" alt="Parth reaching toward the liquid crimson singularity gate" />
+    <img id="reach-hd-img" alt="Parth reaching toward the singularity firewall breach" />
     <canvas id="reach-cv"></canvas>
     <div class="cap-box speaker-badge" data-speaker="THRESHOLD" id="cap-reach">
-      ZERO HESITATION. <span class="red">HOLD TO ENTER THE AUDIT</span>.
+      ZERO EXPLOIT FEAR. <span class="red">HOLD TO BREACH THE FIREWALL</span>.
     </div>
 
     <div id="hand-line" aria-hidden="true"></div>
@@ -1481,7 +1481,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
         <img id="step-hd-img" alt="Parth stepping inside the crimson portal flanked by marble columns" />
         <canvas id="step-cv"></canvas>
         <div class="cap-box" id="cap-step">
-          TAKING A DEEP BREATH, PARTH <span class="red">STEPS INTO THE SYSTEM</span>.
+          ONE DEEP BREATH—PARTH <span class="red">EXECUTED THE OVERRIDE AND STEPPED INSIDE</span>.
         </div>
       </div>
     </div>
@@ -1491,11 +1491,11 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
     <div id="curtain-sticky">
       <canvas id="curtain-cv"></canvas>
       <div id="eye-strip">
-        <img id="img-eye-parth" alt="Parth eyes awakening in sanctuary" />
-        <img id="img-eye-god" alt="The Divine luminous violet gaze" style="opacity:0" />
+        <img id="img-eye-parth" alt="Parth eyes inside the kernel sanctuary" />
+        <img id="img-eye-god" alt="The Kernel Warden luminous gaze" style="opacity:0" />
       </div>
       <div class="cap-box speaker-badge" data-speaker="SANCTUARY" id="cap-curtain">
-        "WHERE AM I…? THIS ISN'T MUMBAI." <span class="red">CRIMSON CATHEDRAL LIGHT</span> SWALLOWS THE VOID.
+        "WHERE AM I…? THAT WASN'T A NETWORK DROP." <span class="red">CRIMSON PILLARS SURROUND THE KERNEL</span>.
       </div>
       <div class="inset-frame" id="temple-leg-inset">
         <canvas id="temple-leg-cv"></canvas>
@@ -1594,11 +1594,11 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
       <span id="lbl-pour">HOLD &amp;<br>POUR</span>
     </button>
     <div class="cap-box speaker-badge" data-speaker="LIQUID MERCURY" id="cap-pour">
-      DEFENSE, SYSTEMS, AND CREATION MERGE INTO <span class="red">LIQUID MERCURY</span>—FORGING ONE UNBREAKABLE SECURITY-FIRST CRAFT.
+      AEGIS, FORGE, AND SPARK FUSE WITH <span class="red">LIQUID MERCURY</span>—COMPILING SECURITY, SYSTEMS, AND CREATION INTO ONE.
     </div>
   </section>
 
-  <!-- ACT VII: AWAKENING LIGHT IN THE DARKNESS & SHATTERING COLUMNS + NAVI MUMBAI DAWN -->
+  <!-- ACT VII: AWAKENING LIGHT IN THE DARKNESS & SHATTERING FIREWALL + NAVI MUMBAI DAWN -->
   <section id="scene-vortex">
     <canvas id="vortex-cv"></canvas>
     <canvas id="vortex-actor-cv"></canvas>
@@ -1607,7 +1607,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
       <span id="lbl-vortex">HOLD</span>
     </button>
     <div class="cap-box speaker-badge" data-speaker="PARTH · AWAKENED" id="cap-vortex">
-      "MY FOCUS… CRYSTAL CLEAR AND <span class="red">LIMITLESS</span>. AUDIT PASSED. THE <span class="red">SOVEREIGN ARCHITECT</span> AWAKENS."
+      "ROOT CLEARANCE LOCKED—<span class="red">ZERO LATENCY, LIMITLESS REACH</span>. THE <span class="red">SOVEREIGN ARCHITECT</span> AWAKENS."
     </div>
   </section>
 
@@ -1618,10 +1618,10 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
         <canvas id="shatter-cv"></canvas>
         <div class="inset-frame" id="shatter-inset">
           <img id="img-shatter-inset" alt="Parth awakened" />
-          <span class="inset-tag">REINCARNATION · AWAKENED</span>
+          <span class="inset-tag">CLEARANCE UNLOCKED · LIVE</span>
         </div>
         <div class="cap-box speaker-badge" data-speaker="EPILOGUE" id="cap-shatter">
-          CRIMSON STONE <span class="red">SHATTERS ABOVE NAVI MUMBAI</span>. A NEW SKY OPENS—AND PARTH WAKES UP <span class="red">READY TO BUILD WHAT'S NEXT</span>.
+          THE CRIMSON FIREWALL <span class="red">SHATTERS ABOVE NAVI MUMBAI</span>. THE DEPLOY CLEARS—AND PARTH WAKES UP <span class="red">READY TO BUILD WHAT'S NEXT</span>.
         </div>
       </div>
 
@@ -1994,25 +1994,25 @@ $('#ref-g-img').src=IM.ref_g;
 
 /* ==================== WEB AUDIO + SYNCHRONIZED PART-BY-PART JAPANESE VOICE ENGINE ==================== */
 const JP_CUES={
-  prologue:[{who:'n',spk:'NARRATOR',jp:'序章。漆黒の向こうから、創作者パルトの物語が目を覚ます。'}],
-  mist1:[{who:'n',spk:'NARRATOR',jp:'ムンバイ、午後六時四十二分。茜色の空の下、パルトは今もコードを書き続けていた。'}],
-  mist2:[{who:'p',spk:'PARTH',jp:'嘘だろ…バロン全国ハッカソンの結果が出た。ガラーが準優勝！？俺たちが本当にやり遂げたんだ！'}],
-  mist3:[{who:'p',spk:'PARTH',jp:'デヴハーバーの四千人以上の開発者にも知らせなきゃ…って、待て、なぜ道路が揺れている！？'}],
-  impact:[{who:'n',spk:'IMPACT',jp:'警笛が夕暮れを切り裂く。眩いヘッドライトが道を飲み込み——パルトの動きが止まった。'}],
-  impact2:[{who:'n',spk:'SILENCE',jp:'轟音は静寂へと砕け散った。痛みもなく、雑音もない。ただ真っ白な世界だけ。'}],
-  void_orb:[{who:'n',spk:'MEMORY',jp:'最後に残った記憶。実装したコードの画面、全国の表彰台、そしてまだ終わらぬ使命。'}],
-  monolith:[{who:'n',spk:'AWAKENING',jp:'果てしない虚無の中、石の階段が白銀の裂け目へと伸びていく。彼の意志は止まらない。'}],
-  mono_legs:[{who:'n',spk:'FOOTSTEPS',jp:'迷いのない足取りが階段を駆け上がり、一段ごとに覚悟を刻んでいく。'}],
-  portal:[{who:'n',spk:'THRESHOLD',jp:'白銀の液体のように波打つ光の輪が、限界を超えた共鳴を響かせる。'}],
-  portal2:[{who:'n',spk:'THRESHOLD',jp:'冷たい風がコートを揺らす。証明の境界線を前に、彼は迷わず右手を掲げた。'}],
-  reach:[{who:'p',spk:'PARTH',jp:'ためらいはない。この監査の扉を、今ここでこじ開ける！'}],
-  step:[{who:'p',spk:'PARTH',jp:'深く息を吸い込み——パルトはシステムの中へと踏み出した。'}],
-  curtain:[{who:'p',spk:'PARTH',jp:'ここはどこだ…ムンバイじゃない。真紅の聖域の光が視界を染め上げる！'}],
-  curtain_god:[{who:'g',spk:'THE DIVINE',jp:'真紅の玉座から審判者が問う——お前はこの世界で、実際に何を創り上げてきた？'}],
-  medallions:[{who:'n',spk:'ESSENCES',jp:'防御、構築、創造。三つの魂の紋章が今、ここに揃い立つ。'}],
-  pour:[{who:'n',spk:'LIQUID MERCURY',jp:'防御と構造と創造が白銀の液体水銀と溶け合い、揺るぎない技術へと鍛え上げられる。'}],
-  vortex:[{who:'pw',spk:'PARTH · AWAKENED',jp:'視界が冴え渡る…限界などない。監査完了、至高の設計者が今ここに目覚める！'}],
-  shatter:[{who:'n',spk:'EPILOGUE',jp:'ナビムンバイの空に真紅の石柱が砕け散る。新たな夜明けの中、パルトは次なる開発へと目覚める。'}],
+  prologue:[{who:'n',spk:'NARRATOR',jp:'序章。漆黒の向こうから、創作者パルトの暗号領域が起動する。'}],
+  mist1:[{who:'n',spk:'NARRATOR',jp:'ムンバイ、午後六時四十二分。街がざわめく中、パルトは最新のビルドを本番へ送り出した。'}],
+  mist2:[{who:'p',spk:'PARTH',jp:'待て…バロン全国ハッカソンの結果が出た。ガラーが準優勝！？デヴハーバーの仲間が沸いている！'}],
+  mist3:[{who:'p',spk:'PARTH',jp:'まずはライブ記録を更新しよう…ちょっと待て、街の輪郭がなぜ引き裂かれている！？'}],
+  impact:[{who:'n',spk:'BREACH',jp:'未知のファイアウォールが地平を切り裂く。真紅の走査線が街を飲み込み——接続が遮断された。'}],
+  impact2:[{who:'n',spk:'ISOLATION',jp:'わずか一ミリ秒で街の音が消えた。雑音も遅延もない。ただ真っ白な隔離領域だけ。'}],
+  void_orb:[{who:'n',spk:'MEMORY',jp:'ローカル記憶に残されたもの。稼働中のプロトタイプ、全国の表彰台、そして未完のコード。'}],
+  monolith:[{who:'n',spk:'AWAKENING',jp:'隔離領域の向こう、折り紙の石階段が白銀のポートへと伸びていく。彼の足は迷わず前へ踏み出した。'}],
+  mono_legs:[{who:'n',spk:'FOOTSTEPS',jp:'折り紙の階段を一歩ずつ駆け上がり、暗号の門へと確かな鼓動を刻んでいく。'}],
+  portal:[{who:'n',spk:'THRESHOLD',jp:'白銀のゲートが高周波の共鳴を響かせ、あらゆる未検証プロセスを内側へと引き寄せる。'}],
+  portal2:[{who:'n',spk:'THRESHOLD',jp:'データの嵐がコートを揺らす。最深部の防壁を前に、彼は右手を掲げた。'}],
+  reach:[{who:'p',spk:'PARTH',jp:'恐れはない。長押しして聖域のファイアウォールを突破しろ！'}],
+  step:[{who:'p',spk:'PARTH',jp:'深く息を吸い——パルトは強制突破を実行し、中核へと踏み込んだ。'}],
+  curtain:[{who:'p',spk:'PARTH',jp:'ここは…単なる通信切断じゃない。真紅の柱が中核領域を囲んでいる！'}],
+  curtain_god:[{who:'g',spk:'THE DIVINE',jp:'玉座の監視者が問う——侵入者よ、お前の創った技術が本物だと証明してみせろ。'}],
+  medallions:[{who:'n',spk:'ESSENCES',jp:'防御、構築、創造。三つの暗号紋章が中核の前に並び立つ。'}],
+  pour:[{who:'n',spk:'LIQUID MERCURY',jp:'防御と構築と創造が液体水銀へと溶け合い、揺るぎないセキュリティ技術にコンパイルされる。'}],
+  vortex:[{who:'pw',spk:'PARTH · AWAKENED',jp:'ルート権限解放——遅延ゼロ、限界なし。至高の設計者が今ここに目覚める！'}],
+  shatter:[{who:'n',spk:'EPILOGUE',jp:'ナビムンバイの空に真紅の防壁が砕け散る。デプロイ完了——パルトは次なる創造へと目覚める。'}],
   collection:[{who:'n',spk:'COLLECTION',jp:'ここが創作者パルト・ヴィジャイ・ギッデの検証済みアーカイブだ。'}]
 };
 
@@ -2383,12 +2383,18 @@ function triggerImpactCut(){
 }
 function dismissWelcome(){
   const w=$('#welcome-gate');
-  if(w&&!w.classList.contains('gone')){w.classList.add('gone');w.setAttribute('aria-hidden','true')}
+  if(w&&!w.classList.contains('gone')){
+    if(document.activeElement&&w.contains(document.activeElement))try{document.activeElement.blur()}catch{}
+    w.classList.add('gone');w.setAttribute('aria-hidden','true');
+  }
 }
 function dismissGates(){
   dismissWelcome();
   const s=$('#sound-gate');
-  if(s&&!s.classList.contains('gone')){s.classList.add('gone');s.setAttribute('aria-hidden','true')}
+  if(s&&!s.classList.contains('gone')){
+    if(document.activeElement&&s.contains(document.activeElement))try{document.activeElement.blur()}catch{}
+    s.classList.add('gone');s.setAttribute('aria-hidden','true');
+  }
 }
 $('#welcome-enter').onclick=()=>{
   dismissWelcome();
@@ -2446,11 +2452,11 @@ function fitCanvas(cv,uhd=false){
   const w=Math.max(10,Math.round(cw>0?cw:r.width)),h=Math.max(10,Math.round(ch>0?ch:r.height));
   const d=uhd
     ? Math.min(5.334,Math.max(devicePixelRatio||1,Math.min(5.334,7680/Math.max(w,1))))
-    : Math.min(Math.max(devicePixelRatio||1,1.6),2.8);
+    : Math.min(Math.max(devicePixelRatio||1,1.8),3.0);
   const bw=Math.round(w*d),bh=Math.round(h*d);
   if(cv.width!==bw||cv.height!==bh){cv.width=bw;cv.height=bh}
   const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);
-  c.imageSmoothingEnabled=true;c.imageSmoothingQuality=uhd?'medium':'high';
+  c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
   return{w,h,c};
 }
 
@@ -2734,7 +2740,7 @@ function makePaperBackdropUrl(srcImg,opts={}){
   if(!srcImg)return '';
   const nw=srcImg.naturalWidth||srcImg.width,nh=srcImg.naturalHeight||srcImg.height;
   if(!nw||!nh)return '';
-  const maxD=typeof window!=='undefined'&&window.innerWidth<760?1150:1680;
+  const maxD=typeof window!=='undefined'&&window.innerWidth<760?1400:2400;
   const scale=Math.min(1,maxD/Math.max(nw,nh));
   const w=Math.round(nw*scale),h=Math.round(nh*scale);
   const cv=document.createElement('canvas');cv.width=w;cv.height=h;
@@ -2747,7 +2753,7 @@ function makePaperBackdropUrl(srcImg,opts={}){
   const pat=cx.createPattern(getPaperGrainTile(),'repeat');
   if(pat){cx.fillStyle=pat;cx.fillRect(0,0,w,h)}
   cx.restore();
-  try{return cv.toDataURL('image/webp',0.91)}catch{return ''}
+  try{return cv.toDataURL('image/webp',0.93)}catch{return ''}
 }
 const ENTITY_CACHE={},REF_PORTRAITS={},HD_FACE_URL={},WALK_FRAMES=[];
 function getEntityParthSprite(key){
@@ -3309,172 +3315,65 @@ function drawMistBg(t,pMist){
   }
   c.restore();
 
-  /* Twin Oncoming Truck Headlights blooming at end of Act I (0.68..1.0) with Full Visual Truck Body */
-  if(pMist>0.65){
-    const hp=smoothstep(0.65,0.98,pMist);
-    const tw=lerp(48,Math.min(w*0.46,360),Math.pow(hp,1.3));
-    const th=tw*0.86;
-    const tx=lerp(w*0.86,w*0.75,Math.pow(hp,0.85));
-    const ty=hor+15+Math.pow(hp,1.35)*(h*0.86-(hor+15));
-    const rumbleY=hp>0.35?Math.sin(t*54)*(hp*2.8):0;
-    const rumbleX=hp>0.35?Math.cos(t*46)*(hp*1.6):0;
-    const cx=tx+rumbleX,cy=ty+rumbleY,topY=cy-th;
+  /* IDEA 1 — THE PAPER FIREWALL BREACH: 3D Origami City Unzip & Crimson Cipher Rift (0.64..1.0) */
+  if(pMist>0.64){
+    const hp=smoothstep(0.64,0.98,pMist);
+    const rx=w*0.64,ry=hor*0.72;
+    const breachR=Math.min(w,h)*(0.08+Math.pow(hp,1.15)*0.48);
 
     c.save();
-    /* Smoking Brake Tire Skid Tracks Streaking Behind Barreling Truck */
-    if(hp>0.16){
+    /* Crimson Rift Glow Behind Unfolding Skyline */
+    const riftG=c.createRadialGradient(rx,ry,6,rx,ry,breachR*1.45);
+    riftG.addColorStop(0,'rgba(255,255,255,'+(0.90*hp).toFixed(2)+')');
+    riftG.addColorStop(0.28,'rgba(229,57,53,'+(0.68*hp).toFixed(2)+')');
+    riftG.addColorStop(0.66,'rgba(120,16,20,'+(0.38*hp).toFixed(2)+')');
+    riftG.addColorStop(1,'rgba(120,16,20,0)');
+    c.fillStyle=riftG;c.fillRect(0,0,w,h);
+
+    /* Counter-Rotating 3D Cryptographic Hexagonal Firewall Seals */
+    c.save();
+    c.translate(rx,ry);
+    c.scale(1,0.78+hp*0.18);
+    for(let ring=0;ring<3;ring++){
       c.save();
-      c.strokeStyle='rgba(12,12,15,'+(0.52*hp).toFixed(2)+')';
-      c.lineWidth=Math.max(2,tw*0.09);
-      [-tw*0.36,tw*0.36].forEach(off=>{
-        c.beginPath();c.moveTo(cx+off*0.25,hor+8);c.lineTo(cx+off,cy-1);c.stroke();
-      });
-      for(let sm=0;sm<6;sm++){
-        const sx=cx+((sm%2?1:-1)*tw*0.36)+Math.sin(t*18+sm)*10*hp;
-        const sy=cy-((t*65+sm*18)%32);
-        c.fillStyle='rgba(230,228,220,'+(0.28*hp).toFixed(2)+')';
-        c.beginPath();c.arc(sx,sy,4+hp*10+(sm%3)*3,0,Math.PI*2);c.fill();
+      c.rotate(t*(ring%2?-0.85:0.70)*(1+hp*0.8)+hp*1.4);
+      const rad=breachR*(0.42+ring*0.26);
+      c.strokeStyle=ring===1?'rgba(255,248,240,'+(0.52*hp).toFixed(2)+')':'rgba(201,37,33,'+(0.68*hp).toFixed(2)+')';
+      c.lineWidth=1.8-ring*0.3;
+      c.setLineDash(ring===2?[10,8]:[]);
+      c.beginPath();
+      for(let s=0;s<=6;s++){
+        const a=(s/6)*Math.PI*2;
+        const px=Math.cos(a)*rad,py=Math.sin(a)*rad;
+        if(s===0)c.moveTo(px,py);else c.lineTo(px,py);
       }
+      c.stroke();c.restore();
+    }
+    c.restore();
+
+    /* Horizontal Crimson Laser Breach Scanlines */
+    for(let sl=0;sl<14;sl++){
+      const sy=(hor*0.18+(sl/14)*h*0.72+Math.sin(t*12+sl)*4*hp);
+      const swLen=w*(0.18+((sl*37)%55)/100)*hp;
+      const sx=(sl%2===0)?w-swLen:(w*0.22);
+      c.fillStyle=sl%3===0?'rgba(43,182,216,'+(0.28*hp).toFixed(2)+')':'rgba(201,37,33,'+(0.34*hp).toFixed(2)+')';
+      c.fillRect(sx,sy,swLen,1.5+(sl%3));
+    }
+
+    /* Peeling 3D Cardstock Paper Ribbons Lifting Off the City Horizon */
+    c.shadowColor='rgba(12,6,8,0.45)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=5;
+    for(let p=0;p<24;p++){
+      const px=w*(0.06+((p*43)%88)/100)+Math.sin(t*2.4+p)*22*hp;
+      const py=hor+40-(Math.pow(hp,1.1)*(hor+120)*((p%5)*0.14+0.55))-((t*90+p*28)%80)*hp;
+      const pw=14+(p%4)*8,ph=22+(p%3)*12;
+      c.save();c.translate(px,py);
+      c.rotate(hp*(p%2?1.8:-1.6)+t*(1.4+(p%3)*0.4));
+      c.scale(1,Math.cos(t*2.5+p+hp*2));
+      c.fillStyle=p%4===0?'#C92521':p%2===0?'#F5F1E6':'#1B1C22';
+      c.strokeStyle='#141414';c.lineWidth=1.2;
+      c.fillRect(-pw/2,-ph/2,pw,ph);c.strokeRect(-pw/2,-ph/2,pw,ph);
       c.restore();
     }
-    /* Ground Contact Shadow */
-    c.fillStyle=`rgba(12,12,18,${(0.4+hp*0.45).toFixed(2)})`;
-    c.beginPath();
-    c.ellipse(cx,cy+2,tw*0.52,th*0.09,0,0,Math.PI*2);
-    c.fill();
-
-    /* Tires */
-    const tireW=tw*0.16,tireH=th*0.26;
-    c.fillStyle='#121318';c.strokeStyle='#232530';c.lineWidth=Math.max(1,hp*1.8);
-    c.fillRect(cx-tw*0.44,cy-tireH,tireW,tireH);
-    c.strokeRect(cx-tw*0.44,cy-tireH,tireW,tireH);
-    c.fillRect(cx+tw*0.28,cy-tireH,tireW,tireH);
-    c.strokeRect(cx+tw*0.28,cy-tireH,tireW,tireH);
-
-    /* Truck Cab Body */
-    const cabTop=topY+th*0.06;
-    const cabH=th*0.78;
-    const cabW=tw*0.82;
-    const cabL=cx-cabW*0.5;
-
-    const cabG=c.createLinearGradient(0,cabTop,0,cy);
-    cabG.addColorStop(0,'#2a2c38');
-    cabG.addColorStop(0.3,'#1c1d25');
-    cabG.addColorStop(0.85,'#12131a');
-    cabG.addColorStop(1,'#0c0d12');
-    c.fillStyle=cabG;
-    c.strokeStyle='#0b0c10';
-    c.lineWidth=Math.max(1.2,hp*2.5);
-
-    c.beginPath();
-    const cr=Math.min(10,tw*0.06);
-    c.roundRect(cabL,cabTop,cabW,cabH,[cr,cr,2,2]);
-    c.fill();c.stroke();
-
-    /* Windshield */
-    const windW=cabW*0.82;
-    const windH=cabH*0.34;
-    const windL=cx-windW*0.5;
-    const windT=cabTop+cabH*0.10;
-    const windG=c.createLinearGradient(windL,windT,windL+windW,windT+windH);
-    windG.addColorStop(0,'#1e2535');
-    windG.addColorStop(0.5,'#131824');
-    windG.addColorStop(1,'#0b0e17');
-    c.fillStyle=windG;
-    c.fillRect(windL,windT,windW,windH);
-    c.strokeStyle='#262b3a';c.lineWidth=Math.max(1,hp*1.6);
-    c.strokeRect(windL,windT,windW,windH);
-
-    c.beginPath();c.moveTo(cx,windT);c.lineTo(cx,windT+windH);c.stroke();
-
-    c.fillStyle='rgba(180,225,255,0.18)';
-    c.beginPath();
-    c.moveTo(windL+windW*0.25,windT);
-    c.lineTo(windL+windW*0.48,windT);
-    c.lineTo(windL+windW*0.30,windT+windH);
-    c.lineTo(windL+windW*0.12,windT+windH);
-    c.closePath();c.fill();
-
-    /* Roof Cab Marker Lights (Amber) */
-    for(let m=0;m<5;m++){
-      const mx=cx-cabW*0.32+(m/4)*cabW*0.64;
-      const my=cabTop+cabH*0.04;
-      c.fillStyle='rgba(255,185,45,0.95)';
-      c.beginPath();c.arc(mx,my,Math.max(1.5,hp*3.2),0,Math.PI*2);c.fill();
-    }
-
-    /* Side Mirrors */
-    const mirW=tw*0.06,mirH=th*0.18;
-    c.fillStyle='#14161e';c.strokeStyle='#0b0c10';
-    c.fillRect(cabL-mirW-tw*0.02,windT+windH*0.2,mirW,mirH);
-    c.strokeRect(cabL-mirW-tw*0.02,windT+windH*0.2,mirW,mirH);
-    c.beginPath();c.moveTo(cabL,windT+windH*0.3);c.lineTo(cabL-tw*0.02,windT+windH*0.3);c.stroke();
-    c.fillRect(cabL+cabW+tw*0.02,windT+windH*0.2,mirW,mirH);
-    c.strokeRect(cabL+cabW+tw*0.02,windT+windH*0.2,mirW,mirH);
-    c.beginPath();c.moveTo(cabL+cabW,windT+windH*0.3);c.lineTo(cabL+cabW+tw*0.02,windT+windH*0.3);c.stroke();
-
-    /* Front Radiator Grille */
-    const grlW=cabW*0.56;
-    const grlH=cabH*0.36;
-    const grlL=cx-grlW*0.5;
-    const grlT=cabTop+cabH*0.48;
-    c.fillStyle='#111217';c.fillRect(grlL,grlT,grlW,grlH);
-    c.strokeStyle='#3e4252';c.lineWidth=Math.max(1,hp*1.8);
-    c.strokeRect(grlL,grlT,grlW,grlH);
-    c.strokeStyle='rgba(180,185,200,0.45)';c.lineWidth=Math.max(0.8,hp*1.3);
-    for(let s=1;s<5;s++){
-      const sy=grlT+(s/5)*grlH;
-      c.beginPath();c.moveTo(grlL+4,sy);c.lineTo(grlL+grlW-4,sy);c.stroke();
-    }
-    c.fillStyle='#8a92a6';
-    c.beginPath();c.arc(cx,grlT+grlH*0.38,Math.max(2,hp*4.5),0,Math.PI*2);c.fill();
-
-    /* Heavy Metal Bumper */
-    const bmpW=tw*0.94;
-    const bmpH=th*0.13;
-    const bmpL=cx-bmpW*0.5;
-    const bmpT=cy-th*0.18;
-    const bmpG=c.createLinearGradient(0,bmpT,0,bmpT+bmpH);
-    bmpG.addColorStop(0,'#383d4c');
-    bmpG.addColorStop(0.5,'#20232c');
-    bmpG.addColorStop(1,'#12141a');
-    c.fillStyle=bmpG;
-    c.strokeStyle='#0a0c10';c.lineWidth=Math.max(1.2,hp*2);
-    c.beginPath();c.roundRect(bmpL,bmpT,bmpW,bmpH,[3,3,1,1]);c.fill();c.stroke();
-
-    const pltW=bmpW*0.22,pltH=bmpH*0.65;
-    c.fillStyle='#dedacf';c.fillRect(cx-pltW*0.5,bmpT+bmpH*0.18,pltW,pltH);
-    c.strokeStyle='#202020';c.lineWidth=0.8;c.strokeRect(cx-pltW*0.5,bmpT+bmpH*0.18,pltW,pltH);
-
-    /* Headlights on Left & Right of Grille */
-    const hx1=cx-cabW*0.36;
-    const hx2=cx+cabW*0.36;
-    const hy=grlT+grlH*0.48;
-    const hRadius=Math.max(3,hp*15);
-
-    // Forward Light Cone (blended toward Parth while keeping truck chassis crisp)
-    const cone=c.createRadialGradient(cx,hy,10,cx-w*0.32,hy+h*0.14,w*(0.28+hp*0.75));
-    cone.addColorStop(0,`rgba(255,254,238,${(0.46*hp).toFixed(2)})`);
-    cone.addColorStop(0.38,`rgba(255,228,145,${(0.36*hp).toFixed(2)})`);
-    cone.addColorStop(0.75,`rgba(255,245,215,${(0.16*hp).toFixed(2)})`);
-    cone.addColorStop(1,'rgba(255,245,215,0)');
-    c.fillStyle=cone;
-    c.fillRect(0,0,w,h);
-
-    // Twin High-Intensity Glowing Headlamps
-    [hx1,hx2].forEach(hx=>{
-      c.fillStyle='#2a2d3a';c.beginPath();c.arc(hx,hy,hRadius+Math.max(1.5,hp*3.5),0,Math.PI*2);c.fill();
-      c.strokeStyle='#101116';c.stroke();
-      const lampG=c.createRadialGradient(hx,hy,1,hx,hy,hRadius*1.8);
-      lampG.addColorStop(0,'rgba(255,255,255,1)');
-      lampG.addColorStop(0.4,'rgba(255,245,190,0.9)');
-      lampG.addColorStop(1,'rgba(255,210,120,0)');
-      c.fillStyle=lampG;
-      c.beginPath();c.arc(hx,hy,hRadius*1.8,0,Math.PI*2);c.fill();
-      c.fillStyle='#ffffff';
-      c.beginPath();c.arc(hx,hy,Math.max(2,hRadius*0.55),0,Math.PI*2);c.fill();
-    });
-
     c.restore();
   }
 }
@@ -3512,12 +3411,14 @@ function drawParthWalkActor(t,pMist,cam){
   const baseX=w*(0.46+pMist*0.04);
   const baseY=h*0.90;
 
-  /* Apply camera matrix natively inside 4K canvas BEFORE sampling 8K Paper-Cutout sprites */
+  /* Apply 3D camera matrix (dolly + roll + yaw shear) inside 4K canvas BEFORE sampling 8K Paper-Cutout sprites */
   c.save();
   if(cam){
     c.translate(w*0.5+w*(cam.tx/100),h*0.52+h*(cam.ty/100));
-    c.scale(cam.s,cam.s);
-    c.rotate(cam.r*Math.PI/180);
+    const yawComp=Math.cos((cam.ry||0)*Math.PI/180);
+    const pitchComp=1-Math.abs(cam.rx||0)*0.008;
+    c.scale(cam.s*yawComp,cam.s*pitchComp);
+    c.rotate((cam.r||0)*Math.PI/180);
     c.translate(-w*0.5,-h*0.52);
   }
 
@@ -3586,22 +3487,26 @@ function drawImpactRays(t,pImp){
     c.beginPath();c.arc(cx,cy,Math.min(w,h)*(0.12+waveP*0.58),0,Math.PI*2);c.stroke();
     c.restore();
   }
-  /* Twin Approaching Blinding Headlights + Horizontal Anamorphic Flares Behind Parth */
+  /* Twin Crimson & Silver Breach Scan Flares + Horizontal Firewall Arcs Behind Parth */
   if(pImp>0.16){
     const hl=smoothstep(0.16,0.62,pImp);
     const flicker=0.92+Math.sin(t*42)*0.08;
     const sep=lerp(w*0.32,w*0.20,hl);
-    [cx-sep,cx+sep].forEach(lx=>{
-      const ly=cy+Math.sin(t*38)*2.5*hl;
+    [cx-sep,cx+sep].forEach((lx,idx)=>{
+      const ly=cy+Math.sin(t*38+idx*1.5)*2.8*hl;
       const rad=maxD*0.26*hl*flicker;
       const g=c.createRadialGradient(lx,ly,2,lx,ly,rad);
       g.addColorStop(0,'rgba(255,255,255,'+(0.96*hl).toFixed(2)+')');
-      g.addColorStop(0.28,'rgba(255,232,165,'+(0.64*hl).toFixed(2)+')');
-      g.addColorStop(1,'rgba(255,244,210,0)');
+      g.addColorStop(0.28,idx%2===0?'rgba(229,57,53,'+(0.62*hl).toFixed(2)+')':'rgba(175,235,255,'+(0.58*hl).toFixed(2)+')');
+      g.addColorStop(1,'rgba(229,57,53,0)');
       c.fillStyle=g;c.beginPath();c.arc(lx,ly,rad,0,Math.PI*2);c.fill();
       c.strokeStyle='rgba(255,255,255,'+(0.62*hl).toFixed(2)+')';
-      c.lineWidth=2.6*hl;c.beginPath();c.moveTo(lx-rad*1.4,ly);c.lineTo(lx+rad*1.4,ly);c.stroke();
+      c.lineWidth=2.4*hl;c.beginPath();c.moveTo(lx-rad*1.4,ly);c.lineTo(lx+rad*1.4,ly);c.stroke();
     });
+    c.save();c.translate(cx,cy);c.rotate(t*0.7+pImp*2.2);
+    c.strokeStyle='rgba(201,37,33,'+(0.42*hl).toFixed(2)+')';c.lineWidth=1.8;c.setLineDash([12,10]);
+    c.beginPath();c.arc(0,0,Math.min(w,h)*(0.24+hl*0.22),0,Math.PI*2);c.stroke();
+    c.restore();
   }
   /* Flying Shattered Paper-Cut Glass Shards on Collision */
   if(pImp>0.34){
@@ -3867,8 +3772,8 @@ function drawCurtain(t,pCur){
   if(pCur<0.45)curtainBoomed=false;
   $('#img-eye-god').style.opacity=godEyeOp.toFixed(2);
   const curTxt=godEyeOp>0.5
-    ? 'FROM THE CRIMSON THRONE, THE SOVEREIGN JUDGE ASKS ONE QUESTION: <span class="red">"WHAT HAVE YOU ACTUALLY BUILT?"</span>'
-    : '"WHERE AM I…? THIS ISN\x27T MUMBAI." <span class="red">CRIMSON CATHEDRAL LIGHT</span> SWALLOWS THE VOID.';
+    ? 'THE KERNEL WARDEN LOOKS DOWN FROM THE THRONE: <span class="red">"INTRUDER—PROVE YOUR SYSTEM BELONGS HERE."</span>'
+    : '"WHERE AM I…? THAT WASN\x27T A NETWORK DROP." <span class="red">CRIMSON PILLARS SURROUND THE KERNEL</span>.';
   setTypedRaw($('#cap-curtain'),curTxt,showEye?smoothstep(0.55,0.88,pCur):0);
 }
 
@@ -3876,25 +3781,25 @@ function drawCurtain(t,pCur){
 const SANCTUARY_BEATS=[
   {
     id:'confrontation',turn1:'g',
-    cam:{s:1.06,tx:0,ty:0,r:0,vpX:0.50,hor:0.75,shake:0},
+    cam:{s:1.06,tx:0,ty:0,r:0,rx:1.2,ry:0,vpX:0.50,hor:0.75,shake:0},
     godPose:'g_front',parthPose:'p_recoil',
     godFace:'ge_serene',parthFace:'pe_shocked',
     speaker:'THE DIVINE',showFace:'ge_serene',
-    cap1:'"WELCOME TO THE SANCTUARY, <span class="red">PARTH VIJAY GIDDE</span>. STEP FORWARD AND PROVE YOUR WORTH."',
-    cap2:'"WHERE IS THIS PLACE…? IF IT\x27S A <span class="red">SYSTEM AUDIT</span>—CHECK EVERY LOG!"',
+    cap1:'"WELCOME TO THE KERNEL SANCTUARY, <span class="red">PARTH VIJAY GIDDE</span>. PROVE YOUR SYSTEM COMPILES."',
+    cap2:'"IF THIS ENGINE AUDITS <span class="red">REAL CODE</span>—OPEN MY LOGS AND RUN EVERY CHECK!"',
     jpLines:[
-      {who:'g',spk:'THE DIVINE',jp:'聖域へようこそ、パルト・ヴィジャイ・ギッデ。審判の前に立ち、お前の価値を証明してみせろ。'},
-      {who:'p',spk:'PARTH',jp:'ここは一体…システムの監査だというなら、俺の記録をすべて確かめるがいい！'}
+      {who:'g',spk:'THE DIVINE',jp:'中核聖域へようこそ、パルト・ヴィジャイ・ギッデ。お前の創った技術が本物か、ここで検証する。'},
+      {who:'p',spk:'PARTH',jp:'コードの真価を測る監査エンジンだというなら、俺の全ログを今すぐ走らせるがいい！'}
     ],
     wind:1.05,dossierSide:'right',dossier:null
   },
   {
     id:'who',turn1:'p',
-    cam:{s:1.56,tx:16,ty:15,r:-1.6,vpX:0.72,hor:0.86,shake:.35},
+    cam:{s:1.58,tx:16,ty:15,r:-1.8,rx:4.5,ry:-6.2,vpX:0.74,hor:0.86,shake:.35},
     godPose:'g_listen',parthPose:'p_speak',
     godFace:'ge_eval',parthFace:'pe_confident',
     speaker:'PARTH',showFace:'pe_confident',
-    cap1:'"WHO STANDS BEHIND THE TERMINAL IN <span class="red">NAVI MUMBAI</span>? CONTINUE."',
+    cap1:'"WHO STANDS BEHIND THE TERMINAL IN <span class="red">NAVI MUMBAI</span>? TRACE CONFIRMED."',
     cap2:'"<span class="red">B.E. CYBERSECURITY &amp; IOT</span> AT MUMBAI UNIVERSITY. CO-FOUNDED <span class="red">DEVHARBOUR</span>."',
     jpLines:[
       {who:'p',spk:'PARTH',jp:'ムンバイ大学でサイバーセキュリティとIoTを専攻し、デヴハーバーを共同設立したパルトだ。'},
@@ -3916,11 +3821,11 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'built',turn1:'g',
-    cam:{s:1.52,tx:-13,ty:8,r:1.5,vpX:0.24,hor:0.72,shake:.45},
+    cam:{s:1.54,tx:-13,ty:8,r:1.7,rx:-3.2,ry:6.8,vpX:0.22,hor:0.72,shake:.45},
     godPose:'g_listen',parthPose:'p_speak',
     godFace:'ge_eval',parthFace:'pe_relieved',
     speaker:'THE DIVINE',showFace:'ge_eval',
-    cap1:'"TALK IS CHEAP. SHOW ME <span class="red">DEPLOYED SYSTEMS</span>—NOT SLIDE DECKS."',
+    cap1:'"TALK IS CHEAP. MOUNT THE <span class="red">DEPLOYED SYSTEMS</span>—NOT SLIDE DECKS."',
     cap2:'"FIVE SHIPPED BUILDS: <span class="red">GARAA</span> WON NATIONAL 1ST RUNNER-UP, <span class="red">ZYR</span>, LASER &amp; IOT SENSORS!"',
     jpLines:[
       {who:'g',spk:'THE DIVINE',jp:'言葉は不要だ。机上の空論ではなく、実際に稼働するシステムを見せてみろ。'},
@@ -3936,11 +3841,11 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'defended',turn1:'p',
-    cam:{s:1.72,tx:19,ty:17,r:1.8,vpX:0.78,hor:0.88,shake:.55},
+    cam:{s:1.74,tx:19,ty:17,r:2.1,rx:5.2,ry:-7.5,vpX:0.78,hor:0.88,shake:.55},
     godPose:'g_front',parthPose:'p_idle',
     godFace:'ge_serene',parthFace:'pe_determined',
     speaker:'PARTH',showFace:'pe_determined',
-    cap1:'"YOU <span class="cyan">GUARD WHAT OTHERS TRUST</span>. FEW DEFEND THE FRONTLINES SO EARLY."',
+    cap1:'"YOU <span class="cyan">HARDEN WHAT SYSTEMS DEPEND ON</span>. LOGS VERIFIED."',
     cap2:'"<span class="red">TRIPPLE ONE SOLUTIONS</span>—THREAT RESEARCH, NETWORK MONITORING &amp; <span class="red">NPTEL ELITE 75%</span>."',
     jpLines:[
       {who:'p',spk:'PARTH',jp:'トリプルワン・ソリューションズで脅威分析とネットワーク監視を担い、NPTELエリート七十五％も修めた。'},
@@ -3962,12 +3867,12 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'led',turn1:'p',
-    cam:{s:1.50,tx:-12,ty:9,r:-1.4,vpX:0.26,hor:0.74,shake:.5},
+    cam:{s:1.52,tx:-12,ty:9,r:-1.6,rx:-2.8,ry:5.6,vpX:0.26,hor:0.74,shake:.5},
     godPose:'g_profile',parthPose:'p_listen',
     godFace:'ge_approve',parthFace:'pe_confident',
     speaker:'THE DIVINE',showFace:'ge_approve',
-    cap1:'"A BUILDER WHO <span class="red">MOVES AN ENTIRE ECOSYSTEM</span>. RARE."',
-    cap2:'"<span class="red">DEVHARBOUR</span> SCALED TO <span class="red">4,000+ BUILDERS</span>—PLUS IIT BOMBAY TECHFEST RANK 88!"',
+    cap1:'"A BUILDER WHO <span class="red">SCALES AN ENTIRE ECOSYSTEM</span>. RARE SIGNATURE."',
+    cap2:'"<span class="red">DEVHARBOUR</span> REACHED <span class="red">4,000+ BUILDERS</span>—PLUS IIT BOMBAY TECHFEST RANK 88!"',
     jpLines:[
       {who:'p',spk:'PARTH',jp:'デヴハーバーを四千人以上の開発者が集う場へと導き、IITボンベイのテックフェストでも実績を残した！'},
       {who:'g',spk:'THE DIVINE',jp:'一人の技術者にとどまらず、コミュニティごと動かす指導力か。稀有な才能だな。'}
@@ -3987,11 +3892,11 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'know',turn1:'p',
-    cam:{s:1.48,tx:12,ty:12,r:0.8,vpX:0.50,hor:0.78,shake:.95},
+    cam:{s:1.50,tx:12,ty:12,r:1.0,rx:3.5,ry:-4.5,vpX:0.50,hor:0.78,shake:.95},
     godPose:'g_front',parthPose:'p_listen',
     godFace:'ge_eval',parthFace:'pe_curious',
     speaker:'DUAL',dualEyes:true,
-    cap1:'"<span class="red">VERIFIED OUTPUT. ZERO HYPE</span>. THE NUMBERS HOLD."',
+    cap1:'"<span class="red">CHECKSUM MATCH. ZERO HYPE</span>. THE NUMBERS HOLD."',
     cap2:'"FROM <span class="red">LINUX &amp; PYTHON SECURITY</span> TO <span class="red">REACT &amp; GENAI</span>—EARNED IN PRODUCTION."',
     jpLines:[
       {who:'p',spk:'PARTH',jp:'リナックスやパイソンの防御技術からリアクト、生成AIまで、すべて実戦で鍛え上げてきた。'},
@@ -4013,12 +3918,12 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'unbuilt',turn1:'p',
-    cam:{s:1.64,tx:-15,ty:9,r:1.7,vpX:0.18,hor:0.84,shake:.5},
+    cam:{s:1.66,tx:-15,ty:9,r:1.9,rx:-4.2,ry:7.2,vpX:0.18,hor:0.84,shake:.5},
     godPose:'g_front',parthPose:'p_listen',
     godFace:'ge_approve',parthFace:'pe_curious',
     speaker:'THE DIVINE',showFace:'ge_approve',
-    cap1:'"AND THE BLUEPRINTS STILL MARKED <span class="red">IN PROGRESS</span>? UNFINISHED MEANS ALIVE."',
-    cap2:'"NEVER STOPPING—<span class="red">ANTI-SPOOFING AI, LOG PLAYBOOKS &amp; NEXT-GEN SYSTEMS</span>."',
+    cap1:'"AND THE MODULES STILL MARKED <span class="red">ACTIVE R&amp;D</span>? UNFINISHED MEANS ALIVE."',
+    cap2:'"NEVER HALTING—<span class="red">ANTI-SPOOFING AI, LOG PLAYBOOKS &amp; NEXT-GEN SYSTEMS</span>."',
     jpLines:[
       {who:'p',spk:'PARTH',jp:'未完の設計図こそが前進の証だ。なりすまし防止AIやセキュリティ自動化を今も創り続けている。'},
       {who:'g',spk:'THE DIVINE',jp:'未完であるということは、すなわち挑戦が生きているということだな。'}
@@ -4038,15 +3943,15 @@ const SANCTUARY_BEATS=[
   },
   {
     id:'verdict',turn1:'g',
-    cam:{s:1.42,tx:-7,ty:5,r:-1.0,vpX:0.34,hor:0.68,shake:1.15},
+    cam:{s:1.44,tx:-7,ty:5,r:-1.2,rx:3.8,ry:-5.0,vpX:0.34,hor:0.68,shake:1.15},
     godPose:'g_bestow',parthPose:'p_idle',
     godFace:'ge_cmd',parthFace:'pe_relieved',
     speaker:'THE DIVINE',showFace:'ge_cmd',
-    cap1:'"AUDIT PASSED. CROSS THE BREACH AND <span class="red">SHIP WHAT OTHERS ONLY TALK ABOUT</span>."',
-    cap2:'"SYSTEM <span class="cyan">VERIFIED</span>. RETURNING TO NAVI MUMBAI—AT FULL POWER!"',
+    cap1:'"CHECKSUM CLEAN. ALL CLAIMS COMPILED—<span class="red">ROOT OVERRIDE GRANTED</span>."',
+    cap2:'"CLEARANCE <span class="cyan">LOCKED</span>. RETURNING TO NAVI MUMBAI—AT FULL BANDWIDTH!"',
     jpLines:[
-      {who:'g',spk:'THE DIVINE',jp:'監査は完了した。境界を越えて戻り、他者が語るだけの未来をその手で実装しろ！'},
-      {who:'pw',spk:'PARTH · AWAKENED',jp:'システム検証完了。ナビムンバイへ帰還し、全開で次のステージへ挑む！'}
+      {who:'g',spk:'THE DIVINE',jp:'チェック完了。全項目が仕様通りに稼働している——ルート権限を解放する！'},
+      {who:'pw',spk:'PARTH · AWAKENED',jp:'検証完了。システム解放——ナビムンバイの夜明けへ、フル稼働で戻る！'}
     ],
     wind:2.5,dossierSide:'right',dossier:null
   }
@@ -4102,7 +4007,7 @@ function renderSanctuaryDossier(beat){
 }
 
 let lastBeatIdx=-1,sancShake=0,verdictZoomBoomed=false;
-let camCur={s:1.06,tx:0,ty:0,r:0,vpX:0.5,hor:0.75};
+let camCur={s:1.06,tx:0,ty:0,r:0,rx:1.2,ry:0,vpX:0.5,hor:0.75};
 function drawHallBg(t,wind,pSanc=0,vpX=0.5,horRatio=0.75,verdictTr=0){
   const{w,h,c}=fitCanvas(hallCv);
   c.fillStyle='#96191D';c.fillRect(0,0,w,h);
@@ -4186,6 +4091,20 @@ function drawHallBg(t,wind,pSanc=0,vpX=0.5,horRatio=0.75,verdictTr=0){
       c.fillStyle='rgba(255,246,238,0.58)';
       c.beginPath();c.arc(ex,ey,1.2+(i%2)*0.8,0,Math.PI*2);c.fill();
     }
+    /* Floating 3D Kirigami Blueprint Cards Orbiting Sanctuary Core */
+    for(let sc=0;sc<4;sc++){
+      const ang=pSanc*6.5+t*0.24+(sc*Math.PI*0.5);
+      const sx=gx+Math.cos(ang)*(w*0.25)-panShift*0.42;
+      const sy=gy+Math.sin(ang)*(h*0.14);
+      const depth=0.65+0.35*Math.sin(ang);
+      c.save();c.translate(sx,sy);
+      c.scale(depth*Math.cos(t*0.4+sc),depth);
+      c.fillStyle='rgba(245,241,230,0.16)';c.strokeStyle='rgba(255,248,240,0.42)';c.lineWidth=1.2;
+      c.fillRect(-36,-24,72,48);c.strokeRect(-36,-24,72,48);
+      c.fillStyle='rgba(43,182,216,0.55)';c.fillRect(-26,-14,24,4);
+      c.fillStyle='rgba(255,248,240,0.45)';c.fillRect(-26,-4,48,2);c.fillRect(-26,4,38,2);
+      c.restore();
+    }
     c.restore();
   }
 
@@ -4208,12 +4127,14 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
   const floorY=h*clamp(horRatio,0.54,0.92);
   const isVerdict=beat.id==='verdict';
 
-  /* Apply Camera Transform in Native 4K Canvas Coordinates BEFORE rasterizing 8K Paper-Cutout ink */
+  /* Apply 3D Camera Matrix (dolly + roll + yaw foreshortening) in Native 4K Canvas Coordinates */
   c.save();
   if(cam){
     c.translate(w*0.5+w*(cam.tx/100),h*0.5+h*(cam.ty/100));
-    c.scale(cam.s,cam.s);
-    c.rotate(cam.r*Math.PI/180);
+    const yawComp=Math.cos((cam.ry||0)*Math.PI/180);
+    const pitchComp=1-Math.abs(cam.rx||0)*0.008;
+    c.scale(cam.s*yawComp,cam.s*pitchComp);
+    c.rotate((cam.r||0)*Math.PI/180);
     c.translate(-w*0.5,-h*0.5);
   }
 
@@ -4462,15 +4383,24 @@ function drawShatter(t,pSh){
   const crack=smoothstep(0.08,0.88,pSh);
   const celOp=smoothstep(0.24,0.84,pSh);
   $('#shatter-cel-bg').style.opacity=celOp.toFixed(2);
-  const celRot=((0.5-pSh)*3.8).toFixed(2);
-  $('#shatter-cel-bg').style.transform=`perspective(900px) scale(${(1.18-celOp*0.06+Math.sin(t*1.4)*0.012).toFixed(3)}) rotateX(${celRot}deg) translateY(${((0.5-pSh)*3.2).toFixed(2)}%)`;
-  $('#shatter-inset').style.transform=`translateY(${((0.55-pSh)*36+Math.sin(t*2.1)*4).toFixed(1)}px) rotate(${((pSh-0.5)*-2.5).toFixed(2)}deg)`;
-  $('#cap-shatter').style.transform=`translateX(-50%) translateY(${((pSh-0.5)*28).toFixed(1)}px)`;
+  const celRotX=((0.5-pSh)*7.5).toFixed(2);
+  const celRotY=((pSh-0.5)*5.5).toFixed(2);
+  const celRotZ=((pSh-0.5)*1.8).toFixed(2);
+  $('#shatter-cel-bg').style.transform=`perspective(950px) translate3d(0,${((0.5-pSh)*3.4).toFixed(2)}%,0) scale(${(1.20-celOp*0.08+Math.sin(t*1.4)*0.014).toFixed(3)}) rotateX(${celRotX}deg) rotateY(${celRotY}deg) rotate(${celRotZ}deg)`;
+  $('#shatter-inset').style.transform=`perspective(750px) translateY(${((0.55-pSh)*38+Math.sin(t*2.1)*4).toFixed(1)}px) rotateY(${((0.5-pSh)*8).toFixed(2)}deg) rotate(${((pSh-0.5)*-2.8).toFixed(2)}deg)`;
+  $('#cap-shatter').style.transform=`perspective(750px) translateX(-50%) translateY(${((pSh-0.5)*28).toFixed(1)}px) rotateX(${((0.5-pSh)*4).toFixed(2)}deg)`;
 
   const{w,h,c}=fitCanvas(shatterCv);
   c.clearRect(0,0,w,h);
-  /* Crimson wall splitting apart to unveil Navi Mumbai / Celestial Dawn */
+  /* Crimson firewall splitting in 3D perspective to unveil Navi Mumbai Dawn */
   c.fillStyle=`rgba(150,25,29,${(1-celOp*0.88).toFixed(2)})`;c.fillRect(0,0,w,h);
+  if(crack>0.06){
+    const sunG=c.createRadialGradient(w*0.5,h*0.42,8,w*0.5,h*0.42,Math.max(w,h)*0.58*crack);
+    sunG.addColorStop(0,'rgba(255,252,240,'+(0.75*crack).toFixed(2)+')');
+    sunG.addColorStop(0.42,'rgba(255,220,170,'+(0.32*crack*(1-celOp*0.5)).toFixed(2)+')');
+    sunG.addColorStop(1,'rgba(255,255,255,0)');
+    c.fillStyle=sunG;c.fillRect(0,0,w,h);
+  }
 
   [w*0.36,w*0.64].forEach((cx,ci)=>{
     const cw=Math.min(118,w*0.11);
@@ -4779,58 +4709,58 @@ function tick(ts){
     if(!firstRun&&pHeroT>0.12&&pHeroT<0.68&&isNearView($('#hero'),0))Sound.cue('prologue');
   }
 
-  /* 2. Act I: Mumbai Walk Camera & Expressions (camera applied natively inside 4K walkActorCv!) */
+  /* 2. Act I: Mumbai Walk 3D Multi-Axis Camera & Paper Firewall Breach */
   if(isNearView($('#scene-mist'))){
     drawMistBg(tTime,pMistS);
-    let mScale=1.04,mTx=0,mTy=0,mRot=0;
+    let mScale=1.04,mTx=0,mTy=0,mRot=0,mRx=0,mRy=0;
     if(pMistS<0.15){
       const u=smoothstep(0,0.15,pMistS);
-      mScale=lerp(1.04,1.12,u);mTx=lerp(0,-1.5,u);mTy=lerp(0,1.2,u);mRot=lerp(0,-0.4,u);
+      mScale=lerp(1.04,1.12,u);mTx=lerp(0,-1.8,u);mTy=lerp(0,1.4,u);mRot=lerp(0,-0.6,u);mRx=lerp(2.2,4.0,u);mRy=lerp(-4.5,-1.5,u);
     }else if(pMistS<0.30){
       const u=smoothstep(0.15,0.30,pMistS);
-      mScale=lerp(1.12,1.18,u);mTx=lerp(-1.5,-3.6,u);mTy=lerp(1.2,2.4,u);mRot=lerp(-0.4,0.9,u);
+      mScale=lerp(1.12,1.20,u);mTx=lerp(-1.8,-4.2,u);mTy=lerp(1.4,2.8,u);mRot=lerp(-0.6,1.2,u);mRx=lerp(4.0,1.5,u);mRy=lerp(-1.5,5.5,u);
     }else if(pMistS<0.45){
       const u=smoothstep(0.30,0.45,pMistS);
-      mScale=lerp(1.18,1.32,u);mTx=lerp(-3.6,-5.8,u);mTy=lerp(2.4,4.2,u);mRot=lerp(0.9,1.6,u);
+      mScale=lerp(1.20,1.34,u);mTx=lerp(-4.2,-6.0,u);mTy=lerp(2.8,4.4,u);mRot=lerp(1.2,2.0,u);mRx=lerp(1.5,-3.2,u);mRy=lerp(5.5,-6.2,u);
     }else if(pMistS<0.60){
       const u=smoothstep(0.45,0.60,pMistS);
-      mScale=lerp(1.32,1.16,u);mTx=lerp(-5.8,-2.0,u);mTy=lerp(4.2,1.2,u);mRot=lerp(1.6,-1.8,u);
+      mScale=lerp(1.34,1.18,u);mTx=lerp(-6.0,-1.8,u);mTy=lerp(4.4,1.4,u);mRot=lerp(2.0,-2.1,u);mRx=lerp(-3.2,3.6,u);mRy=lerp(-6.2,4.0,u);
     }else if(pMistS<0.80){
       const u=smoothstep(0.60,0.80,pMistS);
-      mScale=lerp(1.16,1.36,u);mTx=lerp(-2.0,3.2,u);mTy=lerp(1.2,5.0,u);mRot=lerp(-1.8,1.3,u);
+      mScale=lerp(1.18,1.38,u);mTx=lerp(-1.8,3.6,u);mTy=lerp(1.4,5.4,u);mRot=lerp(-2.1,1.8,u);mRx=lerp(3.6,-4.5,u);mRy=lerp(4.0,-7.5,u);
     }else{
       const u=smoothstep(0.80,1.0,pMistS);
-      mScale=lerp(1.36,1.52,u);mTx=lerp(3.2,2.5,u);mTy=lerp(5.0,7.2,u);mRot=lerp(1.3,-1.8,u);
+      mScale=lerp(1.38,1.54,u);mTx=lerp(3.6,2.8,u);mTy=lerp(5.4,7.4,u);mRot=lerp(1.8,-2.4,u);mRx=lerp(-4.5,5.2,u);mRy=lerp(-7.5,6.8,u);
     }
     if(pMistS>0.64)Sound.truckApproach(clamp((pMistS-0.64)/0.36,0,1));
     if(pMistS>0.72)Sound.tireScreech();
     if(pMistS>0.78)Sound.truckHorn();
     if(pMistS<0.25)Sound.resetCues();
-    $('#mist-cam').style.transform='translate('+mTx.toFixed(2)+'%,'+mTy.toFixed(2)+'%) scale('+mScale.toFixed(3)+') rotate('+mRot.toFixed(2)+'deg)';
-    drawParthWalkActor(tTime,pMistS,{tx:mTx,ty:mTy,s:mScale,r:mRot});
+    $('#mist-cam').style.transform='perspective(950px) translate3d('+mTx.toFixed(2)+'%,'+mTy.toFixed(2)+'%,0) scale('+mScale.toFixed(3)+') rotateX('+mRx.toFixed(2)+'deg) rotateY('+mRy.toFixed(2)+'deg) rotate('+mRot.toFixed(2)+'deg)';
+    drawParthWalkActor(tTime,pMistS,{tx:mTx,ty:mTy,s:mScale,r:mRot,rx:mRx,ry:mRy});
     const hint=$('.scroll-step-hint');
     if(hint){hint.style.opacity=pMistS>0.025?'0':'1';hint.style.visibility=pMistS>0.03?'hidden':'visible'}
 
     const showM1=pMistS<0.36,showM2=pMistS>=0.32&&pMistS<0.68,showM3=pMistS>=0.64;
     $('#cap-mist-1').style.opacity=showM1?1:0;
-    $('#cap-mist-1').style.transform='translateY('+(showM1?0:16)+'px)';
+    $('#cap-mist-1').style.transform='perspective(700px) translateY('+(showM1?0:16)+'px) rotateY('+(mRy*0.35).toFixed(2)+'deg)';
     setTypedProgress($('#cap-mist-1'),showM1?smoothstep(0.01,0.22,pMistS):0);
     $('#inset-face-1').style.opacity=showM1?1:0;
-    $('#inset-face-1').style.transform='translateY('+((0.18-pMistS)*45).toFixed(1)+'px)';
+    $('#inset-face-1').style.transform='perspective(700px) translateY('+((0.18-pMistS)*45).toFixed(1)+'px) rotateY('+(mRy*-0.45).toFixed(2)+'deg)';
 
     $('#cap-mist-2').style.opacity=showM2?1:0;
-    $('#cap-mist-2').style.transform='translateY('+(showM2?0:16)+'px)';
+    $('#cap-mist-2').style.transform='perspective(700px) translateY('+(showM2?0:16)+'px) rotateY('+(mRy*0.35).toFixed(2)+'deg)';
     setTypedProgress($('#cap-mist-2'),showM2?smoothstep(0.32,0.54,pMistS):0);
     $('#inset-phone-joy').style.opacity=showM2?1:0;
-    $('#inset-phone-joy').style.transform='translateY('+((pMistS-0.48)*55).toFixed(1)+'px)';
+    $('#inset-phone-joy').style.transform='perspective(700px) translateY('+((pMistS-0.48)*55).toFixed(1)+'px) rotateY('+(mRy*-0.45).toFixed(2)+'deg)';
 
     $('#cap-mist-3').style.opacity=showM3?1:0;
-    $('#cap-mist-3').style.transform='translateY('+(showM3?0:16)+'px)';
+    $('#cap-mist-3').style.transform='perspective(700px) translateY('+(showM3?0:16)+'px) rotateY('+(mRy*0.35).toFixed(2)+'deg)';
     setTypedProgress($('#cap-mist-3'),showM3?smoothstep(0.64,0.88,pMistS):0);
     $('#inset-face-shock').style.opacity=showM3?1:0;
-    $('#inset-face-shock').style.transform='translateY('+((0.82-pMistS)*38).toFixed(1)+'px)';
+    $('#inset-face-shock').style.transform='perspective(700px) translateY('+((0.82-pMistS)*38).toFixed(1)+'px) rotateY('+(mRy*-0.45).toFixed(2)+'deg)';
     $('#img-mist-shock').src=getFaceCloseUrl(pMistS>0.83?'pe_shocked':'pe_confused');
-    $('#mist-shock-tag').textContent=pMistS>0.83?'HEADLIGHTS!':'WAIT…';
+    $('#mist-shock-tag').textContent=pMistS>0.83?'BREACH!':'WAIT…';
 
     if(!firstRun&&pMistT>0.03&&pMistT<0.98){
       if(pMistT<0.33)Sound.cue('mist1');
@@ -4839,26 +4769,26 @@ function tick(ts){
     }
   }
 
-  /* 3. Act II: Portrait Face Zoom Close-Up, Headlight Shock & Clean Scroll Typewriter */
+  /* 3. Act II: 3D Bullet-Time Orbit, Breach Shock & Gyroscope Snapshot */
   if(isNearView($('#scene-impact'))){
     drawImpactRays(tTime,pImpS);
-    const impZoom=1.02+smoothstep(0.20,0.68,pImpS)*0.48;
+    const impZoom=1.02+smoothstep(0.18,0.72,pImpS)*0.50;
     const hitVib=(pImpS>0.44&&pImpS<0.76)?Math.sin(tTime*62)*3.5*(1-Math.abs(pImpS-0.60)*4):0;
-    $('#img-impact-portrait').style.transform='scale('+impZoom.toFixed(3)+')';
+    $('#img-impact-portrait').style.transform='scale('+impZoom.toFixed(3)+') rotate('+((pImpS-0.5)*-2.4).toFixed(2)+'deg)';
     $('#img-impact-portrait').src=getFaceCloseUrl(pImpS>0.46?'pe_shocked':pImpS>0.34?'pe_determined':'pe_profile');
-    $('#portrait-panel').style.transform='perspective(900px) translateX('+hitVib.toFixed(1)+'px) scale('+(0.98+smoothstep(0.1,0.75,pImpS)*0.07).toFixed(3)+') rotateY('+((pImpS-0.45)*-7.2).toFixed(2)+'deg) rotateX('+((0.5-pImpS)*4.6).toFixed(2)+'deg)';
+    $('#portrait-panel').style.transform='perspective(950px) translate3d('+hitVib.toFixed(1)+'px,0,0) scale('+(0.98+smoothstep(0.1,0.75,pImpS)*0.09).toFixed(3)+') rotateY('+((pImpS-0.45)*-14.5).toFixed(2)+'deg) rotateX('+((0.5-pImpS)*8.5).toFixed(2)+'deg) rotate('+((pImpS-0.45)*2.6).toFixed(2)+'deg)';
     $('#impact-eye-cut').style.opacity=pImpS>0.36&&pImpS<0.85?1:0;
-    $('#impact-eye-cut').style.transform='translateY('+((0.5-pImpS)*28).toFixed(1)+'px) scale('+(1+smoothstep(0.36,0.75,pImpS)*0.12).toFixed(3)+')';
-    $('#cap-imp-1').style.transform='translateY('+((0.5-pImpS)*32).toFixed(1)+'px)';
-    $('#cap-imp-2').style.transform='translateY('+((pImpS-0.5)*32).toFixed(1)+'px)';
+    $('#impact-eye-cut').style.transform='perspective(750px) translateY('+((0.5-pImpS)*32).toFixed(1)+'px) rotateY('+((0.5-pImpS)*10).toFixed(2)+'deg) scale('+(1+smoothstep(0.36,0.75,pImpS)*0.14).toFixed(3)+')';
+    $('#cap-imp-1').style.transform='perspective(750px) translateY('+((0.5-pImpS)*36).toFixed(1)+'px) rotateY('+((pImpS-0.5)*-7.5).toFixed(2)+'deg)';
+    $('#cap-imp-2').style.transform='perspective(750px) translateY('+((pImpS-0.5)*36).toFixed(1)+'px) rotateY('+((pImpS-0.5)*7.5).toFixed(2)+'deg)';
     setTypedProgress($('#cap-imp-1'),smoothstep(0.08,0.42,pImpS));
     setTypedProgress($('#cap-imp-2'),smoothstep(0.45,0.78,pImpS));
     setTypedProgress($('#cap-void-orb'),smoothstep(0.08,0.62,viewProgress($('.void-orb-stage'))));
     $('#portrait-headlight').style.opacity=pImpS>0.42?smoothstep(0.42,0.64,pImpS).toFixed(2):'0';
     $('#portrait-flash').style.opacity=pImpS>0.64?smoothstep(0.64,0.82,pImpS).toFixed(2):'0';
     const orb=$('.void-orb-svg'),pol=$('.mem-polaroid');
-    if(orb)orb.style.transform='rotate('+(pImpS*44-20+Math.sin(tTime*1.4)*6).toFixed(1)+'deg) scale('+(0.92+pImpS*0.14).toFixed(3)+')';
-    if(pol)pol.style.transform='translateY('+((0.68-pImpS)*34+Math.sin(tTime*2.1)*4).toFixed(1)+'px) rotate('+(-5.5+pImpS*5.5).toFixed(2)+'deg)';
+    if(orb)orb.style.transform='perspective(800px) rotateX('+((0.5-pImpS)*22).toFixed(1)+'deg) rotateY('+((pImpS-0.5)*34).toFixed(1)+'deg) rotate('+(pImpS*44-20+Math.sin(tTime*1.4)*6).toFixed(1)+'deg) scale('+(0.92+pImpS*0.14).toFixed(3)+')';
+    if(pol)pol.style.transform='perspective(800px) translateY('+((0.68-pImpS)*36+Math.sin(tTime*2.1)*4).toFixed(1)+'px) rotateX('+((pImpS-0.5)*11).toFixed(2)+'deg) rotateY('+((0.5-pImpS)*14).toFixed(2)+'deg) rotate('+(-5.5+pImpS*5.5).toFixed(2)+'deg)';
     if(pImpS>0.12&&pImpS<0.46)Sound.tireScreech();
     if(pImpS>0.56&&pImpS<0.86){Sound.impactHit();if(!impactCutDone){impactCutDone=true;triggerImpactCut();}}
     else if(pImpS<0.12){impactCutDone=false;Sound.resetCues();}
@@ -4869,15 +4799,17 @@ function tick(ts){
     }
   }
 
-  /* 4. Act III: Monolith Stone Ladder + Silvery-Liquid-White Circle + Walking Legs Focus */
+  /* 4. Act III: 3D Sweeping Monolith Staircase + Silvery Port + Walking Legs Focus */
   if(isNearView($('.mono-wide'))){
     const legFocus=smoothstep(0.22,0.56,pMonoS)*(1-smoothstep(0.68,0.92,pMonoS));
-    const monoScale=(1.08+legFocus*0.36+smoothstep(0.68,1.0,pMonoS)*0.18).toFixed(3);
+    const monoScale=(1.08+legFocus*0.36+smoothstep(0.68,1.0,pMonoS)*0.22).toFixed(3);
     const monoTx=lerp(0,-3.5,legFocus)+lerp(0,4.0,smoothstep(0.68,1.0,pMonoS));
     const monoTy=lerp(2,-9.5,legFocus)+lerp(0,5.5,smoothstep(0.68,1.0,pMonoS));
-    const monoRot=((pMonoS-0.5)*1.4).toFixed(2);
-    $('#img-mono-hd').style.transform='perspective(900px) scale('+monoScale+') translate('+monoTx.toFixed(2)+'%,'+monoTy.toFixed(2)+'%) rotate('+monoRot+'deg)';
-    $('#cap-mono-1').style.transform='translateY('+((0.5-pMonoS)*16).toFixed(1)+'px)';
+    const monoRot=((pMonoS-0.5)*2.4).toFixed(2);
+    const monoRx=((0.5-pMonoS)*6.5).toFixed(2);
+    const monoRy=((pMonoS-0.5)*-9.0).toFixed(2);
+    $('#img-mono-hd').style.transform='perspective(950px) translate3d('+monoTx.toFixed(2)+'%,'+monoTy.toFixed(2)+'%,0) scale('+monoScale+') rotateX('+monoRx+'deg) rotateY('+monoRy+'deg) rotate('+monoRot+'deg)';
+    $('#cap-mono-1').style.transform='perspective(750px) translateY('+((0.5-pMonoS)*20).toFixed(1)+'px) rotateY('+((pMonoS-0.5)*5).toFixed(2)+'deg)';
     setTypedProgress($('#cap-mono-1'),smoothstep(0.06,0.56,pMonoS));
     drawPortalParticles(monoFxCv,tTime,0.85+pMonoS*0.65,{x:0.71+monoTx*0.008,y:0.54+monoTy*0.008,r:0.15});
     const showLadderLegs=pMonoS>0.08&&pMonoS<0.96;
@@ -4893,13 +4825,14 @@ function tick(ts){
     }
   }
   if(isNearView($('.portal-panel-wrap'))){
-    const portScale=(1.48+pPortS*0.42).toFixed(3);
-    const portRotX=((0.5-pPortS)*6.2).toFixed(2);
-    const portRotZ=((pPortS-0.5)*2.4).toFixed(2);
+    const portScale=(1.48+pPortS*0.44).toFixed(3);
+    const portRotX=((0.5-pPortS)*9.5).toFixed(2);
+    const portRotY=((pPortS-0.5)*11.0).toFixed(2);
+    const portRotZ=((pPortS-0.5)*3.4).toFixed(2);
     const portTy=((0.5-pPortS)*4.2).toFixed(2);
-    $('#portal-hd-img').style.transform='perspective(800px) scale('+portScale+') rotateX('+portRotX+'deg) rotate('+portRotZ+'deg) translateY('+portTy+'%)';
-    $('#cap-port-1').style.transform='translateY('+((0.5-pPortS)*34).toFixed(1)+'px)';
-    $('#cap-port-2').style.transform='translateY('+((pPortS-0.5)*30).toFixed(1)+'px)';
+    $('#portal-hd-img').style.transform='perspective(850px) translate3d(0,'+portTy+'%,0) scale('+portScale+') rotateX('+portRotX+'deg) rotateY('+portRotY+'deg) rotate('+portRotZ+'deg)';
+    $('#cap-port-1').style.transform='perspective(750px) translateY('+((0.5-pPortS)*34).toFixed(1)+'px) rotateY('+((0.5-pPortS)*6).toFixed(2)+'deg)';
+    $('#cap-port-2').style.transform='perspective(750px) translateY('+((pPortS-0.5)*30).toFixed(1)+'px) rotateY('+((pPortS-0.5)*6).toFixed(2)+'deg)';
     setTypedProgress($('#cap-port-1'),smoothstep(0.06,0.44,pPortS));
     setTypedProgress($('#cap-port-2'),smoothstep(0.36,0.78,pPortS));
     drawPortalParticles(portalFxCv,tTime,0.9+pPortS*0.95,{x:0.50,y:0.48,r:0.28});
@@ -4931,13 +4864,14 @@ function tick(ts){
     if(didInitDraw&&pReachT>0.28&&pReachT<0.78&&isNearView($('#scene-reach'),-40)&&!isHoldMove())Sound.cue('reach');
     $('#ring-move').style.strokeDashoffset=(345*(1-reachProgress)).toFixed(1);
     const suck=smoothstep(0.02,1.0,reachProgress);
-    const reachScale=(1.08+pReachS*0.12+suck*0.18-(Math.pow(suck,2.1)*0.82)).toFixed(3);
+    const reachScale=(1.08+pReachS*0.14+suck*0.20-(Math.pow(suck,2.1)*0.82)).toFixed(3);
     const reachTx=(-suck*32).toFixed(2);
-    const reachRot=(-Math.pow(suck,1.6)*14).toFixed(2);
-    const reachRy=((0.5-pReachS)*4.2).toFixed(2);
-    $('#reach-hd-img').style.transform='perspective(850px) translateX('+reachTx+'%) scale('+reachScale+') rotate('+reachRot+'deg) rotateY('+reachRy+'deg)';
+    const reachRot=(-Math.pow(suck,1.6)*16).toFixed(2);
+    const reachRx=((0.5-pReachS)*7.5-suck*10).toFixed(2);
+    const reachRy=((0.5-pReachS)*11.5+suck*12).toFixed(2);
+    $('#reach-hd-img').style.transform='perspective(850px) translate3d('+reachTx+'%,0,0) scale('+reachScale+') rotateX('+reachRx+'deg) rotateY('+reachRy+'deg) rotate('+reachRot+'deg)';
     $('#reach-hd-img').style.opacity=(1-smoothstep(0.76,0.98,suck)).toFixed(2);
-    $('#cap-reach').style.transform='translateY('+((pReachS-0.5)*26).toFixed(1)+'px)';
+    $('#cap-reach').style.transform='perspective(750px) translateY('+((pReachS-0.5)*28).toFixed(1)+'px) rotateY('+((pReachS-0.5)*6).toFixed(2)+'deg)';
     setTypedProgress($('#cap-reach'),smoothstep(0.08,0.56,pReachS));
     drawReach(tTime);
     const moveBtn=$('#hold-move-btn'),handDot=$('#hand-dot'),handLine=$('#hand-line');
@@ -4954,26 +4888,27 @@ function tick(ts){
     }
   }
 
-  /* 6. Act V: Step Inside & 72-Strip Etched Ink Curtain */
+  /* 6. Act V: Step Inside & 100-Strip 3D Firewall Curtain */
   if(isNearView($('#scene-step'))){
-    const stepScale=(1.12+pStepS*0.28).toFixed(3);
-    const stepRot=((pStepS-0.5)*3.6).toFixed(2);
-    const stepTilt=((0.5-pStepS)*4.0).toFixed(2);
-    const stepTy=((0.5-pStepS)*3.8).toFixed(2);
-    $('#step-hd-img').style.transform='perspective(750px) scale('+stepScale+') rotate('+stepRot+'deg) rotateX('+stepTilt+'deg) translateY('+stepTy+'%)';
-    $('#cap-step').style.transform='translateX(-50%) translateY('+((0.5-pStepS)*24).toFixed(1)+'px)';
+    const stepScale=(1.12+pStepS*0.30).toFixed(3);
+    const stepRot=((pStepS-0.5)*4.8).toFixed(2);
+    const stepTilt=((0.5-pStepS)*7.5).toFixed(2);
+    const stepYaw=((pStepS-0.5)*9.0).toFixed(2);
+    const stepTy=((0.5-pStepS)*4.2).toFixed(2);
+    $('#step-hd-img').style.transform='perspective(820px) translate3d(0,'+stepTy+'%,0) scale('+stepScale+') rotateX('+stepTilt+'deg) rotateY('+stepYaw+'deg) rotate('+stepRot+'deg)';
+    $('#cap-step').style.transform='perspective(750px) translateX(-50%) translateY('+((0.5-pStepS)*24).toFixed(1)+'px) rotateX('+((0.5-pStepS)*5).toFixed(2)+'deg)';
     setTypedProgress($('#cap-step'),smoothstep(0.10,0.62,pStepS));
     drawStepOverlay(tTime);
     if(!firstRun&&pStepT>0.30&&pStepT<0.74&&isNearView($('#scene-step'),-40))Sound.cue('step');
   }
   if(isNearView($('#scene-curtain'))){
     drawCurtain(tTime,pCurS);
-    const curZoom=(1.10+smoothstep(0.08,0.94,pCurS)*0.22).toFixed(3);
-    const curRot=((pCurS-0.45)*-2.6).toFixed(2);
-    const curTilt=((pCurS-0.45)*3.8).toFixed(2);
-    const curPan=((0.5-pCurS)*2.8).toFixed(2);
-    const curTy=((pCurS-0.45)*-18).toFixed(1);
-    $('#curtain-cv').style.transform='perspective(850px) scale('+curZoom+') rotate('+curRot+'deg) rotateX('+curTilt+'deg) rotateY('+curPan+'deg) translateY('+curTy+'px)';
+    const curZoom=(1.12+smoothstep(0.08,0.94,pCurS)*0.24).toFixed(3);
+    const curRot=((pCurS-0.45)*-3.8).toFixed(2);
+    const curTilt=((pCurS-0.45)*6.8).toFixed(2);
+    const curPan=((0.5-pCurS)*8.5).toFixed(2);
+    const curTy=((pCurS-0.45)*-20).toFixed(1);
+    $('#curtain-cv').style.transform='perspective(920px) translate3d(0,'+curTy+'px,0) scale('+curZoom+') rotateX('+curTilt+'deg) rotateY('+curPan+'deg) rotate('+curRot+'deg)';
     if(!firstRun&&pCurT>0.52&&pCurT<0.97){
       if(pCurT<=0.70)Sound.cue('curtain');else Sound.cue('curtain_god');
     }
@@ -4992,13 +4927,15 @@ function tick(ts){
     const nextBeat=SANCTUARY_BEATS[Math.min(bIdx+1,SANCTUARY_BEATS.length-1)];
     const easeBeat=smoothstep(0.42,1.0,subBeat);
 
-    let aimCam={s:beat.cam.s,tx:beat.cam.tx,ty:beat.cam.ty,r:beat.cam.r,vpX:beat.cam.vpX,hor:beat.cam.hor};
+    let aimCam={s:beat.cam.s,tx:beat.cam.tx,ty:beat.cam.ty,r:beat.cam.r,rx:beat.cam.rx||0,ry:beat.cam.ry||0,vpX:beat.cam.vpX,hor:beat.cam.hor};
     if(beat.id==='verdict'){
       const vZoom=smoothstep(0.32,0.68,subBeat);
-      aimCam.s=lerp(1.42,1.94,vZoom);
+      aimCam.s=lerp(1.44,1.94,vZoom);
       aimCam.tx=lerp(-7,24,vZoom);
       aimCam.ty=lerp(5,12,vZoom);
-      aimCam.r=lerp(-1.0,0.8,vZoom);
+      aimCam.r=lerp(-1.2,0.9,vZoom);
+      aimCam.rx=lerp(3.8,-2.8,vZoom);
+      aimCam.ry=lerp(-5.0,4.5,vZoom);
       aimCam.vpX=lerp(0.34,0.66,vZoom);
       aimCam.hor=lerp(0.68,0.84,vZoom);
       if(subBeat>0.42&&!verdictZoomBoomed){
@@ -5012,6 +4949,8 @@ function tick(ts){
       aimCam.tx=lerp(beat.cam.tx,nextBeat.cam.tx,easeBeat);
       aimCam.ty=lerp(beat.cam.ty,nextBeat.cam.ty,easeBeat);
       aimCam.r=lerp(beat.cam.r,nextBeat.cam.r,easeBeat);
+      aimCam.rx=lerp(beat.cam.rx||0,nextBeat.cam.rx||0,easeBeat);
+      aimCam.ry=lerp(beat.cam.ry||0,nextBeat.cam.ry||0,easeBeat);
       aimCam.vpX=lerp(beat.cam.vpX,nextBeat.cam.vpX,easeBeat);
       aimCam.hor=lerp(beat.cam.hor,nextBeat.cam.hor,easeBeat);
     }
@@ -5022,13 +4961,17 @@ function tick(ts){
     camCur.tx=snapRun?(aimCam.tx+hoverDriftX):camCur.tx+((aimCam.tx+hoverDriftX)-camCur.tx)*sancDamp;
     camCur.ty=snapRun?(aimCam.ty+hoverDriftY):camCur.ty+((aimCam.ty+hoverDriftY)-camCur.ty)*sancDamp;
     camCur.r=snapRun?aimCam.r:camCur.r+(aimCam.r-camCur.r)*sancDamp;
+    camCur.rx=snapRun?aimCam.rx:camCur.rx+(aimCam.rx-camCur.rx)*sancDamp;
+    camCur.ry=snapRun?aimCam.ry:camCur.ry+(aimCam.ry-camCur.ry)*sancDamp;
     camCur.vpX=snapRun?aimCam.vpX:camCur.vpX+(aimCam.vpX-camCur.vpX)*sancDamp;
     camCur.hor=snapRun?aimCam.hor:camCur.hor+(aimCam.hor-camCur.hor)*sancDamp;
     if(snapRun)sancShift=targetShift;
 
     sancShake*=Math.exp(-12*dt);
-    $('#sanc-cam').style.transform='translate('+camCur.tx.toFixed(2)+'%,'+camCur.ty.toFixed(2)+'%) scale('+camCur.s.toFixed(3)+') rotate('+camCur.r.toFixed(2)+'deg)';
+    $('#sanc-cam').style.transform='perspective(1050px) translate3d('+camCur.tx.toFixed(2)+'%,'+camCur.ty.toFixed(2)+'%,0) scale('+camCur.s.toFixed(3)+') rotateX('+camCur.rx.toFixed(2)+'deg) rotateY('+camCur.ry.toFixed(2)+'deg) rotate('+camCur.r.toFixed(2)+'deg)';
     $('#img-sanc-speaker').style.transform='scale('+(1.02+subBeat*0.08).toFixed(3)+')';
+    if($('#sanc-speaker-inset'))$('#sanc-speaker-inset').style.transform='perspective(700px) rotateY('+(-camCur.ry*0.42).toFixed(2)+'deg) rotateX('+(camCur.rx*0.35).toFixed(2)+'deg)';
+    if($('#sanc-dossier-card')&&!$('#sanc-dossier-card').classList.contains('hidden'))$('#sanc-dossier-card').style.transform='perspective(850px) rotateY('+(camCur.ry*0.36).toFixed(2)+'deg) rotateX('+(camCur.rx*0.24).toFixed(2)+'deg)';
 
     /* Sequential Manhwa One-Speaker-At-A-Time Flow (NEVER stack two dialogue walls at once!) */
     const splitPt=beat.id==='verdict'?0.24:0.48;
@@ -5061,7 +5004,7 @@ function tick(ts){
 
     const verdictTr=beat.id==='verdict'?smoothstep(0.04,0.32,subBeat):0;
     $('#sanc-sticky').style.background=verdictTr>0.3?'#000000':'';
-    $('#hall-cv').style.filter=verdictTr>0.5?'none':'blur(2.4px) saturate(1.06)';
+    $('#hall-cv').style.filter=verdictTr>0.5?'none':'blur(0.9px) saturate(1.08)';
     drawHallBg(tTime,beat.wind,pSancS,camCur.vpX,camCur.hor,verdictTr);
     drawSanctuaryActors(tTime,beat,sancShift,scrollVelS,camCur.vpX,camCur.hor,subBeat,camCur,verdictTr);
 
