@@ -2164,16 +2164,6 @@ function drawSanctuaryActors(t,beat,shift=0,scrollBoost=0,vpX=0.5,horRatio=0.75,
   const{w,h,c}=fitCanvas(sancActorsCv,true);
   c.clearRect(0,0,w,h);
   initRefPortraits();
-  if(window.Nexus3D&&window.Nexus3D.ok){
-    /* 3D characters live directly inside #nexus-3d-cv; draw crisp animated 8K ink sparkles on HUD overlay canvas */
-    for(let i=0;i<16;i++){
-      const x=w*(0.15+((i*47)%70)/100)+Math.sin(t*2.1+i)*24;
-      const y=h-((t*(48+(i%4)*16)+i*52)%h);
-      c.fillStyle=i%3===0?'rgba(255,255,255,0.65)':'rgba(255,215,205,0.48)';
-      c.beginPath();c.arc(x,y,1.6+(i%3)*0.9,0,Math.PI*2);c.fill();
-    }
-    return;
-  }
   const gIm=getPaperCutSprite(beat.godPose||'g_front',false)||getHDAnimeSprite(beat.godPose||'g_front')||IMG[beat.godPose]||IMG.g_front;
   const pRaw=IMG[beat.parthPose||'p_listen']||IMG.p_listen;
   const pIm=getPaperCutSprite(beat.parthPose||'p_listen',false)||getHDAnimeSprite(beat.parthPose||'p_listen')||pRaw;
@@ -3205,50 +3195,6 @@ function tick(ts){
   if(!firstRun&&inCol)Sound.cue('collection');
 
   if(didInitDraw&&(!REF_PORTRAITS.parth||!REF_PORTRAITS.god))initRefPortraits();
-
-  /* Render Unified Real-Time Three.js 3D World Behind Storytelling HUD */
-  if(window.Nexus3D&&window.Nexus3D.ok){
-    const zones=[
-      ['hero','#hero'],['mist','#scene-mist'],['impact','#scene-impact'],
-      ['monolith','.mono-wide'],['portal','.portal-panel-wrap'],
-      ['reach','#scene-reach'],['step','#scene-step'],['curtain','#scene-curtain'],
-      ['sanctuary','#scene-sanctuary-story'],['medallions','#scene-medallions'],
-      ['pour','#scene-pour'],['vortex','#scene-vortex'],['shatter','#scene-shatter']
-    ];
-    let activeZone='mist',bestOverlap=-1;
-    const midY=innerHeight*0.5;
-    zones.forEach(([nm,sel])=>{
-      const el=$(sel);if(!el)return;
-      const r=el.getBoundingClientRect();
-      const ov=Math.min(innerHeight,r.bottom)-Math.max(0,r.top);
-      const dist=Math.abs((r.top+r.bottom)*0.5-midY);
-      const score=ov>0?(ov*10-dist*0.1):-dist;
-      if(score>bestOverlap){bestOverlap=score;activeZone=nm}
-    });
-    const colCover=clamp((innerHeight-colRect.top)/Math.max(200,innerHeight*0.85),0,1);
-    const isPhone3D=pMistS>=0.34&&pMistS<=0.64;
-    const isRecoil3D=pMistS>0.82;
-    const pB3D=isPhone3D?smoothstep(0.32,0.39,pMistS)*(1-smoothstep(0.59,0.66,pMistS)):0;
-    const rB3D=isRecoil3D?smoothstep(0.82,0.90,pMistS):0;
-    const subB=clamp(pSancS*SANCTUARY_BEATS.length-bIdx,0,1);
-    const verdB=(beat.id==='verdict')?smoothstep(0.04,0.32,subB):0;
-    window.Nexus3D.render({
-      t:tTime,dt,zone:activeZone,snap:snapRun,colCover,
-      pHero:pHeroS,pMist:pMistS,pImp:pImpS,pMono:pMonoS,pPort:pPortS,
-      reachProgress,pStep:pStepS,pCur:pCurS,pSanc:pSancS,bIdx,subBeat:subB,
-      pourProgress,pPour:pPourS,vortexProgress,pVor:pVorS,pShatter:pShatterS,
-      walkFloat100:pMistS*2.5*STRIDE_FRAMES,phoneBlend:pB3D,recoilBlend:rB3D,
-      getWalkFrameImg:true,
-      drawWalkToCtx:(cx,wf,dx,dy,dw,dh)=>drawSmoothWalkFrame(cx,wf,dx,dy,dw,dh,1,false),
-      phoneImg:getPaperCutSprite('p_phone')||IMG.p_phone,
-      recoilImg:getPaperCutSprite('p_recoil')||IMG.p_recoil,
-      godPose:beat.godPose||'g_front',parthPose:beat.parthPose||'p_listen',
-      godSprite:getPaperCutSprite(beat.godPose||'g_front',false)||getHDAnimeSprite(beat.godPose||'g_front')||IMG[beat.godPose]||IMG.g_front,
-      parthSprite:verdB>0.2?(getPaperCutSprite(beat.parthPose||'p_idle',true)||getEntityParthSprite(beat.parthPose||'p_idle')||IMG.p_idle):(getPaperCutSprite(beat.parthPose||'p_listen',false)||getHDAnimeSprite(beat.parthPose||'p_listen')||IMG[beat.parthPose]||IMG.p_listen),
-      entitySprite:getPaperCutSprite('p_idle',true)||getEntityParthSprite('p_idle')||IMG.p_idle,
-      smoothstep,clamp,lerp
-    });
-  }
   requestAnimationFrame(tick);
 }
 initTypewriters();

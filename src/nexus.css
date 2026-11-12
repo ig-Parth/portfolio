@@ -978,7 +978,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 @media print{
   @page{size:A4;margin:12mm}
   body{background:#fff !important;color:#111 !important;font-size:11pt}
-  body::after,#welcome-gate,#sound-gate,#brand-mark,#top-nav,#movie-btn,#voice-btn,#eq-btn,#jp-sub-bar,#film-vignette,#cinema-bars,#sakuga-flash,#impact-cut-fx,#nexus-3d-cv,main#experience,#col-fx-cv,#dossier-modal,.lens-bar,.prod-arrows,.ev-tabs,#skill-svg,#skill-cats,#draft-mail-form,.enter-collection-bar,.print-hide{display:none !important}
+  body::after,#welcome-gate,#sound-gate,#brand-mark,#top-nav,#movie-btn,#voice-btn,#eq-btn,#jp-sub-bar,#film-vignette,#cinema-bars,#sakuga-flash,#impact-cut-fx,main#experience,#col-fx-cv,#dossier-modal,.lens-bar,.prod-arrows,.ev-tabs,#skill-svg,#skill-cats,#draft-mail-form,.enter-collection-bar,.print-hide{display:none !important}
   #print-resume-header{display:block !important;border-bottom:2px solid #121212;padding-bottom:10px;margin-bottom:14px}
   #collection{border:none !important;background:#fff !important}
   .col-sec{padding:12px 0 !important;border-bottom:1px solid #ccc !important;background:#fff !important;break-inside:avoid-page}
@@ -990,32 +990,3 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   .portrait-plate{max-width:160px}
   a::after{content:''}
 }
-#nexus-3d-cv{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:none;transition:opacity .25s ease}
-body.has-3d #nexus-3d-cv{display:block}
-body.has-3d #hero,body.has-3d main#experience{position:relative;z-index:5}
-body.has-3d #hero,
-body.has-3d #scene-mist,body.has-3d #mist-sticky,
-body.has-3d #scene-impact,
-body.has-3d #scene-monolith,body.has-3d .mono-wide,body.has-3d .portal-frame,
-body.has-3d #scene-reach,
-body.has-3d #scene-step,body.has-3d .step-frame,
-body.has-3d #scene-curtain,body.has-3d #curtain-sticky,
-body.has-3d #scene-sanctuary-story,body.has-3d #sanc-sticky,
-body.has-3d #scene-medallions,body.has-3d #scene-pour,body.has-3d #scene-vortex,
-body.has-3d #scene-shatter,body.has-3d .shatter-panel,body.has-3d .shatter-bottom-panel{
-  background:transparent !important;
-}
-body.has-3d .mono-wide,body.has-3d .portal-frame,body.has-3d .step-frame,body.has-3d #scene-sanctuary-story,body.has-3d #scene-reach{
-  border-color:transparent !important;
-}
-body.has-3d #hero-cv,body.has-3d #mist-cv,body.has-3d #parth-walk-cv,
-body.has-3d #impact-rays,body.has-3d #img-mono-hd,body.has-3d #mono-fx-cv,
-body.has-3d #portal-hd-img,body.has-3d #portal-fx-cv,
-body.has-3d #reach-hd-img,body.has-3d #step-hd-img,
-body.has-3d #curtain-cv,body.has-3d #hall-cv,
-body.has-3d #pour-cv,body.has-3d #vortex-cv,body.has-3d #vortex-actor-cv,
-body.has-3d #shatter-cv,body.has-3d #shatter-fall-cv,body.has-3d #shatter-cel-bg{
-  opacity:0 !important;
-}
-body.has-3d #mist-hud,body.has-3d #sanc-hud,body.has-3d .impact-wrap{transform-style:flat !important;z-index:8}
-body.has-3d #collection,body.has-3d .footer{position:relative;z-index:12;background:var(--paper)}

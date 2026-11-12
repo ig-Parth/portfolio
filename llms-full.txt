@@ -25,6 +25,6 @@
 - **IoT Weather Detection** (Arduino environmental monitor): Built hardware connections and live monitoring firmware. Tech: Arduino, Temp/humidity sensors, IoT.
 
 ## Technical Architecture of NEXUS 01
-- Real-Time Three.js WebGL 3D Engine (`THREE.WebGLRenderer`, ACES Filmic tone mapping, soft PCF shadows, 3D Mumbai skyscrapers & moving Metro train, 3D paper-tear firewall rings, 3D staircase & reflective mercury portal, 100-slat rotating 3D curtain, 16-column Crimson Sanctuary with orbiting holographic schematics, 3D essence crystals & 96-shard explosion) layered seamlessly with Kirigami paper-cut characters.
+- Custom 8K Canvas2D & Layered 3D Kirigami Pipeline: client-side edge-directed sharpening, alpha defringing, stepped cotton-rag paper surface quantization, cream die-cut contour silhouettes, physical 3D shadow casting, and multi-axis CSS 3D camera choreography.
 - 100-frame crossfaded gait kinematics, smooth inertial damping, procedural WebAudio synthesizer synchronized with Japanese SpeechSynthesis turn-locked dialogues.
 - Full SSR semantic HTML parity for all 5 case files and 8 skill nodes, JSON-LD @graph, JSON Resume v1.0, ATS print mode (@media print), and Lighthouse 100/100/100/100 across Accessibility, Best Practices, SEO, and Agentic Browsing (Desktop & Mobile).
