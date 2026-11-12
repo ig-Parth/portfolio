@@ -277,12 +277,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 #hero{position:relative;height:185vh;background:#000000}
 #hero-sticky{
   position:sticky;top:0;width:100%;height:100vh;overflow:hidden;
-  display:grid;place-items:center;background:#000000;
+  display:grid;place-items:center;background:#000000;perspective:1150px;transform-style:preserve-3d;
 }
-#hero-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+#hero-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;will-change:transform}
 .hero-lockup{
   position:relative;z-index:2;text-align:center;color:#F7F5EE;
-  padding:0 20px;user-select:none;will-change:opacity,transform;
+  padding:0 20px;user-select:none;will-change:opacity,transform;transform-style:preserve-3d;
 }
 .hero-the{font:500 13px var(--sf);letter-spacing:.42em;text-transform:uppercase;color:#DFDDD6;margin-bottom:8px}
 .hero-main{
@@ -444,12 +444,12 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 .void-orb-cap{max-width:480px;text-align:center}
 
 /* ==================== ACT III: MONOLITH STAIRS & SILVERY LIQUID PORTAL (SS7 / SS6 FRAMED) ==================== */
-#scene-monolith{position:relative;background:var(--paper);padding:5vh clamp(14px,3vw,32px) 8vh}
+#scene-monolith{position:relative;background:var(--paper);padding:5vh clamp(14px,3vw,32px) 8vh;perspective:1150px}
 .mono-wide{
   position:relative;max-width:1160px;margin:0 auto;height:min(86vh,760px);overflow:visible;
-  border:1.5px solid var(--ink);background:#F2F1EC;
+  border:1.5px solid var(--ink);background:#F2F1EC;transform-style:preserve-3d;will-change:transform;
 }
-.mono-wide-inner{position:relative;width:100%;height:100%;overflow:hidden}
+.mono-wide-inner{position:relative;width:100%;height:100%;overflow:hidden;transform-style:preserve-3d}
 .hd-stage-img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;
   display:block;will-change:transform;transform-origin:24% 76%;
@@ -480,7 +480,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT IV: INTERACTIVE HOLD & MOVE (HD ANIME HAND) ==================== */
 #scene-reach{
   position:relative;height:105vh;min-height:640px;background:var(--crimson-wall);
-  border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);overflow:hidden;user-select:none;
+  border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);overflow:hidden;user-select:none;perspective:1100px;transform-style:preserve-3d;
 }
 #reach-hd-img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;
@@ -515,10 +515,10 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 #hold-move-btn:hover{transform:translate(-50%,-50%) scale(1.05)}
 
 /* ==================== ACT V: STEP INSIDE & 56-STRIP CURTAIN + DUAL EYES ==================== */
-#scene-step{position:relative;background:var(--paper);padding:8vh clamp(14px,3vw,36px)}
+#scene-step{position:relative;background:var(--paper);padding:8vh clamp(14px,3vw,36px);perspective:1100px}
 .step-frame{
   position:relative;max-width:980px;margin:0 auto;border:1.5px solid var(--ink);
-  background:#141414;overflow:hidden;
+  background:#141414;overflow:hidden;transform-style:preserve-3d;will-change:transform;
 }
 .step-top{position:relative;width:100%;height:min(82vh,740px);overflow:hidden}
 #step-hd-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;will-change:transform}
@@ -526,7 +526,7 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 #cap-step{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);text-align:center;max-width:340px;z-index:5}
 
 #scene-curtain{position:relative;height:235vh;background:var(--paper)}
-#curtain-sticky{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall)}
+#curtain-sticky{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--crimson-wall);perspective:1100px;transform-style:preserve-3d}
 #curtain-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2}
 #eye-strip{
   position:absolute;left:50%;top:11vh;transform:translateX(-50%);z-index:6;
@@ -693,9 +693,9 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 
 #scene-pour{
   position:relative;height:105vh;min-height:620px;background:linear-gradient(180deg,#8F1519 0%,#5E0C0F 100%);
-  border-bottom:1.5px solid var(--ink);overflow:hidden;
+  border-bottom:1.5px solid var(--ink);overflow:hidden;perspective:1100px;transform-style:preserve-3d;
 }
-#pour-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none}
+#pour-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none;will-change:transform}
 #hold-pour-btn{position:absolute;left:28%;top:52%;transform:translate(-50%,-50%)}
 #hold-pour-btn:hover{transform:translate(-50%,-50%) scale(1.06)}
 #cap-pour{position:absolute;right:clamp(16px,4vw,54px);bottom:12vh;max-width:350px;z-index:6}
@@ -703,19 +703,19 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 /* ==================== ACT VII: VORTEX HOLD & SHATTERING PILLARS + DAWN ==================== */
 #scene-vortex{
   position:relative;height:108vh;min-height:640px;background:var(--void);
-  overflow:hidden;border-bottom:1.5px solid var(--ink);
+  overflow:hidden;border-bottom:1.5px solid var(--ink);perspective:1100px;transform-style:preserve-3d;
 }
-#vortex-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
-#vortex-actor-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none}
+#vortex-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;will-change:transform}
+#vortex-actor-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none;will-change:transform}
 #hold-vortex-btn{position:absolute;left:clamp(22%,32vw,36%);top:52%;transform:translate(-50%,-50%)}
 #hold-vortex-btn:hover{transform:translate(-50%,-50%) scale(1.06)}
 #cap-vortex{position:absolute;right:clamp(16px,4vw,54px);top:40%;max-width:420px;z-index:6}
 
-#scene-shatter{position:relative;background:var(--paper);padding:8vh clamp(14px,3vw,38px)}
-.shatter-grid{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+#scene-shatter{position:relative;background:var(--paper);padding:8vh clamp(14px,3vw,38px);perspective:1150px}
+.shatter-grid{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px;transform-style:preserve-3d}
 .shatter-panel{
   position:relative;width:100%;height:min(78vh,620px);
-  border:1.5px solid var(--ink);background:var(--crimson-wall);overflow:hidden;
+  border:1.5px solid var(--ink);background:var(--crimson-wall);overflow:hidden;transform-style:preserve-3d;will-change:transform;
 }
 #shatter-cel-bg{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;
