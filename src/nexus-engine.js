@@ -933,32 +933,12 @@ else setTimeout(hydrateDomPaperCutouts,500);
 
 function getWalkFrame(f){
   const idx100=((Math.floor(f)%STRIDE_FRAMES)+STRIDE_FRAMES)%STRIDE_FRAMES;
-  const qIdx=Math.round((idx100/STRIDE_FRAMES)*WALK_KEY_COUNT)%WALK_KEY_COUNT;
+  const qIdx=Math.round((idx100/STRIDE_FRAMES)*16)%16;
   if(WALK_FRAMES[qIdx])return WALK_FRAMES[qIdx];
-  const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
-  const w2=getHDAnimeSprite('p_walk2')||w1;
-  const w3=getHDAnimeSprite('p_walk3')||w1;
-  if(!w1||!w2||!w3)return null;
-  const sw=Math.max(w1.width||w1.naturalWidth,w2.width||w2.naturalWidth,w3.width||w3.naturalWidth);
-  const sh=w1.height||w1.naturalHeight;
-  if(!sw||!sh)return null;
-  /* Crisp 100%-opaque 3D CGI key poses [w2 -> w1 -> w3 -> w1] with continuous vertical stride arc & lean (ZERO double-leg ghosting!) */
-  const phi=qIdx/WALK_KEY_COUNT,p4=phi*4;
-  const seq=[w2,w1,w3,w1];
-  const A=seq[Math.floor(p4)%4];
-  const aW=A.width||A.naturalWidth;
-  const comY=-Math.abs(Math.sin(phi*Math.PI*2))*5.2;
-  const lean=Math.sin(phi*Math.PI*2)*0.013;
-  const cv=document.createElement('canvas');cv.width=sw;cv.height=sh;
-  const cx=cv.getContext('2d');
-  cx.imageSmoothingEnabled=true;cx.imageSmoothingQuality='high';
-  cx.save();
-  cx.translate(sw*0.5,sh*0.5+comY);
-  cx.rotate(lean);
-  cx.drawImage(A,-aW*0.5,-sh*0.5);
-  cx.restore();
-  WALK_FRAMES[qIdx]=cv;
-  return cv;
+  const im=IMG['p_walk_'+qIdx]||IMG.p_walk1;
+  if(!im)return null;
+  WALK_FRAMES[qIdx]=im;
+  return im;
 }
 
 /* HTML-Preserving Scroll-Written Typewriter Engine (.cap-box starts empty and writes on scroll) */
@@ -1326,7 +1306,7 @@ function drawParthWalkActor(t,pMist,cam){
   const{w,h,c}=fitCanvas(walkActorCv,true);
   c.clearRect(0,0,w,h);
   initRefPortraits();
-  const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
+  const w1=IMG.p_walk_0||IMG.p_walk1;
   if(!w1)return;
 
   const isPhone=pMist>=0.34&&pMist<=0.64;
@@ -1335,27 +1315,41 @@ function drawParthWalkActor(t,pMist,cam){
   const recoilBlend=isRecoil?smoothstep(0.82,0.90,pMist):0;
   const walkAmt=1-Math.max(phoneBlend,recoilBlend);
 
-  /* Scroll-locked 100-Frame Sub-Pixel Layered 3D Paper-Cutout Gait Cycle */
-  const walkFloat=pMist*2.5*STRIDE_FRAMES;
-  const walkBase=getWalkPaperFrame(walkFloat)||getPaperCutSprite('p_walk1')||w1;
-  const phoneIm=phoneBlend>0.02?(getPaperCutSprite('p_phone')||IMG.p_phone):null;
-  const recoilIm=recoilBlend>0.02?(getPaperCutSprite('p_recoil')||IMG.p_recoil):null;
-  const phi=((walkFloat/STRIDE_FRAMES)%1+1)%1;
+  const sw=w1.naturalWidth||w1.width||240,sh=w1.naturalHeight||w1.height||720;
+  const targetH=Math.min(h*0.72,560);
+  const scale=targetH/sh;
+  const drawW=sw*scale,drawH=targetH;
+  const baseY=h*0.90; // Anchored to street pavement
+
+  // Responsive Horizontal Movement across the website screen (Enter from left -> Center -> Right -> Recoil)
+  let charX=w*0.48;
+  if(pMist<0.35){
+    const tWalk=pMist/0.35;
+    charX=lerp(-drawW*0.35,w*0.48,tWalk);
+  }else if(pMist<=0.64){
+    const tPhone=(pMist-0.35)/(0.64-0.35);
+    charX=lerp(w*0.48,w*0.52,tPhone);
+  }else if(pMist<=0.82){
+    const tResume=(pMist-0.64)/(0.82-0.64);
+    charX=lerp(w*0.52,w*0.72,tResume);
+  }else{
+    const tRecoil=(pMist-0.82)/(1.0-0.82);
+    charX=lerp(w*0.72,w*0.67,tRecoil);
+  }
+
+  // Zero-Slip Biomechanical Walk Kinematics (Feet grounded without sliding)
+  const stridePx=Math.max(110,drawW*0.75);
+  const walkDist=charX-(-drawW*0.35);
+  const cycleCount=walkDist/stridePx;
+  const frameIdx=Math.floor(Math.abs(cycleCount)*16)%16;
+  const walkFrame=IMG['p_walk_'+frameIdx]||w1;
 
   if(walkAmt>0.6&&pMist>0.03&&pMist<0.95){
-    const stepIdx=Math.floor(pMist*12);
+    const stepIdx=Math.floor(cycleCount*2);
     if(stepIdx!==lastWalkStepPhase){lastWalkStepPhase=stepIdx;Sound.step()}
   }
 
-  const sw=w1.width||w1.naturalWidth,sh=w1.height||w1.naturalHeight;
-  if(!sw||!sh)return;
-  const targetH=Math.min(h*0.72,560);
-  const scale=targetH/sh;
-  const drawW=sw*scale,drawH=sh*scale;
-  const baseX=w*(0.46+pMist*0.04);
-  const baseY=h*0.90;
-
-  /* Apply 3D camera matrix (dolly + roll + yaw shear) inside 4K canvas BEFORE sampling 8K Paper-Cutout sprites */
+  /* 3D Cinematic camera parallax */
   c.save();
   if(cam){
     c.translate(w*0.5+w*(cam.tx/100),h*0.52+h*(cam.ty/100));
@@ -1366,46 +1360,38 @@ function drawParthWalkActor(t,pMist,cam){
     c.translate(-w*0.5,-h*0.52);
   }
 
-  const bob=-Math.abs(Math.sin(phi*Math.PI*2))*6.2*walkAmt;
-  const gshR=drawW*(0.40-bob*0.002);
-  c.save();c.translate(baseX,baseY-3);c.scale(1,0.16);
+  // Realistic contact shadow directly beneath sneakers
+  const gshR=drawW*0.38;
+  c.save();c.translate(charX,baseY-4);c.scale(1,0.18);
   const gsh=c.createRadialGradient(0,0,2,0,0,gshR);
-  gsh.addColorStop(0,'rgba(14,14,18,0.34)');
-  gsh.addColorStop(0.6,'rgba(14,14,18,0.14)');
-  gsh.addColorStop(1,'rgba(14,14,18,0)');
+  gsh.addColorStop(0,'rgba(12,14,18,0.52)');
+  gsh.addColorStop(0.6,'rgba(12,14,18,0.18)');
+  gsh.addColorStop(1,'rgba(12,14,18,0)');
   c.fillStyle=gsh;c.beginPath();c.arc(0,0,gshR,0,Math.PI*2);c.fill();
   c.restore();
 
-  const lean=(walkAmt*0.020*Math.cos(phi*Math.PI*2))-(recoilBlend*0.045);
-  c.translate(baseX,baseY+bob);
-  c.rotate(lean);
-
-  if(phoneBlend>0.12){
-    for(let rg=0;rg<2;rg++){
-      const pr=((t*0.9+rg*0.5)%1);
-      c.save();
-      c.strokeStyle='rgba(201,37,33,'+((1-pr)*0.48*phoneBlend).toFixed(2)+')';
-      c.lineWidth=1.8;
-      c.beginPath();c.arc(drawW*0.06,-drawH*0.56,14+pr*52,0,Math.PI*2);c.stroke();
-      c.restore();
-    }
-  }
-
-  if(walkAmt>0.02&&walkBase){
-    drawSmoothWalkFrame(c,walkFloat,-drawW/2,-drawH,drawW,drawH,walkAmt,false);
-  }
-  if(phoneBlend>0.02&&phoneIm){
-    const phW=phoneIm._origW||phoneIm.width||sw,phH=phoneIm._origH||phoneIm.height||sh;
-    const psc=targetH/phH,pdw=phW*psc,pdh=targetH;
-    c.save();c.globalAlpha=phoneBlend;
-    drawPaperSprite(c,phoneIm,-pdw/2,-pdh,pdw,pdh);
+  // Draw 2D Character anchored to street ground
+  if(walkAmt>0.02&&walkFrame){
+    c.save();c.globalAlpha=walkAmt;
+    c.drawImage(walkFrame,charX-drawW*0.5,baseY-drawH,drawW,drawH);
     c.restore();
   }
-  if(recoilBlend>0.02&&recoilIm){
-    const rcW=recoilIm._origW||recoilIm.width||sw,rcH=recoilIm._origH||recoilIm.height||sh;
-    const rsc=targetH/rcH,rdw=rcW*rsc,rdh=targetH;
+
+  if(phoneBlend>0.02&&IMG.p_phone){
+    c.save();c.globalAlpha=phoneBlend;
+    c.drawImage(IMG.p_phone,charX-drawW*0.5,baseY-drawH,drawW,drawH);
+    for(let rg=0;rg<2;rg++){
+      const pr=((t*0.9+rg*0.5)%1);
+      c.strokeStyle='rgba(0,229,255,'+((1-pr)*0.55*phoneBlend).toFixed(2)+')';
+      c.lineWidth=1.8;
+      c.beginPath();c.arc(charX+drawW*0.06,baseY-drawH*0.48,12+pr*44,0,Math.PI*2);c.stroke();
+    }
+    c.restore();
+  }
+
+  if(recoilBlend>0.02&&IMG.p_recoil){
     c.save();c.globalAlpha=recoilBlend;
-    drawPaperSprite(c,recoilIm,-rdw/2,-rdh,rdw,rdh);
+    c.drawImage(IMG.p_recoil,charX-drawW*0.5,baseY-drawH,drawW,drawH);
     c.restore();
   }
   c.restore();
