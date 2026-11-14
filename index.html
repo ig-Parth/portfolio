@@ -1308,6 +1308,323 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   .portrait-plate{max-width:160px}
   a::after{content:''}
 }
+
+/* ==========================================================================
+   SANTIONI SPIRITS ART DIRECTION & WOODCUT ENGRAVING EDITORIAL OVERRIDES
+   ========================================================================== */
+:root {
+  --ink-black: #111111;
+  --paper-white: #F1F0E9;
+  --blood-red: #B8201D;
+  --antique-beige: #A68A5C;
+  --dark-burgundy: #702A2A;
+  --muted-blue: #67B8D2;
+
+  --sf: 'Cormorant Garamond', Georgia, serif;
+  --sn: 'Inter', system-ui, -apple-system, sans-serif;
+  --ub: 'Roboto Condensed', 'Inter', system-ui, sans-serif;
+  --mn: 'Roboto Condensed', monospace;
+  --lb: 'Roboto Condensed', 'Oswald', sans-serif;
+}
+
+body {
+  background-color: var(--paper-white) !important;
+  color: var(--ink-black) !important;
+  font-family: var(--sn) !important;
+}
+
+/* Subtle Antique Tactile Paper Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Santioni Spirits Sharp Editorial Navigation Bar */
+#top-nav {
+  position: fixed !important;
+  top: 24px !important;
+  right: 28px !important;
+  z-index: 120 !important;
+  display: flex !important;
+  align-items: center !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid var(--ink-black) !important;
+  border-radius: 0px !important;
+  padding: 4px 8px !important;
+  box-shadow: 3px 3px 0px rgba(17, 17, 17, 0.22) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#top-nav .header__background {
+  display: none !important;
+}
+#top-nav .header__content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+#top-nav .header__link {
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-black) !important;
+  padding: 6px 14px !important;
+  text-decoration: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 0px !important;
+  background: transparent !important;
+  transition: all 0.15s ease !important;
+}
+#top-nav .header__link:hover,
+#top-nav .header__link.active {
+  background: var(--ink-black) !important;
+  color: var(--paper-white) !important;
+  border-color: var(--ink-black) !important;
+}
+#top-nav .header__ornament {
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-left: 6px !important;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z' fill='%23B8201D'/%3E%3C/svg%3E") no-repeat center !important;
+}
+
+/* Santioni Spirits Brand Crest Left */
+#brand-mark {
+  position: fixed !important;
+  top: 24px !important;
+  left: 28px !important;
+  z-index: 120 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid var(--ink-black) !important;
+  border-radius: 0px !important;
+  padding: 6px 16px !important;
+  box-shadow: 3px 3px 0px rgba(17, 17, 17, 0.22) !important;
+  text-decoration: none !important;
+  color: var(--ink-black) !important;
+}
+#brand-mark .brand-words {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-black) !important;
+}
+#brand-mark svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: var(--ink-black) !important;
+}
+
+/* Sharp Rectangular White Narration Panels (Zero Pills, Zero Glassmorphism) */
+.cap-box,
+.cap-speaker-badge,
+[id^="cap-"] {
+  background: #FFFFFF !important;
+  border: 1.5px solid var(--ink-black) !important;
+  border-radius: 0px !important;
+  box-shadow: 3px 3px 0px rgba(17, 17, 17, 0.2) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: var(--ink-black) !important;
+  font-family: 'Roboto Condensed', 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  line-height: 1.5 !important;
+  padding: 10px 18px !important;
+}
+.cap-box .red,
+.cap-box span.red {
+  color: var(--blood-red) !important;
+  font-weight: 800 !important;
+}
+.cap-box::before,
+.cap-box::after {
+  display: none !important;
+}
+
+/* Hide legacy picture-in-picture cutouts that broke visual cohesion */
+#ladder-leg-inset,
+#temple-leg-inset,
+.inset-frame {
+  display: none !important;
+}
+
+/* Santioni Spirits "HOLD & MOVE" Interactive Circle */
+.orb-btn {
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--ink-black) !important;
+  color: var(--ink-black) !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28) !important;
+  cursor: grab !important;
+  display: grid !important;
+  place-items: center !important;
+  text-align: center !important;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s !important;
+  user-select: none !important;
+}
+.orb-btn:active {
+  cursor: grabbing !important;
+  transform: scale(0.96) !important;
+}
+.orb-btn:hover {
+  transform: scale(1.05) !important;
+}
+.orb-btn.done {
+  background: var(--ink-black) !important;
+  color: var(--paper-white) !important;
+}
+
+/* Curated Dossier & Collection Sharp Editorial Grid */
+#collection {
+  background: var(--paper-white) !important;
+  color: var(--ink-black) !important;
+  border-top: 2px solid var(--ink-black) !important;
+  padding: 90px 48px 120px !important;
+}
+#collection h2,
+#collection .collection-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(38px, 6vw, 68px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--ink-black) !important;
+  margin-bottom: 24px !important;
+}
+.dossier-card,
+.project-card,
+.sec-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid var(--ink-black) !important;
+  border-radius: 0px !important;
+  box-shadow: 4px 4px 0px rgba(17, 17, 17, 0.18) !important;
+  padding: 28px !important;
+  margin-bottom: 32px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.dossier-card:hover,
+.project-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 6px 6px 0px rgba(17, 17, 17, 0.25) !important;
+}
+.dossier-card h3,
+.project-card h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: var(--ink-black) !important;
+}
+.tag-badge {
+  display: inline-block !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+  background: var(--paper-white) !important;
+  border: 1px solid var(--ink-black) !important;
+  color: var(--ink-black) !important;
+  border-radius: 0px !important;
+  padding: 3px 8px !important;
+}
+
+/* Editorial Minimal Footer Audio Pill */
+#jp-sub-bar,
+.footer-audio-pill {
+  border-radius: 0px !important;
+  border: 1.5px solid var(--ink-black) !important;
+  background: #FFFFFF !important;
+  color: var(--ink-black) !important;
+  box-shadow: 2px 2px 0px rgba(17, 17, 17, 0.18) !important;
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+}
+
+
+#hero-lockup {
+  position: absolute !important;
+  left: clamp(36px, 7vw, 110px) !important;
+  top: clamp(140px, 20vh, 210px) !important;
+  right: auto !important;
+  text-align: left !important;
+  transform-origin: left center !important;
+  max-width: 540px !important;
+}
+#cap-hero-pedestal {
+  position: absolute !important;
+  left: clamp(36px, 7vw, 110px) !important;
+  top: clamp(72px, 10vh, 105px) !important;
+  z-index: 20 !important;
+  max-width: 440px !important;
+}
+
+
+.btn-enter-portal {
+  display: none !important;
+}
+
+
+/* Authentic Copperplate & Woodcut Engraving for Character Portraits */
+.portrait-plate img,
+#img-impact-portrait,
+.portrait-panel img,
+#img-dual-parth,
+#img-dual-god {
+  filter: grayscale(100%) contrast(160%) brightness(92%) !important;
+}
+
+.portrait-plate {
+  position: relative !important;
+  background: var(--paper-white) !important;
+  border: 2px solid var(--ink-black) !important;
+  box-shadow: 4px 4px 0px rgba(17, 17, 17, 0.22) !important;
+}
+
+.portrait-plate::before {
+  content: "";
+  position: absolute;
+  inset: 16px 16px 40px 16px;
+  pointer-events: none;
+  z-index: 5;
+  background-image: repeating-linear-gradient(45deg, rgba(17, 17, 17, 0.24) 0px, rgba(17, 17, 17, 0.24) 1.2px, transparent 1.2px, transparent 4.5px);
+  mix-blend-mode: multiply;
+}
+
+.portrait-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-image: repeating-linear-gradient(45deg, rgba(17, 17, 17, 0.24) 0px, rgba(17, 17, 17, 0.24) 1.2px, transparent 1.2px, transparent 4.5px);
+  mix-blend-mode: multiply;
+}
+
 </style>
 </head>
 <body>
@@ -1409,24 +1726,20 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 <section id="hero">
   <div id="hero-sticky">
     <canvas id="hero-cv"></canvas>
-    <div class="hero-lockup" id="hero-lockup">
-      <div class="hero-the">THE</div>
-      <div class="hero-main">
-        <span>NEXUS</span>
-        <span class="hero-01">
-          <span class="hero-rings" aria-hidden="true">
-            <svg viewBox="0 0 110 72" fill="none">
-              <circle cx="40" cy="36" r="27" stroke="#FAF9F5" stroke-width="3.2" />
-              <circle cx="68" cy="36" r="27" stroke="#FAF9F5" stroke-width="3.2" />
-            </svg>
-          </span>
-          <span>1</span>
-        </span>
+    <div class="cap-box" id="cap-hero-pedestal" style="position:absolute;left:clamp(24px,5vw,64px);top:clamp(90px,14vh,130px);z-index:10;max-width:380px;">
+      IN FRONT OF HIM, A LARGE PEDESTAL PULSATES WITH LIGHT.
+    </div>
+    <div class="hero-lockup" id="hero-lockup" style="pointer-events:none;z-index:8;">
+      <div class="hero-the" style="font-family:'Roboto Condensed',sans-serif;font-weight:700;letter-spacing:0.24em;font-size:12px;color:#111111;text-transform:uppercase;margin-bottom:6px;">PORTFOLIO DOSSIER</div>
+      <div class="hero-main" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(54px,9vw,110px);letter-spacing:-0.02em;line-height:0.95;color:#111111;">
+        NEXUS 01
       </div>
-      <div class="hero-sub">EXPERIENC<span class="swash-e">E</span></div>
-      <div class="hero-cue">
-        <span>PARTH VIJAY GIDDE · SCROLL TO ENTER</span>
-        <i>▾</i>
+      <div class="hero-sub" style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(22px,3.2vw,36px);color:#B8201D;margin-top:8px;">
+        Parth Vijay Gidde
+      </div>
+      <div class="hero-cue" style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:1.5px solid #111111;padding:8px 18px;box-shadow:2px 2px 0 rgba(17,17,17,0.18);">
+        <span style="font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.14em;color:#111111;text-transform:uppercase;">SCROLL TO ENTER ODYSSEY</span>
+        <i style="color:#B8201D;font-style:normal;">↓</i>
       </div>
     </div>
   </div>
@@ -1536,6 +1849,21 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
   <!-- ACT IV: (BREACH SCENE REMOVED AS REQUESTED) -->
 
   <!-- ACT V: STEPPING INSIDE (HD ANIME WIDESCREEN 16:9 LANDSCAPE PORTAL) -->
+  
+  <!-- ==================== CHAPTER 05: HOLD & MOVE (HAND-ENGRAVED INTERACTION) ==================== -->
+  <section id="scene-reach">
+    <div id="reach-sticky" style="position:relative;width:100vw;height:100vh;overflow:hidden;background:#702A2A;display:flex;align-items:center;justify-content:center;">
+      <canvas id="reach-cv" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
+      <div class="cap-box" id="cap-reach" style="position:absolute;left:clamp(24px,5vw,64px);top:clamp(90px,14vh,130px);z-index:10;max-width:360px;">
+        HESITANTLY, HIS HAND DRAWS FORWARD.
+      </div>
+      
+      <div id="hold-move-btn" class="orb-btn" role="button" tabindex="0" aria-label="Hold and Move to Advance" style="position:absolute;left:clamp(38%,44vw,48%);top:52%;transform:translate(-50%,-50%);z-index:15;">
+        <span style="display:block;line-height:1.2;">HOLD &amp;<br>MOVE</span>
+      </div>
+    </div>
+  </section>
+
   <section id="scene-step">
     <div class="step-frame">
       <div class="step-top">
@@ -2743,39 +3071,39 @@ function makePaperCutSprite(src,opts={}){
   if(!src)return null;
   const sw=src.width||src.naturalWidth,sh=src.height||src.naturalHeight;
   if(!sw||!sh)return null;
-  /* Volumetric 3D CGI Character Polish: ZERO flat white sticker borders, full PBR shading + soft ambient depth separation */
-  const pad=opts.pad??Math.max(10,Math.round(Math.max(sw,sh)*0.018));
-  const shOff=opts.shadow??Math.max(5,Math.round(pad*0.38));
-  const out=document.createElement('canvas');out.width=sw+pad*2;out.height=sh+pad*2;
-  const oc=out.getContext('2d');
-  oc.imageSmoothingEnabled=true;oc.imageSmoothingQuality='high';
-  const shadSil=makeTintSilhouette(src,sw,sh,'rgba(6,6,12,0.34)');
-  const rimSil=makeTintSilhouette(src,sw,sh,opts.rimColor||'rgba(218,232,255,0.22)');
-
-  /* 1. Soft volumetric depth drop shadow & directional studio rim highlight */
-  oc.save();
-  try{oc.filter='blur('+Math.max(4,Math.round(shOff*0.65))+'px)'}catch{}
-  oc.drawImage(shadSil,pad+shOff*0.8,pad+shOff*0.95);
-  oc.restore();
-
-  oc.save();
-  try{oc.filter='blur('+Math.max(1.5,Math.round(shOff*0.24))+'px)'}catch{}
-  oc.drawImage(rimSil,pad-Math.max(1,shOff*0.18),pad-Math.max(1,shOff*0.18));
-  oc.restore();
-
-  /* 2. Full smooth 3D CGI character render */
-  oc.drawImage(src,pad,pad);
-  out._pad=pad;out._origW=sw;out._origH=sh;
-  return out;
+  /* Natural Editorial Woodcut Character Integration: ZERO cutout sticker borders, ZERO blurry offset rims, 100% grounded contact */
+  src._pad=0;src._origW=sw;src._origH=sh;
+  return src;
 }
 function drawPaperSprite(c,spr,dx,dy,dw,dh){
   if(!spr)return;
-  if(spr._pad&&spr._origW&&spr._origH){
-    const sx=dw/spr._origW,sy=dh/spr._origH;
-    c.drawImage(spr,dx-spr._pad*sx,dy-spr._pad*sy,dw+2*spr._pad*sx,dh+2*spr._pad*sy);
-  }else{
-    c.drawImage(spr,dx,dy,dw,dh);
+  c.save();
+  // 1. Woodcut High-Contrast Monochromatic Linework
+  try{ c.filter = 'grayscale(100%) contrast(165%) brightness(96%)'; }catch(e){}
+  c.drawImage(spr,dx,dy,dw,dh);
+  
+  // 2. Strict Woodcut Directional Parallel Engraving Line Hatching (source-atop)
+  c.globalCompositeOperation = 'source-atop';
+  c.strokeStyle = 'rgba(17, 17, 17, 0.42)';
+  c.lineWidth = 1.15;
+  c.beginPath();
+  const step = 5;
+  for(let l = dx - dh; l < dx + dw + dh; l += step){
+    c.moveTo(l, dy);
+    c.lineTo(l + dh * 0.72, dy + dh);
   }
+  c.stroke();
+
+  // 3. Antique Beige Highlight Hatching on Fabric Folds
+  c.strokeStyle = 'rgba(166, 138, 92, 0.28)';
+  c.lineWidth = 1.0;
+  c.beginPath();
+  for(let l = dx - dh + 2.5; l < dx + dw + dh; l += step * 2){
+    c.moveTo(l, dy);
+    c.lineTo(l + dh * 0.72, dy + dh);
+  }
+  c.stroke();
+  c.restore();
 }
 const PAPER_CACHE={},PAPER_ENTITY_CACHE={},WALK_PAPER_FRAMES=[],STAGE_PAPER_URL={};
 const STRIDE_FRAMES=100,WALK_KEY_COUNT=16;
@@ -3092,366 +3420,294 @@ addEventListener('pointermove',e=>{
 
 function drawHero(t,pHero){
   const{w,h,c}=fitCanvas(heroCv);
-  c.fillStyle='#000000';c.fillRect(0,0,w,h);
-  /* 3D Perspective Deep-Space Floor Grid & Orbiting Wireframe Octahedron Shards */
-  const vpX=w*0.5+ptr3dX*w*0.06,vpY=h*(0.48-pHero*0.18)+ptr3dY*h*0.04;
+  c.clearRect(0,0,w,h);
+  
+  // 1. Santioni Spirits Screen-Print Split Canvas
+  // Top 58%: Solid Crimson Red block (#B8201D)
+  const splitY = h * 0.58;
+  c.fillStyle = '#B8201D';
+  c.fillRect(0, 0, w, splitY);
+  
+  // Subtle horizontal woodcut grain in crimson block
   c.save();
-  c.strokeStyle='rgba(255,255,255,0.065)';c.lineWidth=1;
-  for(let i=-10;i<=10;i++){
-    c.beginPath();c.moveTo(vpX+i*18,vpY);c.lineTo(vpX+i*190,h*1.08);c.stroke();
-  }
-  const gShift=(pHero*320+t*22)%68;
-  for(let r=1;r<8;r++){
-    const yy=vpY+Math.pow((r+gShift/68)/8,1.7)*(h*1.08-vpY);
-    if(yy<h){c.beginPath();c.moveTo(0,yy);c.lineTo(w,yy);c.stroke()}
-  }
-  for(let k=0;k<8;k++){
-    const ang=t*(0.24+(k%3)*0.08)+k*0.85+pHero*2.1;
-    const rad=Math.min(w,h)*(0.24+(k%4)*0.08);
-    const ox=vpX+Math.cos(ang)*rad*1.35,oy=vpY+Math.sin(ang)*rad*0.42-pHero*85;
-    const zScale=0.72+0.36*Math.sin(ang);
-    const s=18*zScale;
-    c.save();c.translate(ox,oy);c.scale(Math.cos(t*0.8+k),zScale);c.rotate(t*0.6+k);
-    c.strokeStyle='rgba(245,241,230,'+(0.16*zScale).toFixed(2)+')';c.lineWidth=1.1;
-    c.beginPath();c.moveTo(0,-s);c.lineTo(s*0.85,0);c.lineTo(0,s);c.lineTo(-s*0.85,0);c.closePath();c.stroke();
-    c.restore();
+  c.strokeStyle = 'rgba(112, 42, 42, 0.45)';
+  c.lineWidth = 1;
+  for(let y = 12; y < splitY; y += 14){
+    c.beginPath();
+    c.moveTo(0, y);
+    c.lineTo(w, y);
+    c.stroke();
   }
   c.restore();
 
-  const baseRise=0.07+smoothstep(0.06,0.94,pHero)*1.04;
-  const topY=h*(1-baseRise);
-  for(let m=0;m<28;m++){
-    const z=0.5+((m*37)%100)/100;
-    const mx=(w*((m*41+13)%94)/100)+ptr3dX*36*z;
-    const my=h*((m*23+7)%62)/100+ptr3dY*24*z;
-    const al=(0.14+0.28*Math.max(0,Math.sin(t*1.8+m)))*z;
-    c.fillStyle='rgba(255,255,255,'+al.toFixed(2)+')';
-    c.beginPath();c.arc(mx,my,(1.0+(m%3)*0.6)*z,0,Math.PI*2);c.fill();
+  // Bottom 42%: Aged drawing paper white (#F1F0E9)
+  c.fillStyle = '#F1F0E9';
+  c.fillRect(0, splitY, w, h - splitY);
+
+  // Horizontal woodcut etching lines across the paper floor
+  c.save();
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1.2;
+  c.beginPath();
+  c.moveTo(0, splitY);
+  c.lineTo(w, splitY);
+  c.stroke();
+
+  // Perspective floor hatching lines
+  for(let y = splitY + 16; y < h; y += 18){
+    const alpha = Math.min(0.65, (y - splitY) / 120);
+    c.strokeStyle = 'rgba(17, 17, 17, ' + alpha.toFixed(2) + ')';
+    c.beginPath();
+    c.moveTo(0, y);
+    c.lineTo(w, y);
+    c.stroke();
   }
-  const decks=[
-    {dy:-44,fill:'#C8C3B8',stroke:'#161418',phase:0.75,shad:'rgba(0,0,0,0.48)',amp:12,bump:38,par:0.18},
-    {dy:-28,fill:'#DAD6CC',stroke:'#161418',phase:0.95,shad:'rgba(0,0,0,0.45)',amp:14,bump:44,par:0.34},
-    {dy:-12,fill:'#EAE6DC',stroke:'#161418',phase:1.35,shad:'rgba(0,0,0,0.36)',amp:16,bump:50,par:0.54},
-    {dy:0,fill:'#F5F1E6',stroke:'#141414',phase:1.7,shad:'rgba(0,0,0,0.32)',amp:18,bump:56,par:0.82}
+  c.restore();
+
+  // 2. Antique Classical Fluted Stone Pedestal (Santioni Spirits Reference 1)
+  const pedX = w * 0.74 + ptr3dX * 25;
+  const pedY = splitY + 40 + ptr3dY * 18;
+  const pedW = Math.min(140, w * 0.16);
+  const pedH = Math.min(220, h * 0.32);
+
+  c.save();
+  // Cast shadow beneath pedestal on paper floor
+  c.fillStyle = 'rgba(17, 17, 17, 0.85)';
+  c.beginPath();
+  c.ellipse(pedX, pedY + 8, pedW * 0.72, 16, -0.05, 0, Math.PI * 2);
+  c.fill();
+
+  // Dense stippled crosshatching shadow around pedestal base
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1;
+  for(let s = -pedW * 0.6; s <= pedW * 0.6; s += 5){
+    c.beginPath();
+    c.moveTo(pedX + s - 14, pedY + 12);
+    c.lineTo(pedX + s + 10, pedY - 4);
+    c.stroke();
+  }
+
+  // Pedestal Plinth Base
+  c.fillStyle = '#F1F0E9';
+  c.strokeStyle = '#111111';
+  c.lineWidth = 2;
+  c.fillRect(pedX - pedW * 0.55, pedY - 24, pedW * 1.1, 28);
+  c.strokeRect(pedX - pedW * 0.55, pedY - 24, pedW * 1.1, 28);
+
+  // Pedestal Shaft with Fluted Vertical Engraving Lines
+  const shaftTop = pedY - pedH + 35;
+  const shaftH = pedH - 59;
+  c.fillRect(pedX - pedW * 0.42, shaftTop, pedW * 0.84, shaftH);
+  c.strokeRect(pedX - pedW * 0.42, shaftTop, pedW * 0.84, shaftH);
+
+  // Fluting vertical parallel lines
+  c.lineWidth = 1.4;
+  const flutes = 9;
+  const fluteStep = (pedW * 0.84) / flutes;
+  for(let f = 1; f < flutes; f++){
+    const fx = pedX - pedW * 0.42 + f * fluteStep;
+    c.beginPath();
+    c.moveTo(fx, shaftTop + 4);
+    c.lineTo(fx, shaftTop + shaftH - 4);
+    c.stroke();
+  }
+
+  // Pedestal Capital Top
+  c.lineWidth = 2;
+  c.fillRect(pedX - pedW * 0.58, shaftTop - 24, pedW * 1.16, 26);
+  c.strokeRect(pedX - pedW * 0.58, shaftTop - 24, pedW * 1.16, 26);
+
+  // Horizontal dentil hatching on capital
+  c.lineWidth = 1;
+  for(let dx = pedX - pedW * 0.54; dx <= pedX + pedW * 0.54; dx += 8){
+    c.beginPath();
+    c.moveTo(dx, shaftTop - 22);
+    c.lineTo(dx, shaftTop - 6);
+    c.stroke();
+  }
+
+  // 3. Illuminated Terminal Artifact / Three Glowing Vessels on Pedestal
+  const capTopY = shaftTop - 24;
+  const vesselW = 16, vesselH = 46;
+  const vessels = [
+    { off: -28, fill: '#67B8D2', label: 'C' },
+    { off: 0, fill: '#FAF7F0', label: 'V' },
+    { off: 28, fill: '#A68A5C', label: 'G' }
   ];
-  const segs=16;
-  decks.forEach((dk,li)=>{
-    c.save();
-    c.shadowColor=dk.shad;c.shadowBlur=18;c.shadowOffsetY=-6;
-    c.fillStyle=dk.fill;c.strokeStyle=dk.stroke;c.lineWidth=2;
-    const xOff=ptr3dX*38*dk.par,yOff=ptr3dY*18*dk.par;
-    const xStart=-60+xOff,step=(w+120)/segs;
-    const y0=topY+dk.dy+yOff+Math.sin(t*(1.05-li*0.1))*dk.amp;
-    c.beginPath();c.moveTo(xStart,h+60);c.lineTo(xStart,y0);
-    for(let i=0;i<segs;i++){
-      const x1=xStart+i*step,x2=x1+step;
-      const midX=(x1+x2)*0.5;
-      const puff=Math.sin((i+1)*dk.phase+t*(1.05-li*0.1))*dk.amp+Math.cos(i*2.1-t*.8+li)*10;
-      const dome=(dk.bump+((i*17+li*11)%28)+Math.sin(t*1.2+i+li)*8)*1.35;
-      c.quadraticCurveTo(midX,topY+dk.dy+yOff+puff-dome,x2,topY+dk.dy+yOff+puff);
-    }
-    c.lineTo(w+60,h+60);c.closePath();c.fill();
-    c.shadowColor='transparent';c.stroke();
-    c.restore();
+  vessels.forEach(v => {
+    const vx = pedX + v.off;
+    const vy = capTopY - vesselH;
+    c.fillStyle = v.fill;
+    c.strokeStyle = '#111111';
+    c.lineWidth = 1.8;
+    c.beginPath();
+    c.rect(vx - vesselW/2, vy, vesselW, vesselH);
+    c.fill();
+    c.stroke();
+    // Engraved contour line
+    c.fillStyle = '#111111';
+    c.fillRect(vx - vesselW/2 + 3, vy + vesselH * 0.45, vesselW - 6, 2.5);
+    // Stopper top
+    c.fillRect(vx - 4, vy - 8, 8, 8);
+    c.strokeRect(vx - 4, vy - 8, 8, 8);
   });
-  c.save();
-  c.shadowColor='rgba(14,12,16,0.34)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=5;
-  c.fillStyle='#F5F1E6';c.strokeStyle='#141414';c.lineWidth=2;
-  for(let k=0;k<6;k++){
-    const px=w*(0.16+k*0.135)+Math.sin(t*.7+k)*14+ptr3dX*26;
-    const py=topY-42-(k%3)*26+Math.cos(t*.9+k)*8+ptr3dY*14;
-    const pr=14+(k%3)*9;
-    c.beginPath();c.arc(px,py,pr,0,Math.PI*2);c.fill();c.stroke();
-  }
+
+  // Soft radiant aura around artifact
+  const auraG = c.createRadialGradient(pedX, capTopY - 25, 10, pedX, capTopY - 25, 95);
+  auraG.addColorStop(0, 'rgba(255, 255, 255, 0.42)');
+  auraG.addColorStop(0.5, 'rgba(241, 240, 233, 0.18)');
+  auraG.addColorStop(1, 'rgba(184, 32, 29, 0)');
+  c.fillStyle = auraG;
+  c.beginPath();
+  c.arc(pedX, capTopY - 25, 95, 0, Math.PI * 2);
+  c.fill();
   c.restore();
 
-  const heroCvEl=$('#hero-cv');
-  const hRx=(pHero*5.5-ptr3dY*3.2).toFixed(2),hRy=(ptr3dX*4.2+Math.sin(t*0.55)*1.4).toFixed(2);
-  if(heroCvEl)heroCvEl.style.transform=`perspective(1100px) scale(${(1.04+pHero*0.08).toFixed(3)}) rotateX(${hRx}deg) rotateY(${hRy}deg)`;
-  const lock=$('#hero-lockup');
-  const fade=1-smoothstep(0.32,0.74,pHero);
-  lock.style.opacity=fade.toFixed(3);
-  lock.style.transform=`perspective(950px) translate3d(${(ptr3dX*16).toFixed(1)}px,${(-pHero*64+ptr3dY*12).toFixed(1)}px,${(pHero*70).toFixed(1)}px) scale(${(1+pHero*0.14).toFixed(3)}) rotateX(${(pHero*11-ptr3dY*5.5).toFixed(2)}deg) rotateY(${(ptr3dX*6.5+Math.sin(t*0.7)*1.8).toFixed(2)}deg)`;
+  // 4. Parallax Camera Motion & Lockup Dissolve
+  const heroCvEl = $('#hero-cv');
+  if(heroCvEl){
+    heroCvEl.style.transform = 'scale(' + (1.02 + pHero * 0.05).toFixed(3) + ')';
+  }
+  const lock = $('#hero-lockup');
+  if(lock){
+    const fade = 1 - smoothstep(0.24, 0.68, pHero);
+    lock.style.opacity = fade.toFixed(3);
+    lock.style.transform = 'translateY(' + (-pHero * 45).toFixed(1) + 'px)';
+  }
 }
 
 /* ==================== ACT I: MUMBAI 6:42 PM — DUSK SKYLINE, SMOOTH WALK & HEADLIGHTS ==================== */
 let lastWalkStepPhase=0;
 function drawMistBg(t,pMist){
   const{w,h,c}=fitCanvas(mistCv);
-  const dusk=smoothstep(0.28,0.88,pMist);
+  c.clearRect(0,0,w,h);
   
-  // 1. Cinematic Anime Mumbai Sky Gradient (Peach dusk down to warm amber coastal haze)
-  const bgG=c.createLinearGradient(0,0,0,h*0.7);
-  bgG.addColorStop(0,'#FAF7F0');
-  bgG.addColorStop(0.45,dusk>0.4?'#EFE6D8':'#F5EEE2');
-  bgG.addColorStop(0.85,dusk>0.4?'#E4D8C5':'#ECE2D3');
-  bgG.addColorStop(1,'#DCD0BE');
-  c.fillStyle=bgG;
+  // 1. Aged Warm Drawing Paper Base (#F1F0E9)
+  c.fillStyle = '#F1F0E9';
   c.fillRect(0,0,w,h);
 
-  const hor=h*0.48+ptr3dY*h*0.025;
-  const vpX=w*0.5+(Math.sin(pMist*Math.PI*3)*0.08+ptr3dX*0.10)*w;
-  const pan=pMist*260;
+  const hor = h * 0.52 + ptr3dY * h * 0.02;
+  const pan = pMist * 220;
 
   c.save();
 
-  // 2. Distant Arabian Sea Coastal Plane & Soft Marine Haze
-  const seaG=c.createLinearGradient(0,hor-25,0,hor+15);
-  seaG.addColorStop(0,'rgba(215,205,192,0.55)');
-  seaG.addColorStop(1,'rgba(235,227,216,0.25)');
-  c.fillStyle=seaG;
-  c.fillRect(0,hor-25,w,40);
-
-  // 3. Bandra-Worli Sea Link Inspired Cable-Stay Pylons (Iconic Mumbai landmark in anime aesthetic)
-  const pylonX1=((w*0.35-pan*0.15)%(w+400)+w+400)%(w+400)-200;
-  const pylonX2=pylonX1+240;
-  [pylonX1,pylonX2].forEach((px,pIdx)=>{
-    const pylonH=110+(pIdx%2)*20;
-    const topY=hor-pylonH;
-    c.save();
-    c.strokeStyle='rgba(165,155,142,0.68)';
-    c.fillStyle='rgba(185,176,164,0.60)';
-    c.lineWidth=2.0;
+  // 2. Fine Parallel Horizontal Engraving Hatching in the Sky
+  c.strokeStyle = 'rgba(17, 17, 17, 0.08)';
+  c.lineWidth = 1;
+  for(let y = 14; y < hor - 40; y += 12){
     c.beginPath();
-    c.moveTo(px,topY);
-    c.lineTo(px+14,hor-8);
-    c.lineTo(px-14,hor-8);
-    c.closePath();
-    c.fill();
+    c.moveTo(0, y);
+    c.lineTo(w, y);
+    c.stroke();
+  }
+
+  // 3. Distant Mumbai Etched Skyline (Bandra-Worli Sea Link Pylons in Woodcut Etching)
+  const pylonX1 = ((w * 0.38 - pan * 0.12) % (w + 400) + w + 400) % (w + 400) - 200;
+  const pylonX2 = pylonX1 + 280;
+  
+  [pylonX1, pylonX2].forEach((px, idx) => {
+    const pyH = 140 + (idx % 2) * 25;
+    const topY = hor - pyH;
+    
+    // Tower Legs in solid ink black with parallel vertical line shading
+    c.strokeStyle = '#111111';
+    c.lineWidth = 2.4;
+    c.beginPath();
+    c.moveTo(px, hor);
+    c.lineTo(px + 16, topY);
+    c.lineTo(px + 32, hor);
     c.stroke();
 
-    // Top aircraft warning beacon / tip
-    c.strokeStyle='rgba(216,38,34,0.85)';
-    c.lineWidth=1.2;
-    c.beginPath();
-    c.moveTo(px,topY);
-    c.lineTo(px,topY-14);
-    c.stroke();
-    c.fillStyle='rgba(255,60,50,0.9)';
-    c.beginPath();
-    c.arc(px,topY-14,1.6,0,Math.PI*2);
-    c.fill();
-
-    // Fanned stay cables
-    c.strokeStyle='rgba(180,172,160,0.35)';
-    c.lineWidth=0.8;
-    for(let cb=1;cb<=7;cb++){
-      const stayFrac=cb/7;
-      const stayY=topY+22+stayFrac*(pylonH*0.42);
-      const spanDist=28+cb*16;
+    // Cross-struts
+    c.lineWidth = 1.2;
+    for(let cs = 0.25; cs < 0.9; cs += 0.22){
+      const sy = hor - pyH * cs;
+      const lx1 = px + 16 * (1 - cs);
+      const lx2 = px + 32 - 16 * (1 - cs);
       c.beginPath();
-      c.moveTo(px,stayY);
-      c.lineTo(px-spanDist,hor-8);
-      c.moveTo(px,stayY);
-      c.lineTo(px+spanDist,hor-8);
+      c.moveTo(lx1, sy);
+      c.lineTo(lx2, sy);
       c.stroke();
     }
-    c.restore();
+
+    // Suspension Stay Cables (individual etched diagonal lines)
+    c.lineWidth = 0.9;
+    c.strokeStyle = 'rgba(17, 17, 17, 0.45)';
+    for(let cable = 1; cable <= 8; cable++){
+      const cFrac = cable / 8;
+      const ancY = topY + pyH * 0.28 + cable * 8;
+      // Left fan
+      c.beginPath();
+      c.moveTo(px + 16, ancY);
+      c.lineTo(px - 140 * cFrac, hor);
+      c.stroke();
+      // Right fan
+      c.beginPath();
+      c.moveTo(px + 16, ancY);
+      c.lineTo(px + 32 + 140 * cFrac, hor);
+      c.stroke();
+    }
   });
 
-  // Elevated Viaduct Deck cutting across the bay
-  c.fillStyle='rgba(175,166,154,0.65)';
-  c.fillRect(0,hor-10,w,5);
-  c.fillStyle='rgba(145,136,125,0.55)';
-  c.fillRect(0,hor-5,w,2);
+  // Architectural Skyline Silhouette with Vertical Line Engraving
+  const bldgW = 44;
+  const bldgCount = Math.ceil(w / bldgW) + 4;
+  c.fillStyle = '#FFFFFF';
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1.2;
+  for(let b = 0; b < bldgCount; b++){
+    const bx = b * bldgW - (pan * 0.18 % bldgW) - 40;
+    const bH = 50 + ((b * 47) % 85);
+    const by = hor - bH;
+    c.fillRect(bx, by, bldgW - 4, bH);
+    c.strokeRect(bx, by, bldgW - 4, bH);
 
-  // 4. Distant Layered Anime Skyline Silhouettes
-  // Layer A: Far hazy silhouettes
-  c.fillStyle='rgba(202,194,182,0.52)';
-  for(let a=-1;a<10;a++){
-    const ax=((a*210-(pan*0.18)%210)+w+300)%(w+300)-150;
-    const ah=75+((a*43)%95);
-    const aw=58+((a*29)%45);
-    const ay=hor-ah-8;
-    c.fillRect(ax,ay,aw,ah+8);
-    if(a%2===0){
-      c.strokeStyle='rgba(185,178,166,0.58)';
-      c.lineWidth=1.2;
+    // Fine vertical line shading inside building
+    c.save();
+    c.strokeStyle = 'rgba(17, 17, 17, 0.25)';
+    c.lineWidth = 1;
+    for(let vx = bx + 6; vx < bx + bldgW - 8; vx += 6){
       c.beginPath();
-      c.moveTo(ax+aw/2,ay);
-      c.lineTo(ax+aw/2,ay-24);
+      c.moveTo(vx, by + 4);
+      c.lineTo(vx, hor);
       c.stroke();
     }
+    c.restore();
   }
 
-  // Layer B: Mid-ground sleek modern skyscrapers with setback terraces
-  for(let b=-1;b<9;b++){
-    const bx=((b*240-(pan*0.38)%240)+w+320)%(w+320)-160;
-    const bh=95+((b*51)%115);
-    const bw=72+((b*31)%48);
-    const by=hor-bh-6;
+  // 4. Ground Promenade Pavers with Dramatic Receding Woodcut Perspective
+  c.fillStyle = '#F1F0E9';
+  c.fillRect(0, hor, w, h - hor);
 
-    c.fillStyle='rgba(188,179,167,0.72)';
-    c.strokeStyle='rgba(140,132,120,0.45)';
-    c.lineWidth=1.2;
-    c.fillRect(bx,by,bw,bh+6);
-    c.strokeRect(bx,by,bw,bh+6);
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1.8;
+  c.beginPath();
+  c.moveTo(0, hor);
+  c.lineTo(w, hor);
+  c.stroke();
 
-    c.fillStyle='rgba(215,208,198,0.65)';
-    c.fillRect(bx+8,by-12,bw-16,12);
-    c.strokeRect(bx+8,by-12,bw-16,12);
-
-    c.fillStyle='rgba(255,248,230,0.28)';
-    const winFloors=Math.floor(bh/16);
-    for(let f=1;f<winFloors;f++){
-      if((f+b)%3===0)c.fillRect(bx+6,by+f*16,bw-12,3.5);
-    }
-  }
-  c.restore();
-
-  // 5. The Elevated Anime Promenade (Skyway Deck)
-  const deckG=c.createLinearGradient(0,hor,0,h);
-  deckG.addColorStop(0,'#ECE7DC');
-  deckG.addColorStop(0.35,'#E5DFD4');
-  deckG.addColorStop(1,'#D8D1C4');
-  c.fillStyle=deckG;
-  c.fillRect(0,hor,w,h-hor);
-
-  // Soft atmospheric perspective joint lines
-  c.strokeStyle='rgba(145,138,128,0.18)';
-  c.lineWidth=1.0;
-  for(let p=-8;p<=8;p++){
-    const startX=vpX+p*36;
-    const endX=vpX+p*190;
+  // Perspective transverse stone lines
+  const vpX = w * 0.5 + ptr3dX * 40;
+  c.lineWidth = 1;
+  for(let i = -14; i <= 14; i++){
     c.beginPath();
-    c.moveTo(startX,hor);
-    c.lineTo(endX,h);
+    c.moveTo(vpX + i * 22, hor);
+    c.lineTo(vpX + i * 140, h + 20);
     c.stroke();
   }
 
-  // Receding horizontal tile joints
-  const pShift=(pMist*380)%52;
-  for(let r=1;r<9;r++){
-    const ty=hor+Math.pow(r/8,1.8)*(h-hor)+pShift*(r/8);
-    if(ty<h){
-      c.strokeStyle='rgba(145,138,128,'+(0.10+(r/8)*0.14).toFixed(2)+')';
-      c.beginPath();
-      c.moveTo(0,ty);
-      c.lineTo(w,ty);
-      c.stroke();
-    }
-  }
-
-  // 6. Sleek Modern Glass & Steel Promenade Balustrade along horizon edge
-  c.save();
-  c.fillStyle='#2A2930';
-  c.fillRect(0,hor-28,w,4);
-
-  c.fillStyle='rgba(222,234,244,0.42)';
-  c.strokeStyle='rgba(180,195,208,0.55)';
-  c.lineWidth=1.0;
-  const panelW=96;
-  const balustradePan=(pan*0.75)%panelW;
-  for(let px=-balustradePan-panelW;px<w+panelW;px+=panelW){
-    c.fillRect(px+4,hor-24,panelW-8,22);
-    c.strokeRect(px+4,hor-24,panelW-8,22);
-    c.save();
-    c.strokeStyle='rgba(255,255,255,0.35)';
-    c.lineWidth=1.5;
+  // Horizontal stone joint hatching
+  for(let row = 1; row <= 16; row++){
+    const yNorm = Math.pow(row / 16, 1.8);
+    const ry = hor + yNorm * (h - hor);
+    c.strokeStyle = '#111111';
+    c.lineWidth = 1.2;
     c.beginPath();
-    c.moveTo(px+12,hor-4);
-    c.lineTo(px+38,hor-22);
+    c.moveTo(0, ry);
+    c.lineTo(w, ry);
     c.stroke();
-    c.restore();
-
-    c.fillStyle='#3E3D46';
-    c.fillRect(px,hor-28,4,28);
-  }
-
-  c.fillStyle='rgba(255,242,210,0.65)';
-  c.fillRect(0,hor-2,w,2.5);
-  const ledG=c.createLinearGradient(0,hor,0,hor+22);
-  ledG.addColorStop(0,'rgba(255,235,190,0.22)');
-  ledG.addColorStop(1,'rgba(255,235,190,0)');
-  c.fillStyle=ledG;
-  c.fillRect(0,hor,w,22);
-  c.restore();
-
-  // 7. Drifting Warm Golden Dusk Particles
-  for(let e=0;e<20;e++){
-    const mx=(w*((e*47)%96)/100)+Math.sin(t*1.2+e)*16-pan*0.28;
-    const my=hor*0.95-((t*(16+(e%4)*6)+e*37)%(hor*0.88));
-    c.fillStyle=e%3===0?'rgba(224,82,58,0.24)':'rgba(255,245,220,0.45)';
-    c.beginPath();
-    c.arc(((mx%w)+w)%w,my,1.2+(e%3)*0.5,0,Math.PI*2);
-    c.fill();
-  }
-
-  // 8. Soft Volumetric Sunset Light Beams
-  c.save();
-  for(let r=0;r<3;r++){
-    const rx=w*(0.20+r*0.28)+Math.sin(t*0.5+r)*20-pan*0.15;
-    const rg=c.createLinearGradient(rx,0,rx+w*0.14,hor);
-    rg.addColorStop(0,'rgba(255,245,225,0.18)');
-    rg.addColorStop(1,'rgba(255,245,225,0)');
-    c.fillStyle=rg;
-    c.beginPath();
-    c.moveTo(rx,0);
-    c.lineTo(rx+w*0.08,0);
-    c.lineTo(rx+w*0.24,hor);
-    c.lineTo(rx+w*0.12,hor);
-    c.closePath();
-    c.fill();
   }
   c.restore();
-
-  /* IDEA 1 — THE PAPER FIREWALL BREACH: 3D Origami City Unzip & Crimson Cipher Rift (0.64..1.0) */
-  if(pMist>0.64){
-    const hp=smoothstep(0.64,0.98,pMist);
-    const rx=w*0.64,ry=hor*0.72;
-    const breachR=Math.min(w,h)*(0.08+Math.pow(hp,1.15)*0.48);
-
-    c.save();
-    const riftG=c.createRadialGradient(rx,ry,6,rx,ry,breachR*1.45);
-    riftG.addColorStop(0,'rgba(255,255,255,'+(0.90*hp).toFixed(2)+')');
-    riftG.addColorStop(0.28,'rgba(229,57,53,'+(0.68*hp).toFixed(2)+')');
-    riftG.addColorStop(0.66,'rgba(120,16,20,'+(0.38*hp).toFixed(2)+')');
-    riftG.addColorStop(1,'rgba(120,16,20,0)');
-    c.fillStyle=riftG;c.fillRect(0,0,w,h);
-
-    c.save();
-    c.translate(rx,ry);
-    c.scale(1,0.78+hp*0.18);
-    for(let ring=0;ring<3;ring++){
-      c.save();
-      c.rotate(t*(ring%2?-0.85:0.70)*(1+hp*0.8)+hp*1.4);
-      const rad=breachR*(0.42+ring*0.26);
-      c.strokeStyle=ring===1?'rgba(255,248,240,'+(0.52*hp).toFixed(2)+')':'rgba(201,37,33,'+(0.68*hp).toFixed(2)+')';
-      c.lineWidth=1.8-ring*0.3;
-      c.setLineDash(ring===2?[10,8]:[]);
-      c.beginPath();
-      for(let s=0;s<=6;s++){
-        const a=(s/6)*Math.PI*2;
-        const px=Math.cos(a)*rad,py=Math.sin(a)*rad;
-        if(s===0)c.moveTo(px,py);else c.lineTo(px,py);
-      }
-      c.stroke();c.restore();
-    }
-    c.restore();
-
-    for(let sl=0;sl<14;sl++){
-      const sy=(hor*0.18+(sl/14)*h*0.72+Math.sin(t*12+sl)*4*hp);
-      const swLen=w*(0.18+((sl*37)%55)/100)*hp;
-      const sx=(sl%2===0)?w-swLen:(w*0.22);
-      c.fillStyle=sl%3===0?'rgba(43,182,216,'+(0.28*hp).toFixed(2)+')':'rgba(201,37,33,'+(0.34*hp).toFixed(2)+')';
-      c.fillRect(sx,sy,swLen,1.5+(sl%3));
-    }
-
-    c.shadowColor='rgba(12,6,8,0.45)';c.shadowBlur=10;c.shadowOffsetX=4;c.shadowOffsetY=5;
-    for(let p=0;p<24;p++){
-      const px=w*(0.06+((p*43)%88)/100)+Math.sin(t*2.4+p)*22*hp;
-      const py=hor+40-(Math.pow(hp,1.1)*(hor+120)*((p%5)*0.14+0.55))-((t*90+p*28)%80)*hp;
-      const pw=14+(p%4)*8,ph=22+(p%3)*12;
-      c.save();c.translate(px,py);
-      c.rotate(hp*(p%2?1.8:-1.6)+t*(1.4+(p%3)*0.4));
-      c.scale(1,Math.cos(t*2.5+p+hp*2));
-      c.fillStyle=p%4===0?'#C92521':p%2===0?'#F5F1E6':'#1B1C22';
-      c.strokeStyle='#141414';c.lineWidth=1.2;
-      c.fillRect(-pw/2,-ph/2,pw,ph);c.strokeRect(-pw/2,-ph/2,pw,ph);
-      c.restore();
-    }
-    c.restore();
-  }
 }
 
 const FOOT_TELEMETRY = [{"f":0,"nearX":101.7,"nearLift":0,"farX":319.4,"farLift":0},{"f":1,"nearX":110.6,"nearLift":0,"farX":256.3,"farLift":6.1},{"f":2,"nearX":135.9,"nearLift":0,"farX":206.2,"farLift":11.3},{"f":3,"nearX":174.5,"nearLift":0,"farX":154.8,"farLift":14.8},{"f":4,"nearX":220.4,"nearLift":0,"farX":110.4,"farLift":16},{"f":5,"nearX":252.9,"nearLift":0,"farX":78.9,"farLift":14.8},{"f":6,"nearX":293.7,"nearLift":0,"farX":64.2,"farLift":11.3},{"f":7,"nearX":320.3,"nearLift":0,"farX":68.3,"farLift":6.1},{"f":8,"nearX":329.4,"nearLift":0,"farX":91.7,"farLift":0},{"f":9,"nearX":266.3,"nearLift":6.1,"farX":100.6,"farLift":0},{"f":10,"nearX":216.2,"nearLift":11.3,"farX":125.9,"farLift":0},{"f":11,"nearX":164.8,"nearLift":14.8,"farX":164.5,"farLift":0},{"f":12,"nearX":120.4,"nearLift":16,"farX":210.4,"farLift":0},{"f":13,"nearX":88.9,"nearLift":14.8,"farX":242.9,"farLift":0},{"f":14,"nearX":74.2,"nearLift":11.3,"farX":283.7,"farLift":0},{"f":15,"nearX":78.3,"nearLift":6.1,"farX":310.3,"farLift":0}];
@@ -3711,53 +3967,135 @@ let reachProgress=0,reachHolding=false,reachDone=false,reachUserHold=false;
 function drawReach(t){
   const{w,h,c}=fitCanvas(reachCv,true);
   c.clearRect(0,0,w,h);
-  const cx=w*0.24,cy=h*0.50;
-  const pull=clamp(reachProgress,0,1);
-  const voidR=Math.min(w,h)*(0.24+pull*0.28);
+  
+  // 1. Santioni Spirits Chapter 05: Deep Burgundy / Crimson Wood Grain (#702A2A)
+  c.fillStyle = '#702A2A';
+  c.fillRect(0,0,w,h);
 
-  /* Glossy Obsidian-Crimson Singularity Core + Swirl Pulling Toward Center */
-  const rim=c.createRadialGradient(cx,cy,voidR*0.18,cx,cy,voidR*1.45);
-  rim.addColorStop(0,'rgba(8,2,3,'+(0.95).toFixed(2)+')');
-  rim.addColorStop(0.42,'rgba(42,4,8,'+(0.88).toFixed(2)+')');
-  rim.addColorStop(0.68,'rgba(220,226,238,'+(0.42+pull*0.38).toFixed(2)+')');
-  rim.addColorStop(0.84,'rgba(150,25,29,'+(0.28+pull*0.25).toFixed(2)+')');
-  rim.addColorStop(1,'rgba(150,25,29,0)');
-  c.fillStyle=rim;
-  c.beginPath();c.arc(cx,cy,voidR*1.45,0,Math.PI*2);c.fill();
-
-  /* Silvery Liquid Mercury Inward Vacuum Streams + 3D Orbiting Singularity Torus Rings */
+  // Vertical Hand-Carved Wood Grain Linework
   c.save();
-  for(let tr=0;tr<3;tr++){
-    c.save();c.translate(cx,cy);
-    c.rotate(t*(tr%2?-0.52:0.65)+tr*1.05+pull*1.8);
-    c.scale(1,0.32+0.25*Math.sin(t*1.4+tr));
-    c.strokeStyle=tr===0?'rgba(255,255,255,'+(0.45+pull*0.38).toFixed(2)+')':'rgba(205,222,248,'+(0.32+pull*0.32).toFixed(2)+')';
-    c.lineWidth=1.4+pull*1.2;
-    c.beginPath();c.arc(0,0,voidR*(0.82+tr*0.24),0,Math.PI*2);c.stroke();
-    c.restore();
-  }
-  const count=24;
-  for(let i=0;i<count;i++){
-    const a=(i/count)*Math.PI*2-t*(1.4+pull*4.2);
-    const rOut=voidR*(1.35+((i*17)%10)*0.08);
-    const rIn=voidR*(0.24+((i%3)*0.06));
-    const midA=a+0.75+pull*1.15;
-    c.strokeStyle=i%2===0?'rgba(255,255,255,'+(0.46+pull*0.42).toFixed(2)+')':'rgba(210,218,232,'+(0.32+pull*0.35).toFixed(2)+')';
-    c.lineWidth=1.4+(i%3)*0.8+pull*1.2;
+  c.strokeStyle = '#111111';
+  c.lineWidth = 2.2;
+  const grainLines = 28;
+  const gStep = w / grainLines;
+  for(let g = 0; g <= grainLines; g++){
+    const gx = g * gStep;
+    const wave = Math.sin(g * 0.8 + t * 0.15) * 14;
     c.beginPath();
-    c.moveTo(cx+Math.cos(a)*rOut,cy+Math.sin(a)*rOut);
-    c.quadraticCurveTo(cx+Math.cos(midA)*rOut*0.58,cy+Math.sin(midA)*rOut*0.58,cx+Math.cos(midA+0.55)*rIn,cy+Math.sin(midA+0.55)*rIn);
+    c.moveTo(gx, 0);
+    c.bezierCurveTo(gx + wave, h * 0.35, gx - wave, h * 0.70, gx + wave * 0.5, h);
     c.stroke();
   }
   c.restore();
 
-  if(pull>0.72){
-    const flash=smoothstep(0.72,1.0,pull);
-    const fg=c.createRadialGradient(cx,cy,4,cx,cy,Math.hypot(w,h)*flash);
-    fg.addColorStop(0,'rgba(255,255,255,'+(0.95*flash).toFixed(2)+')');
-    fg.addColorStop(0.45,'rgba(255,244,244,'+(0.52*flash).toFixed(2)+')');
-    fg.addColorStop(1,'rgba(150,25,29,0)');
-    c.fillStyle=fg;c.fillRect(0,0,w,h);
+  const pull = clamp(reachProgress, 0, 1);
+  const orbX = w * (0.44 + pull * 0.18);
+  const orbY = h * 0.52;
+
+  // 2. Hand-Engraved Human Hand Reaching from Right to Left (Santioni Spirits Reference 4)
+  const handBaseX = w * (0.86 - pull * 0.12);
+  const handBaseY = h * 0.56;
+  const handScale = Math.min(1.0, w / 1100);
+
+  c.save();
+  c.translate(handBaseX, handBaseY);
+  c.scale(handScale, handScale);
+
+  // Forearm & Sleeve in dense ink black with directional cuff hatching
+  c.fillStyle = '#111111';
+  c.beginPath();
+  c.moveTo(180, 80);
+  c.lineTo(40, 30);
+  c.lineTo(40, -40);
+  c.lineTo(180, -90);
+  c.closePath();
+  c.fill();
+  c.strokeStyle = '#F1F0E9';
+  c.lineWidth = 1.4;
+  c.stroke();
+
+  // Sleeve cuff geometric engraving rings
+  c.fillStyle = '#F1F0E9';
+  c.fillRect(35, -42, 14, 74);
+  c.strokeStyle = '#111111';
+  c.lineWidth = 2;
+  c.strokeRect(35, -42, 14, 74);
+
+  // Hand Palm & Fingers in Warm Paper White with Fine Woodcut Crosshatching
+  c.fillStyle = '#F1F0E9';
+  c.strokeStyle = '#111111';
+  c.lineWidth = 2.4;
+
+  // Palm shape
+  c.beginPath();
+  c.moveTo(35, -30);
+  c.quadraticCurveTo(-20, -40, -70, -25); // index knuckle
+  c.quadraticCurveTo(-90, -10, -110, 0); // index finger extended
+  c.quadraticCurveTo(-115, 8, -95, 14);
+  c.quadraticCurveTo(-60, 15, -45, 18);
+  // Middle finger
+  c.quadraticCurveTo(-85, 25, -112, 32);
+  c.quadraticCurveTo(-118, 40, -98, 44);
+  c.quadraticCurveTo(-55, 38, -35, 42);
+  // Ring & Pinky curled
+  c.quadraticCurveTo(-65, 52, -88, 58);
+  c.quadraticCurveTo(-90, 68, -75, 70);
+  c.quadraticCurveTo(-30, 62, 35, 40);
+  c.closePath();
+  c.fill();
+  c.stroke();
+
+  // Thumb extending towards the top
+  c.beginPath();
+  c.moveTo(10, -25);
+  c.quadraticCurveTo(-25, -55, -60, -68);
+  c.quadraticCurveTo(-68, -62, -50, -45);
+  c.quadraticCurveTo(-30, -35, 5, -15);
+  c.closePath();
+  c.fill();
+  c.stroke();
+
+  // Woodcut Fine Parallel Hatching Lines across Palm and Fingers
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1.2;
+  for(let l = -90; l <= 20; l += 6){
+    c.beginPath();
+    c.moveTo(l, -20);
+    c.lineTo(l + 12, 35);
+    c.stroke();
+  }
+  c.restore();
+
+  // 3. Tether Line and Concentric Engraved Sound / Reaction Waves
+  c.save();
+  c.strokeStyle = 'rgba(241, 240, 233, ' + (0.45 + pull * 0.45).toFixed(2) + ')';
+  c.lineWidth = 2;
+  c.setLineDash([6, 6]);
+  c.beginPath();
+  c.moveTo(orbX, orbY);
+  c.lineTo(handBaseX - 80 * handScale, handBaseY + 10 * handScale);
+  c.stroke();
+  c.setLineDash([]);
+
+  // Concentric etched ripple rings around the orb when dragged
+  if(pull > 0.05){
+    const ringCount = 4;
+    for(let r = 1; r <= ringCount; r++){
+      const rRad = 65 + r * 22 * pull + Math.sin(t * 3 + r) * 4;
+      c.strokeStyle = 'rgba(241, 240, 233, ' + (0.6 * (1 - r / (ringCount + 1))).toFixed(2) + ')';
+      c.lineWidth = 1.4;
+      c.beginPath();
+      c.arc(orbX, orbY, rRad, 0, Math.PI * 2);
+      c.stroke();
+    }
+  }
+  c.restore();
+
+  // Position DOM Orb Button smoothly
+  const orbBtn = $('#hold-move-btn');
+  if(orbBtn){
+    orbBtn.style.left = orbX + 'px';
+    orbBtn.style.top = orbY + 'px';
   }
 }
 
@@ -3829,88 +4167,135 @@ function drawStepOverlay(t){
 let curtainBoomed=false;
 function drawCurtain(t,pCur){
   const{w,h,c}=fitCanvas(curtainCv);
-  /* Match reference video 00:43-00:45: deep crimson hall emerging out of obsidian ink darkness */
-  const bgG=c.createLinearGradient(0,0,0,h);
-  bgG.addColorStop(0,'#0D0D0F');
-  bgG.addColorStop(0.28,'#480A0C');
-  bgG.addColorStop(0.75,'#96191D');
-  bgG.addColorStop(1,'#6B1013');
-  c.fillStyle=bgG;c.fillRect(0,0,w,h);
+  c.clearRect(0,0,w,h);
 
-  const pillars=[0.05,0.16,0.28,0.72,0.84,0.95];
-  const camYawC=ptr3dX*22;
-  pillars.forEach((px,idx)=>{
-    const pw=w*(idx===0||idx===5?.082:idx===1||idx===4?.062:.044);
-    const depth=(idx===0||idx===5)?1.6:(idx===1||idx===4)?1.05:0.55;
-    const x=w*px-pw/2+(px-0.5)*pCur*44+Math.sin(t*1.1+idx)*2.2-camYawC*depth;
-    const sideW=clamp((0.5-px)*46-camYawC*0.35,-24,24);
-    c.save();
-    c.fillStyle='#240608';
-    c.fillRect(sideW>0?x+pw:x+sideW,0,Math.abs(sideW),h);
-    c.shadowColor='rgba(6,2,4,0.52)';c.shadowBlur=16;c.shadowOffsetX=idx<3?7:-7;c.shadowOffsetY=4;
-    const g=c.createLinearGradient(x,0,x+pw,0);
-    g.addColorStop(0,'#1B0708');g.addColorStop(.45,'#82181C');g.addColorStop(.8,'#4A0C0E');g.addColorStop(1,'#120506');
-    c.fillStyle=g;c.fillRect(x,0,pw,h);
-    c.shadowColor='transparent';
-    c.strokeStyle='#0B0B0D';c.lineWidth=1.4;c.strokeRect(x,0,pw,h);
-    for(let k=1;k<6;k++){c.beginPath();c.moveTo(x+k*(pw/6),0);c.lineTo(x+k*(pw/6),h);c.stroke()}
-    c.restore();
-  });
-  for(let e=0;e<36;e++){
-    const ex=(w*(0.06+((e*43)%88)/100))+Math.sin(t*1.6+e)*16;
-    const ey=h-((t*(30+(e%4)*10)+e*48)%h);
-    c.fillStyle='rgba(255,235,230,0.46)';
-    c.beginPath();c.arc(ex,ey,1.1+(e%3)*0.75,0,Math.PI*2);c.fill();
+  // 1. Solid Ink Black Background (#111111)
+  c.fillStyle = '#111111';
+  c.fillRect(0,0,w,h);
+
+  const cx = w * 0.5 + ptr3dX * 30;
+  const cy = h * 0.50 + ptr3dY * 20;
+  const portalR = Math.min(w, h) * (0.34 + pCur * 0.08);
+
+  // 2. Colossal Circular Blood-Red Eclipse Portal Disc (Santioni Spirits Reference 2)
+  c.save();
+  // Deep Blood Red Inner Core (#B8201D)
+  c.fillStyle = '#B8201D';
+  c.beginPath();
+  c.arc(cx, cy, portalR, 0, Math.PI * 2);
+  c.fill();
+
+  // Concentric Woodcut Line Engraving inside Portal
+  c.strokeStyle = '#111111';
+  c.lineWidth = 1.6;
+  const rings = 12;
+  for(let r = 1; r <= rings; r++){
+    const rad = (portalR / rings) * r;
+    c.beginPath();
+    c.arc(cx, cy, rad, 0, Math.PI * 2);
+    c.stroke();
   }
 
-  /* 100-Strip Etched Ink & Cardstock Curtain peeling with 3D Y-axis Twist & Drop Shadows */
-  if(pCur<0.78){
-    const bars=100,bw=w/bars;
-    const sweepIn=smoothstep(0.01,0.34,pCur);
-    const sweepOut=smoothstep(0.30,0.78,pCur);
-    c.save();
-    c.shadowColor='rgba(0,0,0,0.48)';c.shadowBlur=8;c.shadowOffsetX=5;c.shadowOffsetY=3;
-    for(let i=0;i<bars;i++){
-      const stagger=((i*31)%17)*0.016+Math.sin(i*0.18)*0.024;
-      const top=clamp((sweepOut*1.40-stagger)*h,0,h);
-      const bot=clamp((sweepIn*1.40-stagger)*h,0,h);
-      if(bot>top){
-        const twist=0.35+0.65*Math.abs(Math.cos(pCur*5.2+i*0.14));
-        const cxStrip=i*bw+bw*0.5;
-        const wStrip=bw*0.78*twist;
-        c.fillStyle=i%3===0?'#F5F1E6':'#141317';
-        c.fillRect(cxStrip-wStrip*0.5,top,wStrip,bot-top);
-      }
+  // Radial engraved rays radiating outward
+  const rays = 36;
+  for(let a = 0; a < rays; a++){
+    const angle = (a / rays) * Math.PI * 2 + t * 0.05;
+    const r1 = portalR * 0.35;
+    const r2 = portalR * 0.98;
+    c.beginPath();
+    c.moveTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
+    c.lineTo(cx + Math.cos(angle) * r2, cy + Math.sin(angle) * r2);
+    c.stroke();
+  }
+
+  // Thick Outer White Circular Border Ring (Santioni Reference 2)
+  c.strokeStyle = '#F1F0E9';
+  c.lineWidth = Math.max(16, w * 0.024);
+  c.beginPath();
+  c.arc(cx, cy, portalR + c.lineWidth * 0.5, 0, Math.PI * 2);
+  c.stroke();
+
+  // Outer Black Outline
+  c.strokeStyle = '#111111';
+  c.lineWidth = 2.5;
+  c.beginPath();
+  c.arc(cx, cy, portalR + Math.max(16, w * 0.024) + 1.5, 0, Math.PI * 2);
+  c.stroke();
+  c.restore();
+
+  // 3. Monumental Fluted Architectural Columns Left & Right (Santioni Reference 2)
+  c.save();
+  const colWidth = Math.min(130, w * 0.14);
+  const leftColX = cx - portalR - colWidth * 0.85;
+  const rightColX = cx + portalR - colWidth * 0.15;
+
+  [leftColX, rightColX].forEach(cxPos => {
+    // Column Base Plinth
+    c.fillStyle = '#F1F0E9';
+    c.strokeStyle = '#111111';
+    c.lineWidth = 2.2;
+    c.fillRect(cxPos, 0, colWidth, h);
+    c.strokeRect(cxPos, 0, colWidth, h);
+
+    // Fine Vertical Fluting Lines
+    const fluteCount = 7;
+    const fW = colWidth / fluteCount;
+    c.lineWidth = 1.4;
+    for(let f = 1; f < fluteCount; f++){
+      const fx = cxPos + f * fW;
+      c.beginPath();
+      c.moveTo(fx, 0);
+      c.lineTo(fx, h);
+      c.stroke();
     }
-    c.restore();
+  });
+  c.restore();
+
+  // 4. Character Seen from Behind Stepping Into Portal (Santioni Reference 2)
+  c.save();
+  const charX = cx;
+  const charY = h * 0.82;
+  const charH = Math.min(320, h * 0.44);
+  const charW = charH * 0.42;
+
+  // Cast shadow on floor
+  c.fillStyle = 'rgba(17, 17, 17, 0.95)';
+  c.beginPath();
+  c.ellipse(charX, charY + 6, charW * 0.75, 14, 0, 0, Math.PI * 2);
+  c.fill();
+
+  // Billowing dark coat/robe in solid ink black
+  c.fillStyle = '#111111';
+  c.beginPath();
+  c.moveTo(charX - charW * 0.22, charY - charH * 0.88); // head
+  c.quadraticCurveTo(charX - charW * 0.48, charY - charH * 0.72, charX - charW * 0.52, charY - charH * 0.42); // left shoulder
+  c.quadraticCurveTo(charX - charW * 0.62, charY - charH * 0.15, charX - charW * 0.55, charY); // left hem
+  c.lineTo(charX + charW * 0.45, charY); // bottom hem
+  c.quadraticCurveTo(charX + charW * 0.55, charY - charH * 0.18, charX + charW * 0.48, charY - charH * 0.42); // right hem
+  c.quadraticCurveTo(charX + charW * 0.45, charY - charH * 0.72, charX + charW * 0.22, charY - charH * 0.88); // right shoulder
+  c.closePath();
+  c.fill();
+
+  // Flowing hair rendered with expressive ink strokes (Santioni Reference 2)
+  c.beginPath();
+  c.ellipse(charX, charY - charH * 0.92, charW * 0.22, charH * 0.14, 0, 0, Math.PI * 2);
+  c.fill();
+  c.beginPath();
+  c.moveTo(charX + charW * 0.15, charY - charH * 0.92);
+  c.quadraticCurveTo(charX + charW * 0.45, charY - charH * 0.90, charX + charW * 0.62, charY - charH * 0.82);
+  c.quadraticCurveTo(charX + charW * 0.40, charY - charH * 0.85, charX + charW * 0.12, charY - charH * 0.88);
+  c.fill();
+
+  // Vertical engraved fabric lines along cloak
+  c.strokeStyle = '#F1F0E9';
+  c.lineWidth = 1.2;
+  for(let fl = -charW * 0.35; fl <= charW * 0.35; fl += 10){
+    c.beginPath();
+    c.moveTo(charX + fl * 0.6, charY - charH * 0.75);
+    c.lineTo(charX + fl, charY - 4);
+    c.stroke();
   }
-  const showEye=pCur>0.55&&pCur<0.97;
-  $('#eye-strip').classList.toggle('on',showEye);
-  $('#cap-curtain').classList.toggle('on',showEye);
-  const showLegs=pCur>0.44&&pCur<0.96;
-  const tLeg=$('#temple-leg-inset');
-  if(tLeg)tLeg.classList.toggle('on',showLegs);
-  if(showLegs){
-    drawLadderLegFocus(templeLegCv,tTime,pCur,true);
-    const tStep=Math.floor(pCur*14);
-    if(tStep!==lastTempleStepIdx){lastTempleStepIdx=tStep;Sound.step()}
-  }
-  if(showEye){
-    const eyeZoom=(1.04+(pCur-0.55)*0.42).toFixed(3);
-    const eyeRot=((pCur-0.75)*2.4).toFixed(2);
-    const eyeTilt=((pCur-0.75)*-4.0).toFixed(2);
-    $('#eye-strip').style.transform=`perspective(800px) translateX(-50%) translateY(0) scale(${eyeZoom}) rotate(${eyeRot}deg) rotateX(${eyeTilt}deg)`;
-  }else{
-    $('#eye-strip').style.transform='translateX(-50%) translateY(16px)';
-  }
-  const godEyeOp=smoothstep(0.72,0.82,pCur);
-  if(godEyeOp>0.55&&!curtainBoomed){curtainBoomed=true;Sound.boom(56,.26)}
-  if(pCur<0.45)curtainBoomed=false;
-  $('#img-eye-god').style.opacity=godEyeOp.toFixed(2);
-  const curTxt=godEyeOp>0.5
-    ? 'THE KERNEL WARDEN LOOKS DOWN FROM THE THRONE: <span class="red">"INTRUDER—PROVE YOUR SYSTEM BELONGS HERE."</span>'
-    : '"WHERE AM I…? THAT WASN\x27T A NETWORK DROP." <span class="red">CRIMSON PILLARS SURROUND THE KERNEL</span>.';
-  setTypedRaw($('#cap-curtain'),curTxt,showEye?smoothstep(0.55,0.88,pCur):0);
+  c.restore();
 }
 
 /* ==================== ACT VI: CRIMSON SANCTUARY · 3D MULTI-ANGLE FILM RIG & RIBBONS ==================== */
@@ -4741,7 +5126,17 @@ function bindHold(btnId,ringId,onProg,moveMode=false){
   addEventListener('pointercancel',up);
   return()=>active;
 }
-const isHoldMove = () => false;
+
+const isHoldMove = bindHold('#hold-move-btn', '#ring-reach', (prog) => {
+  reachUserHold = true;
+  reachProgress = Math.max(reachProgress, prog);
+  if (prog >= 0.85 && !reachDone) {
+    reachDone = true;
+    Sound.whoosh();
+    smoothScrollTo($('#scene-step')?.offsetTop || ($('#scene-curtain')?.offsetTop || 0));
+  }
+}, true);
+
 const isHoldPour=bindHold('#hold-pour-btn','#ring-pour',()=>{pourUserHold=true});
 const isHoldVortex=bindHold('#hold-vortex-btn','#ring-vortex',()=>{vortexUserHold=true});
 
@@ -5098,7 +5493,11 @@ function tick(ts){
   }
 
   /* 5. Act IV: Hold & Singularity Breach Suction -> Auto-Advance to Next Slide */
-  /* reach tick block removed */
+  
+  if(isNearView($('#scene-reach'))){
+    drawReach(tTime);
+  }
+  
 
   /* 6. Act V: Step Inside & 100-Strip 3D Firewall Curtain */
   if(isNearView($('#scene-step'))){
