@@ -2628,9 +2628,8 @@ function fitCanvas(cv,uhd=false){
   const cw=cv.clientWidth,ch=cv.clientHeight;
   const r=(cw>0&&ch>0)?null:cv.getBoundingClientRect();
   const w=Math.max(10,Math.round(cw>0?cw:r.width)),h=Math.max(10,Math.round(ch>0?ch:r.height));
-  const d=uhd
-    ? Math.min(5.334,Math.max(devicePixelRatio||1,Math.min(5.334,7680/Math.max(w,1))))
-    : Math.min(Math.max(devicePixelRatio||1,1.8),3.0);
+  const dpr=typeof window!=='undefined'?(window.devicePixelRatio||1):1;
+  const d=uhd?Math.min(Math.max(dpr,1.5),2.25):Math.min(Math.max(dpr,1.0),1.75);
   const bw=Math.round(w*d),bh=Math.round(h*d);
   if(cv.width!==bw||cv.height!==bh){cv.width=bw;cv.height=bh}
   const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);
