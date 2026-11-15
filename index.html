@@ -2273,27 +2273,28 @@ const Sound=(()=>{
       o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.06);
     });
   }
-  function step(stone=false){
+  function step(stone=false, intensity=1.0){
     if(!live||!boot()||!nb)return;
-    const now=performance.now();if(now-lastStepT<180)return;lastStepT=now;
+    const now=performance.now();if(now-lastStepT<140)return;lastStepT=now;
     const t=ctx.currentTime;
-    /* Soft organic leather sole or sacred marble tap (no synthetic blip!) */
+    const sc=Math.max(0.35, Math.min(1.4, intensity));
+    /* Soft organic sneaker sole or sacred marble tap with dynamic velocity response */
     const o=ctx.createOscillator(),og=ctx.createGain();
     o.type='sine';
-    o.frequency.setValueAtTime(stone?128:86,t);
-    o.frequency.exponentialRampToValueAtTime(stone?48:34,t+.065);
+    o.frequency.setValueAtTime((stone?128:86)*sc,t);
+    o.frequency.exponentialRampToValueAtTime((stone?48:34)*sc,t+.065);
     og.gain.setValueAtTime(.0001,t);
-    og.gain.linearRampToValueAtTime(stone?.075:.062,t+.006);
+    og.gain.linearRampToValueAtTime((stone?.075:.062)*Math.min(1.2,sc),t+.006);
     og.gain.exponentialRampToValueAtTime(.0001,t+.082);
     o.connect(og);og.connect(master);o.start(t);o.stop(t+.09);
     const b=ctx.createBufferSource(),fl=ctx.createBiquadFilter(),g=ctx.createGain();
     b.buffer=nb;fl.type='bandpass';fl.frequency.value=stone?480:290;fl.Q.value=0.9;
     g.gain.setValueAtTime(.0001,t);
-    g.gain.linearRampToValueAtTime(stone?.052:.040,t+.004);
+    g.gain.linearRampToValueAtTime((stone?.052:.040)*sc,t+.004);
     g.gain.exponentialRampToValueAtTime(.0001,t+.055);
     b.connect(fl);fl.connect(g);g.connect(master);b.start(t,Math.random()*1.2,.07);
   }
-  /* Cyber-Origami Firewall Breach Telemetry Pulse (replaces harsh engine drone) */
+    /* Cyber-Origami Firewall Breach Telemetry Pulse (replaces harsh engine drone) */
   function truckApproach(pct){
     if(!live||!boot())return;
     const now=performance.now();if(now-lastApproachT<340)return;lastApproachT=now;
@@ -2505,8 +2506,18 @@ const Sound=(()=>{
     if(!voiceOn)setVoice(true);
     speakSeq(seq);
   }
+  let isMutedTab=false;
+  function muteTab(muted){
+    if(!ctx||!master)return;
+    isMutedTab=muted;
+    master.gain.setTargetAtTime(muted?0:(live?targetMaster:0), ctx.currentTime, 0.18);
+  }
+  document.addEventListener('visibilitychange',()=>{
+    muteTab(document.hidden);
+  });
   return{
     enable(on){setOn(on)},
+    muteTab,
     setVoice,
     resumeCtx,
     autoUnlockIfPending,
@@ -3665,17 +3676,24 @@ function drawMistBg(t,pMist){
 }
 
 function drawParthWalkActor(t,pMist,cam){
+  /* Render delicate wind-blown anime autumn leaves across Shibuya bridge */
+  const mistCv=$('#walk-actor-cv');
+  if(mistCv&&mistCv.getContext){
+    const mcx=mistCv.getContext('2d');
+    if(mcx&&pMist>0.04&&pMist<0.82){
+      drawAnimeLeaves(mcx,mistCv.width||1280,mistCv.height||800,t,1.2,true);
+    }
+  }
   const{w,h,c}=fitCanvas(walkActorCv,true);
   c.clearRect(0,0,w,h);
   initRefPortraits();
   const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
   if(!w1)return;
 
-  const isPhone=pMist>=0.30&&pMist<=0.68;
+  const isPhone=pMist>=0.35&&pMist<=0.63;
   const isRecoil=pMist>0.82;
-  const phoneBlend=isPhone?smoothstep(0.30,0.38,pMist)*(1-smoothstep(0.58,0.68,pMist)):0;
   const recoilBlend=isRecoil?smoothstep(0.82,0.90,pMist):0;
-  const walkAmt=1-phoneBlend;
+  const walkAmt=isPhone?0:1;
 
   /* Horizontal walking across website screen:
      Parth enters from screen left and walks smoothly across towards right */
@@ -3701,12 +3719,16 @@ function drawParthWalkActor(t,pMist,cam){
   const walkDist=isRecoil?Math.min(totalTravel,0.82*w*0.64):totalTravel;
   const walkFloat=(walkDist/stridePx)*STRIDE_FRAMES;
   const walkBase=getWalkPaperFrame(walkFloat)||getPaperCutSprite('p_walk1')||w1;
-  const phoneIm=phoneBlend>0.02?(getPaperCutSprite('p_phone')||IMG.p_phone):null;
+  const phoneIm=isPhone?(getPaperCutSprite('p_phone')||IMG.p_phone):null;
   const phi=((walkFloat/STRIDE_FRAMES)%1+1)%1;
 
   if(walkAmt>0.6&&pMist>0.03&&pMist<0.82){
     const stepIdx=Math.floor((totalTravel/stridePx)*2);
-    if(stepIdx!==lastWalkStepPhase){lastWalkStepPhase=stepIdx;Sound.step()}
+    if(stepIdx!==lastWalkStepPhase){
+      lastWalkStepPhase=stepIdx;
+      const stepIntensity=clamp((scrollVelS||0.6)*0.8+0.5, 0.45, 1.35);
+      Sound.step(false, stepIntensity);
+    }
   }
 
   /* Apply 3D camera matrix inside 4K canvas */
@@ -3740,26 +3762,26 @@ function drawParthWalkActor(t,pMist,cam){
   c.translate(baseX,baseY+bob);
   c.rotate(lean);
 
-  if(phoneBlend>0.12){
+  if(isPhone){
     for(let rg=0;rg<2;rg++){
       const pr=((t*0.9+rg*0.5)%1);
       c.save();
-      c.strokeStyle='rgba(201,37,33,'+((1-pr)*0.48*phoneBlend).toFixed(2)+')';
+      c.strokeStyle='rgba(201,37,33,'+((1-pr)*0.55).toFixed(2)+')';
       c.lineWidth=1.8;
       c.beginPath();c.arc(drawW*0.06,-drawH*0.56,14+pr*52,0,Math.PI*2);c.stroke();
       c.restore();
     }
   }
 
-  if(walkAmt>0.02&&walkBase){
-    drawSmoothWalkFrame(c,walkFloat,-drawW/2,-drawH,drawW,drawH,walkAmt,false);
-  }
-  if(phoneBlend>0.02&&phoneIm){
+  if(isPhone&&phoneIm){
     const phW=phoneIm._origW||phoneIm.width||sw,phH=phoneIm._origH||phoneIm.height||sh;
     const psc=targetH/phH,pdw=phW*psc,pdh=targetH;
-    c.save();c.globalAlpha=phoneBlend;
-    drawPaperSprite(c,phoneIm,-pdw/2,-pdh,pdw,pdh);
+    const dyOffset=(18/720)*targetH;
+    c.save();
+    drawPaperSprite(c,phoneIm,-pdw/2,-pdh-dyOffset,pdw,pdh);
     c.restore();
+  }else if(walkBase){
+    drawSmoothWalkFrame(c,walkFloat,-drawW/2,-drawH,drawW,drawH,1,false);
   }
   c.restore();
 }
@@ -3869,7 +3891,24 @@ function drawPortalParticles(cv,t,intensity=1,portalCenter=null){
     c.beginPath();c.arc(0,0,rad*0.86,0,Math.PI*2);c.stroke();
     c.restore();
   }
-  for(let i=0;i<56;i++){
+  /* Multi-Tier Inward-Spiraling Dimensional Accretion Disc */
+  if(portalCenter){
+    const cx=w*portalCenter.x,cy=h*portalCenter.y,rad=Math.min(w,h)*portalCenter.r;
+    c.save();
+    for(let s=0;s<28;s++){
+      const sPhi=(s/28)*Math.PI*2;
+      const sDistRatio=((t*0.55+s*0.14)%1);
+      const curR=rad*(0.35+sDistRatio*1.35);
+      const spiralAng=sPhi+sDistRatio*3.4;
+      const px=cx+Math.cos(spiralAng)*curR;
+      const py=cy+Math.sin(spiralAng)*(curR*0.58);
+      const pAlpha=(Math.sin(sDistRatio*Math.PI)*0.55*intensity).toFixed(2);
+      c.fillStyle=`rgba(255,255,255,${pAlpha})`;
+      c.beginPath();c.arc(px,py,1.1+sDistRatio*1.4,0,Math.PI*2);c.fill();
+    }
+    c.restore();
+  }
+  for(let i=0;i<48;i++){
     const spd=22+(i%6)*12;
     const x=((i*97+t*spd*0.6)%w);
     const y=h-((i*53+t*spd)%h);
@@ -4972,19 +5011,89 @@ $('#sanc-cap-2').onclick=()=>{
 /* ==================== MASTER SCROLL & CINEMATIC CAMERA LOOP ==================== */
 let lastTs=0,tTime=0,lastTheme='',lastScrollY=window.scrollY||0,scrollVelS=0,sancShift=0,didInitDraw=false,impactCutDone=false;
 let pHeroS=0,pMistS=0,pImpS=0,pMonoS=0,pPortS=0,pReachS=0,pStepS=0,pCurS=0,pSancS=0,pMedS=0,pPourS=0,pVorS=0,pShatterS=0;
+/* 120Hz/144Hz Zero-Layout-Thrashing Cached Metric Register */
+const LAYOUT_CACHE = new Map();
+function updateLayoutMetrics(){
+  const tracked=['#hero','#scene-mist','#scene-impact','.mono-wide','.portal-panel-wrap','#scene-step','#scene-curtain','#scene-sanctuary-story','#scene-medallions','#scene-pour','#scene-vortex','#scene-shatter','#collection'];
+  const curY=window.scrollY||0;
+  for(const sel of tracked){
+    const el=$(sel);
+    if(el){
+      const rect=el.getBoundingClientRect();
+      const top=rect.top+curY;
+      const height=rect.height;
+      LAYOUT_CACHE.set(el,{top,height,scrollRange:Math.max(1,height-innerHeight)});
+    }
+  }
+}
+addEventListener('resize',updateLayoutMetrics,{passive:true});
+addEventListener('load',updateLayoutMetrics,{passive:true});
+setTimeout(updateLayoutMetrics,100);
+
 function isNearView(el,pad=280){
   if(!el)return false;
+  const m=LAYOUT_CACHE.get(el);
+  const curY=window.scrollY||0;
+  if(m){
+    const top=m.top-curY;
+    return (top+m.height)>=-pad && top<=innerHeight+pad;
+  }
   const r=el.getBoundingClientRect();
   return r.bottom>=-pad&&r.top<=innerHeight+pad;
 }
 function secProgress(el){
+  if(!el)return 0;
+  const m=LAYOUT_CACHE.get(el);
+  const curY=window.scrollY||0;
+  if(m){
+    return clamp((curY-m.top)/m.scrollRange,0,1);
+  }
   const r=el.getBoundingClientRect();
   const total=Math.max(1,r.height-innerHeight);
   return clamp(-r.top/total,0,1);
 }
 function viewProgress(el){
+  if(!el)return 0;
+  const m=LAYOUT_CACHE.get(el);
+  const curY=window.scrollY||0;
+  if(m){
+    return clamp((innerHeight-(m.top-curY))/(innerHeight+m.height),0,1);
+  }
   const r=el.getBoundingClientRect();
   return clamp((innerHeight-r.top)/(innerHeight+r.height),0,1);
+}
+
+/* ==================== PROCEDURAL ANIME ATMOSPHERIC LEAF & EMBER SYSTEM ==================== */
+const ANIME_LEAVES = Array.from({length:8}, (_,i)=>({
+  x: Math.random()*1200,
+  y: Math.random()*800,
+  speedX: 45 + (i%3)*20,
+  speedY: 28 + (i%4)*15,
+  size: 7 + (i%3)*3,
+  rot: Math.random()*Math.PI*2,
+  rotSpeed: 0.8 + (i%2)*0.6,
+  oscOffset: i * 1.3
+}));
+
+function drawAnimeLeaves(c,w,h,t,wind=1.0,crimson=true){
+  c.save();
+  for(let i=0;i<ANIME_LEAVES.length;i++){
+    const l=ANIME_LEAVES[i];
+    const curX=(l.x + t * l.speedX * wind + Math.sin(t*2.0 + l.oscOffset)*35) % (w + 60) - 30;
+    const curY=(l.y + t * l.speedY + Math.cos(t*1.6 + l.oscOffset)*25) % (h + 60) - 30;
+    const curRot=l.rot + t * l.rotSpeed;
+    c.save();
+    c.translate(curX, curY);
+    c.rotate(curRot);
+    c.fillStyle=crimson ? 'rgba(184,32,29,0.52)' : 'rgba(215,190,140,0.48)';
+    c.beginPath();
+    c.moveTo(0, -l.size);
+    c.quadraticCurveTo(l.size*0.7, 0, 0, l.size);
+    c.quadraticCurveTo(-l.size*0.7, 0, 0, -l.size);
+    c.fill();
+    c.restore();
+  }
+  c.restore();
 }
 
 function tick(ts){
