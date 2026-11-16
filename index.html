@@ -293,6 +293,82 @@ body{background:var(--paper);color:var(--ink);overflow-x:clip;position:relative}
 #manga-cursor.hover{transform:translate(-50%,-50%) scale(1.4) rotate(45deg);border-color:#E53935;background:rgba(229,57,53,0.08)}
 #manga-trail-cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998}
 
+/* ==================== BGM JUKEBOX BUTTON & LIVE EQ ==================== */
+#bgm-btn{
+  position:fixed;bottom:16px;right:434px;z-index:9000;
+  height:42px;min-height:42px;padding:0 14px;
+  background:rgba(20,20,24,0.92);border:1px solid rgba(255,255,255,0.22);
+  color:#FAF8F2;font:700 10.5px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:10px;border-radius:2px;cursor:pointer;
+  transition:all 0.22s ease;backdrop-filter:blur(8px);
+}
+#bgm-btn:hover{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:translateY(-1px)}
+#bgm-btn .bgm-eq{display:inline-flex;align-items:flex-end;gap:2px;height:14px;width:16px}
+#bgm-btn .bgm-eq i{display:inline-block;width:2.5px;background:var(--crimson);border-radius:1px;animation:eqDance 0.8s ease-in-out infinite alternate}
+#bgm-btn .bgm-eq i:nth-child(1){height:6px;animation-delay:0.1s}
+#bgm-btn .bgm-eq i:nth-child(2){height:12px;animation-delay:0.3s}
+#bgm-btn .bgm-eq i:nth-child(3){height:8px;animation-delay:0.2s}
+#bgm-btn .bgm-eq i:nth-child(4){height:14px;animation-delay:0.4s}
+#bgm-btn:hover .bgm-eq i{background:#fff}
+@keyframes eqDance{
+  0%{transform:scaleY(0.35)}
+  50%{transform:scaleY(1.0)}
+  100%{transform:scaleY(0.5)}
+}
+
+/* ==================== MIDNIGHT TOKYO NEON WEATHER STYLES ==================== */
+#weather-btn.neon{
+  background:rgba(18,10,36,0.95);border-color:#A855F7;color:#D8B4FE;
+  box-shadow:0 0 16px rgba(168,85,247,0.35);
+}
+
+/* ==================== PERSONA 5 / SAKUGA EYE CUT-IN TRANSITION ==================== */
+#sakuga-cut-in{
+  position:fixed;inset:0;pointer-events:none;z-index:99994;
+  display:none;align-items:center;justify-content:center;overflow:hidden;
+}
+#sakuga-cut-in.active{display:flex}
+.sci-speedlines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg, rgba(201,37,33,0.18) 0px, transparent 4px, transparent 18px);
+  animation:speedlineZoom 0.25s linear infinite;
+}
+@keyframes speedlineZoom{
+  0%{transform:scaleX(1) translateX(0)}
+  100%{transform:scaleX(1.1) translateX(20px)}
+}
+.sci-banner{
+  position:relative;width:120vw;height:118px;left:-10vw;
+  background:linear-gradient(90deg, #09090D 0%, #15151C 15%, #96191D 50%, #15151C 85%, #09090D 100%);
+  border-top:3px solid var(--crimson);border-bottom:3px solid var(--crimson);
+  transform:skewY(-4deg) scaleY(0);display:flex;align-items:center;justify-content:space-between;
+  padding:0 12vw;box-shadow:0 0 45px rgba(201,37,33,0.7),inset 0 0 25px rgba(0,0,0,0.8);
+  transition:transform 0.22s cubic-bezier(0.16,1,0.3,1);
+}
+#sakuga-cut-in.active .sci-banner{transform:skewY(-4deg) scaleY(1)}
+.sci-eye-slot{
+  width:280px;height:90px;overflow:hidden;border:1px solid rgba(255,255,255,0.4);
+  position:relative;background:#000;border-radius:2px;box-shadow:0 0 20px rgba(0,0,0,0.8);
+}
+.sci-eye-slot img{width:100%;height:100%;object-fit:cover;filter:contrast(1.2) brightness(1.05)}
+.sci-text-group{display:flex;flex-direction:column;align-items:flex-end}
+.sci-kanji{font:900 32px/1 var(--sf);letter-spacing:0.18em;color:#FAF8F2;text-shadow:0 0 16px rgba(255,255,255,0.7)}
+.sci-sub{font:700 11px/1 var(--mn);letter-spacing:0.25em;color:#FFB4B0;text-transform:uppercase;margin-top:4px}
+.sci-slash{
+  position:absolute;top:-40%;left:-20%;width:140%;height:4px;background:#FFF;
+  transform:rotate(-28deg);box-shadow:0 0 18px #FFF,0 0 35px var(--crimson);
+  animation:katanaSweep 0.35s ease-out forwards;
+}
+@keyframes katanaSweep{
+  0%{transform:rotate(-28deg) translateY(-250px);opacity:1}
+  100%{transform:rotate(-28deg) translateY(250px);opacity:0}
+}
+
+/* ==================== OVERDRIVE SAKUGA LIGHTNING VIBE ==================== */
+body.overdrive-mode #parth-walk-cv{
+  filter:drop-shadow(0 0 12px rgba(255,215,0,0.65)) drop-shadow(0 0 24px rgba(201,37,33,0.45));
+}
+
 /* ==================== WEATHER & ATMOSPHERE TOGGLE ==================== */
 #weather-btn{
   position:fixed;bottom:16px;right:312px;z-index:9000;
@@ -1511,7 +1587,11 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
 <button type="button" id="terminal-trigger-btn" title="Open Interactive Cyber-Anime Terminal (Shortcut: ~)">
   <span>&gt;_ TERMINAL</span>
 </button>
-<button type="button" id="weather-btn" title="Toggle Anime Atmosphere (Sunset / Cyber Rain)">
+<button type="button" id="bgm-btn" title="Cycle Procedural Anime OST Theme (Sunset / Cyber Rain / Sanctuary)">
+  <span class="bgm-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="bgm-txt">BGM: SUNSET</span>
+</button>
+<button type="button" id="weather-btn" title="Toggle Anime Atmosphere (Sunset / Cyber Rain / Midnight Neon)">
   <span>🌧 RAIN</span>
 </button>
 
@@ -2247,11 +2327,20 @@ const Sound=(()=>{
     if(!jpVoices.length)return null;
     const lower=v=>(v.name||'').toLowerCase();
     const neural=v=>/online|natural|google|neural|nanami|keita/i.test(lower(v));
-    const male=jpVoices.find(v=>neural(v)&&/keita|ichiro|otoya|takumi|hattori|male/i.test(lower(v)))||jpVoices.find(v=>/keita|ichiro|otoya|takumi|hattori|male/i.test(lower(v)));
-    const fem=jpVoices.find(v=>neural(v)&&/nanami|google|haruka|ayumi|sayaka|kyoko/i.test(lower(v)))||jpVoices.find(v=>neural(v))||jpVoices[0];
-    if(who==='g')return male||jpVoices[jpVoices.length-1]||fem||jpVoices[0];
-    if(who==='p'||who==='pw')return (male&&male!==fem?male:fem)||jpVoices[0];
-    return fem||male||jpVoices[0];
+    const allVoices = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+    if(who==='g'){
+      // THE DIVINE: Ethereal, ancient elder sovereign - distinct from Parth
+      const elder = allVoices.find(v=>/ichiro|hattori|otoya|elder|authority|george|david|male.*deep/i.test(lower(v))) ||
+                    jpVoices.find(v=>/ichiro|hattori|otoya/i.test(lower(v))) ||
+                    jpVoices[jpVoices.length-1];
+      return elder || jpVoices[0] || allVoices[0];
+    }
+    // PARTH: Deep, grounded, confident modern male protagonist
+    const parthVoice = allVoices.find(v=>neural(v)&&/keita|takumi|kensuke|guy|mark|andrew/i.test(lower(v))) ||
+                       allVoices.find(v=>/keita|takumi|kensuke|male/i.test(lower(v))) ||
+                       jpVoices.find(v=>/keita|male/i.test(lower(v))) ||
+                       jpVoices[0];
+    return parthVoice || allVoices[0];
   }
   function boot(){
     if(ctx){if(ctx.state==='suspended')ctx.resume();return true}
@@ -2635,8 +2724,10 @@ const Sound=(()=>{
         activeUtt=u;
         u.lang='ja-JP';
         const v=pickVoice(who);if(v)u.voice=v;
-        u.pitch=who==='g'?0.64:who==='pw'?0.92:who==='n'?0.98:1.12;
-        u.rate=who==='g'?0.84:who==='pw'?0.96:who==='n'?0.99:1.05;
+        // User-Requested Voice Architecture: Deep Parth (0.72) & Distinct Sovereign God (0.46)
+        u.pitch=who==='g'?0.46:who==='pw'?0.82:who==='n'?0.98:0.72;
+        u.rate=who==='g'?0.72:who==='pw'?0.90:who==='n'?0.99:0.94;
+        if(who==='g'){ divineCosmicDrone(); }
         u.volume=1.0;
         let done=false;
         const safety=setTimeout(()=>{if(!done){done=true;playIdx(idx+1)}},Math.max(2400,item.jp.length*175+1100));
@@ -2668,6 +2759,189 @@ const Sound=(()=>{
     if(!voiceOn)setVoice(true);
     speakSeq(seq);
   }
+  /* ==================== CONTINUOUS PROCEDURAL RAIN AMBIENCE ==================== */
+  let rainGain=null, rainSrc=null, rainFilter=null;
+  function initRainAudio(){
+    if(!ctx||rainGain)return;
+    rainGain=ctx.createGain();
+    rainGain.gain.value=0;
+    
+    // Pink noise buffer (3s loop)
+    const bufSize=ctx.sampleRate*3;
+    const buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);
+    const d=buf.getChannelData(0);
+    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+    for(let i=0;i<bufSize;i++){
+      const white=Math.random()*2-1;
+      b0=0.99886*b0+white*0.0555179;
+      b1=0.99332*b1+white*0.0750759;
+      b2=0.96900*b2+white*0.1538520;
+      b3=0.86650*b3+white*0.3104856;
+      b4=0.55000*b4+white*0.5329522;
+      b5=-0.7616*b5-white*0.0168980;
+      d[i]=(b0+b1+b2+b3+b4+b5+b6+white*0.5362)*0.09;
+      b6=white*0.115926;
+    }
+    rainSrc=ctx.createBufferSource();
+    rainSrc.buffer=buf;
+    rainSrc.loop=true;
+    
+    rainFilter=ctx.createBiquadFilter();
+    rainFilter.type='lowpass';
+    rainFilter.frequency.value=2100;
+    rainFilter.Q.value=0.9;
+
+    const rainMid=ctx.createBiquadFilter();
+    rainMid.type='peaking';
+    rainMid.frequency.value=920;
+    rainMid.gain.value=4.5;
+    rainMid.Q.value=1.4;
+
+    rainSrc.connect(rainFilter);
+    rainFilter.connect(rainMid);
+    rainMid.connect(rainGain);
+    rainGain.connect(master);
+    try{rainSrc.start(0);}catch(e){}
+  }
+
+  function setRain(on){
+    if(!ctx)return;
+    if(on){
+      if(!rainGain)initRainAudio();
+      if(rainGain){
+        rainGain.gain.cancelScheduledValues(ctx.currentTime);
+        rainGain.gain.setTargetAtTime(0.28, ctx.currentTime, 0.45);
+      }
+    }else{
+      if(rainGain){
+        rainGain.gain.cancelScheduledValues(ctx.currentTime);
+        rainGain.gain.setTargetAtTime(0, ctx.currentTime, 0.35);
+      }
+    }
+  }
+
+  /* ==================== CELESTIAL GOD COSMIC SUB-BASS DRONE ==================== */
+  function divineCosmicDrone(){
+    if(!ctx||!master)return;
+    const now=ctx.currentTime;
+    const sub=ctx.createOscillator(), g=ctx.createGain(), lp=ctx.createBiquadFilter();
+    sub.type='sawtooth';
+    sub.frequency.setValueAtTime(52, now);
+    sub.frequency.exponentialRampToValueAtTime(42, now+3.5);
+    lp.type='lowpass';
+    lp.frequency.setValueAtTime(130, now);
+    g.gain.setValueAtTime(0.001, now);
+    g.gain.linearRampToValueAtTime(0.28, now+0.4);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+3.6);
+    sub.connect(lp); lp.connect(g); g.connect(master);
+    sub.start(now); sub.stop(now+3.7);
+
+    // Ethereal overtone shimmer
+    const shimmer=ctx.createOscillator(), sg=ctx.createGain();
+    shimmer.type='sine';
+    shimmer.frequency.setValueAtTime(528, now);
+    sg.gain.setValueAtTime(0.001, now);
+    sg.gain.linearRampToValueAtTime(0.07, now+0.25);
+    sg.gain.exponentialRampToValueAtTime(0.0001, now+2.8);
+    shimmer.connect(sg); sg.connect(master);
+    shimmer.start(now); shimmer.stop(now+2.9);
+  }
+
+  /* ==================== SAKUGA KATANA CUT-IN CLASH SFX ==================== */
+  function katanaSlash(){
+    if(!ctx||!master)return;
+    const now=ctx.currentTime;
+    const osc=ctx.createOscillator(), g=ctx.createGain();
+    osc.type='sawtooth';
+    osc.frequency.setValueAtTime(1920, now);
+    osc.frequency.exponentialRampToValueAtTime(220, now+0.32);
+    const hp=ctx.createBiquadFilter();
+    hp.type='highpass'; hp.frequency.value=400;
+    g.gain.setValueAtTime(0.001, now);
+    g.gain.linearRampToValueAtTime(0.32, now+0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+0.35);
+    osc.connect(hp); hp.connect(g); g.connect(master);
+    osc.start(now); osc.stop(now+0.36);
+    // Low body impact punch
+    const punch=ctx.createOscillator(), pg=ctx.createGain();
+    punch.type='sine'; punch.frequency.setValueAtTime(95, now);
+    punch.frequency.exponentialRampToValueAtTime(35, now+0.25);
+    pg.gain.setValueAtTime(0.4, now);
+    pg.gain.exponentialRampToValueAtTime(0.0001, now+0.28);
+    punch.connect(pg); pg.connect(master);
+    punch.start(now); punch.stop(now+0.29);
+  }
+
+  /* ==================== J-RPG DIALOGUE AUDIO BLIP (DEEP PARTH vs GOD CHIME) ==================== */
+  let lastBlipTime=0;
+  function dialogueBlip(who){
+    if(!ctx||!live||isMutedTab)return;
+    const now=ctx.currentTime;
+    if(now-lastBlipTime<0.048)return;
+    lastBlipTime=now;
+    
+    if(who==='THE DIVINE'||who==='g'){
+      // Celestial crystal bell chime
+      const o1=ctx.createOscillator(), o2=ctx.createOscillator(), g=ctx.createGain();
+      o1.type='sine'; o2.type='sine';
+      o1.frequency.setValueAtTime(523.25, now); // C5
+      o2.frequency.setValueAtTime(1046.5, now); // C6
+      g.gain.setValueAtTime(0.055, now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.12);
+      o1.connect(g); o2.connect(g); g.connect(master);
+      o1.start(now); o1.stop(now+0.13);
+      o2.start(now); o2.stop(now+0.13);
+    }else if(who==='PARTH'||who==='p'){
+      // Deep, grounded masculine vocal synthesizer blip (165Hz)
+      const osc=ctx.createOscillator(), g=ctx.createGain(), f=ctx.createBiquadFilter();
+      osc.type='triangle';
+      osc.frequency.setValueAtTime(165, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now+0.055);
+      f.type='lowpass'; f.frequency.value=480;
+      g.gain.setValueAtTime(0.09, now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.065);
+      osc.connect(f); f.connect(g); g.connect(master);
+      osc.start(now); osc.stop(now+0.07);
+    }else{
+      // Narrator / Mechanical typewriter clack
+      const osc=ctx.createOscillator(), g=ctx.createGain();
+      osc.type='square';
+      osc.frequency.setValueAtTime(940, now);
+      g.gain.setValueAtTime(0.025, now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.022);
+      osc.connect(g); g.connect(master);
+      osc.start(now); osc.stop(now+0.025);
+    }
+  }
+
+  /* ==================== 3-TRACK PROCEDURAL ANIME BGM JUKEBOX ==================== */
+  let currentBgmIdx=0;
+  const BGM_TRACKS=[
+    { name:'SUNSET', title:'SHIBUYA SUNSET', desc:'PEACEFUL AMBIENT PENTATONIC CHORDS', freqs:[220, 277.18, 329.63, 440] },
+    { name:'RAIN', title:'CYBER MONSOON', desc:'MODAL MINOR 7TH RAIN SYNTHWAVE', freqs:[174.61, 220, 261.63, 349.23] },
+    { name:'SANCTUARY', title:'DOMAIN SANCTUARY', desc:'COSMIC CELESTIAL DRONE & CHIMES', freqs:[130.81, 196, 261.63, 392] }
+  ];
+
+  function applyBGMTrack(idx){
+    currentBgmIdx=idx % BGM_TRACKS.length;
+    const tr=BGM_TRACKS[currentBgmIdx];
+    if(ostVoices && ostVoices.length>=4){
+      tr.freqs.forEach((f, i)=>{
+        if(ostVoices[i]){
+          ostVoices[i].frequency.cancelScheduledValues(ctx.currentTime);
+          ostVoices[i].frequency.setTargetAtTime(f, ctx.currentTime, 0.6);
+        }
+      });
+    }
+    return tr;
+  }
+
+  function cycleBGM(){
+    const nextIdx=(currentBgmIdx+1) % BGM_TRACKS.length;
+    const tr=applyBGMTrack(nextIdx);
+    return tr;
+  }
+
   let isMutedTab=false;
   function muteTab(muted){
     if(!ctx||!master)return;
@@ -2682,6 +2956,12 @@ const Sound=(()=>{
     startAmbientOST,
     muteTab,
     uiTap,
+    setRain,
+    divineCosmicDrone,
+    katanaSlash,
+    dialogueBlip,
+    cycleBGM,
+    getBGMTrack(){ return BGM_TRACKS[currentBgmIdx]; },
     setVoice,
     resumeCtx,
     autoUnlockIfPending,
@@ -3221,8 +3501,13 @@ function paintTypedTokens(el,rec,frac){
   const f=clamp(frac,0,1);
   const n=Math.round(f*rec.total);
   if(el.dataset.typeN===String(n))return;
+  const prevN = parseInt(el.dataset.typeN||'0', 10);
   el.dataset.typeN=String(n);
   if(n<=0){el.innerHTML='';return}
+  if(n > prevN && Math.abs(n - prevN) <= 7){
+    const spk = el.getAttribute('data-speaker') || (el.classList.contains('speaker-god') ? 'THE DIVINE' : 'NARRATOR');
+    if(typeof Sound !== 'undefined' && Sound.dialogueBlip) Sound.dialogueBlip(spk);
+  }
   let left=n,out='';
   for(let i=0;i<rec.toks.length&&left>0;i++){
     const tk=rec.toks[i],take=tk.txt.slice(0,left);
@@ -3845,8 +4130,13 @@ function drawParthWalkActor(t,pMist,cam){
   if(pMist>0.03&&pMist<0.85){
     if(window.__NEXUS_WEATHER==='rain'){
       drawCyberRain(c,w,h,0.016,t);
+    }else if(window.__NEXUS_WEATHER==='neon'){
+      drawTokyoMidnightNeon(c,w,h,t);
     }else{
       drawAnimeLeaves(c,w,h,t,1.2,true);
+    }
+    if(window.__NEXUS_OVERDRIVE){
+      drawElectricArcs(c, w * 0.46, h * 0.45, Math.min(w, h) * 0.32, t);
     }
   }
   initRefPortraits();
@@ -5393,6 +5683,55 @@ const SUN_DUST = Array.from({length:16}, (_,i)=>({
 }));
 
 /* Dynamic Cyberpunk Monsoon Rain & Neon Puddle Engine */
+/* Tokyo Midnight Neon Ambient Drawing Engine */
+function drawTokyoMidnightNeon(c, w, h, t){
+  c.save();
+  // Deep midnight cyber glow gradient
+  const grad = c.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(12, 6, 28, 0.42)');
+  grad.addColorStop(0.65, 'rgba(168, 85, 247, 0.08)');
+  grad.addColorStop(1, 'rgba(43, 182, 216, 0.12)');
+  c.fillStyle = grad;
+  c.fillRect(0, 0, w, h);
+
+  // Glowing neon vertical atmospheric streaks
+  c.lineWidth = 1.5;
+  for(let i=0; i<18; i++){
+    const x = ((i * 137.5 + t * 40) % w);
+    const alpha = 0.08 + Math.sin(t * 2.5 + i) * 0.05;
+    c.strokeStyle = i % 2 === 0 ? `rgba(168, 85, 247, ${alpha})` : `rgba(43, 182, 216, ${alpha})`;
+    c.beginPath();
+    c.moveTo(x, h * 0.2);
+    c.lineTo(x, h * 0.78);
+    c.stroke();
+  }
+  c.restore();
+}
+
+/* Overdrive Golden/Crimson Electric Lightning Aura Arcs */
+function drawElectricArcs(c, cx, cy, rad, t){
+  c.save();
+  c.lineWidth = 2.0;
+  c.shadowBlur = 14;
+  c.shadowColor = '#FFD700';
+  const numArcs = 4;
+  for(let a=0; a<numArcs; a++){
+    const ang = (a / numArcs) * Math.PI * 2 + Math.sin(t * 12 + a) * 0.8;
+    let curX = cx + Math.cos(ang) * (rad * 0.35);
+    let curY = cy + Math.sin(ang) * (rad * 0.55);
+    c.strokeStyle = a % 2 === 0 ? '#FFE066' : '#FF4D4D';
+    c.beginPath();
+    c.moveTo(curX, curY);
+    for(let seg=0; seg<5; seg++){
+      curX += (Math.random() - 0.5) * 32;
+      curY += (Math.random() - 0.5) * 32 - 8;
+      c.lineTo(curX, curY);
+    }
+    c.stroke();
+  }
+  c.restore();
+}
+
 window.__NEXUS_WEATHER = window.__NEXUS_WEATHER || 'sunset';
 const CYBER_RAIN = Array.from({length:140}, (_,i)=>({
   x: Math.random()*1600,
@@ -5473,6 +5812,9 @@ function drawAnimeLeaves(c,w,h,t,wind=1.0,crimson=true){
 
 function tick(ts){
   const dt=Math.min(.05,(ts-lastTs)/1e3||.016);lastTs=ts;tTime+=dt;
+  /* Check Persona 5 Cut-In Act Boundaries & Update 3D Diorama Tilt */
+  if(typeof checkCutInMilestones==='function') checkCutInMilestones(pMistS, pSancS, pVorS);
+  if(typeof updateDioramaTilt==='function') updateDioramaTilt();
 
   /* Auto-Play 4K Anime Film Director Mode ("as videoo") */
   if(moviePlaying){
@@ -6103,21 +6445,156 @@ document.querySelectorAll('.fact-card, .medallion, .taste-card, .retail-item').f
   },{passive:true});
 });
 
-/* ==================== DYNAMIC WEATHER TOGGLE ENGINE ==================== */
+/* ==================== PERSONA 5 / SAKUGA EYE CUT-IN ENGINE ==================== */
+let cutInTimer = null;
+function triggerEyeCutIn(who, kanji, sub){
+  const el = document.getElementById('sakuga-cut-in');
+  const img = document.getElementById('sci-eye-img');
+  const kEl = document.getElementById('sci-kanji');
+  const sEl = document.getElementById('sci-sub');
+  if(!el || !img) return;
+
+  if(who === 'g'){
+    img.src = IM.hd_eye_god || IM.pe_shocked;
+    if(kEl) kEl.textContent = kanji || '領域展開 // THE SANCTUARY';
+    if(sEl) sEl.textContent = sub || 'CHAPTER 04 · THE DIVINE SOVEREIGN';
+  }else if(who === 'dual'){
+    img.src = IM.hd_eye_parth || IM.pe_confident;
+    if(kEl) kEl.textContent = kanji || '神格融合 // FUSION MATRIX';
+    if(sEl) sEl.textContent = sub || 'CHAPTER 07 · LIQUID MERCURY AWAKENING';
+  }else{
+    img.src = IM.hd_eye_parth || IM.pe_confident;
+    if(kEl) kEl.textContent = kanji || '覚醒 // AWAKENING';
+    if(sEl) sEl.textContent = sub || 'CHAPTER 02 · SHIBUYA CYBER BREACH';
+  }
+
+  if(typeof Sound !== 'undefined' && Sound.katanaSlash) Sound.katanaSlash();
+  el.classList.remove('active');
+  void el.offsetWidth;
+  el.classList.add('active');
+
+  clearTimeout(cutInTimer);
+  cutInTimer = setTimeout(()=>{
+    el.classList.remove('active');
+  }, 540);
+}
+
+const CUTIN_MILESTONES = new Set();
+function checkCutInMilestones(pMist, pSanc, pVortex){
+  if(pMist > 0.08 && pMist < 0.28 && !CUTIN_MILESTONES.has('mist')){
+    CUTIN_MILESTONES.add('mist');
+    triggerEyeCutIn('p', '覚醒 // AWAKENING', 'CHAPTER 01 · MUMBAI TO SHIBUYA');
+  }
+  if(pSanc > 0.08 && pSanc < 0.35 && !CUTIN_MILESTONES.has('sanc')){
+    CUTIN_MILESTONES.add('sanc');
+    triggerEyeCutIn('g', '領域展開 // THE SANCTUARY', 'CHAPTER 04 · THE DIVINE SOVEREIGN');
+  }
+  if(pVortex > 0.12 && pVortex < 0.45 && !CUTIN_MILESTONES.has('vortex')){
+    CUTIN_MILESTONES.add('vortex');
+    triggerEyeCutIn('dual', '神格融合 // FUSION MATRIX', 'CHAPTER 07 · LIQUID MERCURY AWAKENING');
+  }
+}
+
+/* ==================== DYNAMIC WEATHER TOGGLE ENGINE (3 ATMOSPHERES + CONTINUOUS RAIN AUDIO) ==================== */
 const weatherBtn = document.getElementById('weather-btn');
 if (weatherBtn) {
   weatherBtn.onclick = () => {
     Sound.resumeCtx();
     Sound.uiTap(720, 0.04);
-    window.__NEXUS_WEATHER = window.__NEXUS_WEATHER === 'rain' ? 'sunset' : 'rain';
-    const isRain = window.__NEXUS_WEATHER === 'rain';
-    weatherBtn.classList.toggle('rain', isRain);
+    const order = ['sunset', 'rain', 'neon'];
+    let curIdx = order.indexOf(window.__NEXUS_WEATHER || 'sunset');
+    if (curIdx === -1) curIdx = 0;
+    const nextWeather = order[(curIdx + 1) % order.length];
+    window.__NEXUS_WEATHER = nextWeather;
+
+    weatherBtn.classList.remove('rain', 'neon');
     const span = weatherBtn.querySelector('span');
-    if (span) span.textContent = isRain ? '☀ SUNSET' : '🌧 RAIN';
-    showGameMilestone(isRain ? 'WEATHER // CYBER-MONSOON' : 'WEATHER // SUNSET DUSK', isRain ? 'NEON RAIN & ASPHALT REFLECTIONS ACTIVE' : 'GOLDEN LIGHT SHAFTS ACTIVE');
-    if (isRain) Sound.chime(440, 1.2, 0.06);
+
+    if (nextWeather === 'rain') {
+      weatherBtn.classList.add('rain');
+      if (span) span.textContent = '🌧 RAIN';
+      Sound.setRain(true);
+      showGameMilestone('WEATHER // CYBER-MONSOON', 'CONTINUOUS RAIN AUDIO & ASPHALT REFLECTIONS ACTIVE');
+      Sound.chime(440, 1.2, 0.06);
+    } else if (nextWeather === 'neon') {
+      weatherBtn.classList.add('neon');
+      if (span) span.textContent = '🌃 MIDNIGHT';
+      Sound.setRain(false);
+      showGameMilestone('WEATHER // TOKYO MIDNIGHT NEON', 'CYBER-NEON BILLBOARDS & VOLUMETRIC GRADIENT ACTIVE');
+      Sound.chime(587.33, 1.4, 0.07);
+    } else {
+      if (span) span.textContent = '☀ SUNSET';
+      Sound.setRain(false);
+      showGameMilestone('WEATHER // SUNSET DUSK', 'GOLDEN LIGHT SHAFTS & AUTUMN LEAVES ACTIVE');
+      Sound.chime(523.25, 1.2, 0.06);
+    }
   };
 }
+
+/* ==================== ANIME OST BGM JUKEBOX ENGINE ==================== */
+const bgmBtn = document.getElementById('bgm-btn');
+if (bgmBtn) {
+  bgmBtn.onclick = () => {
+    Sound.resumeCtx();
+    Sound.uiTap(840, 0.035);
+    const tr = Sound.cycleBGM();
+    const txt = document.getElementById('bgm-txt');
+    if (txt) txt.textContent = 'BGM: ' + tr.name;
+    showGameMilestone('OST // ' + tr.title, tr.desc);
+  };
+}
+
+/* ==================== OVERDRIVE / SAKUGA COMBAT AURA ENGINE ==================== */
+function toggleOverdrive(){
+  window.__NEXUS_OVERDRIVE = !window.__NEXUS_OVERDRIVE;
+  const on = window.__NEXUS_OVERDRIVE;
+  document.body.classList.toggle('overdrive-mode', on);
+  Sound.resumeCtx();
+  if (on) {
+    Sound.katanaSlash();
+    Sound.boom(0.5);
+    showGameMilestone('OVERDRIVE // SAKUGA STATE UNLEASHED', 'GOLDEN LIGHTNING AURA & CONTACT SHOCKWAVES ACTIVE');
+    triggerEyeCutIn('p', '限界突破 // OVERDRIVE', 'UNLIMITED SAKUGA COMBAT AURA');
+  } else {
+    Sound.uiTap(440, 0.04);
+    showGameMilestone('OVERDRIVE // DEACTIVATED', 'RETURNED TO STANDARD EQUILIBRIUM');
+  }
+}
+
+// Konami Code sequence: ↑ ↑ ↓ ↓ ← → ← → B A
+const KONAMI_CODE = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+let konamiPos = 0;
+window.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase();
+  if (k === KONAMI_CODE[konamiPos]) {
+    konamiPos++;
+    if (konamiPos === KONAMI_CODE.length) {
+      konamiPos = 0;
+      toggleOverdrive();
+    }
+  } else {
+    konamiPos = 0;
+  }
+});
+
+/* ==================== 3D INTERACTIVE DIORAMA MOUSE TILT ENGINE ==================== */
+let targetTiltX = 0, targetTiltY = 0, curTiltX = 0, curTiltY = 0;
+window.addEventListener('pointermove', e => {
+  targetTiltY = (e.clientX / window.innerWidth - 0.5) * 2.8;
+  targetTiltX = (e.clientY / window.innerHeight - 0.5) * -2.4;
+}, { passive: true });
+
+function updateDioramaTilt(){
+  curTiltX = lerp(curTiltX, targetTiltX, 0.08);
+  curTiltY = lerp(curTiltY, targetTiltY, 0.08);
+  const heroCv = document.getElementById('hero-cv');
+  const mistCv = document.getElementById('mist-cv');
+  if(heroCv) heroCv.style.transform = 'perspective(1200px) rotateX(' + curTiltX.toFixed(2) + 'deg) rotateY(' + curTiltY.toFixed(2) + 'deg)';
+  if(mistCv) mistCv.style.transform = 'perspective(1400px) rotateX(' + (curTiltX*0.7).toFixed(2) + 'deg) rotateY(' + (curTiltY*0.7).toFixed(2) + 'deg)';
+}
+
+
+
 
 /* ==================== INTERACTIVE CYBER TERMINAL ENGINE ==================== */
 const termModal = document.getElementById('cyber-terminal-modal');
@@ -6205,6 +6682,14 @@ if (termInput) {
         appendTermLine('3. NEXUS 01 · 8K Layered Kirigami Anime Portfolio Engine');
       } else if (val === 'weather') {
         if (weatherBtn) weatherBtn.click();
+      } else if (val === 'bgm' || val === 'music' || val === 'ost') {
+        if (bgmBtn) bgmBtn.click();
+      } else if (val === 'overdrive' || val === 'sakuga' || val === 'limitbreak') {
+        toggleOverdrive();
+        appendTermLine('OVERDRIVE PROTOCOL TOGGLED.', 'success');
+      } else if (val === 'cutin' || val === 'slash') {
+        triggerEyeCutIn('p', '覚醒 // CRITICAL STRIKE', 'TERMINAL SAKUGA ACTIVATION');
+        appendTermLine('SAKUGA EYE CUT-IN TRIGGERED.', 'success');
       } else if (val.startsWith('warp')) {
         const actNum = parseInt(val.split(' ')[1] || '1', 10);
         const map = ['#hero', '#scene-mist', '#scene-impact', '.mono-wide', '.portal-panel-wrap', '#scene-step', '#scene-sanctuary-story', '#collection'];
@@ -6421,5 +6906,20 @@ $('#replay-btn').onclick=()=>{
     <div class="gt-sub" id="gt-sub">SYSTEM // PARTH NEXUS 01</div>
   </div>
 </div>
+<!-- ==================== PERSONA 5 / SAKUGA EYE CUT-IN TRANSITION ==================== -->
+<div id="sakuga-cut-in" aria-hidden="true">
+  <div class="sci-speedlines"></div>
+  <div class="sci-banner">
+    <div class="sci-eye-slot">
+      <img id="sci-eye-img" src="" alt="Sakuga Cut-In Eyes" />
+    </div>
+    <div class="sci-text-group">
+      <div class="sci-kanji" id="sci-kanji">覚醒 // AWAKENING</div>
+      <div class="sci-sub" id="sci-sub">CHAPTER 02 · SHIBUYA CYBER BREACH</div>
+    </div>
+    <div class="sci-slash"></div>
+  </div>
+</div>
+
 </body>
 </html>
