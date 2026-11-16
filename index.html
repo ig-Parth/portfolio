@@ -281,6 +281,33 @@ body{background:var(--paper);color:var(--ink);overflow-x:clip;position:relative}
 .body-bold{font-family:var(--ub);font-size:clamp(11px,1vw,15px);letter-spacing:.02em;text-transform:uppercase;font-weight:800;line-height:1.2}
 .body-regular{font-family:var(--sn);font-size:15px;letter-spacing:.005em;font-weight:300;line-height:1.5}
 
+/* ==================== ANIME GAME CURSOR & TRAIL ==================== */
+#manga-cursor{
+  position:fixed;top:0;left:0;width:24px;height:24px;pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);transition:transform 0.06s ease-out, opacity 0.2s, border-color 0.2s;
+  opacity:0;border:1px solid rgba(201,37,33,0.65);border-radius:50%;
+}
+#manga-cursor.on{opacity:1}
+#manga-cursor::before{content:'';position:absolute;top:50%;left:-4px;right:-4px;height:1px;background:var(--crimson);transform:translateY(-50%)}
+#manga-cursor::after{content:'';position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--crimson);transform:translateX(-50%)}
+#manga-cursor.hover{transform:translate(-50%,-50%) scale(1.4) rotate(45deg);border-color:#E53935;background:rgba(229,57,53,0.08)}
+#manga-trail-cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998}
+
+/* ==================== ANIME GAME MILESTONE TOAST ==================== */
+#game-toast{
+  position:fixed;top:28px;left:50%;transform:translateX(-50%) translateY(-35px);
+  background:rgba(14,14,18,0.92);border:1px solid var(--crimson);color:#FAF8F2;
+  padding:10px 22px;border-radius:2px;z-index:99995;opacity:0;pointer-events:none;
+  box-shadow:0 12px 35px rgba(0,0,0,0.6),0 0 16px rgba(201,37,33,0.35);
+  font:700 11px/1.3 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+  backdrop-filter:blur(8px);
+}
+#game-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#game-toast .gt-badge{color:var(--crimson);font-size:14px}
+#game-toast .gt-title{color:#FAF8F2;font-weight:700}
+#game-toast .gt-sub{color:#9E9B93;font-size:9.5px;letter-spacing:0.18em;margin-top:2px}
+
 /* Analog paper grain */
 body::after{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.025;
@@ -2284,12 +2311,48 @@ const Sound=(()=>{
     g.gain.exponentialRampToValueAtTime(.0001,t+0.042);
     o.connect(g);g.connect(master);o.start(t);o.stop(t+0.048);
   }
-  function step(stone=false, intensity=1.0){
+  /* Ethereal Generative Pentatonic Anime Game OST Pad */
+  let ostGain=null, ostVoices=[];
+  function startAmbientOST(){
+    if(!live||!boot()||ostGain)return;
+    ostGain=ctx.createGain();
+    ostGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    ostGain.gain.linearRampToValueAtTime(0.024, ctx.currentTime + 3.0);
+    const padFilter=ctx.createBiquadFilter();
+    padFilter.type='lowpass';padFilter.frequency.value=850;
+    ostGain.connect(padFilter);padFilter.connect(master);
+    // Db minor 9 / Gb sus / Ab anime cinematic chord frequencies
+    const chord=[138.59, 164.81, 207.65, 277.18, 329.63];
+    chord.forEach((f, idx)=>{
+      const osc=ctx.createOscillator(), g=ctx.createGain();
+      osc.type=idx%2===0?'sine':'triangle';
+      osc.frequency.value=f;
+      // Soft analog pitch drift
+      const lfo=ctx.createOscillator(), lfoG=ctx.createGain();
+      lfo.frequency.value=0.15 + idx*0.04;
+      lfoG.gain.value=0.8;
+      lfo.connect(osc.detune);lfo.start();
+      g.gain.value=0.18/(idx+1);
+      osc.connect(g);g.connect(ostGain);osc.start();
+      ostVoices.push(osc);
+    });
+  }
+
+  function step(stone=false, intensity=1.0, panVal=0.0){
     if(!live||!boot()||!nb)return;
     const now=performance.now();if(now-lastStepT<140)return;lastStepT=now;
     const t=ctx.currentTime;
     const sc=Math.max(0.35, Math.min(1.4, intensity));
-    /* Soft organic sneaker sole or sacred marble tap with dynamic velocity response */
+    let dest=master;
+    if(ctx.createStereoPanner){
+      try{
+        const panner=ctx.createStereoPanner();
+        panner.pan.setValueAtTime(clamp(panVal,-0.85,0.85), t);
+        panner.connect(master);
+        dest=panner;
+      }catch{}
+    }
+    /* Soft organic sneaker sole or sacred marble tap with dynamic velocity response & spatial stereo pan */
     const o=ctx.createOscillator(),og=ctx.createGain();
     o.type='sine';
     o.frequency.setValueAtTime((stone?128:86)*sc,t);
@@ -2297,13 +2360,13 @@ const Sound=(()=>{
     og.gain.setValueAtTime(.0001,t);
     og.gain.linearRampToValueAtTime((stone?.075:.062)*Math.min(1.2,sc),t+.006);
     og.gain.exponentialRampToValueAtTime(.0001,t+.082);
-    o.connect(og);og.connect(master);o.start(t);o.stop(t+.09);
+    o.connect(og);og.connect(dest);o.start(t);o.stop(t+.09);
     const b=ctx.createBufferSource(),fl=ctx.createBiquadFilter(),g=ctx.createGain();
     b.buffer=nb;fl.type='bandpass';fl.frequency.value=stone?480:290;fl.Q.value=0.9;
     g.gain.setValueAtTime(.0001,t);
     g.gain.linearRampToValueAtTime((stone?.052:.040)*sc,t+.004);
     g.gain.exponentialRampToValueAtTime(.0001,t+.055);
-    b.connect(fl);fl.connect(g);g.connect(master);b.start(t,Math.random()*1.2,.07);
+    b.connect(fl);fl.connect(g);g.connect(dest);b.start(t,Math.random()*1.2,.07);
   }
     /* Cyber-Origami Firewall Breach Telemetry Pulse (replaces harsh engine drone) */
   function truckApproach(pct){
@@ -2527,7 +2590,8 @@ const Sound=(()=>{
     muteTab(document.hidden);
   });
   return{
-    enable(on){setOn(on)},
+    enable(on){setOn(on);if(on)startAmbientOST();},
+    startAmbientOST,
     muteTab,
     uiTap,
     setVoice,
@@ -3729,12 +3793,22 @@ function drawParthWalkActor(t,pMist,cam){
   const phoneIm=isPhone?(getPaperCutSprite('p_phone')||IMG.p_phone):null;
   const phi=((walkFloat/STRIDE_FRAMES)%1+1)%1;
 
+  /* Dynamic Sneaker Ground Contact Resonance Ripples */
+  if(typeof SNEAKER_RIPPLES==='undefined') window.SNEAKER_RIPPLES=[];
   if(walkAmt>0.6&&pMist>0.03&&pMist<0.82){
     const stepIdx=Math.floor((totalTravel/stridePx)*2);
     if(stepIdx!==lastWalkStepPhase){
       lastWalkStepPhase=stepIdx;
       const stepIntensity=clamp((scrollVelS||0.6)*0.8+0.5, 0.45, 1.35);
-      Sound.step(false, stepIntensity);
+      const spatialPan=clamp((baseX/w)*1.5 - 0.75, -0.85, 0.85);
+      Sound.step(false, stepIntensity, spatialPan);
+      SNEAKER_RIPPLES.push({
+        x: baseX + (phi>0.5 ? drawW*0.08 : -drawW*0.10),
+        y: baseY - 2,
+        r: 3,
+        maxR: drawW*0.38,
+        birth: t
+      });
     }
   }
 
@@ -3754,6 +3828,25 @@ function drawParthWalkActor(t,pMist,cam){
   const idleChest = isPhone ? (1 + Math.sin(t * 2.2) * 0.006) : 1;
   const bob = isPhone ? idleBreathe : (-Math.abs(Math.sin(phi * Math.PI * 2)) * 6.2 * walkAmt * (1 - recoilBlend));
   const gshR = drawW * (0.40 - bob * 0.002);
+
+  // Render dynamic sneaker sole ground impact resonance rings
+  if(window.SNEAKER_RIPPLES&&window.SNEAKER_RIPPLES.length){
+    for(let ri=window.SNEAKER_RIPPLES.length-1;ri>=0;ri--){
+      const rip=window.SNEAKER_RIPPLES[ri];
+      const age=t-rip.birth;
+      if(age>0.75){window.SNEAKER_RIPPLES.splice(ri,1);continue;}
+      const prog=age/0.75;
+      const curR=rip.r+(rip.maxR-rip.r)*Math.sqrt(prog);
+      const curAlpha=(1-prog)*0.45;
+      c.save();
+      c.translate(rip.x,rip.y);
+      c.scale(1,0.18);
+      c.strokeStyle=`rgba(201,37,33,${curAlpha.toFixed(2)})`;
+      c.lineWidth=1.5*(1-prog*0.5);
+      c.beginPath();c.arc(0,0,curR,0,Math.PI*2);c.stroke();
+      c.restore();
+    }
+  }
 
   // Ground contact ambient occlusion & dual sneaker sole anchor shadows
   c.save();c.translate(baseX,baseY-3);c.scale(1,0.16);
@@ -5003,12 +5096,27 @@ addEventListener('keydown',e=>{
   }
 },{passive:false});
 
-/* Smooth Anchor Jumps */
-$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+/* Smooth Anchor Jumps with Cinematic Hyper-Warp */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   const id=a.getAttribute('href');
   if(!id||id.length<2)return;
   const target=$(id);
-  if(target){e.preventDefault();smoothScrollTo(target.getBoundingClientRect().top+window.scrollY)}
+  if(target){
+    e.preventDefault();
+    const isWarp = id==='#collection'||id==='#scene-sanctuary-story';
+    if(isWarp){
+      Sound.resumeCtx();
+      Sound.whoosh();
+      const flash=$('#sakuga-flash');
+      if(flash){
+        flash.style.opacity='0.42';
+        setTimeout(()=>{flash.style.opacity='0'},180);
+      }
+    }
+    const m=LAYOUT_CACHE.get(target);
+    const dstTop = m ? m.top : target.getBoundingClientRect().top + window.scrollY;
+    smoothScrollTo(dstTop);
+  }
 }));
 
 /* Scroll Reveal Observer for Collection & Cards */
@@ -5422,6 +5530,7 @@ function tick(ts){
     drawPortalParticles(portalFxCv,tTime,0.9+pPortS*0.95,{x:0.50,y:0.48,r:0.28});
     if(!firstRun&&pPortT>0.18&&pPortT<0.84&&isNearView($('.portal-panel-wrap'),-30)){
       Sound.cue(pPortT<0.52?'portal':'portal2');
+      showGameMilestone('DIMENSIONAL PIONEER', 'ROOT FIREWALL PORTAL ACTIVATED');
     }
   }
 
@@ -5710,12 +5819,83 @@ function tick(ts){
   const inCol=mCol?(mCol.top-curY)<220:false;
   $('#nav-exp').classList.toggle('active',!inCol);
   $('#nav-col').classList.toggle('active',inCol);
-  if(!firstRun&&inCol)Sound.cue('collection');
+  if(!firstRun&&inCol){
+    Sound.cue('collection');
+    showGameMilestone('ARCHIVE ACCESS GRANTED', 'FULL DOSSIER & CASEFILES UNLOCKED');
+  }
 
   if(didInitDraw&&(!REF_PORTRAITS.parth||!REF_PORTRAITS.god))initRefPortraits();
   requestAnimationFrame(tick);
 }
 initTypewriters();
+/* ==================== ANIME GAME MILESTONE TOAST ENGINE ==================== */
+const UNLOCKED_ACHIEVEMENTS = new Set();
+function showGameMilestone(title, sub){
+  const key = title + '_' + sub;
+  if(UNLOCKED_ACHIEVEMENTS.has(key))return;
+  UNLOCKED_ACHIEVEMENTS.add(key);
+  const toast=$('#game-toast'), tEl=$('#gt-title'), sEl=$('#gt-sub');
+  if(!toast||!tEl||!sEl)return;
+  tEl.textContent=title;sEl.textContent=sub;
+  toast.classList.add('show');
+  Sound.chime(1046,0.85,0.045);
+  setTimeout(()=>{toast.classList.remove('show')},3800);
+}
+
+/* ==================== MANGA CURSOR & SLASH TRAIL SYSTEM ==================== */
+const mCur=$('#manga-cursor'), trailCv=$('#manga-trail-cv');
+const trailPoints=[];
+if(trailCv){
+  const tcx=trailCv.getContext('2d');
+  function resizeTrailCv(){
+    trailCv.width=window.innerWidth;
+    trailCv.height=window.innerHeight;
+  }
+  resizeTrailCv();
+  addEventListener('resize',resizeTrailCv,{passive:true});
+
+  let curMouseX=-100,curMouseY=-100,isCursorActive=false;
+  addEventListener('pointermove',e=>{
+    curMouseX=e.clientX;curMouseY=e.clientY;
+    if(!isCursorActive&&mCur){isCursorActive=true;mCur.classList.add('on')}
+    if(mCur){
+      mCur.style.left=curMouseX+'px';
+      mCur.style.top=curMouseY+'px';
+    }
+    trailPoints.push({x:curMouseX,y:curMouseY,life:1.0});
+    if(trailPoints.length>22)trailPoints.shift();
+  },{passive:true});
+
+  document.querySelectorAll('a,button,.fact-card,.medallion,.taste-card,.rail-pip').forEach(el=>{
+    el.addEventListener('pointerenter',()=>{if(mCur)mCur.classList.add('hover')},{passive:true});
+    el.addEventListener('pointerleave',()=>{if(mCur)mCur.classList.remove('hover')},{passive:true});
+  });
+
+  function renderMangaTrail(){
+    if(!tcx)return;
+    tcx.clearRect(0,0,trailCv.width,trailCv.height);
+    if(trailPoints.length>2){
+      tcx.save();
+      tcx.strokeStyle='rgba(201,37,33,0.32)';
+      tcx.lineCap='round';tcx.lineJoin='round';
+      for(let i=1;i<trailPoints.length;i++){
+        const p0=trailPoints[i-1], p1=trailPoints[i];
+        p0.life-=0.055;
+        if(p0.life<=0)continue;
+        tcx.lineWidth=Math.max(0.5, p0.life*3.2);
+        tcx.strokeStyle=`rgba(201,37,33,${(p0.life*0.38).toFixed(2)})`;
+        tcx.beginPath();
+        tcx.moveTo(p0.x,p0.y);
+        tcx.lineTo(p1.x,p1.y);
+        tcx.stroke();
+      }
+      tcx.restore();
+    }
+    requestAnimationFrame(renderMangaTrail);
+  }
+  requestAnimationFrame(renderMangaTrail);
+}
+
 /* Attach Soft Anime UI Sound Clicks */
 ['#movie-btn','#voice-btn','#eq-btn','.tab-btn','.rail-pip','.btn-dark','.btn-outline','#print-resume-btn','#print-resume-btn-2','.fact-card','.medallion'].forEach(sel=>{
   document.querySelectorAll(sel).forEach(el=>{
@@ -5897,5 +6077,14 @@ $('#replay-btn').onclick=()=>{
 };
 </script>
 <div id="portal-flash" aria-hidden="true"></div>
+<div id="manga-cursor" aria-hidden="true"></div>
+<canvas id="manga-trail-cv" aria-hidden="true"></canvas>
+<div id="game-toast" role="status" aria-live="polite">
+  <span class="gt-badge">◈</span>
+  <div>
+    <div class="gt-title" id="gt-title">MILESTONE UNLOCKED</div>
+    <div class="gt-sub" id="gt-sub">SYSTEM // PARTH NEXUS 01</div>
+  </div>
+</div>
 </body>
 </html>
