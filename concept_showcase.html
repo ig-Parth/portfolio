@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Nexus 01 — 4 Visual Design Reference Boards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==================== ULTRA-HD & SMOOTH ENGINE ==================== */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+body {
+  background: #060608;
+  color: #FAF8F2;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sl-card, .p5-panel, .cp-shard, .zzz-box {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.sl-card:hover, .cp-shard:hover, .zzz-box:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 229, 255, 0.18);
+}
+
+/* Nav Switcher */
+#nav-switcher {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  display: flex;
+  gap: 8px;
+  background: rgba(14, 14, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 10px;
+  border-radius: 40px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #B5B2A8;
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.08em;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: #FAF8F2;
+  color: #0A0A0E;
+  box-shadow: 0 2px 12px rgba(255,255,255,0.3);
+}
+
+/* Concept Board Section */
+.concept-board {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: none;
+  overflow: hidden;
+}
+.concept-board.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================================
+   CONCEPT 1: SOLO LEVELING SYSTEM (DARK FANTASY RPG)
+   ======================================================== */
+#board-solo-leveling {
+  background: radial-gradient(circle at 50% 30%, #160D2E 0%, #08060E 65%, #030206 100%);
+  padding: 80px 48px 48px;
+  color: #E2E8F0;
+  justify-content: center;
+  align-items: center;
+}
+.sl-smoke-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(147, 51, 234, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.sl-runes-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 229, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.sl-window {
+  width: min(1080px, 92vw);
+  background: rgba(10, 10, 16, 0.88);
+  border: 1.5px solid #00E5FF;
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.25), inset 0 0 24px rgba(147, 51, 234, 0.2);
+  border-radius: 4px;
+  backdrop-filter: blur(16px);
+  padding: 32px;
+  position: relative;
+  z-index: 2;
+}
+.sl-window::before {
+  content: 'SYSTEM // PLAYER STATUS WINDOW';
+  position: absolute;
+  top: -12px;
+  left: 28px;
+  background: #00E5FF;
+  color: #030206;
+  font: 900 10.5px/1 'JetBrains Mono', monospace;
+  padding: 3px 12px;
+  letter-spacing: 0.2em;
+  border-radius: 2px;
+}
+.sl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+  padding-bottom: 20px;
+  margin-bottom: 26px;
+}
+.sl-char-title {
+  font: 900 36px/1 'Syne', sans-serif;
+  color: #FAF8F2;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+}
+.sl-class-tag {
+  font: 700 13px/1 'JetBrains Mono', monospace;
+  color: #A855F7;
+  letter-spacing: 0.16em;
+  margin-top: 6px;
+}
+.sl-level-badge {
+  text-align: right;
+}
+.sl-level-num {
+  font: 900 48px/1 'JetBrains Mono', monospace;
+  color: #00E5FF;
+  text-shadow: 0 0 25px rgba(0, 229, 255, 0.8);
+}
+.sl-level-label {
+  font: 700 10px/1 'JetBrains Mono', monospace;
+  color: #94A3B8;
+  letter-spacing: 0.2em;
+}
+.sl-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr 1.2fr;
+  gap: 24px;
+}
+.sl-card {
+  background: rgba(18, 16, 28, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 3px;
+  padding: 18px;
+}
+.sl-card-title {
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  color: #00E5FF;
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sl-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font: 600 12px/1 'JetBrains Mono', monospace;
+}
+.sl-stat-name { color: #CBD5E1; }
+.sl-stat-val { color: #A855F7; font-weight: 800; }
+.sl-bar-bg { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+.sl-bar-fill { height: 100%; background: linear-gradient(90deg, #00E5FF, #A855F7); }
+.sl-shadow-soldier {
+  background: rgba(26, 16, 42, 0.85);
+  border-left: 3px solid #A855F7;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+.sl-shadow-name { font: 800 13px/1 'Syne', sans-serif; color: #FAF8F2; }
+.sl-shadow-rank { font: 700 9px/1 'JetBrains Mono', monospace; color: #00E5FF; margin-top: 3px; }
+.sl-quote-box {
+  margin-top: 24px;
+  background: rgba(0, 229, 255, 0.06);
+  border: 1px dashed rgba(0, 229, 255, 0.4);
+  padding: 14px 18px;
+  font: 600 12px/1.4 'JetBrains Mono', monospace;
+  color: #7DD3FC;
+  border-radius: 3px;
+}
+
+/* ========================================================
+   CONCEPT 2: PERSONA 5 ROYAL (METAVERSE PALACE PUNK)
+   ======================================================== */
+#board-persona5 {
+  background: #E60012;
+  padding: 80px 48px 48px;
+  color: #FFFFFF;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.p5-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#B8000E 2px, transparent 2px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+.p5-layout {
+  width: min(1120px, 94vw);
+  position: relative;
+  z-index: 2;
+  transform: rotate(-2.5deg);
+}
+.p5-banner-huge {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 18px 36px;
+  display: inline-block;
+  transform: skewX(-14deg);
+  border: 4px solid #FFFFFF;
+  box-shadow: 12px 12px 0px rgba(0,0,0,0.8);
+  margin-bottom: 24px;
+}
+.p5-banner-huge h1 {
+  font: 900 48px/0.9 'Syne', sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.p5-banner-huge span { color: #FFEE00; }
+.p5-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1.8fr;
+  gap: 28px;
+}
+.p5-panel {
+  background: #000000;
+  border: 3px solid #FFFFFF;
+  box-shadow: 10px 10px 0px #000000;
+  padding: 24px;
+  transform: skewX(-4deg);
+}
+.p5-panel-title {
+  background: #FFEE00;
+  color: #000000;
+  display: inline-block;
+  font: 900 14px/1 'JetBrains Mono', monospace;
+  padding: 4px 12px;
+  letter-spacing: 0.16em;
+  transform: skewX(10deg);
+  margin-bottom: 16px;
+}
+.p5-calling-card {
+  background: #FFFFFF;
+  color: #000000;
+  padding: 20px;
+  transform: rotate(3deg);
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.6);
+  border: 3px solid #000000;
+  margin-bottom: 18px;
+}
+.p5-card-header {
+  font: 900 20px/1 'Syne', sans-serif;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+.p5-card-body {
+  font: 700 12px/1.3 'JetBrains Mono', monospace;
+  color: #111111;
+}
+.p5-all-out {
+  background: #FFEE00;
+  color: #000000;
+  padding: 14px 20px;
+  border: 3px solid #000000;
+  font: 900 16px/1 'Syne', sans-serif;
+  transform: skewX(-8deg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ========================================================
+   CONCEPT 3: CYBERPUNK 2099 (BRAINDANCE CYBERDECK)
+   ======================================================== */
+#board-cyberpunk {
+  background: #08090C;
+  padding: 80px 48px 48px;
+  color: #00F0FF;
+  justify-content: center;
+  align-items: center;
+}
+.cp-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.25) 0px, rgba(0,0,0,0.25) 2px, transparent 2px, transparent 4px);
+  pointer-events: none;
+}
+.cp-deck {
+  width: min(1080px, 92vw);
+  border: 2px solid #FCEE0A;
+  background: rgba(10, 12, 16, 0.94);
+  box-shadow: 0 0 35px rgba(252, 238, 10, 0.22), inset 0 0 30px rgba(0, 240, 255, 0.08);
+  border-radius: 2px;
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+}
+.cp-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #00F0FF;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  color: #FCEE0A;
+  letter-spacing: 0.16em;
+}
+.cp-hero-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+.cp-title {
+  font: 900 42px/1 'Syne', sans-serif;
+  color: #FCEE0A;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 16px rgba(252, 238, 10, 0.6);
+}
+.cp-subtitle {
+  font: 700 12px/1.4 'JetBrains Mono', monospace;
+  color: #00F0FF;
+  margin-top: 8px;
+}
+.cp-meter-box {
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid #00F0FF;
+  padding: 16px;
+  border-radius: 2px;
+}
+.cp-meter-title { font: 800 11px/1 'JetBrains Mono', monospace; color: #FAF8F2; margin-bottom: 10px; }
+.cp-shards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.cp-shard {
+  background: rgba(18, 20, 28, 0.9);
+  border-top: 3px solid #00F0FF;
+  border-right: 1px solid rgba(0, 240, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  border-left: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 16px;
+  border-radius: 2px;
+}
+.cp-shard-id { font: 700 9px/1 'JetBrains Mono', monospace; color: #FCEE0A; margin-bottom: 4px; }
+.cp-shard-name { font: 800 15px/1.2 'Syne', sans-serif; color: #FAF8F2; margin-bottom: 6px; }
+.cp-shard-desc { font: 400 10.5px/1.3 'JetBrains Mono', monospace; color: #94A3B8; }
+
+/* ========================================================
+   CONCEPT 4: ZENLESS ZONE ZERO / GENSHIN (AAA LOBBY)
+   ======================================================== */
+#board-zenless {
+  background: linear-gradient(135deg, #12131A 0%, #1A1D28 50%, #0E1017 100%);
+  padding: 80px 48px 48px;
+  color: #FAF8F2;
+  justify-content: center;
+  align-items: center;
+}
+.zzz-glass-frame {
+  width: min(1080px, 92vw);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  backdrop-filter: blur(28px);
+  padding: 34px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 2;
+}
+.zzz-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+.zzz-kicker {
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  color: #E4B648;
+  letter-spacing: 0.22em;
+  margin-bottom: 6px;
+}
+.zzz-name {
+  font: 900 40px/1 'Plus Jakarta Sans', sans-serif;
+  color: #FAF8F2;
+  letter-spacing: -0.01em;
+}
+.zzz-badge-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.zzz-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font: 700 10.5px/1 'JetBrains Mono', monospace;
+  color: #FAF8F2;
+}
+.zzz-pill.gold { background: rgba(228, 182, 72, 0.15); border-color: #E4B648; color: #E4B648; }
+.zzz-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.5fr 1fr;
+  gap: 20px;
+}
+.zzz-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+.zzz-box-title {
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  color: #94A3B8;
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.zzz-mission-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.zzz-mission-title { font: 800 13px/1 'Plus Jakarta Sans', sans-serif; color: #FAF8F2; }
+.zzz-mission-tag { font: 700 9px/1 'JetBrains Mono', monospace; color: #38BDF8; }
+.zzz-voice-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font: 600 11px/1 'JetBrains Mono', monospace;
+  color: #CBD5E1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+</style>
+</head>
+<body>
+
+<nav id="nav-switcher">
+  <button class="tab-btn active" onclick="showBoard('solo-leveling')">01 · SOLO LEVELING</button>
+  <button class="tab-btn" onclick="showBoard('persona5')">02 · PERSONA 5</button>
+  <button class="tab-btn" onclick="showBoard('cyberpunk')">03 · CYBERPUNK 2099</button>
+  <button class="tab-btn" onclick="showBoard('zenless')">04 · ZENLESS ZONE ZERO</button>
+</nav>
+
+<!-- CONCEPT 1 -->
+<section class="concept-board active" id="board-solo-leveling">
+  <div class="sl-smoke-bg"></div>
+  <div class="sl-runes-bg"></div>
+  <div class="sl-window">
+    <div class="sl-header">
+      <div>
+        <h1 class="sl-char-title">PARTH VIJAY GIDDE</h1>
+        <div class="sl-class-tag">CLASS: SOVEREIGN CYBER ARCHITECT // RANK S</div>
+      </div>
+      <div class="sl-level-badge">
+        <div class="sl-level-num">LV. 99</div>
+        <div class="sl-level-label">PLAYER STATUS</div>
+      </div>
+    </div>
+    <div class="sl-grid">
+      <div class="sl-card">
+        <div class="sl-card-title">◈ STATS MATRIX</div>
+        <div class="sl-stat-row"><span>SYSTEMS DEFENSE</span><span class="sl-stat-val">98</span></div>
+        <div class="sl-bar-bg"><div class="sl-bar-fill" style="width:98%;"></div></div>
+        <div class="sl-stat-row" style="margin-top:12px;"><span>FULL-STACK SPEED</span><span class="sl-stat-val">96</span></div>
+        <div class="sl-bar-bg"><div class="sl-bar-fill" style="width:96%;"></div></div>
+        <div class="sl-stat-row" style="margin-top:12px;"><span>DEVHARBOUR COMMAND</span><span class="sl-stat-val">99</span></div>
+        <div class="sl-bar-bg"><div class="sl-bar-fill" style="width:99%;"></div></div>
+        <div class="sl-stat-row" style="margin-top:12px;"><span>HARDWARE &amp; IOT</span><span class="sl-stat-val">92</span></div>
+        <div class="sl-bar-bg"><div class="sl-bar-fill" style="width:92%;"></div></div>
+      </div>
+      <div class="sl-card">
+        <div class="sl-card-title">⚔ SHADOW ARMY // EXTRACTED BUILDS</div>
+        <div class="sl-shadow-soldier">
+          <div class="sl-shadow-name">GARAA · SECURITY AGENT</div>
+          <div class="sl-shadow-rank">RANK S // BALOON NATIONAL 1ST RUNNER-UP</div>
+        </div>
+        <div class="sl-shadow-soldier">
+          <div class="sl-shadow-name">DEVHARBOUR ECOSYSTEM</div>
+          <div class="sl-shadow-rank">RANK S // 4,000+ DEVELOPERS CONNECTED</div>
+        </div>
+        <div class="sl-shadow-soldier">
+          <div class="sl-shadow-name">ZYR · WEB SYSTEM</div>
+          <div class="sl-shadow-rank">RANK A // PRODUCTION DISTRIBUTED ENGINE</div>
+        </div>
+      </div>
+      <div class="sl-card">
+        <div class="sl-card-title">⬡ RUNES INVENTORY</div>
+        <div class="sl-stat-row"><span>PYTHON SECURITY</span><span style="color:#00E5FF;">RUNE [S]</span></div>
+        <div class="sl-stat-row"><span>LINUX KERNEL</span><span style="color:#00E5FF;">RUNE [S]</span></div>
+        <div class="sl-stat-row"><span>REACT / VITE</span><span style="color:#00E5FF;">RUNE [A]</span></div>
+        <div class="sl-stat-row"><span>GENERATIVE AI</span><span style="color:#00E5FF;">RUNE [S]</span></div>
+      </div>
+    </div>
+    <div class="sl-quote-box">
+      "IF THIS ENGINE AUDITS REAL CODE—OPEN MY LOGS AND RUN EVERY TEST!" — PARTH VIJAY GIDDE
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT 2 -->
+<section class="concept-board" id="board-persona5">
+  <div class="p5-dots"></div>
+  <div class="p5-layout">
+    <div class="p5-banner-huge">
+      <h1>TAKE YOUR <span>CODE!</span></h1>
+    </div>
+    <div class="p5-grid">
+      <div>
+        <div class="p5-calling-card">
+          <div class="p5-card-header">CALLING CARD // PARTH V. GIDDE</div>
+          <div class="p5-card-body">
+            "SIR SOVEREIGN AUDITOR: YOU WHO DOUBTED OUR ARCHITECTURE. WE HAVE DEPLOYED FIVE PRODUCTION ENGINES AND 4,000 BUILDERS ACROSS MUMBAI. WE WILL STEAL YOUR APPROVAL TODAY."
+          </div>
+        </div>
+        <div class="p5-all-out">
+          <span>★ ALL-OUT ATTACK FINISHER</span>
+          <span>GARAA 1ST RUNNER-UP</span>
+        </div>
+      </div>
+      <div class="p5-panel">
+        <div class="p5-panel-title">METAVERSE PALACE INVASION</div>
+        <h2 style="font:900 28px/1.1 'Syne',sans-serif; margin-bottom:12px; color:#FFEE00;">PHANTOM THIEF OF SYSTEMS</h2>
+        <p style="font:700 13px/1.4 'JetBrains Mono',monospace; color:#E2E8F0; margin-bottom:16px;">
+          Asymmetrical red trench coat, dynamic skewed panels, bold vinyl records menu, halftone pop-art explosions.
+        </p>
+        <div style="background:#FFFFFF; color:#000000; padding:10px 14px; font:900 12px/1 'Syne',sans-serif; transform:skewX(-6deg);">
+          PRESS [X] TO TRIGGER ALL-OUT SLICE FINISHER
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT 3 -->
+<section class="concept-board" id="board-cyberpunk">
+  <div class="cp-scanlines"></div>
+  <div class="cp-deck">
+    <div class="cp-bar">
+      <span>◈ NEO-NAVI MUMBAI // 2099 CYBERDECK v4.8</span>
+      <span>LATENCY: 0.12MS · HEAP: 1024MB</span>
+      <span>SANDEVISTAN: READY</span>
+    </div>
+    <div class="cp-hero-row">
+      <div>
+        <div class="cp-title">PARTH // DECK_01</div>
+        <div class="cp-subtitle">NEURAL INTERFACE LOADED · CYBERSECURITY &amp; DISTRIBUTED IOT</div>
+      </div>
+      <div class="cp-meter-box">
+        <div class="cp-meter-title">OVERCLOCK FREQUENCY</div>
+        <div style="font:900 24px/1 'JetBrains Mono',monospace; color:#FCEE0A;">4.80 GHz · ZERO DROPS</div>
+        <div style="font:400 10px/1.2 'JetBrains Mono',monospace; color:#94A3B8; margin-top:4px;">HOLD [SPACE] FOR SLOW-MOTION BULLET TIME</div>
+      </div>
+    </div>
+    <div class="cp-shards-grid">
+      <div class="cp-shard">
+        <div class="cp-shard-id">SHARD 01 // DEVHARBOUR</div>
+        <div class="cp-shard-name">4,000+ Nodes</div>
+        <div class="cp-shard-desc">Distributed peer-to-peer developer ecosystem in western Maharashtra.</div>
+      </div>
+      <div class="cp-shard">
+        <div class="cp-shard-id">SHARD 02 // GARAA AGENT</div>
+        <div class="cp-shard-name">National Podium</div>
+        <div class="cp-shard-desc">Real-time anti-spoofing verification and automated security logging.</div>
+      </div>
+      <div class="cp-shard">
+        <div class="cp-shard-id">SHARD 03 // LASER SENSORS</div>
+        <div class="cp-shard-name">Hardware Matrix</div>
+        <div class="cp-shard-desc">Integrated Arduino and IoT environmental telemetry node.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT 4 -->
+<section class="concept-board" id="board-zenless">
+  <div class="zzz-glass-frame">
+    <div class="zzz-header-row">
+      <div>
+        <div class="zzz-kicker">AGENT SELECT // S-RANK</div>
+        <div class="zzz-name">PARTH VIJAY GIDDE</div>
+        <div class="zzz-badge-row">
+          <span class="zzz-pill gold">SSR ★★★★★</span>
+          <span class="zzz-pill">DEFENSE // SYSTEM ARCHITECT</span>
+          <span class="zzz-pill">DEVHARBOUR FOUNDER</span>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font:800 26px/1 'JetBrains Mono',monospace; color:#E4B648;">AFFINITY: MAX</div>
+        <div style="font:600 10px/1 'JetBrains Mono',monospace; color:#94A3B8; letter-spacing:0.18em;">SHIPPED BUILDS: 05</div>
+      </div>
+    </div>
+    <div class="zzz-grid">
+      <div class="zzz-box">
+        <div class="zzz-box-title">VOICE LOGS (日本語)</div>
+        <div class="zzz-voice-pill"><span>▶</span> Idle Voice Line 01</div>
+        <div class="zzz-voice-pill"><span>▶</span> About DevHarbour</div>
+        <div class="zzz-voice-pill"><span>▶</span> Hackathon Victory</div>
+      </div>
+      <div class="zzz-box">
+        <div class="zzz-box-title">MISSION DISPATCH RECORD</div>
+        <div class="zzz-mission-item">
+          <div><div class="zzz-mission-title">Baloon National 2026</div><div class="zzz-mission-tag">GARAA · 1ST RUNNER-UP</div></div>
+          <span style="font:800 11px/1 'JetBrains Mono',monospace; color:#4ADE80;">COMPLETE ✓</span>
+        </div>
+        <div class="zzz-mission-item">
+          <div><div class="zzz-mission-title">IIT Bombay Techfest</div><div class="zzz-mission-tag">LEADERSHIP · RANK 88</div></div>
+          <span style="font:800 11px/1 'JetBrains Mono',monospace; color:#4ADE80;">COMPLETE ✓</span>
+        </div>
+        <div class="zzz-mission-item">
+          <div><div class="zzz-mission-title">Tripple One Solutions</div><div class="zzz-mission-tag">SECURITY INTERNSHIP</div></div>
+          <span style="font:800 11px/1 'JetBrains Mono',monospace; color:#4ADE80;">COMPLETE ✓</span>
+        </div>
+      </div>
+      <div class="zzz-box">
+        <div class="zzz-box-title">5-STAR ARTIFACT FORGE</div>
+        <div style="margin-bottom:12px; font:700 11.5px/1 'JetBrains Mono',monospace; color:#E4B648;">
+          +88% SYSTEM COMPILATION
+        </div>
+        <div style="font:400 10.5px/1.3 'JetBrains Mono',monospace; color:#94A3B8;">
+          Vulnerability analysis, threat mitigation, and high-velocity shipping across web and IoT.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function showBoard(id){
+  document.querySelectorAll('.concept-board').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById('board-' + id);
+  if(target) target.classList.add('active');
+  const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.textContent.toLowerCase().includes(id.replace('-', ' ')));
+  if(btn) btn.classList.add('active');
+  try { history.replaceState(null, '', '#' + id); } catch(e){}
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const h = (location.hash || '').replace('#', '');
+  if(h && document.getElementById('board-' + h)){
+    showBoard(h);
+  }
+});
+if(location.hash){
+  const h = location.hash.replace('#', '');
+  if(h && document.getElementById('board-' + h)) showBoard(h);
+}
+</script>
+
+</body>
+</html>

@@ -238,6 +238,31 @@
 }
 </script>
 <style>
+/* ==================== ULTRA-HD & 120HZ LIQUID MOTION ENGINE ==================== */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto !important;
+}
+body {
+  text-rendering: optimizeLegibility;
+}
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+#anime-radar-hud, #quest-hud, #quest-clear-banner, #rpg-choice-wrap, #sakuga-cut-in, .diorama-wrap, .fact-card, .medallion, .taste-card, .retail-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
 :root{
   --charcoal:#1d1d1d;
   --void:#0D0D0F;
@@ -774,14 +799,14 @@ body.movie-mode #cinema-bars::before,body.movie-mode #cinema-bars::after{height:
 @keyframes driftDown{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(6px);opacity:.95}}
 .hero-cue i{font-style:normal;animation:driftDown 2s infinite}
 .hero-gyro-hud{
-  position:absolute;top:28px;left:50%;transform:translateX(-50%);
-  z-index:10;display:inline-flex;align-items:center;gap:8px;
-  padding:7px 18px;border-radius:100px;
-  background:rgba(14,14,18,0.72);border:1px solid rgba(255,255,255,0.18);
-  box-shadow:0 8px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  color:#DFDDD6;font:500 10px/1 var(--mn);letter-spacing:0.20em;text-transform:uppercase;
-  pointer-events:none;transition:opacity 0.3s ease, border-color 0.2s ease;user-select:none;
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  z-index:8999;display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:100px;
+  background:rgba(14,14,18,0.85);border:1px solid rgba(255,255,255,0.20);
+  box-shadow:0 8px 32px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.15);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:#DFDDD6;font:700 9.5px/1 var(--mn);letter-spacing:0.18em;text-transform:uppercase;
+  pointer-events:none;transition:all 0.22s ease;user-select:none;
 }
 .hero-gyro-hud .gyro-dot{
   width:6px;height:6px;border-radius:50%;background:#00E599;box-shadow:0 0 8px #00E599;display:inline-block;
@@ -1552,7 +1577,7 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
 @media print{
   @page{size:A4;margin:12mm}
   body{background:#fff !important;color:#111 !important;font-size:11pt}
-  body::after,#welcome-gate,#sound-gate,#brand-mark,#top-nav,#movie-btn,#voice-btn,#eq-btn,#jp-sub-bar,#film-vignette,#cinema-bars,#sakuga-flash,#impact-cut-fx,main#experience,#col-fx-cv,#dossier-modal,.lens-bar,.prod-arrows,.ev-tabs,#skill-svg,#skill-cats,#draft-mail-form,.enter-collection-bar,.print-hide{display:none !important}
+  body::after,#welcome-gate,#sound-gate,#brand-mark,#top-nav,#movie-btn,#voice-btn,#eq-btn,#jp-sub-bar,#film-vignette,#cinema-bars,#sakuga-flash,#impact-cut-fx,main#experience,#col-fx-cv,#dossier-modal,.lens-bar,.prod-arrows,.ev-tabs,#skill-svg,#skill-cats,#draft-mail-form,.enter-collection-bar,.print-hide,#anime-radar-hud,#quest-hud,#quest-clear-banner,#cyber-cursor,#cursor-spark-canvas,#radar-waypoint-modal{display:none !important}
   #print-resume-header{display:block !important;border-bottom:2px solid #121212;padding-bottom:10px;margin-bottom:14px}
   #collection{border:none !important;background:#fff !important}
   .col-sec{padding:12px 0 !important;border-bottom:1px solid #ccc !important;background:#fff !important;break-inside:avoid-page}
@@ -1564,6 +1589,505 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
   .portrait-plate{max-width:160px}
   a::after{content:''}
 }
+
+/* ==================== AAA ANIME CYBER-RADAR MINI-MAP HUD ==================== */
+#anime-radar-hud {
+  position: fixed;
+  top: 76px;
+  right: 22px;
+  z-index: 9100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+  user-select: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+}
+#radar-disc-wrap {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18,16,24,0.92) 0%, rgba(10,10,14,0.98) 100%);
+  border: 1.5px solid rgba(228,75,70,0.55);
+  box-shadow: 0 0 20px rgba(228,75,70,0.22), inset 0 0 14px rgba(0,0,0,0.85);
+  cursor: pointer;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+#radar-disc-wrap:hover {
+  transform: scale(1.05);
+  border-color: #2BB6D8;
+  box-shadow: 0 0 24px rgba(43,182,216,0.35), inset 0 0 16px rgba(43,182,216,0.15);
+}
+#radar-grid-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#radar-sweep-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(228,75,70,0.42) 0deg, transparent 65deg, transparent 360deg);
+  animation: radarBeamSpin 3.4s linear infinite;
+  pointer-events: none;
+}
+@keyframes radarBeamSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+#radar-player-blip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  background: #2BB6D8;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #2BB6D8, 0 0 14px #2BB6D8;
+  animation: playerBlipPulse 1.8s ease-in-out infinite;
+}
+@keyframes playerBlipPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.6); opacity: 0.65; }
+}
+.radar-telemetry {
+  background: rgba(14,14,18,0.92);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 3px;
+  padding: 4px 8px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  min-width: 110px;
+}
+.radar-sector-name {
+  font: 700 9.5px/1 var(--mn);
+  color: #FAF8F2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.radar-coords {
+  font: 400 8px/1 var(--mn);
+  color: #2BB6D8;
+  letter-spacing: 0.08em;
+}
+.radar-sync-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  margin-top: 4px;
+  border-radius: 1px;
+  overflow: hidden;
+}
+#radar-sync-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--crimson);
+  transition: width 0.15s ease-out;
+}
+
+/* ==================== SOLO LEVELING RPG QUEST OBJECTIVE RIBBON ==================== */
+#quest-hud {
+  position: fixed;
+  top: 76px;
+  left: 22px;
+  z-index: 9100;
+  max-width: 290px;
+  background: rgba(14,14,18,0.92);
+  border: 1px solid rgba(228,75,70,0.45);
+  border-left: 3.5px solid var(--crimson);
+  border-radius: 2px;
+  padding: 8px 12px 9px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 12px rgba(228,75,70,0.18);
+  user-select: none;
+  pointer-events: auto;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+.quest-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 700 8.5px/1 var(--mn);
+  color: #E4B648;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.quest-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #E4B648;
+  box-shadow: 0 0 6px #E4B648;
+  animation: questPulse 1.6s ease-in-out infinite;
+}
+@keyframes questPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+.quest-title {
+  font: 700 12px/1.2 var(--sans);
+  color: #FAF8F2;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+.quest-desc {
+  font: 400 9.5px/1.3 var(--mn);
+  color: #B8B5AB;
+  letter-spacing: 0.02em;
+}
+
+/* ==================== QUEST CLEAR ANIME HOLOGRAPHIC STAMP ==================== */
+#quest-clear-banner {
+  position: fixed;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  z-index: 99998;
+  pointer-events: none;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#quest-clear-banner.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.qc-stamp-box {
+  padding: 18px 46px;
+  background: rgba(12,12,16,0.96);
+  border: 2px solid #E4B648;
+  box-shadow: 0 0 45px rgba(228,182,72,0.5), inset 0 0 30px rgba(228,182,72,0.22);
+  transform: rotate(-3deg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.qc-stamp-box::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.45) 50%, transparent 60%);
+  animation: qcShine 2.2s infinite;
+}
+@keyframes qcShine {
+  from { transform: translateX(-60%); }
+  to { transform: translateX(60%); }
+}
+.qc-kicker {
+  font: 700 11px/1 var(--mn);
+  color: #2BB6D8;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.qc-title {
+  font: 900 32px/1 var(--sans);
+  color: #FAF8F2;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 18px rgba(228,182,72,0.8);
+}
+.qc-sub {
+  font: 600 12px/1 var(--mn);
+  color: #E4B648;
+  letter-spacing: 0.16em;
+  margin-top: 6px;
+}
+
+/* ==================== REACTIVE CYBER-CROSSHAIR CURSOR ==================== */
+@media (pointer: fine) {
+  body {
+    cursor: default;
+  }
+  #cyber-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    margin-top: -13px;
+    margin-left: -13px;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.18s ease, height 0.18s ease, margin 0.18s ease, transform 0.08s ease;
+  }
+  #cyber-cursor .cursor-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    transform: translate(-50%, -50%);
+    background: var(--crimson);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--crimson);
+  }
+  #cyber-cursor .cursor-reticle {
+    position: absolute;
+    inset: 0;
+    border: 1px dashed rgba(228,75,70,0.65);
+    border-radius: 50%;
+    animation: reticleSpin 6s linear infinite;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  @keyframes reticleSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  #cyber-cursor.hover {
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    margin-left: -22px;
+  }
+  #cyber-cursor.hover .cursor-dot {
+    background: #2BB6D8;
+    box-shadow: 0 0 10px #2BB6D8;
+  }
+  #cyber-cursor.hover .cursor-reticle {
+    border-color: #2BB6D8;
+    border-style: solid;
+    border-width: 1.5px;
+    transform: scale(1.1);
+  }
+}
+@media (pointer: coarse) {
+  #cyber-cursor, #cursor-spark-canvas {
+    display: none !important;
+  }
+  #anime-radar-hud {
+    transform: scale(0.85);
+    right: 8px;
+    top: 68px;
+  }
+  #quest-hud {
+    transform: scale(0.85);
+    left: 8px;
+    top: 68px;
+    max-width: 220px;
+  }
+}
+
+/* ==================== RADAR WAYPOINT TELEPORT MODAL ==================== */
+#radar-waypoint-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99995;
+  background: rgba(6,6,8,0.85);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#radar-waypoint-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.rwm-box {
+  width: min(720px, 92vw);
+  background: rgba(14,14,18,0.96);
+  border: 1.5px solid rgba(228,75,70,0.55);
+  box-shadow: 0 0 45px rgba(228,75,70,0.25);
+  border-radius: 4px;
+  padding: 24px;
+  color: #FAF8F2;
+  position: relative;
+}
+.rwm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+.rwm-title {
+  font: 700 18px/1 var(--sans);
+  letter-spacing: 0.08em;
+  color: #FAF8F2;
+  text-transform: uppercase;
+}
+.rwm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.rwm-card {
+  background: rgba(22,22,28,0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.rwm-card:hover {
+  background: rgba(228,75,70,0.18);
+  border-color: var(--crimson);
+  transform: translateY(-2px);
+}
+.rwm-card-num {
+  font: 700 9px/1 var(--mn);
+  color: #2BB6D8;
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.rwm-card-title {
+  font: 700 13px/1.2 var(--sans);
+  color: #FAF8F2;
+  margin-bottom: 3px;
+}
+.rwm-card-desc {
+  font: 400 9.5px/1.2 var(--mn);
+  color: #9E9B92;
+}
+
+/* ==================== 3D PRISMATIC CARD FOIL & SHIMMER ==================== */
+.fact-card, .sheet-card, .retail-item, .taste-card, .ev-panel {
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.fact-card:hover, .sheet-card:hover, .retail-item:hover, .taste-card:hover {
+  border-color: rgba(228,75,70,0.65) !important;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 20px rgba(228,75,70,0.25) !important;
+}
+.fact-card::before, .sheet-card::before, .retail-item::before, .taste-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 20%, rgba(228,75,70,0.18) 40%, rgba(43,182,216,0.22) 60%, rgba(228,182,72,0.22) 80%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+.fact-card:hover::before, .sheet-card:hover::before, .retail-item:hover::before, .taste-card:hover::before {
+  opacity: 1;
+}
+
+/* ==================== PROCEDURAL EYELID BLINK OVERLAY ==================== */
+.eyelid-blink-overlay {
+  position: absolute;
+  inset: 0;
+  background: #141416;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+  transform-origin: top;
+}
+.eyelid-blink-overlay.blink {
+  animation: charBlink 0.16s ease-in-out;
+}
+@keyframes charBlink {
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { transform: scaleY(1); opacity: 0.95; }
+  100% { transform: scaleY(0); opacity: 0; }
+}
+}
+
+/* ==================== ZERO-TRUST SOVEREIGN SECURITY ENCLAVE MODAL ==================== */
+#security-alert-modal{
+  position:fixed;inset:0;background:rgba(6,3,5,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  z-index:999999;display:none;align-items:center;justify-content:center;padding:20px;
+  animation:secFadeIn 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+#security-alert-modal.open{display:flex}
+@keyframes secFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes secStrobePulse{0%,100%{box-shadow:0 0 10px #FF3B30,0 0 24px rgba(255,59,48,0.7);opacity:1}50%{box-shadow:0 0 2px #FF3B30;opacity:0.35}}
+.sec-card{
+  width:min(660px,94vw);background:#0B0B10;border:2px solid #FF3B30;
+  box-shadow:0 0 50px rgba(255,59,48,0.4),inset 0 0 35px rgba(255,59,48,0.12);
+  border-radius:4px;overflow:hidden;position:relative;
+  animation:secPopIn 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes secPopIn{from{transform:scale(0.92) translateY(20px)}to{transform:scale(1) translateY(0)}}
+.sec-card::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.35) 0px,rgba(0,0,0,0.35) 2px,transparent 2px,transparent 4px);
+  pointer-events:none;opacity:0.6;z-index:1;
+}
+.sec-badge-bar{
+  background:#18080A;border-bottom:1px solid rgba(255,59,48,0.35);
+  padding:10px 18px;display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+}
+.sec-badge-left{display:flex;align-items:center;gap:10px}
+.sec-strobe-dot{
+  width:8px;height:8px;border-radius:50%;background:#FF3B30;
+  animation:secStrobePulse 1s infinite ease-in-out;
+}
+.sec-code{
+  font:800 11px/1 var(--mn);color:#FF3B30;letter-spacing:0.18em;text-transform:uppercase;
+}
+.sec-close{
+  background:transparent;border:none;color:#94A3B8;font:700 16px/1 var(--mn);
+  cursor:pointer;padding:4px 8px;border-radius:2px;transition:all 0.2s;
+}
+.sec-close:hover{color:#fff;background:rgba(255,59,48,0.3)}
+.sec-body-inner{padding:26px 28px;position:relative;z-index:2}
+.sec-headline{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.sec-icon{
+  width:50px;height:50px;min-width:50px;border-radius:4px;background:rgba(255,59,48,0.15);
+  border:1px solid #FF3B30;display:flex;align-items:center;justify-content:center;
+  font-size:24px;box-shadow:0 0 20px rgba(255,59,48,0.3);
+}
+.sec-headline h2{
+  font:900 21px/1.1 var(--ub);color:#FAF8F2;letter-spacing:0.04em;text-transform:uppercase;
+}
+.sec-headline .sec-sub{
+  font:700 11px/1 var(--mn);color:#FF8577;letter-spacing:0.14em;margin-top:6px;
+}
+.sec-warning-lead{
+  font:600 13px/1.5 var(--ub);color:#CBD5E1;margin-bottom:18px;
+}
+.sec-terminal-block{
+  background:rgba(5,5,8,0.92);border:1px solid rgba(255,59,48,0.25);
+  border-left:3px solid #FF3B30;border-radius:2px;padding:14px 16px;margin-bottom:22px;
+  font:500 11.5px/1.6 var(--mn);
+}
+.sec-tline{margin-bottom:4px}
+.sec-tline:last-child{margin-bottom:0}
+.t-red{color:#FF3B30;font-weight:800}
+.t-cyan{color:#00E5FF;font-weight:700}
+.t-gold{color:#E4B648;font-weight:700}
+.t-key{background:rgba(255,59,48,0.25);padding:2px 6px;border-radius:2px;color:#fff;font-weight:700}
+.t-dim{color:#94A3B8;font-size:10.5px;margin-top:6px;display:block}
+.sec-footer{
+  display:flex;gap:12px;justify-content:flex-end;position:relative;z-index:2;
+}
+.sec-btn-ack{
+  background:var(--crimson);border:1px solid rgba(255,255,255,0.2);color:#fff;
+  font:700 11.5px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  padding:12px 20px;border-radius:2px;cursor:pointer;transition:all 0.2s;
+  box-shadow:0 0 20px rgba(201,37,33,0.4);
+}
+.sec-btn-ack:hover{background:#e02f29;transform:translateY(-1px);box-shadow:0 0 28px rgba(201,37,33,0.7)}
+.sec-btn-dossier{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);color:#FAF8F2;
+  font:700 11.5px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  padding:12px 18px;border-radius:2px;cursor:pointer;transition:all 0.2s;
+}
+.sec-btn-dossier:hover{background:rgba(255,255,255,0.14);border-color:#FAF8F2}
+
 </style>
 </head>
 <body>
@@ -1615,6 +2139,112 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
   <i></i><i></i><i></i><i></i>
 </button>
 
+<!-- AAA ANIME RADAR MINI-MAP & SECTOR HUD -->
+<aside id="anime-radar-hud" aria-label="Anime Sector Mini-Map">
+  <div id="radar-disc-wrap" title="Sector Radar · Click to Open Waypoint Teleporter" role="button" tabindex="0">
+    <svg id="radar-grid-svg" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+      <circle cx="50" cy="50" r="32" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" stroke-dasharray="2 3" />
+      <circle cx="50" cy="50" r="18" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.8" />
+      <line x1="50" y1="4" x2="50" y2="96" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" />
+      <line x1="4" y1="50" x2="96" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" />
+      <circle cx="68" cy="38" r="2.5" fill="#E4B648" opacity="0.85" />
+      <circle cx="34" cy="62" r="2.5" fill="#E44B46" opacity="0.85" />
+      <circle cx="62" cy="74" r="2" fill="#2BB6D8" opacity="0.85" />
+    </svg>
+    <div id="radar-sweep-beam"></div>
+    <div id="radar-player-blip"></div>
+  </div>
+  <div class="radar-telemetry">
+    <div class="radar-sector-name" id="radar-sec-txt">00 · PROLOGUE</div>
+    <div class="radar-coords" id="radar-coord-txt">19.0760°N · 72.8777°E</div>
+    <div class="radar-sync-bar"><div id="radar-sync-fill"></div></div>
+  </div>
+</aside>
+
+<!-- SOLO LEVELING RPG QUEST OBJECTIVE TRACKER -->
+<div id="quest-hud" role="region" aria-label="Active Quest Objective">
+  <div class="quest-kicker">
+    <span>SYSTEM OBJECTIVE</span>
+    <span class="quest-status-dot"></span>
+  </div>
+  <div class="quest-title" id="quest-hud-title">ACT 00 · PROLOGUE</div>
+  <div class="quest-desc" id="quest-hud-desc">Initialize runtime &amp; scroll to enter the domain.</div>
+</div>
+
+<!-- QUEST CLEAR ANIME HOLOGRAPHIC STAMP BANNER -->
+<div id="quest-clear-banner" aria-hidden="true">
+  <div class="qc-stamp-box">
+    <div class="qc-kicker">SYSTEM LOG // VERIFIED</div>
+    <div class="qc-title" id="qc-title-txt">QUEST COMPLETE</div>
+    <div class="qc-sub" id="qc-sub-txt">KERNEL SANCTUARY ACCESS GRANTED</div>
+  </div>
+</div>
+
+<!-- REACTIVE CYBER-CROSSHAIR CURSOR (re-uses existing manga-cursor with AAA cyber upgrades) -->
+
+<!-- RADAR WAYPOINT TELEPORT MODAL -->
+<div id="radar-waypoint-modal" role="dialog" aria-modal="true" aria-label="Sector Waypoint Teleporter">
+  <div class="rwm-box">
+    <div class="rwm-header">
+      <div class="rwm-title">◈ SECTOR TELEPORT &middot; WAYPOINT NAV</div>
+      <button type="button" class="ct-close" id="rwm-close-btn" aria-label="Close Waypoint Nav">✕</button>
+    </div>
+    <div class="rwm-grid">
+      <div class="rwm-card" data-jump="#hero">
+        <div class="rwm-card-num">SECTOR 00</div>
+        <div class="rwm-card-title">Prologue</div>
+        <div class="rwm-card-desc">Lobby, 3D Gyro, Title Lockup</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-mist">
+        <div class="rwm-card-num">SECTOR 01</div>
+        <div class="rwm-card-title">Mumbai Walk</div>
+        <div class="rwm-card-desc">6:42 PM, Hackathon, City Glitch</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-impact">
+        <div class="rwm-card-num">SECTOR 02</div>
+        <div class="rwm-card-title">Impact Breach</div>
+        <div class="rwm-card-desc">Firewall Cut, Bullet-time, Void Orb</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-monolith">
+        <div class="rwm-card-num">SECTOR 03</div>
+        <div class="rwm-card-title">Monolith Stairs</div>
+        <div class="rwm-card-desc">Kirigami Staircase &amp; Silver Port</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-step">
+        <div class="rwm-card-num">SECTOR 04</div>
+        <div class="rwm-card-title">Portal Step</div>
+        <div class="rwm-card-desc">Root Firewall Override, Curtain</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-sanctuary-story">
+        <div class="rwm-card-num">SECTOR 05</div>
+        <div class="rwm-card-title">Crimson Sanctuary</div>
+        <div class="rwm-card-desc">8-Beat Divine Story, Dossiers</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-pour">
+        <div class="rwm-card-num">SECTOR 06</div>
+        <div class="rwm-card-title">Elixir Pour</div>
+        <div class="rwm-card-desc">Three Essences &amp; Liquid Mercury</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-vortex">
+        <div class="rwm-card-num">SECTOR 07</div>
+        <div class="rwm-card-title">Dark Awakening</div>
+        <div class="rwm-card-desc">Root Clearance &amp; Vortex Surge</div>
+      </div>
+      <div class="rwm-card" data-jump="#scene-shatter">
+        <div class="rwm-card-num">SECTOR 08</div>
+        <div class="rwm-card-title">Firewall Shatter</div>
+        <div class="rwm-card-desc">Navi Mumbai Dawn, Epilogue</div>
+      </div>
+      <div class="rwm-card" data-jump="#collection">
+        <div class="rwm-card-num">SECTOR 09</div>
+        <div class="rwm-card-title">Collection Archive</div>
+        <div class="rwm-card-desc">Dossiers, Casefiles &amp; Skills</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PRE-STAGE: PURE BLACK WELCOME & LAPTOP/DESKTOP ADVISORY -->
 <div id="welcome-gate" role="dialog" aria-modal="true" aria-label="Welcome to the Portfolio">
   <div class="wg-inner">
@@ -1662,6 +2292,46 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
 <button type="button" id="weather-btn" title="Toggle Anime Atmosphere (Sunset / Cyber Rain / Midnight Neon)">
   <span>🌧 RAIN</span>
 </button>
+
+
+<!-- ZERO-TRUST SOVEREIGN SECURITY ENCLAVE MODAL (ANTI-LEAK DEFENSE) -->
+<div id="security-alert-modal" class="security-modal" role="alertdialog" aria-modal="true" aria-label="Security Access Warning">
+  <div class="sec-card">
+    <div class="sec-badge-bar">
+      <div class="sec-badge-left">
+        <span class="sec-strobe-dot"></span>
+        <span class="sec-code">ZERO-TRUST AUDIT // 403 CLASSIFIED PROTOCOL</span>
+      </div>
+      <button type="button" class="sec-close" id="sec-close-btn" aria-label="Close Security Alert">✕</button>
+    </div>
+    <div class="sec-body-inner">
+      <div class="sec-headline">
+        <div class="sec-icon">⚠️</div>
+        <div>
+          <h2>CONFIDENTIAL ARCHITECTURAL DATA</h2>
+          <div class="sec-sub">PARTH VIJAY GIDDE // SOVEREIGN ENCLAVE ACTIVE</div>
+        </div>
+      </div>
+      <p class="sec-warning-lead">
+        SOURCE CODE INSPECTION AND REVERSE-ENGINEERING ARE RESTRICTED.
+      </p>
+      <div class="sec-terminal-block">
+        <div class="sec-tline"><span class="t-red">[INTERCEPTED]</span> Shortcut: <span class="t-key" id="sec-key-code">Ctrl + U (View Source Protocol)</span></div>
+        <div class="sec-tline"><span class="t-cyan">[STATUS]</span> Zero-Trust Runtime: <strong>LOCKED &amp; ENCRYPTED</strong></div>
+        <div class="sec-tline"><span class="t-gold">[INTEGRITY]</span> Baloon National 1st Runner-Up (GARAA) &middot; DevHarbour Ecosystem</div>
+        <div class="sec-tline t-dim">> All production source code, AI anti-spoofing verification models, and distributed IoT nodes are protected by proprietary intellectual property protocols. Unauthorized extraction, scraping, and inspection are monitored and logged.</div>
+      </div>
+      <div class="sec-footer">
+        <button type="button" class="sec-btn-ack" id="sec-ack-btn">
+          <span>🛡 ACKNOWLEDGE &amp; RESUME</span>
+        </button>
+        <button type="button" class="sec-btn-dossier" id="sec-dossier-btn">
+          <span>📄 VIEW VERIFIED DOSSIER</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="cyber-terminal-modal" role="dialog" aria-modal="true" aria-label="Parth Nexus Cyber Terminal">
   <div class="ct-inner">
@@ -3203,12 +3873,12 @@ const ladderLegCv=$('#ladder-leg-cv'),templeLegCv=$('#temple-leg-cv');
 const hallCv=$('#hall-cv'),sancActorsCv=$('#sanc-actors-cv'),pourCv=$('#pour-cv');
 const vortexCv=$('#vortex-cv'),vortexActorCv=$('#vortex-actor-cv'),shatterCv=$('#shatter-cv'),shatterFallCv=$('#shatter-fall-cv'),colFxCv=$('#col-fx-cv');
 
-function fitCanvas(cv,uhd=false){
+function fitCanvas(cv,uhd=true){
   const cw=cv.clientWidth,ch=cv.clientHeight;
   const r=(cw>0&&ch>0)?null:cv.getBoundingClientRect();
   const w=Math.max(10,Math.round(cw>0?cw:r.width)),h=Math.max(10,Math.round(ch>0?ch:r.height));
-  const dpr=typeof window!=='undefined'?(window.devicePixelRatio||1):1;
-  const d=uhd?Math.min(Math.max(dpr,1.5),2.25):Math.min(Math.max(dpr,1.0),1.75);
+  const rawDpr=typeof window!=='undefined'?(window.devicePixelRatio||1):1;
+  const d=Math.min(Math.max(rawDpr,2.0),3.0);
   const bw=Math.round(w*d),bh=Math.round(h*d);
   if(cv.width!==bw||cv.height!==bh){cv.width=bw;cv.height=bh}
   const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);
@@ -3734,17 +4404,14 @@ if(typeof window!=='undefined'){
   }
 
   window.addEventListener('pointerdown', e => {
-    const curScroll = window.scrollY || window.pageYOffset || 0;
-    const heroH = window.innerHeight * 1.5;
-    if(curScroll < heroH){
-      heroGyro.isDragging = true;
-      heroGyro.dragStartX = heroGyro.lastX = e.clientX;
-      heroGyro.dragStartY = heroGyro.lastY = e.clientY;
-      heroGyro.velYaw = 0;
-      heroGyro.velPitch = 0;
-      if(heroEl) heroEl.style.cursor = 'grabbing';
-      document.body.classList.add('hero-orbit-dragging');
-    }
+    if(e.target && e.target.closest('button, a, input, textarea, select, .ct-inner, .rwm-inner, .ag-inner, .dossier-inner, #top-nav, #rpg-choice-wrap, .sec-card')) return;
+    heroGyro.isDragging = true;
+    heroGyro.dragStartX = heroGyro.lastX = e.clientX;
+    heroGyro.dragStartY = heroGyro.lastY = e.clientY;
+    heroGyro.velYaw = 0;
+    heroGyro.velPitch = 0;
+    if(heroEl) heroEl.style.cursor = 'grabbing';
+    document.body.classList.add('hero-orbit-dragging');
   }, {passive: true});
 
   window.addEventListener('pointermove', e => {
@@ -5621,7 +6288,7 @@ if($('#hold-pour-btn'))$('#hold-pour-btn').addEventListener('click',()=>{pourUse
 if($('#hold-vortex-btn'))$('#hold-vortex-btn').addEventListener('click',()=>{vortexUserHold=true;if(vortexProgress<0.25)vortexDone=true});
 
 /* ==================== BUTTER-SMOOTH INERTIAL SCROLL ENGINE ==================== */
-let scrollSmoothY=window.scrollY||0,scrollTargetY=window.scrollY||0,smoothWheelOn=false,smoothProgrammatic=false,prevAppliedY=window.scrollY||0;
+let scrollSmoothY=window.scrollY||0,scrollTargetY=window.scrollY||0,smoothWheelOn=false,smoothProgrammatic=false,prevAppliedY=window.scrollY||0,lastWheelT=0;
 function maxScrollY(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)}
 function smoothScrollTo(y){
   scrollSmoothY=window.scrollY;prevAppliedY=window.scrollY;
@@ -5644,16 +6311,28 @@ addEventListener('wheel',e=>{
   Sound.resumeCtx();
   if(moviePlaying)setMovieMode(false);
   const sc=findScrollableAncestor(e.target);
-  const dy=e.deltaMode===1?e.deltaY*32:e.deltaMode===2?e.deltaY*innerHeight*0.85:e.deltaY;
+  const dy=e.deltaMode===1?e.deltaY*30:e.deltaMode===2?e.deltaY*innerHeight*0.82:e.deltaY;
   if(sc){
     const atTop=sc.scrollTop<=0&&dy<0,atBot=sc.scrollTop+sc.clientHeight>=sc.scrollHeight-1&&dy>0;
     if(!atTop&&!atBot)return;
   }
   e.preventDefault();
-  if(!smoothWheelOn){scrollSmoothY=window.scrollY;scrollTargetY=window.scrollY;prevAppliedY=scrollSmoothY}
-  scrollTargetY=clamp(scrollTargetY+dy*1.05,0,maxScrollY());
+  lastWheelT=performance.now();
+  if(!smoothWheelOn){
+    scrollSmoothY=window.scrollY;
+    scrollTargetY=window.scrollY;
+    prevAppliedY=scrollSmoothY;
+  }
+  scrollTargetY=clamp(scrollTargetY+dy*1.02,0,maxScrollY());
   smoothWheelOn=true;
 },{passive:false});
+addEventListener('scroll',()=>{
+  if(!smoothWheelOn&&(performance.now()-lastWheelT>140)){
+    scrollSmoothY=window.scrollY;
+    scrollTargetY=window.scrollY;
+    prevAppliedY=window.scrollY;
+  }
+},{passive:true});
 addEventListener('touchstart',()=>{smoothWheelOn=false;smoothProgrammatic=false;if(moviePlaying)setMovieMode(false)},{passive:true});
 addEventListener('keydown',e=>{
   const active=document.activeElement;
@@ -5978,22 +6657,19 @@ function tick(ts){
 
   /* Apply Inertial Wheel & Keyboard Scroll Smoothly Before Measuring Section Bounds */
   if(smoothWheelOn){
-    if(!smoothProgrammatic&&Math.abs(window.scrollY-prevAppliedY)>35){
+    const diff=scrollTargetY-scrollSmoothY;
+    const absDiff=Math.abs(diff);
+    // Luxurious butter-smooth dynamic damping rate
+    const kDamp=absDiff>550?9.5:absDiff>220?7.8:6.4;
+    const wDamp=1-Math.exp(-kDamp*dt);
+    scrollSmoothY+=diff*wDamp;
+    if(absDiff<0.25){
+      scrollSmoothY=scrollTargetY;
       smoothWheelOn=false;
-    }else{
-      const diff=scrollTargetY-scrollSmoothY;
-      const absDiff=Math.abs(diff);
-      const kDamp=absDiff>450?15.0:absDiff>120?12.5:9.8;
-      const wDamp=1-Math.exp(-kDamp*dt);
-      scrollSmoothY+=diff*wDamp;
-      if(absDiff<0.35){
-        scrollSmoothY=scrollTargetY;
-        smoothWheelOn=false;
-        smoothProgrammatic=false;
-      }
-      window.scrollTo({top:scrollSmoothY,behavior:'instant'});
-      prevAppliedY=window.scrollY;
+      smoothProgrammatic=false;
     }
+    window.scrollTo({top:scrollSmoothY,behavior:'instant'});
+    prevAppliedY=scrollSmoothY;
   }
 
   const curY=window.scrollY||0;
@@ -6002,8 +6678,8 @@ function tick(ts){
   lastScrollY=curY;
   scrollVelS+=(instVel-scrollVelS)*(1-Math.exp(-8.5*dt));
 
-  const damp=1-Math.exp(-11.5*dt);
-  const gDamp=1-Math.exp(-7.5*dt);
+  const damp=1-Math.exp(-7.8*dt);
+  const gDamp=1-Math.exp(-6.0*dt);
   ptr3dX+=(ptr3dTx-ptr3dX)*gDamp;
   ptr3dY+=(ptr3dTy-ptr3dY)*gDamp;
   if(typeof updateHeroGyroPhysics==='function') updateHeroGyroPhysics(dt, tTime);
@@ -6505,6 +7181,8 @@ function tick(ts){
   }
 
   if(didInitDraw&&(!REF_PORTRAITS.parth||!REF_PORTRAITS.god))initRefPortraits();
+  if(typeof updateAnimeHUD === 'function') updateAnimeHUD(curY, dt, tTime);
+  if(typeof updateCharacterBlinking === 'function') updateCharacterBlinking(ts);
   requestAnimationFrame(tick);
 }
 initTypewriters();
@@ -6522,14 +7200,56 @@ function showGameMilestone(title, sub){
   setTimeout(()=>{toast.classList.remove('show')},3800);
 }
 
+/* ==================== EMBER SPARK PHYSICS ON TRAIL CANVAS ==================== */
+const emberSparks = [];
+function spawnCursorSparks(x, y, count = 2){
+  for(let i = 0; i < count; i++){
+    const angle = Math.random() * Math.PI * 2;
+    const spd = 0.6 + Math.random() * 2.2;
+    emberSparks.push({
+      x, y,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd - 0.7,
+      size: 1.6 + Math.random() * 2.4,
+      life: 1.0,
+      decay: 0.024 + Math.random() * 0.032,
+      color: Math.random() > 0.4 ? 'rgba(228,75,70,' : 'rgba(228,182,72,'
+    });
+  }
+  if(emberSparks.length > 50) emberSparks.splice(0, emberSparks.length - 50);
+}
+
+function renderEmberSparks(ctx){
+  if(!ctx || !emberSparks.length) return;
+  for(let i = emberSparks.length - 1; i >= 0; i--){
+    const p = emberSparks[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.035; // gentle upward/downward drift
+    p.life -= p.decay;
+    if(p.life <= 0){
+      emberSparks.splice(i, 1);
+      continue;
+    }
+    ctx.fillStyle = p.color + p.life.toFixed(2) + ')';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, Math.max(0.6, p.size * p.life), 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
 /* ==================== MANGA CURSOR & SLASH TRAIL SYSTEM ==================== */
 const mCur=$('#manga-cursor'), trailCv=$('#manga-trail-cv');
 const trailPoints=[];
 if(trailCv){
   const tcx=trailCv.getContext('2d');
   function resizeTrailCv(){
-    trailCv.width=window.innerWidth;
-    trailCv.height=window.innerHeight;
+    const dpr=Math.min(Math.max(window.devicePixelRatio||1,2.0),3.0);
+    trailCv.width=Math.round(window.innerWidth*dpr);
+    trailCv.height=Math.round(window.innerHeight*dpr);
+    tcx.setTransform(dpr,0,0,dpr,0,0);
+    tcx.imageSmoothingEnabled=true;
+    tcx.imageSmoothingQuality='high';
   }
   resizeTrailCv();
   addEventListener('resize',resizeTrailCv,{passive:true});
@@ -6544,16 +7264,21 @@ if(trailCv){
     }
     trailPoints.push({x:curMouseX,y:curMouseY,life:1.0});
     if(trailPoints.length>22)trailPoints.shift();
+    if(Math.random()>0.3) spawnCursorSparks(curMouseX, curMouseY, 1);
   },{passive:true});
 
-  document.querySelectorAll('a,button,.fact-card,.medallion,.taste-card,.rail-pip').forEach(el=>{
-    el.addEventListener('pointerenter',()=>{if(mCur)mCur.classList.add('hover')},{passive:true});
+  document.querySelectorAll('a,button,.fact-card,.medallion,.taste-card,.rail-pip,.rwm-card').forEach(el=>{
+    el.addEventListener('pointerenter',()=>{
+      if(mCur)mCur.classList.add('hover');
+      try{Sound.uiTap(1120, 0.012)}catch(e){}
+    },{passive:true});
     el.addEventListener('pointerleave',()=>{if(mCur)mCur.classList.remove('hover')},{passive:true});
   });
 
   function renderMangaTrail(){
     if(!tcx)return;
     tcx.clearRect(0,0,trailCv.width,trailCv.height);
+    renderEmberSparks(tcx);
     if(trailPoints.length>2){
       tcx.save();
       tcx.strokeStyle='rgba(201,37,33,0.32)';
@@ -6803,6 +7528,18 @@ if(arsenalModal) arsenalModal.onclick = e => { if(e.target === arsenalModal) clo
 const speedlinesCv = document.getElementById('speedlines-cv');
 let speedlinesCtx = speedlinesCv ? speedlinesCv.getContext('2d') : null;
 
+function resizeSpeedlinesCv(){
+  if(!speedlinesCv || !speedlinesCtx) return;
+  const dpr = Math.min(Math.max(window.devicePixelRatio || 1, 2.0), 3.0);
+  speedlinesCv.width = Math.round(window.innerWidth * dpr);
+  speedlinesCv.height = Math.round(window.innerHeight * dpr);
+  speedlinesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  speedlinesCtx.imageSmoothingEnabled = true;
+  speedlinesCtx.imageSmoothingQuality = 'high';
+}
+resizeSpeedlinesCv();
+addEventListener('resize', resizeSpeedlinesCv, {passive: true});
+
 function renderRapidSpeedlines(vel){
   if(!speedlinesCv || !speedlinesCtx) return;
   const absVel = Math.abs(vel);
@@ -6811,12 +7548,12 @@ function renderRapidSpeedlines(vel){
     return;
   }
   speedlinesCv.classList.add('active');
-  const w = speedlinesCv.width = window.innerWidth;
-  const h = speedlinesCv.height = window.innerHeight;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
   const cx = w * 0.5, cy = h * 0.5;
 
   speedlinesCtx.clearRect(0, 0, w, h);
-  speedlinesCtx.strokeStyle = 'rgba(201,37,33,0.32)';
+  speedlinesCtx.strokeStyle = 'rgba(201,37,33,0.38)';
   speedlinesCtx.lineWidth = 2.0;
 
   const linesCount = Math.min(32, Math.round(absVel * 0.6));
@@ -6874,12 +7611,56 @@ window.addEventListener('pointermove', e => {
 }, { passive: true });
 
 function updateDioramaTilt(){
-  curTiltX = lerp(curTiltX, targetTiltX, 0.08);
-  curTiltY = lerp(curTiltY, targetTiltY, 0.08);
-  const heroCv = document.getElementById('hero-cv');
-  const mistCv = document.getElementById('mist-cv');
-  if(heroCv) heroCv.style.transform = 'perspective(1200px) rotateX(' + curTiltX.toFixed(2) + 'deg) rotateY(' + curTiltY.toFixed(2) + 'deg)';
-  if(mistCv) mistCv.style.transform = 'perspective(1400px) rotateX(' + (curTiltX*0.7).toFixed(2) + 'deg) rotateY(' + (curTiltY*0.7).toFixed(2) + 'deg)';
+  const yaw = heroGyro.yaw;
+  const pitch = heroGyro.pitch;
+  const roll = heroGyro.roll;
+
+  const rotY = (yaw * 0.72).toFixed(2);
+  const rotX = (-pitch * 0.62).toFixed(2);
+  const rotZ = (roll * 0.38).toFixed(2);
+
+  // Apply 3D perspective rotation to ALL scene canvases and content wrappers
+  const gyroTargets = [
+    { id: 'hero-cv', p: 1200, m: 1.0 },
+    { id: 'hero-lockup', p: 950, m: 0.8 },
+    { id: 'mist-cv', p: 1400, m: 0.85 },
+    { sel: '#scene-mist .mist-story-hud', p: 1000, m: 0.65 },
+    { id: 'impact-rays', p: 1100, m: 0.9 },
+    { sel: '#scene-impact .panel-impact', p: 1000, m: 0.7 },
+    { sel: '.mono-wide', p: 1300, m: 0.75 },
+    { sel: '.portal-panel-wrap', p: 1200, m: 0.8 },
+    { id: 'portal-fx-cv', p: 1100, m: 0.95 },
+    { sel: '#scene-step .step-inner', p: 1200, m: 0.75 },
+    { id: 'curtain-cv', p: 1400, m: 0.85 },
+    { id: 'sanc-actors-cv', p: 1300, m: 0.9 },
+    { sel: '#scene-sanctuary-story .sanc-stage', p: 1200, m: 0.75 },
+    { sel: '#scene-medallions .shelf-stage', p: 1400, m: 0.65 },
+    { id: 'pour-cv', p: 1300, m: 0.85 },
+    { id: 'vortex-cv', p: 1100, m: 0.95 },
+    { id: 'shatter-cv', p: 1200, m: 0.9 },
+    { id: 'shatter-cel-bg', p: 1200, m: 0.8 },
+    { sel: '#collection .col-container', p: 1600, m: 0.45 }
+  ];
+
+  gyroTargets.forEach(t => {
+    const el = t.id ? document.getElementById(t.id) : document.querySelector(t.sel);
+    if(el && (isNearView(el, 260) || t.id === 'hero-cv')){
+      const yD = (rotY * t.m).toFixed(2);
+      const xD = (rotX * t.m).toFixed(2);
+      const zD = (rotZ * t.m * 0.5).toFixed(2);
+      const tx = (yaw * t.m * 0.7).toFixed(1);
+      const ty = (-pitch * t.m * 0.5).toFixed(1);
+      el.style.transform = 'perspective(' + t.p + 'px) translate3d(' + tx + 'px,' + ty + 'px,0) rotateX(' + xD + 'deg) rotateY(' + yD + 'deg) rotateZ(' + zD + 'deg)';
+    }
+  });
+
+  // Keep persistent Gyro HUD active with dynamic readouts
+  const gyroBadge = document.getElementById('hero-gyro-hud');
+  if(gyroBadge){
+    const yDeg = Math.round(heroGyro.yaw);
+    const pDeg = Math.round(heroGyro.pitch);
+    gyroBadge.innerHTML = '<span class="gyro-dot"></span> 3D GYRO PERSPECTIVE &middot; PITCH: ' + (pDeg > 0 ? '+' : '') + pDeg + '&deg; &middot; YAW: ' + (yDeg > 0 ? '+' : '') + yDeg + '&deg; ' + (heroGyro.isDragging ? '<span class="gyro-active">[ROTATING]</span>' : '<span class="gyro-hint">[DRAG ANYWHERE TO TILT]</span>');
+  }
 }
 
 
@@ -7027,6 +7808,188 @@ if (termInput) {
   });
 }
 
+
+/* ==================== AAA ANIME RADAR, QUEST LOG & DYNAMIC HUD ==================== */
+let lastSectorKey = '';
+function triggerQuestClear(title, sub){
+  const b = $('#quest-clear-banner');
+  if(!b) return;
+  if(title) $('#qc-title-txt').textContent = title;
+  if(sub) $('#qc-sub-txt').textContent = sub;
+  b.classList.add('show');
+  try{
+    Sound.chime(880, 1.4, 0.08);
+    setTimeout(() => Sound.chime(1318.5, 1.6, 0.05), 180);
+  }catch(e){}
+  setTimeout(() => b.classList.remove('show'), 3200);
+}
+
+function updateAnimeHUD(curY, dt, tTime){
+  const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  const winH = window.innerHeight;
+  const pct = clamp(Math.round((curY / Math.max(1, docH - winH)) * 100), 0, 100);
+  
+  const fill = $('#radar-sync-fill');
+  if(fill) fill.style.width = pct + '%';
+
+  let secName = '00 · PROLOGUE';
+  let coords = '19.0760°N · 72.8777°E';
+  let qTitle = 'ACT 00 · RUNTIME BOOT';
+  let qDesc = 'Initialize execution environment & scroll to enter domain.';
+  let secKey = 'hero';
+
+  if(isNearView($('#collection'), -80)){
+    secName = '09 · ARCHIVE';
+    coords = 'VERIFIED // CASEFILES';
+    qTitle = 'ACT 09 · DOSSIER ARCHIVE';
+    qDesc = 'Explore deployed production systems & verified credentials.';
+    secKey = 'col';
+  } else if(isNearView($('#scene-shatter'), -60)){
+    secName = '08 · SHATTER';
+    coords = 'NAVI MUMBAI // 06:00 AM';
+    qTitle = 'ACT 08 · FIREWALL SHATTER';
+    qDesc = 'Crimson barrier shatters. Transition to dawn light.';
+    secKey = 'shatter';
+  } else if(isNearView($('#scene-vortex'), -60)){
+    secName = '07 · AWAKENING';
+    coords = 'CORE // ROOT CLEARANCE';
+    qTitle = 'ACT 07 · DARK AWAKENING';
+    qDesc = 'Hold to unlock zero-latency Root Clearance.';
+    secKey = 'vortex';
+  } else if(isNearView($('#scene-pour'), -60)){
+    secName = '06 · ELIXIR';
+    coords = 'CORE // ALCHEMY LAB';
+    qTitle = 'ACT 06 · ESSENCE COMPILATION';
+    qDesc = 'Hold & Pour Aegis, Forge, and Spark into liquid mercury.';
+    secKey = 'pour';
+  } else if(isNearView($('#scene-sanctuary-story'), -40)){
+    secName = '05 · SANCTUARY';
+    coords = 'THRONE // 700VH DOMAIN';
+    qTitle = 'ACT 05 · SOVEREIGN AUDIT';
+    qDesc = 'Pass the 8-beat trial under the gaze of The Divine.';
+    secKey = 'sanc';
+  } else if(isNearView($('#scene-step'), -40) || isNearView($('#scene-curtain'), -40)){
+    secName = '04 · THRESHOLD';
+    coords = 'PORTAL // INGRESS';
+    qTitle = 'ACT 04 · PORTAL OVERRIDE';
+    qDesc = 'Override the barrier and step inside the crimson curtain.';
+    secKey = 'step';
+  } else if(isNearView($('#scene-monolith'), -40)){
+    secName = '03 · MONOLITH';
+    coords = 'WHITE SANDBOX // ELEVATION';
+    qTitle = 'ACT 03 · MONOLITH ASCENT';
+    qDesc = 'Ascend the kirigami staircase towards the open port.';
+    secKey = 'mono';
+  } else if(isNearView($('#scene-impact'), -40)){
+    secName = '02 · IMPACT';
+    coords = 'BREACH // ZERO LATENCY';
+    qTitle = 'ACT 02 · CRIMSON BREACH';
+    qDesc = 'Survive the paper fracture & cache the local snapshot.';
+    secKey = 'impact';
+  } else if(isNearView($('#scene-mist'), -40)){
+    secName = '01 · MUMBAI';
+    coords = '19.0330°N · 73.0297°E';
+    qTitle = 'ACT 01 · PRODUCTION PUSH';
+    qDesc = 'Walk through Mumbai rain & verify Baloon Hackathon podium.';
+    secKey = 'mist';
+  }
+
+  const sEl = $('#radar-sec-txt'), cEl = $('#radar-coord-txt');
+  if(sEl && sEl.textContent !== secName) sEl.textContent = secName;
+  if(cEl && cEl.textContent !== coords) cEl.textContent = coords;
+
+  const qtEl = $('#quest-hud-title'), qdEl = $('#quest-hud-desc');
+  if(qtEl && qtEl.textContent !== qTitle) qtEl.textContent = qTitle;
+  if(qdEl && qdEl.textContent !== qDesc) qdEl.textContent = qDesc;
+
+  if(secKey !== lastSectorKey){
+    lastSectorKey = secKey;
+    if(secKey === 'step') triggerQuestClear('FIREWALL BREACHED', 'ROOT SANCTUARY PORTAL UNLOCKED');
+    else if(secKey === 'vortex') triggerQuestClear('ROOT CLEARANCE', 'SOVEREIGN ARCHITECT AWAKENED');
+    else if(secKey === 'col') triggerQuestClear('QUEST COMPLETE', 'VERIFIED ARCHIVE DOSSIER UNLOCKED');
+  }
+}
+
+/* Waypoint Teleport Modal Wire-Up */
+const rwm = $('#radar-waypoint-modal');
+const openRwm = () => { if(rwm) rwm.classList.add('open'); try{Sound.uiTap(880, 0.04)}catch(e){} };
+const closeRwm = () => { if(rwm) rwm.classList.remove('open'); try{Sound.uiTap(640, 0.02)}catch(e){} };
+const rdw = $('#radar-disc-wrap');
+if(rdw) rdw.onclick = openRwm;
+const rwmClose = $('#rwm-close-btn');
+if(rwmClose) rwmClose.onclick = closeRwm;
+if(rwm) rwm.onclick = e => { if(e.target === rwm) closeRwm(); };
+$$('#radar-waypoint-modal [data-jump]').forEach(b => {
+  b.onclick = () => {
+    closeRwm();
+    const target = $(b.dataset.jump);
+    if(target){
+      try{Sound.whoosh()}catch(e){}
+      smoothScrollTo(target.getBoundingClientRect().top + window.scrollY);
+    }
+  };
+});
+
+/* ==================== PROCEDURAL CHARACTER BLINKING ENGINE ==================== */
+let nextBlinkTime = 0;
+function updateCharacterBlinking(now){
+  if(now < nextBlinkTime) return;
+  nextBlinkTime = now + 3400 + Math.random() * 2600;
+  
+  ['#inset-face-1', '#inset-face-shock', '#sanc-speaker-inset'].forEach(sel => {
+    const frame = $(sel);
+    if(frame && window.getComputedStyle(frame).opacity > 0.4){
+      let ov = frame.querySelector('.eyelid-blink-overlay');
+      if(!ov){
+        ov = document.createElement('div');
+        ov.className = 'eyelid-blink-overlay';
+        frame.appendChild(ov);
+      }
+      ov.classList.remove('blink');
+      void ov.offsetWidth;
+      ov.classList.add('blink');
+    }
+  });
+}
+
+/* ==================== 3D PRISMATIC CARD GYRO & HOLOGRAPHIC TILT ==================== */
+function initPrismaticCardTilt(){
+  const cards = $$('.fact-card, .sheet-card, .retail-item, .taste-card, .ev-panel');
+  cards.forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const midX = rect.width / 2;
+      const midY = rect.height / 2;
+      const rotY = clamp(((x - midX) / midX) * 8.5, -10, 10);
+      const rotX = clamp(((midY - y) / midY) * 8.5, -10, 10);
+      
+      card.style.transform = `perspective(850px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.02)`;
+      card.style.setProperty('--sheen-x', x + 'px');
+      card.style.setProperty('--sheen-y', y + 'px');
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = 'perspective(850px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+}
+initPrismaticCardTilt();
+
+/* ==================== GLOBAL ANIME HOTKEYS ==================== */
+addEventListener('keydown', e => {
+  if(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+  if(e.key === 'x' || e.key === 'X'){
+    if(typeof triggerSakuga === 'function') triggerSakuga(true);
+    if(typeof triggerImpactCut === 'function') triggerImpactCut();
+    try { if(Sound && Sound.katanaSlash) Sound.katanaSlash(); if(Sound && Sound.boom) Sound.boom(48, 0.35); } catch(err) {}
+  } else if(e.key === 'm' || e.key === 'M'){
+    if(rwm && rwm.classList.contains('open')) closeRwm();
+    else openRwm();
+  } else if(e.key === 'Escape'){
+    if(rwm && rwm.classList.contains('open')) closeRwm();
+  }
+});
 
 /* Attach Soft Anime UI Sound Clicks */
 ['#movie-btn','#voice-btn','#eq-btn','.tab-btn','.rail-pip','.btn-dark','.btn-outline','#print-resume-btn','#print-resume-btn-2','.fact-card','.medallion'].forEach(sel=>{
@@ -7207,6 +8170,135 @@ $('#replay-btn').onclick=()=>{
   Sound.resetCues();
   smoothScrollTo(0);
 };
+
+
+/* ==================== SOVEREIGN ZERO-TRUST SECURITY ENCLAVE INTERCEPTOR ==================== */
+function playSecurityAlarmSiren(){
+  try{
+    const ctx = (typeof Sound!=='undefined'&&Sound.ctx)?Sound.ctx:(new (window.AudioContext||window.webkitAudioContext)());
+    if(!ctx) return;
+    if(ctx.state==='suspended') ctx.resume();
+    const now = ctx.currentTime;
+
+    // Siren dual sweep
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.exponentialRampToValueAtTime(440, now + 0.12);
+    osc.frequency.exponentialRampToValueAtTime(880, now + 0.24);
+    osc.frequency.exponentialRampToValueAtTime(320, now + 0.45);
+    gain.gain.setValueAtTime(0.32, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.52);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.53);
+
+    // Heavy sub-bass lockdown thud
+    const sub = ctx.createOscillator();
+    const subGain = ctx.createGain();
+    sub.type = 'sine';
+    sub.frequency.setValueAtTime(75, now);
+    sub.frequency.exponentialRampToValueAtTime(28, now + 0.38);
+    subGain.gain.setValueAtTime(0.48, now);
+    subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+    sub.connect(subGain);
+    subGain.connect(ctx.destination);
+    sub.start(now);
+    sub.stop(now + 0.42);
+  }catch(e){}
+}
+
+function triggerSecurityWarning(triggerName = 'Ctrl + U (View Source)'){
+  const modal = document.getElementById('security-alert-modal');
+  if(!modal) return;
+  const keyLabel = document.getElementById('sec-key-code');
+  if(keyLabel) keyLabel.textContent = triggerName;
+  modal.classList.add('open');
+  playSecurityAlarmSiren();
+}
+
+function closeSecurityWarning(){
+  const modal = document.getElementById('security-alert-modal');
+  if(modal) modal.classList.remove('open');
+}
+
+// Intercept Ctrl+U, F12, Ctrl+Shift+I/J/C, Ctrl+S
+window.addEventListener('keydown', e => {
+  const isCtrl = e.ctrlKey || e.metaKey;
+  const k = e.key;
+
+  // 1. Ctrl + U (View Page Source)
+  if(isCtrl && (k === 'u' || k === 'U')){
+    e.preventDefault();
+    e.stopPropagation();
+    triggerSecurityWarning('Ctrl + U (View Source Protocol)');
+    return false;
+  }
+
+  // 2. F12 (DevTools)
+  if(k === 'F12'){
+    e.preventDefault();
+    e.stopPropagation();
+    triggerSecurityWarning('F12 (DevTools Inspection)');
+    return false;
+  }
+
+  // 3. Ctrl + Shift + I / J / C (Inspect / Console / Element Picker)
+  if(isCtrl && e.shiftKey && ['I','i','J','j','C','c'].includes(k)){
+    e.preventDefault();
+    e.stopPropagation();
+    triggerSecurityWarning('Ctrl + Shift + ' + k.toUpperCase() + ' (Runtime Inspector)');
+    return false;
+  }
+
+  // 4. Ctrl + S (Save Page)
+  if(isCtrl && (k === 's' || k === 'S')){
+    e.preventDefault();
+    e.stopPropagation();
+    triggerSecurityWarning('Ctrl + S (Source Extraction Attempt)');
+    return false;
+  }
+
+  // Escape closes security modal
+  if(k === 'Escape'){
+    closeSecurityWarning();
+  }
+}, true);
+
+// Intercept Right Click (Context Menu)
+window.addEventListener('contextmenu', e => {
+  if(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  triggerSecurityWarning('Right Click (Context Inspection Menu)');
+  return false;
+}, true);
+
+// Wire modal buttons
+const secCloseBtn = document.getElementById('sec-close-btn');
+if(secCloseBtn) secCloseBtn.onclick = closeSecurityWarning;
+
+const secAckBtn = document.getElementById('sec-ack-btn');
+if(secAckBtn) secAckBtn.onclick = closeSecurityWarning;
+
+const secDossierBtn = document.getElementById('sec-dossier-btn');
+if(secDossierBtn) {
+  secDossierBtn.onclick = () => {
+    closeSecurityWarning();
+    const col = document.getElementById('collection');
+    if(col && typeof smoothScrollTo === 'function') smoothScrollTo(col.getBoundingClientRect().top + window.scrollY);
+  };
+}
+
+const secModal = document.getElementById('security-alert-modal');
+if(secModal){
+  secModal.onclick = e => {
+    if(e.target === secModal) closeSecurityWarning();
+  };
+}
+
 </script>
 <div id="portal-flash" aria-hidden="true"></div>
 
