@@ -2273,6 +2273,17 @@ const Sound=(()=>{
       o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.06);
     });
   }
+  function uiTap(freq=880, vol=0.03){
+    if(!live||!boot())return;
+    const t=ctx.currentTime, o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sine';
+    o.frequency.setValueAtTime(freq,t);
+    o.frequency.exponentialRampToValueAtTime(freq*0.48,t+0.038);
+    g.gain.setValueAtTime(.0001,t);
+    g.gain.linearRampToValueAtTime(clamp(vol,0.005,0.08),t+0.003);
+    g.gain.exponentialRampToValueAtTime(.0001,t+0.042);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+0.048);
+  }
   function step(stone=false, intensity=1.0){
     if(!live||!boot()||!nb)return;
     const now=performance.now();if(now-lastStepT<140)return;lastStepT=now;
@@ -2518,6 +2529,7 @@ const Sound=(()=>{
   return{
     enable(on){setOn(on)},
     muteTab,
+    uiTap,
     setVoice,
     resumeCtx,
     autoUnlockIfPending,
@@ -3675,16 +3687,12 @@ function drawMistBg(t,pMist){
 }
 
 function drawParthWalkActor(t,pMist,cam){
-  /* Render delicate wind-blown anime autumn leaves across Shibuya bridge */
-  const mistCv=$('#walk-actor-cv');
-  if(mistCv&&mistCv.getContext){
-    const mcx=mistCv.getContext('2d');
-    if(mcx&&pMist>0.04&&pMist<0.82){
-      drawAnimeLeaves(mcx,mistCv.width||1280,mistCv.height||800,t,1.2,true);
-    }
-  }
   const{w,h,c}=fitCanvas(walkActorCv,true);
   c.clearRect(0,0,w,h);
+  /* Render delicate wind-blown anime autumn leaves & sunset dust across Shibuya bridge */
+  if(pMist>0.03&&pMist<0.85){
+    drawAnimeLeaves(c,w,h,t,1.2,true);
+  }
   initRefPortraits();
   const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
   if(!w1)return;
@@ -3741,8 +3749,12 @@ function drawParthWalkActor(t,pMist,cam){
     c.translate(-w*0.5,-h*0.52);
   }
 
-  const bob=-Math.abs(Math.sin(phi*Math.PI*2))*6.2*walkAmt*(1-recoilBlend);
-  const gshR=drawW*(0.40-bob*0.002);
+  // Organic anime physics: idle breathing cycle vs. dynamic walk bobbing
+  const idleBreathe = isPhone ? Math.sin(t * 2.2) * 1.8 : 0;
+  const idleChest = isPhone ? (1 + Math.sin(t * 2.2) * 0.006) : 1;
+  const bob = isPhone ? idleBreathe : (-Math.abs(Math.sin(phi * Math.PI * 2)) * 6.2 * walkAmt * (1 - recoilBlend));
+  const gshR = drawW * (0.40 - bob * 0.002);
+
   // Ground contact ambient occlusion & dual sneaker sole anchor shadows
   c.save();c.translate(baseX,baseY-3);c.scale(1,0.16);
   const gsh=c.createRadialGradient(0,0,2,0,0,gshR);
@@ -3752,14 +3764,24 @@ function drawParthWalkActor(t,pMist,cam){
   c.fillStyle=gsh;c.beginPath();c.arc(0,0,gshR,0,Math.PI*2);c.fill();
 
   // Dark contact occlusion under left & right sneakers so shoes never float
-  c.fillStyle='rgba(8,8,12,0.65)';
+  c.fillStyle='rgba(8,8,12,0.68)';
   c.beginPath();c.ellipse(-drawW*0.12,0,drawW*0.14,drawW*0.06,0,0,Math.PI*2);c.fill();
   c.beginPath();c.ellipse(drawW*0.10,0,drawW*0.14,drawW*0.06,0,0,Math.PI*2);c.fill();
   c.restore();
 
-  const lean=((1-recoilBlend)*0.020*Math.cos(phi*Math.PI*2))-(recoilBlend*0.065);
+  const lean = isPhone
+    ? Math.sin(t * 2.2) * 0.005
+    : (((1 - recoilBlend) * 0.020 * Math.cos(phi * Math.PI * 2)) - (recoilBlend * 0.065));
   c.translate(baseX,baseY+bob);
   c.rotate(lean);
+
+  // Physical impact squish on footstrike during walk vs chest breathing
+  if(!isPhone && walkAmt > 0.1){
+    const footSquish = Math.pow(Math.max(0, Math.sin(phi * Math.PI * 2)), 2.8) * 0.015;
+    c.scale(1 + footSquish * 0.5, 1 - footSquish);
+  }else if(isPhone){
+    c.scale(1, idleChest);
+  }
 
   if(isPhone){
     for(let rg=0;rg<2;rg++){
@@ -4960,8 +4982,26 @@ addEventListener('wheel',e=>{
 },{passive:false});
 addEventListener('touchstart',()=>{smoothWheelOn=false;smoothProgrammatic=false;if(moviePlaying)setMovieMode(false)},{passive:true});
 addEventListener('keydown',e=>{
-  if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(e.key)){smoothWheelOn=false;if(moviePlaying)setMovieMode(false)}
-});
+  const active=document.activeElement;
+  if(active&&(active.tagName==='INPUT'||active.tagName==='TEXTAREA'||active.isContentEditable))return;
+  const k=e.key;
+  if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(k)){
+    Sound.resumeCtx();
+    if(moviePlaying)setMovieMode(false);
+    let step=0;
+    if(k==='ArrowDown')step=160;
+    else if(k==='ArrowUp')step=-160;
+    else if(k==='PageDown'||k===' ')step=innerHeight*0.75;
+    else if(k==='PageUp')step=-innerHeight*0.75;
+    else if(k==='Home'){scrollTargetY=0;step=0;}
+    else if(k==='End'){scrollTargetY=maxScrollY();step=0;}
+    if(step!==0)scrollTargetY=clamp(scrollTargetY+step,0,maxScrollY());
+    if(!smoothWheelOn){scrollSmoothY=window.scrollY;prevAppliedY=scrollSmoothY;}
+    smoothWheelOn=true;
+    smoothProgrammatic=false;
+    e.preventDefault();
+  }
+},{passive:false});
 
 /* Smooth Anchor Jumps */
 $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
@@ -5063,33 +5103,71 @@ function viewProgress(el){
 }
 
 /* ==================== PROCEDURAL ANIME ATMOSPHERIC LEAF & EMBER SYSTEM ==================== */
-const ANIME_LEAVES = Array.from({length:8}, (_,i)=>({
-  x: Math.random()*1200,
+const ANIME_LEAVES = Array.from({length:14}, (_,i)=>{
+  const layer = i < 3 ? 'front' : i < 10 ? 'mid' : 'back';
+  return {
+    layer,
+    x: Math.random()*1400,
+    y: Math.random()*850,
+    speedX: layer==='front' ? 65+(i%2)*25 : layer==='mid' ? 42+(i%3)*15 : 24+(i%2)*10,
+    speedY: layer==='front' ? 36+(i%2)*12 : layer==='mid' ? 24+(i%3)*10 : 16+(i%2)*8,
+    size: layer==='front' ? 14+(i%3)*4 : layer==='mid' ? 8+(i%3)*3 : 4+(i%2)*2,
+    rot: Math.random()*Math.PI*2,
+    rotSpeed: 0.9 + (i%3)*0.5,
+    pitchSpeed: 1.2 + (i%2)*0.8,
+    oscOffset: i * 1.15
+  };
+});
+
+const SUN_DUST = Array.from({length:16}, (_,i)=>({
+  x: Math.random()*1400,
   y: Math.random()*800,
-  speedX: 45 + (i%3)*20,
-  speedY: 28 + (i%4)*15,
-  size: 7 + (i%3)*3,
-  rot: Math.random()*Math.PI*2,
-  rotSpeed: 0.8 + (i%2)*0.6,
-  oscOffset: i * 1.3
+  vx: 18 + (i%4)*8,
+  vy: 10 + (i%3)*6,
+  r: 1.0 + (i%3)*0.6,
+  phase: Math.random()*Math.PI*2
 }));
 
 function drawAnimeLeaves(c,w,h,t,wind=1.0,crimson=true){
   c.save();
+  // 1. Drifting Golden Sunset Dust Particles in Light Shafts
+  for(let i=0;i<SUN_DUST.length;i++){
+    const d=SUN_DUST[i];
+    const dx=((d.x + t * d.vx * wind + Math.sin(t*1.4 + d.phase)*20) % (w + 40)) - 20;
+    const dy=((d.y + t * d.vy + Math.cos(t*1.2 + d.phase)*15) % (h + 40)) - 20;
+    const pulse=0.25 + 0.25*Math.sin(t*2.0 + d.phase);
+    c.fillStyle=`rgba(255,232,185,${pulse.toFixed(2)})`;
+    c.beginPath();c.arc(dx,dy,d.r,0,Math.PI*2);c.fill();
+  }
+
+  // 2. Multi-Plane 3D Tumbling Japanese Maple Leaves
   for(let i=0;i<ANIME_LEAVES.length;i++){
     const l=ANIME_LEAVES[i];
-    const curX=(l.x + t * l.speedX * wind + Math.sin(t*2.0 + l.oscOffset)*35) % (w + 60) - 30;
-    const curY=(l.y + t * l.speedY + Math.cos(t*1.6 + l.oscOffset)*25) % (h + 60) - 30;
+    const curX=(l.x + t * l.speedX * wind + Math.sin(t*2.2 + l.oscOffset)*32) % (w + 80) - 40;
+    const curY=(l.y + t * l.speedY + Math.cos(t*1.8 + l.oscOffset)*22) % (h + 80) - 40;
     const curRot=l.rot + t * l.rotSpeed;
+    const pitch=Math.cos(t*l.pitchSpeed + l.oscOffset);
     c.save();
     c.translate(curX, curY);
     c.rotate(curRot);
-    c.fillStyle=crimson ? 'rgba(184,32,29,0.52)' : 'rgba(215,190,140,0.48)';
+    c.scale(1, Math.max(0.18, Math.abs(pitch)));
+    if(l.layer==='front'){
+      c.fillStyle='rgba(195,37,33,0.38)';
+    }else if(l.layer==='mid'){
+      c.fillStyle=crimson ? 'rgba(184,32,29,0.72)' : 'rgba(215,190,140,0.65)';
+    }else{
+      c.fillStyle=crimson ? 'rgba(160,28,26,0.35)' : 'rgba(190,170,120,0.30)';
+    }
     c.beginPath();
     c.moveTo(0, -l.size);
-    c.quadraticCurveTo(l.size*0.7, 0, 0, l.size);
-    c.quadraticCurveTo(-l.size*0.7, 0, 0, -l.size);
+    c.quadraticCurveTo(l.size*0.75, 0, 0, l.size);
+    c.quadraticCurveTo(-l.size*0.75, 0, 0, -l.size);
     c.fill();
+    if(l.layer==='mid'){
+      c.strokeStyle='rgba(120,18,16,0.55)';
+      c.lineWidth=0.8;
+      c.beginPath();c.moveTo(0,-l.size*0.8);c.lineTo(0,l.size*0.8);c.stroke();
+    }
     c.restore();
   }
   c.restore();
@@ -5117,14 +5195,21 @@ function tick(ts){
     }
   }
 
-  /* Apply Inertial Wheel Scroll Smoothly Before Measuring Section Bounds */
+  /* Apply Inertial Wheel & Keyboard Scroll Smoothly Before Measuring Section Bounds */
   if(smoothWheelOn){
     if(!smoothProgrammatic&&Math.abs(window.scrollY-prevAppliedY)>35){
       smoothWheelOn=false;
     }else{
-      const wDamp=1-Math.exp(-12.5*dt);
-      scrollSmoothY+=(scrollTargetY-scrollSmoothY)*wDamp;
-      if(Math.abs(scrollTargetY-scrollSmoothY)<1.0){scrollSmoothY=scrollTargetY;smoothWheelOn=false;smoothProgrammatic=false;}
+      const diff=scrollTargetY-scrollSmoothY;
+      const absDiff=Math.abs(diff);
+      const kDamp=absDiff>450?15.0:absDiff>120?12.5:9.8;
+      const wDamp=1-Math.exp(-kDamp*dt);
+      scrollSmoothY+=diff*wDamp;
+      if(absDiff<0.35){
+        scrollSmoothY=scrollTargetY;
+        smoothWheelOn=false;
+        smoothProgrammatic=false;
+      }
       window.scrollTo({top:scrollSmoothY,behavior:'instant'});
       prevAppliedY=window.scrollY;
     }
@@ -5599,9 +5684,16 @@ function tick(ts){
   }
   didInitDraw=true;
 
-  /* 9. Top Header & Equalizer Dynamic Contrast (checked strictly so curtain never bleeds into Sanctuary Beat 0!) */
+  /* 9. Top Header & Equalizer Dynamic Contrast via Zero-Layout-Thrashing Metric Register */
   const themeAtY=y=>{
-    const hit=id=>{const r=$(id).getBoundingClientRect();return y>r.top&&y<r.bottom};
+    const hit=sel=>{
+      const el=$(sel);
+      if(!el)return false;
+      const m=LAYOUT_CACHE.get(el);
+      if(!m)return false;
+      const screenTop=m.top-curY;
+      return y>screenTop&&y<(screenTop+m.height);
+    };
     if(hit('#scene-sanctuary-story')||hit('#scene-pour'))return 'red';
     if(hit('#scene-curtain'))return 'curtain';
     if((hit('#hero')&&pHeroS<0.58)||hit('#scene-medallions')||hit('#scene-vortex'))return 'dark';
@@ -5614,8 +5706,8 @@ function tick(ts){
   }
   const eqLive=$('#eq-btn').classList.contains('live')?'live ':'';
   $('#eq-btn').className=eqLive+(eTheme==='curtain'?'on-curtain':'');
-  const colRect=$('#collection').getBoundingClientRect();
-  const inCol=colRect.top<220;
+  const mCol=LAYOUT_CACHE.get($('#collection'));
+  const inCol=mCol?(mCol.top-curY)<220:false;
   $('#nav-exp').classList.toggle('active',!inCol);
   $('#nav-col').classList.toggle('active',inCol);
   if(!firstRun&&inCol)Sound.cue('collection');
@@ -5624,6 +5716,13 @@ function tick(ts){
   requestAnimationFrame(tick);
 }
 initTypewriters();
+/* Attach Soft Anime UI Sound Clicks */
+['#movie-btn','#voice-btn','#eq-btn','.tab-btn','.rail-pip','.btn-dark','.btn-outline','#print-resume-btn','#print-resume-btn-2','.fact-card','.medallion'].forEach(sel=>{
+  document.querySelectorAll(sel).forEach(el=>{
+    el.addEventListener('click',()=>Sound.uiTap(840,0.028),{passive:true});
+    el.addEventListener('mouseenter',()=>Sound.uiTap(1120,0.012),{passive:true});
+  });
+});
 requestAnimationFrame(tick);
 
 /* ==================== SANCTUARY RAIL JUMP, MEDALLION JUMP & VOICE ==================== */
