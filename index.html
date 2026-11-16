@@ -2378,7 +2378,7 @@ const JP_CUES={
 const Sound=(()=>{
   let ctx,master,comp,warmShelf,lp,nb,windGain,windFilter,padBus,live=false,unlocked=false,declined=false,voiceOn=false,hornPlayed=false,screechPlayed=false,hitPlayed=false,lastApproachT=0,lastStepT=0;
   let jpVoices=[],speechToken=0,subHideTimer=null,activeUtt=null,cueTimer=null,lastZone='',targetMaster=0.56,isSpeaking=false;
-  const setMasterLevel=(v,tc=0.22)=>{if(master&&ctx)master.gain.setTargetAtTime(live?v:0,ctx.currentTime,tc)};
+  const setMasterLevel=(v,tc=0.22)=>{if(master&&ctx)master.gain.setTargetAtTime(live?(v*(typeof masterVolumeLevel==='number'?masterVolumeLevel:1.0)):0,ctx.currentTime,tc)};
   function refreshVoices(){
     if(!window.speechSynthesis)return;
     try{
@@ -2525,6 +2525,7 @@ const Sound=(()=>{
     boot();refreshVoices();
     if(voiceOn&&!live)setOn(true);
     if(!voiceOn)stopSpeech();
+    else lastZone='';
     syncUI();
     return voiceOn;
   }
@@ -2765,94 +2766,124 @@ const Sound=(()=>{
   }
   function portalSuck(pct){updateEnv(320+pct*980,0.05+pct*0.13,380+pct*580)}
   function mercuryFlow(pct){updateEnv(360+pct*880,0.04+pct*0.10,480+pct*340)}
-  let pendingCue = null;
+  /* ==================== SCROLL-SYNCHRONIZED SINGLE-LINE VOICE ENGINE ==================== */
+  function speakSingleLine(item, isForce=false){
+    if(!voiceOn || !item || !item.jp) return;
+    
+    // Cleanly cancel previous speech so the new visible text takes precedence
+    stopSpeech();
+
+    const token = ++speechToken;
+    isSpeaking = true;
+    setMasterLevel(targetMaster * 0.38, 0.16);
+
+    const who = item.who || 'p';
+    showSub(item.spk || (who === 'g' ? 'THE DIVINE' : who === 'n' ? 'NARRATOR' : 'PARTH'), who, item.jp);
+    if(who === 'g'){
+      divineHalo();
+      divineCosmicDrone();
+    }
+
+    if(!window.speechSynthesis){
+      const dur = Math.max(1600, item.jp.length * 130);
+      setTimeout(()=>{
+        if(token === speechToken){
+          isSpeaking = false;
+          setMasterLevel(targetMaster, 0.22);
+          subHideTimer = setTimeout(hideSub, 1500);
+        }
+      }, dur);
+      return;
+    }
+
+    try{
+      speechSynthesis.cancel();
+      if(speechSynthesis.paused) speechSynthesis.resume();
+
+      const u = new SpeechSynthesisUtterance(item.jp);
+      activeUtt = u;
+      u.lang = 'ja-JP';
+      const v = pickVoice(who);
+      if(v) u.voice = v;
+
+      // Studio-Calibrated Formants: Clear, distinct anime voices
+      // The Divine: deep, solemn sovereign cadence
+      // Parth: crisp, confident anime hero
+      // Narrator: cinematic observer
+      u.pitch = who === 'g' ? 0.86 : who === 'pw' ? 0.94 : who === 'n' ? 0.98 : 0.94;
+      u.rate = who === 'g' ? 0.88 : who === 'pw' ? 1.00 : who === 'n' ? 0.98 : 1.02;
+      u.volume = 1.0;
+
+      let finished = false;
+      const endClean = () => {
+        if(finished) return;
+        finished = true;
+        if(token === speechToken){
+          isSpeaking = false;
+          setMasterLevel(targetMaster, 0.22);
+          subHideTimer = setTimeout(hideSub, 1500);
+        }
+      };
+
+      const safety = setTimeout(endClean, Math.max(2200, item.jp.length * 165 + 1100));
+      u.onend = () => { clearTimeout(safety); endClean(); };
+      u.onerror = () => { clearTimeout(safety); endClean(); };
+
+      setTimeout(()=>{
+        if(token !== speechToken || !voiceOn || finished) return;
+        try{
+          if(speechSynthesis.paused) speechSynthesis.resume();
+          speechSynthesis.speak(u);
+        }catch{}
+      }, 50);
+    }catch{
+      setTimeout(()=>{
+        if(token === speechToken){
+          isSpeaking = false;
+          setMasterLevel(targetMaster, 0.22);
+          subHideTimer = setTimeout(hideSub, 1500);
+        }
+      }, Math.max(1600, item.jp.length * 130));
+    }
+  }
+
   function speakSeq(lines, isForce=false){
-    if(!voiceOn||!lines||!lines.length)return;
-    // If voice is already actively speaking and this is NOT a forced user click, DO NOT cut off the voice!
-    if(isSpeaking && !isForce){
-      return;
-    }
-    if(isForce){
-      stopSpeech();
-    }
-    const token=++speechToken;
-    isSpeaking=true;
-    setMasterLevel(targetMaster*0.42,0.18);
-    function playIdx(idx){
-      if(token!==speechToken||!voiceOn||idx>=lines.length){
-        isSpeaking=false;
-        setMasterLevel(targetMaster,0.24);
-        if(token===speechToken){subHideTimer=setTimeout(hideSub,1500)}
-        // When previous voice finishes, smoothly start the pending cue from scrolling!
-        if(pendingCue && voiceOn && !isSpeaking){
-          const next=pendingCue;
-          pendingCue=null;
-          setTimeout(()=>{
-            if(voiceOn && !isSpeaking){
-              speakSeq(next.seq, false);
-            }
-          }, 320);
-        }
-        return;
-      }
-      const item=lines[idx];
-      if(!item||!item.jp){playIdx(idx+1);return}
-      const who=item.who||'p';
-      showSub(item.spk||(who==='g'?'THE DIVINE':who==='n'?'NARRATOR':'PARTH'),who,item.jp);
-      if(who==='g')divineHalo();
-      if(!window.speechSynthesis){
-        setTimeout(()=>playIdx(idx+1),Math.max(1800,item.jp.length*145));
-        return;
-      }
-      try{
-        if(idx === 0 && isForce){
-          speechSynthesis.cancel();
-        }
-        if(speechSynthesis.paused)speechSynthesis.resume();
-        const u=new SpeechSynthesisUtterance(item.jp);
-        activeUtt=u;
-        u.lang='ja-JP';
-        const v=pickVoice(who);if(v)u.voice=v;
-        // Studio-Calibrated Formants: Natural, fluent, crystal-clear anime speech
-        u.pitch = who === 'g' ? 0.88 : who === 'pw' ? 0.94 : who === 'n' ? 0.98 : 0.96;
-        u.rate = who === 'g' ? 0.88 : who === 'pw' ? 0.98 : who === 'n' ? 1.0 : 1.02;
-        if(who === 'g'){ divineCosmicDrone(); }
-        u.volume=1.0;
-        let done=false;
-        const safety=setTimeout(()=>{if(!done){done=true;playIdx(idx+1)}},Math.max(2400,item.jp.length*175+1100));
-        u.onend=()=>{if(!done){done=true;clearTimeout(safety);playIdx(idx+1)}};
-        u.onerror=()=>{if(!done){done=true;clearTimeout(safety);playIdx(idx+1)}};
-        setTimeout(()=>{
-          if(token!==speechToken||!voiceOn||done)return;
-          try{if(speechSynthesis.paused)speechSynthesis.resume();speechSynthesis.speak(u)}catch{}
-        },55);
-      }catch{
-        setTimeout(()=>playIdx(idx+1),Math.max(1600,item.jp.length*130));
-      }
-    }
-    playIdx(0);
+    if(!lines) return;
+    const item = Array.isArray(lines) ? lines[0] : lines;
+    if(item) speakSingleLine(item, isForce);
   }
-  function cue(key,lines,immediate=false){
-    const seq=lines||JP_CUES[key];
-    if(!seq||lastZone===key)return;
-    lastZone=key;
-    if(!voiceOn)return;
+
+  function cue(key, lines, immediate=false){
+    if(!voiceOn || !key) return;
+    if(lastZone === key) return; // Same text box already active; let it speak cleanly without interrupt
+    lastZone = key;
+
+    const seq = lines || JP_CUES[key];
+    if(!seq) return;
+    const targetItem = Array.isArray(seq) ? seq[0] : seq;
+    if(!targetItem || !targetItem.jp) return;
+
     clearTimeout(cueTimer);
-    // If already speaking, queue this cue so the previous voice NEVER GETS CUT OFF!
-    if(isSpeaking || (window.speechSynthesis && speechSynthesis.speaking)){
-      pendingCue={ key, seq };
-      return;
+    if(immediate){
+      speakSingleLine(targetItem, false);
+    } else {
+      // 140ms settle debounce: allows smooth scrolling without rapid-fire jitter,
+      // and triggers as soon as the user enters the text panel!
+      cueTimer = setTimeout(()=>{
+        speakSingleLine(targetItem, false);
+      }, 140);
     }
-    if(immediate){speakSeq(seq, false)}
-    else{cueTimer=setTimeout(()=>speakSeq(seq, false),120)}
   }
-  function forceCue(key,lines){
-    const seq=lines||JP_CUES[key];
-    if(!seq)return;
-    lastZone=key;
-    pendingCue=null;
-    if(!voiceOn)setVoice(true);
-    speakSeq(seq, true);
+
+  function forceCue(key, lines){
+    const seq = lines || JP_CUES[key];
+    if(!seq) return;
+    const targetItem = Array.isArray(seq) ? seq[0] : seq;
+    if(!targetItem || !targetItem.jp) return;
+    lastZone = key;
+    clearTimeout(cueTimer);
+    if(!voiceOn) setVoice(true);
+    speakSingleLine(targetItem, true);
   }
   /* ==================== CONTINUOUS PROCEDURAL RAIN AMBIENCE ==================== */
   let rainGain=null, rainSrc=null, rainFilter=null;
@@ -2900,7 +2931,7 @@ const Sound=(()=>{
   }
 
   function setRain(on){
-    if(!ctx)return;
+    if(!boot())return;
     if(on){
       if(!rainGain)initRainAudio();
       if(rainGain){
@@ -6153,7 +6184,7 @@ function tick(ts){
       if(lStep!==lastLadderStepIdx){lastLadderStepIdx=lStep;Sound.step(true)}
     }
     if(!firstRun&&pMonoT>0.16&&pMonoT<0.84&&isNearView($('.mono-wide'),-30)){
-      Sound.cue(pMonoT<0.46?'monolith':'mono_legs');
+      Sound.cue('monolith');
     }
   }
   if(isNearView($('.portal-panel-wrap'))){
