@@ -293,6 +293,71 @@ body{background:var(--paper);color:var(--ink);overflow-x:clip;position:relative}
 #manga-cursor.hover{transform:translate(-50%,-50%) scale(1.4) rotate(45deg);border-color:#E53935;background:rgba(229,57,53,0.08)}
 #manga-trail-cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998}
 
+/* ==================== VOLUME CONTROLLER BUTTON ==================== */
+#vol-btn{
+  position:fixed;bottom:16px;right:556px;z-index:9000;
+  height:42px;min-height:42px;padding:0 14px;
+  background:rgba(20,20,24,0.92);border:1px solid rgba(255,255,255,0.22);
+  color:#FAF8F2;font:700 10.5px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;border-radius:2px;cursor:pointer;
+  transition:all 0.22s ease;backdrop-filter:blur(8px);
+}
+#vol-btn:hover{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:translateY(-1px)}
+#vol-btn.muted{border-color:var(--crimson);color:#FF6B6B}
+
+/* ==================== RAPID SCROLL MANGA SPEEDLINES ==================== */
+#speedlines-cv{
+  position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99990;
+  opacity:0;transition:opacity 0.15s ease-out;
+}
+#speedlines-cv.active{opacity:1}
+
+/* ==================== VISUAL NOVEL RPG DIALOGUE CHOICE BAR ==================== */
+#rpg-choice-wrap{
+  position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(30px);
+  z-index:99992;display:none;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;pointer-events:none;transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+}
+#rpg-choice-wrap.show{
+  display:flex;transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;
+}
+.rpg-choice-kicker{
+  font:700 10px/1 var(--mn);letter-spacing:0.25em;color:var(--crimson);text-transform:uppercase;
+  background:rgba(10,10,14,0.95);padding:4px 14px;border:1px solid var(--crimson);border-radius:2px;
+}
+.rpg-btn-group{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.rpg-choice-btn{
+  background:rgba(14,14,18,0.95);border:1px solid rgba(255,255,255,0.3);color:#FAF8F2;
+  font:600 12px/1.4 var(--mn);letter-spacing:0.08em;padding:12px 24px;border-radius:2px;
+  cursor:pointer;transition:all 0.22s ease;box-shadow:0 8px 24px rgba(0,0,0,0.6);
+  display:inline-flex;align-items:center;gap:8px;backdrop-filter:blur(10px);
+}
+.rpg-choice-btn:hover{
+  background:var(--crimson);border-color:var(--crimson);color:#fff;
+  transform:translateY(-2px) scale(1.02);box-shadow:0 12px 30px rgba(201,37,33,0.5);
+}
+
+/* ==================== PARTH ARSENAL / LOADOUT MODAL ==================== */
+#arsenal-modal{
+  position:fixed;inset:0;background:rgba(8,8,12,0.85);backdrop-filter:blur(12px);
+  z-index:99996;display:none;align-items:center;justify-content:center;padding:20px;
+}
+#arsenal-modal.open{display:flex}
+.arsenal-box{
+  width:min(680px,94vw);background:#0D0E12;border:1px solid var(--crimson);
+  box-shadow:0 25px 60px rgba(0,0,0,0.85),0 0 35px rgba(201,37,33,0.28);
+  border-radius:3px;overflow:hidden;padding:26px 30px;
+}
+.arsenal-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:14px;margin-bottom:20px}
+.arsenal-title{font:700 16px/1 var(--mn);letter-spacing:0.18em;color:var(--crimson);text-transform:uppercase}
+.arsenal-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px}
+.arsenal-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);padding:14px 16px;border-radius:2px;position:relative}
+.arsenal-card:hover{border-color:var(--crimson);background:rgba(201,37,33,0.05)}
+.ac-tag{font:700 9px/1 var(--mn);color:var(--crimson);letter-spacing:0.2em;text-transform:uppercase}
+.ac-name{font:700 14px/1.3 var(--sf);color:#FAF8F2;margin:6px 0 4px}
+.ac-stat{font:600 11px/1.2 var(--mn);color:#2BB6D8;letter-spacing:0.05em}
+.ac-desc{font:400 11px/1.4 var(--sans);color:#B0ADC5;margin-top:6px}
+
 /* ==================== BGM JUKEBOX BUTTON & LIVE EQ ==================== */
 #bgm-btn{
   position:fixed;bottom:16px;right:434px;z-index:9000;
@@ -1587,6 +1652,9 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
 <button type="button" id="terminal-trigger-btn" title="Open Interactive Cyber-Anime Terminal (Shortcut: ~)">
   <span>&gt;_ TERMINAL</span>
 </button>
+<button type="button" id="vol-btn" title="Toggle Audio Volume (100% / 50% / MUTE)">
+  <span id="vol-txt">🔊 100%</span>
+</button>
 <button type="button" id="bgm-btn" title="Cycle Procedural Anime OST Theme (Sunset / Cyber Rain / Sanctuary)">
   <span class="bgm-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
   <span id="bgm-txt">BGM: SUNSET</span>
@@ -2324,24 +2392,24 @@ const Sound=(()=>{
   }
   function pickVoice(who){
     if(!jpVoices.length)refreshVoices();
-    if(!jpVoices.length)return null;
-    const lower=v=>(v.name||'').toLowerCase();
-    const neural=v=>/online|natural|google|neural|nanami|keita/i.test(lower(v));
-    const allVoices = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
-    if(who==='g'){
-      // THE DIVINE: Ethereal, ancient elder sovereign - distinct from Parth
-      const elder = allVoices.find(v=>/ichiro|hattori|otoya|elder|authority|george|david|male.*deep/i.test(lower(v))) ||
-                    jpVoices.find(v=>/ichiro|hattori|otoya/i.test(lower(v))) ||
-                    jpVoices[jpVoices.length-1];
-      return elder || jpVoices[0] || allVoices[0];
+    // STRICT FILTER: Japanese voices only! NEVER pick an English voice to speak Japanese text!
+    const all = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+    const trueJp = all.filter(v => /^ja/i.test(v.lang || '') || /japanese|nihongo/i.test((v.name||'').toLowerCase()));
+    const pool = trueJp.length ? trueJp : (jpVoices.length ? jpVoices : []);
+    if(!pool.length) return null;
+
+    const lower = v => (v.name||'').toLowerCase();
+    const maleJp = pool.find(v => /keita|ichiro|otoya|takumi|hattori|male/i.test(lower(v)));
+    const femJp = pool.find(v => /nanami|haruka|ayumi|sayaka|kyoko/i.test(lower(v))) || pool[0];
+
+    if(who === 'g'){
+      // THE DIVINE: Dignified, ancient sovereign authority
+      return maleJp || pool[pool.length - 1] || pool[0];
     }
-    // PARTH: Deep, grounded, confident modern male protagonist
-    const parthVoice = allVoices.find(v=>neural(v)&&/keita|takumi|kensuke|guy|mark|andrew/i.test(lower(v))) ||
-                       allVoices.find(v=>/keita|takumi|kensuke|male/i.test(lower(v))) ||
-                       jpVoices.find(v=>/keita|male/i.test(lower(v))) ||
-                       jpVoices[0];
-    return parthVoice || allVoices[0];
+    // PARTH: Modern, confident anime protagonist
+    return (maleJp && maleJp !== femJp ? maleJp : femJp) || pool[0];
   }
+
   function boot(){
     if(ctx){if(ctx.state==='suspended')ctx.resume();return true}
     const AC=window.AudioContext||window.webkitAudioContext;
@@ -2724,10 +2792,10 @@ const Sound=(()=>{
         activeUtt=u;
         u.lang='ja-JP';
         const v=pickVoice(who);if(v)u.voice=v;
-        // User-Requested Voice Architecture: Deep Parth (0.72) & Distinct Sovereign God (0.46)
-        u.pitch=who==='g'?0.46:who==='pw'?0.82:who==='n'?0.98:0.72;
-        u.rate=who==='g'?0.72:who==='pw'?0.90:who==='n'?0.99:0.94;
-        if(who==='g'){ divineCosmicDrone(); }
+        // Studio-Calibrated Formants: Natural, fluent, crystal-clear anime speech
+        u.pitch = who === 'g' ? 0.88 : who === 'pw' ? 0.94 : who === 'n' ? 0.98 : 0.96;
+        u.rate = who === 'g' ? 0.88 : who === 'pw' ? 0.98 : who === 'n' ? 1.0 : 1.02;
+        if(who === 'g'){ divineCosmicDrone(); }
         u.volume=1.0;
         let done=false;
         const safety=setTimeout(()=>{if(!done){done=true;playIdx(idx+1)}},Math.max(2400,item.jp.length*175+1100));
@@ -2820,31 +2888,37 @@ const Sound=(()=>{
     }
   }
 
-  /* ==================== CELESTIAL GOD COSMIC SUB-BASS DRONE ==================== */
+  /* ==================== CELESTIAL GOD HARMONIC CHIME ==================== */
   function divineCosmicDrone(){
     if(!ctx||!master)return;
     const now=ctx.currentTime;
-    const sub=ctx.createOscillator(), g=ctx.createGain(), lp=ctx.createBiquadFilter();
-    sub.type='sawtooth';
-    sub.frequency.setValueAtTime(52, now);
-    sub.frequency.exponentialRampToValueAtTime(42, now+3.5);
-    lp.type='lowpass';
-    lp.frequency.setValueAtTime(130, now);
+    // Warm celestial singing bowl harmonic (432Hz & 528Hz pure sines)
+    const b1=ctx.createOscillator(), b2=ctx.createOscillator(), g=ctx.createGain();
+    b1.type='sine'; b2.type='sine';
+    b1.frequency.setValueAtTime(432, now);
+    b2.frequency.setValueAtTime(528, now);
     g.gain.setValueAtTime(0.001, now);
-    g.gain.linearRampToValueAtTime(0.28, now+0.4);
-    g.gain.exponentialRampToValueAtTime(0.0001, now+3.6);
-    sub.connect(lp); lp.connect(g); g.connect(master);
-    sub.start(now); sub.stop(now+3.7);
+    g.gain.linearRampToValueAtTime(0.12, now+0.3);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+2.8);
+    b1.connect(g); b2.connect(g); g.connect(master);
+    b1.start(now); b1.stop(now+2.9);
+    b2.start(now); b2.stop(now+2.9);
+  }
 
-    // Ethereal overtone shimmer
-    const shimmer=ctx.createOscillator(), sg=ctx.createGain();
-    shimmer.type='sine';
-    shimmer.frequency.setValueAtTime(528, now);
-    sg.gain.setValueAtTime(0.001, now);
-    sg.gain.linearRampToValueAtTime(0.07, now+0.25);
-    sg.gain.exponentialRampToValueAtTime(0.0001, now+2.8);
-    shimmer.connect(sg); sg.connect(master);
-    shimmer.start(now); shimmer.stop(now+2.9);
+  /* ==================== MASTER VOLUME ENGINE ==================== */
+  let masterVolumeLevel = 1.0;
+  function setMasterVolume(v){
+    masterVolumeLevel = clamp(v, 0, 1);
+    if(master && ctx){
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.setTargetAtTime(live ? targetMaster * masterVolumeLevel : 0, ctx.currentTime, 0.12);
+    }
+    return masterVolumeLevel;
+  }
+  function cycleMasterVolume(){
+    if(masterVolumeLevel >= 0.95) return setMasterVolume(0.5);
+    if(masterVolumeLevel >= 0.45) return setMasterVolume(0);
+    return setMasterVolume(1.0);
   }
 
   /* ==================== SAKUGA KATANA CUT-IN CLASH SFX ==================== */
@@ -2875,7 +2949,7 @@ const Sound=(()=>{
   /* ==================== J-RPG DIALOGUE AUDIO BLIP (DEEP PARTH vs GOD CHIME) ==================== */
   let lastBlipTime=0;
   function dialogueBlip(who){
-    if(!ctx||!live||isMutedTab)return;
+    if(!ctx || !live || isMutedTab || isSpeaking) return;
     const now=ctx.currentTime;
     if(now-lastBlipTime<0.048)return;
     lastBlipTime=now;
@@ -2957,6 +3031,9 @@ const Sound=(()=>{
     muteTab,
     uiTap,
     setRain,
+    setMasterVolume,
+    cycleMasterVolume,
+    getMasterVolume(){ return masterVolumeLevel; },
     divineCosmicDrone,
     katanaSlash,
     dialogueBlip,
@@ -5814,6 +5891,12 @@ function tick(ts){
   const dt=Math.min(.05,(ts-lastTs)/1e3||.016);lastTs=ts;tTime+=dt;
   /* Check Persona 5 Cut-In Act Boundaries & Update 3D Diorama Tilt */
   if(typeof checkCutInMilestones==='function') checkCutInMilestones(pMistS, pSancS, pVorS);
+  if(typeof renderRapidSpeedlines === 'function') renderRapidSpeedlines(scrollVelS);
+  if(typeof showRpgChoices === 'function'){
+    // Show RPG choices while lingering in the heart of Sanctuary
+    const inSancDecision = pSancS > 0.42 && pSancS < 0.88;
+    showRpgChoices(inSancDecision);
+  }
   if(typeof updateDioramaTilt==='function') updateDioramaTilt();
 
   /* Auto-Play 4K Anime Film Director Mode ("as videoo") */
@@ -6577,6 +6660,154 @@ window.addEventListener('keydown', e => {
   }
 });
 
+/* ==================== MASTER VOLUME CONTROLLER ENGINE ==================== */
+const volBtn = document.getElementById('vol-btn');
+if (volBtn) {
+  volBtn.onclick = () => {
+    Sound.resumeCtx();
+    Sound.uiTap(880, 0.03);
+    const newVol = Sound.cycleMasterVolume();
+    const txt = document.getElementById('vol-txt');
+    if (newVol === 1.0) {
+      if (txt) txt.textContent = '🔊 100%';
+      volBtn.classList.remove('muted');
+    } else if (newVol === 0.5) {
+      if (txt) txt.textContent = '🔉 50%';
+      volBtn.classList.remove('muted');
+    } else {
+      if (txt) txt.textContent = '🔇 MUTED';
+      volBtn.classList.add('muted');
+    }
+    showGameMilestone('AUDIO // VOLUME LEVEL ' + (newVol*100).toFixed(0) + '%', newVol === 0 ? 'SYSTEM AUDIO MUTED' : 'MASTER AUDIO OUTPUT ACTIVE');
+  };
+}
+
+/* ==================== VISUAL NOVEL RPG DIALOGUE CHOICE ENGINE ==================== */
+const rpgWrap = document.getElementById('rpg-choice-wrap');
+const rpgOptA = document.getElementById('rpg-opt-a');
+const rpgOptB = document.getElementById('rpg-opt-b');
+
+function showRpgChoices(show){
+  if(!rpgWrap) return;
+  if(show) rpgWrap.classList.add('show');
+  else rpgWrap.classList.remove('show');
+}
+
+if(rpgOptA){
+  rpgOptA.onclick = () => {
+    Sound.resumeCtx();
+    Sound.uiTap(1150, 0.05);
+    showRpgChoices(false);
+    triggerEyeCutIn('p', '覚醒 // RESOLVE UNLEASHED', 'CHOICE: "I WILL BUILD WHAT HAS NEVER BEEN SEEN."');
+    showGameMilestone('DECISION // BUILDER RESOLVE CONFIRMED', 'DIVINE MASTER GOJO ACCEPTS YOUR ARCHITECTURE');
+    setTimeout(() => {
+      Sound.speak('良き覚悟だ…その道を貫け。', 'g');
+    }, 450);
+  };
+}
+
+if(rpgOptB){
+  rpgOptB.onclick = () => {
+    Sound.resumeCtx();
+    Sound.uiTap(1250, 0.05);
+    showRpgChoices(false);
+    triggerEyeCutIn('p', '指導者 // LEADERSHIP UNLEASHED', 'CHOICE: "A LEADER WHO SHIPS NEVER FLINCHES."');
+    showGameMilestone('DECISION // LEADERSHIP RESOLVE CONFIRMED', 'DEVHARBOUR 4,000+ DEVELOPER ALLIANCE EMPOWERED');
+    setTimeout(() => {
+      Sound.speak('迷いなき意志こそ、真の力。', 'g');
+    }, 450);
+  };
+}
+
+/* ==================== ARSENAL / LOADOUT INSPECTION ENGINE ==================== */
+const arsenalModal = document.getElementById('arsenal-modal');
+const arsenalClose = document.getElementById('arsenal-close-btn');
+
+function openArsenalModal(){
+  const m = document.getElementById('arsenal-modal');
+  if(!m) return;
+  Sound.resumeCtx();
+  Sound.uiTap(960, 0.035);
+  m.classList.add('open');
+}
+
+function closeArsenalModal(){
+  const m = document.getElementById('arsenal-modal');
+  if(!m) return;
+  Sound.uiTap(640, 0.025);
+  m.classList.remove('open');
+}
+
+if(arsenalClose) arsenalClose.onclick = closeArsenalModal;
+if(arsenalModal) arsenalModal.onclick = e => { if(e.target === arsenalModal) closeArsenalModal(); };
+
+/* ==================== RAPID SCROLL SPEEDLINES ENGINE ==================== */
+const speedlinesCv = document.getElementById('speedlines-cv');
+let speedlinesCtx = speedlinesCv ? speedlinesCv.getContext('2d') : null;
+
+function renderRapidSpeedlines(vel){
+  if(!speedlinesCv || !speedlinesCtx) return;
+  const absVel = Math.abs(vel);
+  if(absVel < 22){
+    speedlinesCv.classList.remove('active');
+    return;
+  }
+  speedlinesCv.classList.add('active');
+  const w = speedlinesCv.width = window.innerWidth;
+  const h = speedlinesCv.height = window.innerHeight;
+  const cx = w * 0.5, cy = h * 0.5;
+
+  speedlinesCtx.clearRect(0, 0, w, h);
+  speedlinesCtx.strokeStyle = 'rgba(201,37,33,0.32)';
+  speedlinesCtx.lineWidth = 2.0;
+
+  const linesCount = Math.min(32, Math.round(absVel * 0.6));
+  for(let i=0; i<linesCount; i++){
+    const ang = (i / linesCount) * Math.PI * 2 + Math.random() * 0.1;
+    const len = 120 + Math.random() * 220;
+    const dist = 180 + Math.random() * 240;
+    const x1 = cx + Math.cos(ang) * dist;
+    const y1 = cy + Math.sin(ang) * dist;
+    const x2 = cx + Math.cos(ang) * (dist + len);
+    const y2 = cy + Math.sin(ang) * (dist + len);
+    speedlinesCtx.beginPath();
+    speedlinesCtx.moveTo(x1, y1);
+    speedlinesCtx.lineTo(x2, y2);
+    speedlinesCtx.stroke();
+  }
+}
+
+/* ==================== SAKUGA CLICK ENERGY WAVE ENGINE ==================== */
+const CLICK_RIPPLES = [];
+window.addEventListener('pointerdown', e => {
+  if (e.target.closest('button, a, input, textarea, .fact-card, .medallion')) return;
+  CLICK_RIPPLES.push({
+    x: e.clientX,
+    y: e.clientY,
+    rad: 8,
+    maxRad: 85,
+    alpha: 0.65
+  });
+  if(CLICK_RIPPLES.length > 12) CLICK_RIPPLES.shift();
+}, { passive: true });
+
+function updateClickRipples(ctx){
+  if(!CLICK_RIPPLES.length) return;
+  ctx.save();
+  for(let i = CLICK_RIPPLES.length - 1; i >= 0; i--){
+    const r = CLICK_RIPPLES[i];
+    r.rad += 3.2;
+    r.alpha *= 0.92;
+    ctx.strokeStyle = `rgba(201,37,33,${r.alpha.toFixed(2)})`;
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, r.rad, 0, Math.PI * 2);
+    ctx.stroke();
+    if(r.alpha < 0.02 || r.rad >= r.maxRad) CLICK_RIPPLES.splice(i, 1);
+  }
+  ctx.restore();
+}
+
 /* ==================== 3D INTERACTIVE DIORAMA MOUSE TILT ENGINE ==================== */
 let targetTiltX = 0, targetTiltY = 0, curTiltX = 0, curTiltY = 0;
 window.addEventListener('pointermove', e => {
@@ -6661,7 +6892,14 @@ if (termInput) {
         appendTermLine('  whoami    - Display developer identity and engineering credentials');
         appendTermLine('  skills    - List core architecture, security & WebGL proficiencies');
         appendTermLine('  projects  - Inspect top deployed systems (Garaa, ZyID, DevHarbour)');
-        appendTermLine('  weather   - Toggle between Sunset Dusk and Cyber-Monsoon Rain');
+        appendTermLine('  weather   - Cycle atmospheres: Sunset, Cyber Rain, Midnight Neon');
+        appendTermLine('  bgm       - Cycle procedural OST: Sunset, Rain Synth, Sanctuary');
+        appendTermLine('  overdrive - Unleash Golden Lightning Sakuga Combat Aura');
+        appendTermLine('  cutin     - Trigger Persona 5 / Sakuga Eye Slash Transition');
+        appendTermLine('  gear      - Inspect Parth\'s complete equipment & stat loadout');
+        appendTermLine('  vol <0-100>- Adjust master audio volume directly');
+        appendTermLine('  breach    - Execute interactive Baloon Hackathon exploit audit');
+        appendTermLine('  matrix    - Stream cybernetic terminal matrix stream');
         appendTermLine('  warp <1-8>- Instantly warp cinematic camera to Act 1 through 8');
         appendTermLine('  hire      - Launch direct developer communication draft');
         appendTermLine('  clear     - Wipe current terminal buffer');
@@ -6690,6 +6928,24 @@ if (termInput) {
       } else if (val === 'cutin' || val === 'slash') {
         triggerEyeCutIn('p', '覚醒 // CRITICAL STRIKE', 'TERMINAL SAKUGA ACTIVATION');
         appendTermLine('SAKUGA EYE CUT-IN TRIGGERED.', 'success');
+      } else if (val === 'gear' || val === 'arsenal' || val === 'loadout' || val === 'items') {
+        openArsenalModal();
+        appendTermLine('OPENING ARSENAL SPECIFICATIONS...', 'success');
+      } else if (val.startsWith('vol')) {
+        const vNum = parseInt(val.split(' ')[1] || '100', 10);
+        const frac = clamp(vNum / 100, 0, 1);
+        Sound.setMasterVolume(frac);
+        appendTermLine('MASTER VOLUME SET TO: ' + Math.round(frac*100) + '%', 'success');
+      } else if (val === 'breach' || val === 'hack') {
+        appendTermLine('INITIALIZING EXPLOIT VERIFICATION PROTOCOL...', 'system');
+        appendTermLine('[+] Scanning node gaara-1.github.io/ZyID/... [OK]', 'system');
+        appendTermLine('[+] Biometric Landmark Check: 68 points verified.', 'success');
+        appendTermLine('[+] OCR Tesseract Confidence: 99.4%', 'success');
+        appendTermLine('VERDICT: NATIONAL 1ST RUNNER-UP ACCESS GRANTED.', 'success');
+      } else if (val === 'matrix') {
+        appendTermLine('01001110 01000101 01011000 01010101 01010011 00100000 00110001', 'system');
+        appendTermLine('01010000 01000001 01010010 01010100 01001000 00100000 01000111', 'success');
+        appendTermLine('QUANTUM DECRYPT STREAM COMPLETE.', 'system');
       } else if (val.startsWith('warp')) {
         const actNum = parseInt(val.split(' ')[1] || '1', 10);
         const map = ['#hero', '#scene-mist', '#scene-impact', '.mono-wide', '.portal-panel-wrap', '#scene-step', '#scene-sanctuary-story', '#collection'];
@@ -6918,6 +7174,58 @@ $('#replay-btn').onclick=()=>{
       <div class="sci-sub" id="sci-sub">CHAPTER 02 · SHIBUYA CYBER BREACH</div>
     </div>
     <div class="sci-slash"></div>
+  </div>
+</div>
+
+<!-- ==================== MANGA RAPID SPEEDLINES CANVAS ==================== -->
+<canvas id="speedlines-cv" aria-hidden="true"></canvas>
+
+<!-- ==================== RPG VISUAL NOVEL DIALOGUE CHOICE BAR ==================== -->
+<div id="rpg-choice-wrap" role="region" aria-label="Dialogue Decision Matrix">
+  <div class="rpg-choice-kicker">◈ DECISION // CHOOSE PARTH'S RESOLVE</div>
+  <div class="rpg-btn-group">
+    <button type="button" class="rpg-choice-btn" id="rpg-opt-a">
+      <span>⚔</span> "I WILL BUILD WHAT HAS NEVER BEEN SEEN."
+    </button>
+    <button type="button" class="rpg-choice-btn" id="rpg-opt-b">
+      <span>🛡</span> "A LEADER WHO SHIPS NEVER FLINCHES."
+    </button>
+  </div>
+</div>
+
+<!-- ==================== ARSENAL / EQUIPMENT MODAL ==================== -->
+<div id="arsenal-modal" role="dialog" aria-modal="true" aria-label="Parth Gear and Arsenal Loadout">
+  <div class="arsenal-box">
+    <div class="arsenal-header">
+      <div class="arsenal-title">◈ PARTH // LOADOUT & ARSENAL SPECIFICATIONS</div>
+      <button type="button" class="ct-close" id="arsenal-close-btn" aria-label="Close">✕</button>
+    </div>
+    <div class="arsenal-grid">
+      <div class="arsenal-card">
+        <div class="ac-tag">FOOTWEAR // KINEMATICS</div>
+        <div class="ac-name">Nike Dunk Low "Photon Dust"</div>
+        <div class="ac-stat">AGILITY +99 · ZERO FLOOR FRICTION</div>
+        <div class="ac-desc">Sub-pixel sub-assembly Nike silhouette with crisp black swoosh. Provides ground contact resonance ripples across Shibuya and Sanctuary.</div>
+      </div>
+      <div class="arsenal-card">
+        <div class="ac-tag">CHRONOMETRY // HUD</div>
+        <div class="ac-name">Smartwatch Matrix OS</div>
+        <div class="ac-stat">TELEMETRY +100 · BARON PROTOCOL SYNC</div>
+        <div class="ac-desc">Real-time hackathon telemetry terminal emitting 3D cyan/crimson holographic cyber-projections in mid-air.</div>
+      </div>
+      <div class="arsenal-card">
+        <div class="ac-tag">TACTICAL // WEAVE</div>
+        <div class="ac-name">Void Cargo Windbreaker</div>
+        <div class="ac-stat">STEALTH +92 · CRYPTOGRAPHIC SHIELD</div>
+        <div class="ac-desc">Black zip-up hoodie over crisp white crew-neck with single left sleeve drape and dual-pocket tactical cargos.</div>
+      </div>
+      <div class="arsenal-card">
+        <div class="ac-tag">COMMUNICATIONS // CORE</div>
+        <div class="ac-name">Quantum Comms Terminal</div>
+        <div class="ac-stat">NETWORK +100 · 4,000+ DEVHARBOUR NODES</div>
+        <div class="ac-desc">High-frequency distributed peer-to-peer uplink routing developer community deployments and live hackathon submissions.</div>
+      </div>
+    </div>
   </div>
 </div>
 
