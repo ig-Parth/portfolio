@@ -2765,15 +2765,34 @@ const Sound=(()=>{
   }
   function portalSuck(pct){updateEnv(320+pct*980,0.05+pct*0.13,380+pct*580)}
   function mercuryFlow(pct){updateEnv(360+pct*880,0.04+pct*0.10,480+pct*340)}
-  function speakSeq(lines){
+  let pendingCue = null;
+  function speakSeq(lines, isForce=false){
     if(!voiceOn||!lines||!lines.length)return;
-    stopSpeech();
+    // If voice is already actively speaking and this is NOT a forced user click, DO NOT cut off the voice!
+    if(isSpeaking && !isForce){
+      return;
+    }
+    if(isForce){
+      stopSpeech();
+    }
     const token=++speechToken;
     isSpeaking=true;
     setMasterLevel(targetMaster*0.42,0.18);
     function playIdx(idx){
       if(token!==speechToken||!voiceOn||idx>=lines.length){
+        isSpeaking=false;
+        setMasterLevel(targetMaster,0.24);
         if(token===speechToken){subHideTimer=setTimeout(hideSub,1500)}
+        // When previous voice finishes, smoothly start the pending cue from scrolling!
+        if(pendingCue && voiceOn && !isSpeaking){
+          const next=pendingCue;
+          pendingCue=null;
+          setTimeout(()=>{
+            if(voiceOn && !isSpeaking){
+              speakSeq(next.seq, false);
+            }
+          }, 320);
+        }
         return;
       }
       const item=lines[idx];
@@ -2786,7 +2805,9 @@ const Sound=(()=>{
         return;
       }
       try{
-        speechSynthesis.cancel();
+        if(idx === 0 && isForce){
+          speechSynthesis.cancel();
+        }
         if(speechSynthesis.paused)speechSynthesis.resume();
         const u=new SpeechSynthesisUtterance(item.jp);
         activeUtt=u;
@@ -2817,15 +2838,21 @@ const Sound=(()=>{
     lastZone=key;
     if(!voiceOn)return;
     clearTimeout(cueTimer);
-    if(immediate){speakSeq(seq)}
-    else{cueTimer=setTimeout(()=>speakSeq(seq),45)}
+    // If already speaking, queue this cue so the previous voice NEVER GETS CUT OFF!
+    if(isSpeaking || (window.speechSynthesis && speechSynthesis.speaking)){
+      pendingCue={ key, seq };
+      return;
+    }
+    if(immediate){speakSeq(seq, false)}
+    else{cueTimer=setTimeout(()=>speakSeq(seq, false),120)}
   }
   function forceCue(key,lines){
     const seq=lines||JP_CUES[key];
     if(!seq)return;
     lastZone=key;
+    pendingCue=null;
     if(!voiceOn)setVoice(true);
-    speakSeq(seq);
+    speakSeq(seq, true);
   }
   /* ==================== CONTINUOUS PROCEDURAL RAIN AMBIENCE ==================== */
   let rainGain=null, rainSrc=null, rainFilter=null;
