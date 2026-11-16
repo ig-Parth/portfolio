@@ -293,6 +293,70 @@ body{background:var(--paper);color:var(--ink);overflow-x:clip;position:relative}
 #manga-cursor.hover{transform:translate(-50%,-50%) scale(1.4) rotate(45deg);border-color:#E53935;background:rgba(229,57,53,0.08)}
 #manga-trail-cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998}
 
+/* ==================== WEATHER & ATMOSPHERE TOGGLE ==================== */
+#weather-btn{
+  position:fixed;bottom:16px;right:312px;z-index:9000;
+  height:42px;min-height:42px;padding:0 14px;
+  background:rgba(20,20,24,0.92);border:1px solid rgba(255,255,255,0.22);
+  color:#FAF8F2;font:700 11px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;border-radius:2px;cursor:pointer;
+  transition:all 0.22s ease;backdrop-filter:blur(8px);
+}
+#weather-btn:hover{background:var(--crimson);border-color:var(--crimson);color:#fff;transform:translateY(-1px)}
+#weather-btn.rain{background:rgba(20,40,65,0.95);border-color:#2BB6D8;color:#7DE3FC}
+
+/* ==================== HOLOGRAPHIC SPECULAR FOIL CARD SHEEN ==================== */
+.fact-card,.medallion,.taste-card,.retail-item{position:relative;overflow:hidden}
+.fact-card::after,.medallion::after,.taste-card::after,.retail-item::after{
+  content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(circle 220px at var(--sheen-x,-600px) var(--sheen-y,-600px),rgba(255,255,255,0.18),rgba(43,182,216,0.08) 45%,transparent 70%);
+  opacity:0;transition:opacity 0.25s ease;mix-blend-mode:overlay;z-index:4;
+}
+.fact-card:hover::after,.medallion:hover::after,.taste-card:hover::after,.retail-item:hover::after{opacity:1}
+
+/* ==================== CYBER TERMINAL MODAL & TRIGGER ==================== */
+#terminal-trigger-btn{
+  position:fixed;bottom:16px;left:18px;z-index:9000;
+  height:42px;min-height:42px;padding:0 14px;
+  background:rgba(18,18,22,0.92);border:1px solid rgba(201,37,33,0.5);
+  color:#E53935;font:700 10.5px/1 var(--mn);letter-spacing:0.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:7px;border-radius:2px;cursor:pointer;
+  transition:all 0.2s ease;backdrop-filter:blur(8px);
+}
+#terminal-trigger-btn:hover{background:var(--crimson);color:#fff;border-color:var(--crimson);transform:translateY(-1px)}
+#cyber-terminal-modal{
+  position:fixed;inset:0;background:rgba(8,8,12,0.85);backdrop-filter:blur(12px);
+  z-index:99996;display:none;align-items:center;justify-content:center;padding:20px;
+}
+#cyber-terminal-modal.open{display:flex}
+.ct-inner{
+  width:min(720px,94vw);background:#0D0E12;border:1px solid var(--crimson);
+  box-shadow:0 25px 60px rgba(0,0,0,0.85),0 0 35px rgba(201,37,33,0.28);
+  border-radius:3px;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;
+}
+.ct-header{
+  padding:12px 18px;background:#15161C;border-bottom:1px solid rgba(201,37,33,0.4);
+  display:flex;align-items:center;justify-content:space-between;font:700 11px var(--mn);letter-spacing:0.12em;color:#FAF8F2;
+}
+.ct-close{background:none;border:none;color:#9E9B93;font-size:16px;cursor:pointer;padding:4px 8px}
+.ct-close:hover{color:#E53935}
+.ct-body{
+  padding:18px;font:500 12.5px/1.65 "Space Mono",monospace;color:#D8D6CE;
+  overflow-y:auto;max-height:50vh;display:flex;flex-direction:column;gap:5px;
+}
+.ct-line.system{color:#2BB6D8}
+.ct-line.success{color:#4BC988}
+.ct-line.error{color:#E53935}
+.ct-line.cmd-echo{color:#FAF8F2;font-weight:700}
+.ct-prompt-row{
+  display:flex;align-items:center;gap:10px;padding:12px 18px;background:#111216;border-top:1px solid rgba(255,255,255,0.08);
+}
+.ct-prompt{color:var(--crimson);font:700 12px "Space Mono",monospace}
+.ct-input{
+  flex:1;background:none;border:none;outline:none;color:#FAF8F2;
+  font:600 12.5px "Space Mono",monospace;caret-color:var(--crimson);
+}
+
 /* ==================== ANIME GAME MILESTONE TOAST ==================== */
 #game-toast{
   position:fixed;top:28px;left:50%;transform:translateX(-50%) translateY(-35px);
@@ -1444,6 +1508,30 @@ body.hero-orbit-dragging, body.hero-orbit-dragging #hero, body.hero-orbit-draggi
   <button type="button" class="gate-movie" id="gate-movie">▶ WATCH AS 8K ANIME FILM</button>
   <div class="gate-half-bot"><div class="heading2">AUDIO</div></div>
 </div>
+<button type="button" id="terminal-trigger-btn" title="Open Interactive Cyber-Anime Terminal (Shortcut: ~)">
+  <span>&gt;_ TERMINAL</span>
+</button>
+<button type="button" id="weather-btn" title="Toggle Anime Atmosphere (Sunset / Cyber Rain)">
+  <span>🌧 RAIN</span>
+</button>
+
+<div id="cyber-terminal-modal" role="dialog" aria-modal="true" aria-label="Parth Nexus Cyber Terminal">
+  <div class="ct-inner">
+    <div class="ct-header">
+      <div class="ct-title">◈ PARTH // NEXUS-OS CYBER TERMINAL v2.4</div>
+      <button type="button" class="ct-close" id="ct-close-btn" aria-label="Close Terminal">✕</button>
+    </div>
+    <div class="ct-body" id="ct-output">
+      <div class="ct-line system">PARTH NEXUS-OS [v2.4.12 - KERNEL ACTIVE]</div>
+      <div class="ct-line system">Type 'help' to inspect available subsystem commands.</div>
+    </div>
+    <div class="ct-prompt-row">
+      <span class="ct-prompt">parth@nexus:~$</span>
+      <input type="text" id="ct-input" class="ct-input" autocomplete="off" spellcheck="false" placeholder="type 'help', 'skills', 'projects', 'warp 7'..." />
+    </div>
+  </div>
+</div>
+
 <script>(function(){
   function hide(id){var e=document.getElementById(id);if(e){e.classList.add('gone');e.setAttribute('aria-hidden','true');}}
   window.__NEXUS_GATE_CHOICE=null;
@@ -3753,9 +3841,13 @@ function drawMistBg(t,pMist){
 function drawParthWalkActor(t,pMist,cam){
   const{w,h,c}=fitCanvas(walkActorCv,true);
   c.clearRect(0,0,w,h);
-  /* Render delicate wind-blown anime autumn leaves & sunset dust across Shibuya bridge */
+  /* Render delicate wind-blown anime autumn leaves & sunset dust or Cyber-Rain across Shibuya bridge */
   if(pMist>0.03&&pMist<0.85){
-    drawAnimeLeaves(c,w,h,t,1.2,true);
+    if(window.__NEXUS_WEATHER==='rain'){
+      drawCyberRain(c,w,h,0.016,t);
+    }else{
+      drawAnimeLeaves(c,w,h,t,1.2,true);
+    }
   }
   initRefPortraits();
   const w1=getHDAnimeSprite('p_walk1')||IMG.p_walk1;
@@ -3877,6 +3969,7 @@ function drawParthWalkActor(t,pMist,cam){
   }
 
   if(isPhone){
+    // 1. Soft cyber-rings
     for(let rg=0;rg<2;rg++){
       const pr=((t*0.9+rg*0.5)%1);
       c.save();
@@ -3885,6 +3978,69 @@ function drawParthWalkActor(t,pMist,cam){
       c.beginPath();c.arc(drawW*0.06,-drawH*0.56,14+pr*52,0,Math.PI*2);c.stroke();
       c.restore();
     }
+
+    // 2. Floating 3D Holographic Cyber-Projection Emitter
+    const emX = drawW * 0.08, emY = -drawH * 0.62;
+    const hW = drawW * 0.90, hH = drawH * 0.36;
+    const hX = emX - hW * 0.18, hY = emY - hH - 18;
+
+    c.save();
+    // Holographic light cone from glass
+    const beamG = c.createLinearGradient(emX, emY, hX + hW*0.5, hY + hH);
+    beamG.addColorStop(0, 'rgba(43,182,216,0.65)');
+    beamG.addColorStop(0.35, 'rgba(201,37,33,0.30)');
+    beamG.addColorStop(1, 'rgba(43,182,216,0.0)');
+    c.fillStyle = beamG;
+    c.beginPath();
+    c.moveTo(emX - 5, emY);c.lineTo(emX + 5, emY);
+    c.lineTo(hX + hW, hY + hH);c.lineTo(hX, hY + hH);
+    c.closePath();c.fill();
+
+    // 3D Perspective Floating HUD Box
+    c.save();
+    c.translate(hX, hY);
+    const glitch = Math.sin(t*38) > 0.94 ? (Math.random()*4 - 2) : 0;
+    c.translate(glitch, Math.sin(t*2.8)*2.5);
+
+    // Dark translucent glass panel
+    c.fillStyle = 'rgba(8,14,24,0.85)';
+    c.strokeStyle = 'rgba(43,182,216,0.85)';
+    c.lineWidth = 1.2;
+    c.fillRect(0,0,hW,hH);
+    c.strokeRect(0,0,hW,hH);
+
+    // Corner brackets
+    const cbLen = 9;
+    c.strokeStyle = '#E53935';c.lineWidth = 2.2;
+    c.beginPath();c.moveTo(0,cbLen);c.lineTo(0,0);c.lineTo(cbLen,0);c.stroke();
+    c.beginPath();c.moveTo(hW-cbLen,0);c.lineTo(hW,0);c.lineTo(hW,cbLen);c.stroke();
+    c.beginPath();c.moveTo(0,hH-cbLen);c.lineTo(0,hH);c.lineTo(cbLen,hH);c.stroke();
+    c.beginPath();c.moveTo(hW-cbLen,hH);c.lineTo(hW,hH);c.lineTo(hW,hH-cbLen);c.stroke();
+
+    // Scanline sweep
+    const scanY = (t * 52) % hH;
+    c.fillStyle = 'rgba(43,182,216,0.35)';
+    c.fillRect(0, scanY, hW, 2);
+
+    // Holographic Telemetry Text
+    c.fillStyle = '#2BB6D8';
+    c.font = '700 8.5px "Space Mono",monospace';
+    c.fillText('◈ BARON PROTOCOL // LIVE', 8, 14);
+
+    c.fillStyle = '#FAF8F2';
+    c.font = '800 10.5px "Syne",sans-serif';
+    c.fillText('GARAA · 1ST RUNNER-UP', 8, 28);
+
+    c.fillStyle = '#E53935';
+    c.font = '700 8.5px "Space Mono",monospace';
+    c.fillText('> DEVHARBOUR [4,000+ DEVS]', 8, 41);
+
+    c.fillStyle = 'rgba(216,214,206,0.72)';
+    c.font = '600 7px "Space Mono",monospace';
+    c.fillText('SECURITY // ZYID VERIFIED', 8, 52);
+
+    c.restore();
+    c.restore();
   }
 
   if(isPhone&&phoneIm){
@@ -5236,6 +5392,40 @@ const SUN_DUST = Array.from({length:16}, (_,i)=>({
   phase: Math.random()*Math.PI*2
 }));
 
+/* Dynamic Cyberpunk Monsoon Rain & Neon Puddle Engine */
+window.__NEXUS_WEATHER = window.__NEXUS_WEATHER || 'sunset';
+const CYBER_RAIN = Array.from({length:140}, (_,i)=>({
+  x: Math.random()*1600,
+  y: Math.random()*1000,
+  len: 18 + (i%5)*8,
+  speedY: 480 + (i%4)*120,
+  speedX: -65 - (i%3)*20,
+  alpha: 0.25 + (i%3)*0.22
+}));
+
+function drawCyberRain(c,w,h,dt,t){
+  c.save();
+  c.lineWidth=1.2;
+  for(let i=0;i<CYBER_RAIN.length;i++){
+    const r=CYBER_RAIN[i];
+    r.y += r.speedY * dt;
+    r.x += r.speedX * dt;
+    if(r.y > h){ r.y = -20; r.x = Math.random()*(w+300); }
+    if(r.x < -40) r.x = w + 40;
+    c.strokeStyle = `rgba(175,235,255,${r.alpha.toFixed(2)})`;
+    c.beginPath();
+    c.moveTo(r.x, r.y);
+    c.lineTo(r.x + (r.speedX*0.035), r.y + r.len);
+    c.stroke();
+    // Micro splash on bridge floor
+    if(r.y > h*0.84 && r.y < h*0.86 && i%4===0){
+      c.strokeStyle = 'rgba(210,245,255,0.45)';
+      c.beginPath();c.arc(r.x, h*0.86, 2.5, 0, Math.PI);c.stroke();
+    }
+  }
+  c.restore();
+}
+
 function drawAnimeLeaves(c,w,h,t,wind=1.0,crimson=true){
   c.save();
   // 1. Drifting Golden Sunset Dust Particles in Light Shafts
@@ -5665,7 +5855,14 @@ function tick(ts){
     const verdictTr=beat.id==='verdict'?smoothstep(0.04,0.32,subBeat):0;
     $('#sanc-sticky').style.background=verdictTr>0.3?'#000000':'';
     $('#hall-cv').style.filter=verdictTr>0.5?'none':'blur(0.9px) saturate(1.08)';
-    drawHallBg(tTime,beat.wind,pSancS,camCur.vpX+ptr3dX*0.035,camCur.hor+ptr3dY*0.025,verdictTr);
+    // Domain Expansion Sakuga Camera Shake on Verdict
+    let sancShakeX=0,sancShakeY=0;
+    if(beat.id==='verdict'&&verdictTr>0.08){
+      const shakeAmt=(1-verdictTr)*4.5;
+      sancShakeX=Math.sin(tTime*42)*shakeAmt;
+      sancShakeY=Math.cos(tTime*48)*shakeAmt;
+    }
+    drawHallBg(tTime,beat.wind,pSancS,camCur.vpX+ptr3dX*0.035+sancShakeX*0.005,camCur.hor+ptr3dY*0.025+sancShakeY*0.005,verdictTr);
     drawSanctuaryActors(tTime,beat,sancShift,scrollVelS,camCur.vpX+ptr3dX*0.045,camCur.hor+ptr3dY*0.025,subBeat,{...camCur,rx:camCur.rx+gPitch*0.55,ry:camCur.ry+gYaw*0.65},verdictTr);
 
     /* Turn-Locked Sanctuary Voice Cue: God & Parth Speak Immediately When Their Bubble Appears! */
@@ -5896,6 +6093,142 @@ if(trailCv){
   requestAnimationFrame(renderMangaTrail);
 }
 
+/* ==================== INTERACTIVE HOLOGRAPHIC SPECULAR CARD FOIL ENGINE ==================== */
+document.querySelectorAll('.fact-card, .medallion, .taste-card, .retail-item').forEach(card=>{
+  card.addEventListener('pointermove',e=>{
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left, y=e.clientY-rect.top;
+    card.style.setProperty('--sheen-x', x+'px');
+    card.style.setProperty('--sheen-y', y+'px');
+  },{passive:true});
+});
+
+/* ==================== DYNAMIC WEATHER TOGGLE ENGINE ==================== */
+const weatherBtn = document.getElementById('weather-btn');
+if (weatherBtn) {
+  weatherBtn.onclick = () => {
+    Sound.resumeCtx();
+    Sound.uiTap(720, 0.04);
+    window.__NEXUS_WEATHER = window.__NEXUS_WEATHER === 'rain' ? 'sunset' : 'rain';
+    const isRain = window.__NEXUS_WEATHER === 'rain';
+    weatherBtn.classList.toggle('rain', isRain);
+    const span = weatherBtn.querySelector('span');
+    if (span) span.textContent = isRain ? '☀ SUNSET' : '🌧 RAIN';
+    showGameMilestone(isRain ? 'WEATHER // CYBER-MONSOON' : 'WEATHER // SUNSET DUSK', isRain ? 'NEON RAIN & ASPHALT REFLECTIONS ACTIVE' : 'GOLDEN LIGHT SHAFTS ACTIVE');
+    if (isRain) Sound.chime(440, 1.2, 0.06);
+  };
+}
+
+/* ==================== INTERACTIVE CYBER TERMINAL ENGINE ==================== */
+const termModal = document.getElementById('cyber-terminal-modal');
+const termTrig = document.getElementById('terminal-trigger-btn');
+const termClose = document.getElementById('ct-close-btn');
+const termInput = document.getElementById('ct-input');
+const termOutput = document.getElementById('ct-output');
+
+function openCyberTerminal() {
+  if (!termModal) return;
+  Sound.resumeCtx();
+  Sound.uiTap(960, 0.035);
+  termModal.classList.add('open');
+  if (termInput) {
+    termInput.focus();
+    termInput.value = '';
+  }
+}
+
+function closeCyberTerminal() {
+  if (!termModal) return;
+  Sound.uiTap(640, 0.025);
+  termModal.classList.remove('open');
+}
+
+if (termTrig) termTrig.onclick = openCyberTerminal;
+if (termClose) termClose.onclick = closeCyberTerminal;
+if (termModal) termModal.onclick = e => {
+  if (e.target === termModal) closeCyberTerminal();
+};
+
+addEventListener('keydown', e => {
+  if (e.key === '~' || e.key === '`' || e.key === 'Backquote') {
+    const act = document.activeElement;
+    if (act && act !== termInput && (act.tagName === 'INPUT' || act.tagName === 'TEXTAREA')) return;
+    e.preventDefault();
+    if (termModal && termModal.classList.contains('open')) closeCyberTerminal();
+    else openCyberTerminal();
+  } else if (e.key === 'Escape' && termModal && termModal.classList.contains('open')) {
+    closeCyberTerminal();
+  }
+});
+
+function appendTermLine(text, cls = '') {
+  if (!termOutput) return;
+  const d = document.createElement('div');
+  d.className = 'ct-line ' + (cls || '');
+  d.textContent = text;
+  termOutput.appendChild(d);
+  termOutput.scrollTop = termOutput.scrollHeight;
+}
+
+if (termInput) {
+  termInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const val = termInput.value.trim().toLowerCase();
+      termInput.value = '';
+      if (!val) return;
+      appendTermLine('parth@nexus:~$ ' + val, 'cmd-echo');
+      Sound.uiTap(880, 0.03);
+
+      if (val === 'help') {
+        appendTermLine('AVAILABLE SUBSYSTEM PROTOCOLS:', 'system');
+        appendTermLine('  whoami    - Display developer identity and engineering credentials');
+        appendTermLine('  skills    - List core architecture, security & WebGL proficiencies');
+        appendTermLine('  projects  - Inspect top deployed systems (Garaa, ZyID, DevHarbour)');
+        appendTermLine('  weather   - Toggle between Sunset Dusk and Cyber-Monsoon Rain');
+        appendTermLine('  warp <1-8>- Instantly warp cinematic camera to Act 1 through 8');
+        appendTermLine('  hire      - Launch direct developer communication draft');
+        appendTermLine('  clear     - Wipe current terminal buffer');
+      } else if (val === 'whoami' || val === 'bio') {
+        appendTermLine('IDENTIFICATION: Parth Vijay Gidde', 'success');
+        appendTermLine('FOCUS: Cybersecurity, IoT Architecture, WebGL Systems & Full-Stack', 'success');
+        appendTermLine('VENTURE: Co-Founder, DevHarbour (4,000+ developer community)', 'success');
+        appendTermLine('BASE: Navi Mumbai, Maharashtra · Mumbai University (2025-2029)', 'system');
+      } else if (val === 'skills') {
+        appendTermLine('CORE SUBSYSTEM ARSENAL:', 'system');
+        appendTermLine('• Languages: JavaScript (ESNext), TypeScript, Python, C++, SQL, Solidity');
+        appendTermLine('• Frameworks: Next.js, Node.js, WebGL/Three.js, Web Audio API, React');
+        appendTermLine('• Security: Reverse Engineering, IoT Protocols, Cryptographic Auth, Zero-Trust');
+      } else if (val === 'projects') {
+        appendTermLine('DEPLOYED ARTIFACTS:', 'system');
+        appendTermLine('1. GARAA · 1st Runner-Up (Baron National Hackathon) -> gaara-1.github.io/ZyID/');
+        appendTermLine('2. DEVHARBOUR · High-performance developer ecosystem (4k+ members)');
+        appendTermLine('3. NEXUS 01 · 8K Layered Kirigami Anime Portfolio Engine');
+      } else if (val === 'weather') {
+        if (weatherBtn) weatherBtn.click();
+      } else if (val.startsWith('warp')) {
+        const actNum = parseInt(val.split(' ')[1] || '1', 10);
+        const map = ['#hero', '#scene-mist', '#scene-impact', '.mono-wide', '.portal-panel-wrap', '#scene-step', '#scene-sanctuary-story', '#collection'];
+        const targetSel = map[clamp(actNum - 1, 0, map.length - 1)];
+        const targetEl = document.querySelector(targetSel);
+        if (targetEl) {
+          appendTermLine('WARPING TO ACT ' + actNum + '...', 'success');
+          Sound.whoosh();
+          smoothScrollTo(targetEl.getBoundingClientRect().top + window.scrollY);
+          setTimeout(closeCyberTerminal, 600);
+        }
+      } else if (val === 'hire' || val === 'contact') {
+        appendTermLine('LAUNCHING SECURE COMMUNICATION PROTOCOL...', 'success');
+        window.location.href = 'mailto:parthvgidde@gmail.com?subject=Engineering%20Collaboration';
+      } else if (val === 'clear') {
+        termOutput.innerHTML = '';
+      } else {
+        appendTermLine('Command not recognized: ' + val + '. Type help for available commands.', 'error');
+      }
+    }
+  });
+}
+
+
 /* Attach Soft Anime UI Sound Clicks */
 ['#movie-btn','#voice-btn','#eq-btn','.tab-btn','.rail-pip','.btn-dark','.btn-outline','#print-resume-btn','#print-resume-btn-2','.fact-card','.medallion'].forEach(sel=>{
   document.querySelectorAll(sel).forEach(el=>{
@@ -6077,6 +6410,8 @@ $('#replay-btn').onclick=()=>{
 };
 </script>
 <div id="portal-flash" aria-hidden="true"></div>
+
+
 <div id="manga-cursor" aria-hidden="true"></div>
 <canvas id="manga-trail-cv" aria-hidden="true"></canvas>
 <div id="game-toast" role="status" aria-live="polite">
